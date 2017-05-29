@@ -11,7 +11,7 @@ Golang on the server side and React on the client side.
 
 ## Usage
 * `go get github.com/titolins/go_react_starter`
-* `cd client`
+* `cd $GOPATH/src/github.com/titolins/go_react_start/client`
 * `npm install`
 * `jspm install`
 * `cd ../server`
