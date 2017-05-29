@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="/static/js/jspm_packages/system.js"></script>
+    <script src="/static/js/jspm.config.js"></script>
+    <script src="/static/js/build.js"></script>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script>
+      SystemJS.import('systemjs-hot-reloader').then(function(connect) {
+        connect();
+        SystemJS.import("/static/js/index.js");
+      });
+    </script>
+  </body>
+</html>
+
