@@ -12,7 +12,10 @@ Golang on the server side and React on the client side.
 ## Usage
 * `go get github.com/titolins/go_react_starter`
 * `cd $GOPATH/src/github.com/titolins/go_react_start/client`
+* `npm init`
 * `npm install`
+* `npm i -g jspm@beta`
+* `jspm init`
 * `jspm install`
 * `cd ../server`
 * `go run main.go`
@@ -21,4 +24,4 @@ Golang on the server side and React on the client side.
 Tito Lins  
 titolins@outlook.com  
 https://github.com/titolins/  
-Date: 29-05-2017  
+Date: 29-05-2017
