@@ -13,7 +13,7 @@ export class App extends React.Component {
         </nav>
         <div className="container">
           <div className="jumbotron">
-            <h1>Hello, Bootstrap!</h1>
+            <h1>Hello, world!</h1>
             <p className="lead">
               This is a simple boiler plate app for easy starting a web application using a golang backend with a react/redux frontend.
               Technologies/applications/libraries/frameworks used in this includes, but may not be limited to: jspm, react, redux, es6, bootstrap, less, golang, go-zoo/bone.
