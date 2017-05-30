@@ -1,6 +1,7 @@
 SystemJS.config({
   paths: {
     "npm:": "jspm_packages/npm/",
+    "github:": "jspm_packages/github/",
     "client/": "src/"
   },
   browserConfig: {
@@ -9,6 +10,16 @@ SystemJS.config({
       "build.js": [
         "index.js",
         "client/app/index.js",
+        "client/app/styles.less",
+        "npm:systemjs-less-plugin@2.0.0.json",
+        "github:twbs/bootstrap@4.0.0-alpha.6/css/bootstrap.css!github:systemjs/plugin-css@0.1.35/css.js",
+        "github:twbs/bootstrap@4.0.0-alpha.6.json",
+        "github:systemjs/plugin-css@0.1.35.json",
+        "github:twbs/bootstrap@4.0.0-alpha.6/js/bootstrap.js",
+        "github:HubSpot/tether@1.4.0/js/tether.js",
+        "github:HubSpot/tether@1.4.0.json",
+        "npm:jquery@2.2.4/dist/jquery.js",
+        "npm:jquery@2.2.4.json",
         "npm:react@15.5.4/react.js",
         "npm:react@15.5.4.json",
         "npm:jspm-nodelibs-process@0.2.1/process.js",
@@ -254,12 +265,115 @@ SystemJS.config({
     "map": {
       "plugin-babel": "npm:systemjs-plugin-babel@0.0.21",
       "systemjs-hot-reloader": "npm:systemjs-hot-reloader@1.1.0",
-      "core-js": "npm:core-js@2.4.1"
+      "core-js": "npm:core-js@2.4.1",
+      "babel-plugin-transform-es2015-modules-commonjs": "npm:babel-plugin-transform-es2015-modules-commonjs@6.24.1",
+      "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@6.24.1",
+      "babel-plugin-add-module-exports": "npm:babel-plugin-add-module-exports@0.2.1"
     },
     "packages": {
       "npm:systemjs-hot-reloader@1.1.0": {
         "map": {
           "systemjs-hmr": "npm:systemjs-hmr@2.0.9"
+        }
+      },
+      "npm:babel-runtime@6.23.0": {
+        "map": {
+          "core-js": "npm:core-js@2.4.1",
+          "regenerator-runtime": "npm:regenerator-runtime@0.10.5"
+        }
+      },
+      "npm:babel-types@6.24.1": {
+        "map": {
+          "esutils": "npm:esutils@2.0.2",
+          "babel-runtime": "npm:babel-runtime@6.23.0",
+          "to-fast-properties": "npm:to-fast-properties@1.0.3",
+          "lodash": "npm:lodash@4.17.4"
+        }
+      },
+      "npm:babel-helper-builder-react-jsx@6.24.1": {
+        "map": {
+          "babel-runtime": "npm:babel-runtime@6.23.0",
+          "babel-types": "npm:babel-types@6.24.1",
+          "esutils": "npm:esutils@2.0.2"
+        }
+      },
+      "npm:babel-plugin-transform-react-jsx@6.24.1": {
+        "map": {
+          "babel-runtime": "npm:babel-runtime@6.23.0",
+          "babel-helper-builder-react-jsx": "npm:babel-helper-builder-react-jsx@6.24.1",
+          "babel-plugin-syntax-jsx": "npm:babel-plugin-syntax-jsx@6.18.0"
+        }
+      },
+      "npm:babel-plugin-transform-es2015-modules-commonjs@6.24.1": {
+        "map": {
+          "babel-types": "npm:babel-types@6.24.1",
+          "babel-runtime": "npm:babel-runtime@6.23.0",
+          "babel-template": "npm:babel-template@6.24.1",
+          "babel-plugin-transform-strict-mode": "npm:babel-plugin-transform-strict-mode@6.24.1"
+        }
+      },
+      "npm:babel-template@6.24.1": {
+        "map": {
+          "babel-types": "npm:babel-types@6.24.1",
+          "babel-runtime": "npm:babel-runtime@6.23.0",
+          "lodash": "npm:lodash@4.17.4",
+          "babel-traverse": "npm:babel-traverse@6.24.1",
+          "babylon": "npm:babylon@6.17.1"
+        }
+      },
+      "npm:babel-plugin-transform-strict-mode@6.24.1": {
+        "map": {
+          "babel-runtime": "npm:babel-runtime@6.23.0",
+          "babel-types": "npm:babel-types@6.24.1"
+        }
+      },
+      "npm:babel-traverse@6.24.1": {
+        "map": {
+          "babel-runtime": "npm:babel-runtime@6.23.0",
+          "babel-types": "npm:babel-types@6.24.1",
+          "invariant": "npm:invariant@2.2.2",
+          "lodash": "npm:lodash@4.17.4",
+          "babylon": "npm:babylon@6.17.1",
+          "babel-code-frame": "npm:babel-code-frame@6.22.0",
+          "babel-messages": "npm:babel-messages@6.23.0",
+          "debug": "npm:debug@2.6.8",
+          "globals": "npm:globals@9.17.0"
+        }
+      },
+      "npm:babel-code-frame@6.22.0": {
+        "map": {
+          "esutils": "npm:esutils@2.0.2",
+          "js-tokens": "npm:js-tokens@3.0.1",
+          "chalk": "npm:chalk@1.1.3"
+        }
+      },
+      "npm:babel-messages@6.23.0": {
+        "map": {
+          "babel-runtime": "npm:babel-runtime@6.23.0"
+        }
+      },
+      "npm:debug@2.6.8": {
+        "map": {
+          "ms": "npm:ms@2.0.0"
+        }
+      },
+      "npm:chalk@1.1.3": {
+        "map": {
+          "ansi-styles": "npm:ansi-styles@2.2.1",
+          "escape-string-regexp": "npm:escape-string-regexp@1.0.5",
+          "supports-color": "npm:supports-color@2.0.0",
+          "strip-ansi": "npm:strip-ansi@3.0.1",
+          "has-ansi": "npm:has-ansi@2.0.0"
+        }
+      },
+      "npm:strip-ansi@3.0.1": {
+        "map": {
+          "ansi-regex": "npm:ansi-regex@2.1.1"
+        }
+      },
+      "npm:has-ansi@2.0.0": {
+        "map": {
+          "ansi-regex": "npm:ansi-regex@2.1.1"
         }
       }
     }
@@ -275,28 +389,13 @@ SystemJS.config({
           "babelOptions": {
             "react": true
           }
+        },
+        "*.css": {
+          "loader": "css"
+        },
+        "*.less": {
+          "loader": "less"
         }
-      }
-    },
-    "npm:babel-runtime@6.23.0": {
-      "map": {
-        "core-js": "npm:core-js@2.4.1",
-        "regenerator-runtime": "npm:regenerator-runtime@0.10.5"
-      }
-    },
-    "npm:babel-types@6.24.1": {
-      "map": {
-        "esutils": "npm:esutils@2.0.2",
-        "babel-runtime": "npm:babel-runtime@6.23.0",
-        "to-fast-properties": "npm:to-fast-properties@1.0.3",
-        "lodash": "npm:lodash@4.17.4"
-      }
-    },
-    "npm:babel-helper-builder-react-jsx@6.24.1": {
-      "map": {
-        "babel-runtime": "npm:babel-runtime@6.23.0",
-        "babel-types": "npm:babel-types@6.24.1",
-        "esutils": "npm:esutils@2.0.2"
       }
     }
   },
@@ -308,7 +407,8 @@ SystemJS.config({
 SystemJS.config({
   packageConfigPaths: [
     "npm:@*/*.json",
-    "npm:*.json"
+    "npm:*.json",
+    "github:*/*.json"
   ],
   map: {
     "assert": "npm:jspm-nodelibs-assert@0.2.1",
@@ -316,11 +416,13 @@ SystemJS.config({
     "child_process": "npm:jspm-nodelibs-child_process@0.2.1",
     "constants": "npm:jspm-nodelibs-constants@0.2.1",
     "crypto": "npm:jspm-nodelibs-crypto@0.2.1",
+    "css": "github:systemjs/plugin-css@0.1.35",
     "domain": "npm:jspm-nodelibs-domain@0.2.1",
     "events": "npm:jspm-nodelibs-events@0.2.2",
     "fs": "npm:jspm-nodelibs-fs@0.2.1",
     "http": "npm:jspm-nodelibs-http@0.2.0",
     "https": "npm:jspm-nodelibs-https@0.2.2",
+    "less": "npm:systemjs-less-plugin@2.0.0",
     "os": "npm:jspm-nodelibs-os@0.2.1",
     "path": "npm:jspm-nodelibs-path@0.2.3",
     "process": "npm:jspm-nodelibs-process@0.2.1",
@@ -330,6 +432,7 @@ SystemJS.config({
     "react-redux": "npm:react-redux@5.0.5",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.1",
+    "twbs/bootstrap": "github:twbs/bootstrap@4.0.0-alpha.6",
     "url": "npm:jspm-nodelibs-url@0.2.1",
     "util": "npm:jspm-nodelibs-util@0.2.2",
     "vm": "npm:jspm-nodelibs-vm@0.2.1",
@@ -699,6 +802,17 @@ SystemJS.config({
         "lodash": "npm:lodash@4.17.4",
         "lodash-es": "npm:lodash-es@4.17.4",
         "loose-envify": "npm:loose-envify@1.3.1"
+      }
+    },
+    "github:twbs/bootstrap@4.0.0-alpha.6": {
+      "map": {
+        "jquery": "npm:jquery@2.2.4",
+        "tether": "github:HubSpot/tether@1.4.0"
+      }
+    },
+    "npm:systemjs-less-plugin@2.0.0": {
+      "map": {
+        "css": "github:systemjs/plugin-css@0.1.35"
       }
     }
   }

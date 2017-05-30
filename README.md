@@ -20,7 +20,7 @@ Golang on the server side and React on the client side.
 * `cd ../server`
 * `go run main.go`
 
-## Author  
+## Author
 Tito Lins  
 titolins@outlook.com  
 https://github.com/titolins/  
