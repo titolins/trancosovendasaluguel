@@ -7,7 +7,7 @@ Golang on the server side and React on the client side.
 ## Requirements:
 * golang 1.8
 * npm
-* jspm
+* jspm1.7
 
 ## Usage
 * `go get github.com/titolins/go_react_starter`
