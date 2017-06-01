@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
+import { module } from '@hot'
+
 import reducers from 'client/reducers'
 import Home from 'client/home'
-
-import { module } from '@hot'
 
 let store = createStore(reducers)
 
