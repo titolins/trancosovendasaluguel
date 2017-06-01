@@ -9,4 +9,4 @@ function state(state = initialState, action) {
   }
 }
 
-export let tvaApp = combineReducers({state})
+export default combineReducers({state})
