@@ -8,9 +8,9 @@ SystemJS.config({
     "baseURL": "/static/js",
     "bundles": {
       "build.js": [
-        "index.js",
-        "client/app/index.js",
-        "client/app/styles.less",
+        "client/main.js",
+        "client/home.js",
+        "client/home.less",
         "npm:systemjs-less-plugin@2.0.0.json",
         "github:twbs/bootstrap@4.0.0-alpha.6/css/bootstrap.css!github:systemjs/plugin-css@0.1.35/css.js",
         "github:twbs/bootstrap@4.0.0-alpha.6.json",
@@ -266,9 +266,7 @@ SystemJS.config({
       "plugin-babel": "npm:systemjs-plugin-babel@0.0.21",
       "systemjs-hot-reloader": "npm:systemjs-hot-reloader@1.1.0",
       "core-js": "npm:core-js@2.4.1",
-      "babel-plugin-transform-es2015-modules-commonjs": "npm:babel-plugin-transform-es2015-modules-commonjs@6.24.1",
-      "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@6.24.1",
-      "babel-plugin-add-module-exports": "npm:babel-plugin-add-module-exports@0.2.1"
+      "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@6.24.1"
     },
     "packages": {
       "npm:systemjs-hot-reloader@1.1.0": {
@@ -303,85 +301,13 @@ SystemJS.config({
           "babel-helper-builder-react-jsx": "npm:babel-helper-builder-react-jsx@6.24.1",
           "babel-plugin-syntax-jsx": "npm:babel-plugin-syntax-jsx@6.18.0"
         }
-      },
-      "npm:babel-plugin-transform-es2015-modules-commonjs@6.24.1": {
-        "map": {
-          "babel-types": "npm:babel-types@6.24.1",
-          "babel-runtime": "npm:babel-runtime@6.23.0",
-          "babel-template": "npm:babel-template@6.24.1",
-          "babel-plugin-transform-strict-mode": "npm:babel-plugin-transform-strict-mode@6.24.1"
-        }
-      },
-      "npm:babel-template@6.24.1": {
-        "map": {
-          "babel-types": "npm:babel-types@6.24.1",
-          "babel-runtime": "npm:babel-runtime@6.23.0",
-          "lodash": "npm:lodash@4.17.4",
-          "babel-traverse": "npm:babel-traverse@6.24.1",
-          "babylon": "npm:babylon@6.17.1"
-        }
-      },
-      "npm:babel-plugin-transform-strict-mode@6.24.1": {
-        "map": {
-          "babel-runtime": "npm:babel-runtime@6.23.0",
-          "babel-types": "npm:babel-types@6.24.1"
-        }
-      },
-      "npm:babel-traverse@6.24.1": {
-        "map": {
-          "babel-runtime": "npm:babel-runtime@6.23.0",
-          "babel-types": "npm:babel-types@6.24.1",
-          "invariant": "npm:invariant@2.2.2",
-          "lodash": "npm:lodash@4.17.4",
-          "babylon": "npm:babylon@6.17.1",
-          "babel-code-frame": "npm:babel-code-frame@6.22.0",
-          "babel-messages": "npm:babel-messages@6.23.0",
-          "debug": "npm:debug@2.6.8",
-          "globals": "npm:globals@9.17.0"
-        }
-      },
-      "npm:babel-code-frame@6.22.0": {
-        "map": {
-          "esutils": "npm:esutils@2.0.2",
-          "js-tokens": "npm:js-tokens@3.0.1",
-          "chalk": "npm:chalk@1.1.3"
-        }
-      },
-      "npm:babel-messages@6.23.0": {
-        "map": {
-          "babel-runtime": "npm:babel-runtime@6.23.0"
-        }
-      },
-      "npm:debug@2.6.8": {
-        "map": {
-          "ms": "npm:ms@2.0.0"
-        }
-      },
-      "npm:chalk@1.1.3": {
-        "map": {
-          "ansi-styles": "npm:ansi-styles@2.2.1",
-          "escape-string-regexp": "npm:escape-string-regexp@1.0.5",
-          "supports-color": "npm:supports-color@2.0.0",
-          "strip-ansi": "npm:strip-ansi@3.0.1",
-          "has-ansi": "npm:has-ansi@2.0.0"
-        }
-      },
-      "npm:strip-ansi@3.0.1": {
-        "map": {
-          "ansi-regex": "npm:ansi-regex@2.1.1"
-        }
-      },
-      "npm:has-ansi@2.0.0": {
-        "map": {
-          "ansi-regex": "npm:ansi-regex@2.1.1"
-        }
       }
     }
   },
   transpiler: "plugin-babel",
   packages: {
     "client": {
-      "main": "app/index.js",
+      "main": "main.js",
       "format": "esm",
       "meta": {
         "*.js": {
@@ -396,6 +322,70 @@ SystemJS.config({
         "*.less": {
           "loader": "less"
         }
+      }
+    },
+    "npm:babel-template@6.24.1": {
+      "map": {
+        "babel-types": "npm:babel-types@6.24.1",
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "lodash": "npm:lodash@4.17.4",
+        "babel-traverse": "npm:babel-traverse@6.24.1",
+        "babylon": "npm:babylon@6.17.1"
+      }
+    },
+    "npm:babel-plugin-transform-strict-mode@6.24.1": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "babel-types": "npm:babel-types@6.24.1"
+      }
+    },
+    "npm:babel-traverse@6.24.1": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "babel-types": "npm:babel-types@6.24.1",
+        "invariant": "npm:invariant@2.2.2",
+        "lodash": "npm:lodash@4.17.4",
+        "babylon": "npm:babylon@6.17.1",
+        "babel-code-frame": "npm:babel-code-frame@6.22.0",
+        "babel-messages": "npm:babel-messages@6.23.0",
+        "debug": "npm:debug@2.6.8",
+        "globals": "npm:globals@9.17.0"
+      }
+    },
+    "npm:babel-code-frame@6.22.0": {
+      "map": {
+        "esutils": "npm:esutils@2.0.2",
+        "js-tokens": "npm:js-tokens@3.0.1",
+        "chalk": "npm:chalk@1.1.3"
+      }
+    },
+    "npm:babel-messages@6.23.0": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0"
+      }
+    },
+    "npm:debug@2.6.8": {
+      "map": {
+        "ms": "npm:ms@2.0.0"
+      }
+    },
+    "npm:chalk@1.1.3": {
+      "map": {
+        "ansi-styles": "npm:ansi-styles@2.2.1",
+        "escape-string-regexp": "npm:escape-string-regexp@1.0.5",
+        "supports-color": "npm:supports-color@2.0.0",
+        "strip-ansi": "npm:strip-ansi@3.0.1",
+        "has-ansi": "npm:has-ansi@2.0.0"
+      }
+    },
+    "npm:strip-ansi@3.0.1": {
+      "map": {
+        "ansi-regex": "npm:ansi-regex@2.1.1"
+      }
+    },
+    "npm:has-ansi@2.0.0": {
+      "map": {
+        "ansi-regex": "npm:ansi-regex@2.1.1"
       }
     }
   },
