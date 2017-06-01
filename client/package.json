@@ -19,6 +19,8 @@
       "less": "npm:systemjs-less-plugin@^2.0.0",
       "react-dom": "npm:react-dom@^15.5.4",
       "react-redux": "npm:react-redux@^5.0.5",
+      "react-router": "npm:react-router@^4.1.1",
+      "react-router-dom": "npm:react-router-dom@^4.1.1",
       "redux": "npm:redux@^3.6.0",
       "systemjs-plugin-css": "npm:systemjs-plugin-css@^0.1.35",
       "twbs/bootstrap": "github:twbs/bootstrap@4.0.0-alpha.6"
@@ -45,7 +47,7 @@
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
       "process": "npm:jspm-nodelibs-process@^0.2.0",
-      "react": "npm:react@^15.5.4",
+      "react": "npm:react@^15",
       "stream": "npm:jspm-nodelibs-stream@^0.2.0",
       "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
       "url": "npm:jspm-nodelibs-url@^0.2.0",
@@ -93,23 +95,6 @@
         },
         "map": {
           "_stream_transform": "readable-stream/transform"
-        }
-      },
-      "npm:debug@2.6.8": {
-        "main": "src/browser.js",
-        "jspmNodeConversion": false,
-        "format": "cjs",
-        "map": {
-          "./src/browser.js": {
-            "node": "./src/node.js"
-          },
-          "./node.js": {
-            "browser": "./src/browser.js"
-          },
-          "fs": "@node/fs",
-          "net": "@node/net",
-          "tty": "@node/tty",
-          "util": "@node/util"
         }
       },
       "npm:inherits@2.0.3": {

@@ -9,10 +9,9 @@ SystemJS.config({
     "bundles": {
       "build.js": [
         "client/main.js",
-        "client/home.js",
-        "client/home.less",
+        "client/todos.js",
+        "client/todos.less",
         "npm:systemjs-less-plugin@2.0.0.json",
-        "client/navbar.js",
         "npm:react@15.5.4/react.js",
         "npm:react@15.5.4.json",
         "npm:jspm-nodelibs-process@0.2.1/process.js",
@@ -58,6 +57,58 @@ SystemJS.config({
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/possibleConstructorReturn.js",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/createClass.js",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/classCallCheck.js",
+        "client/home.js",
+        "client/navbar.js",
+        "npm:react-router-dom@4.1.1/index.js",
+        "npm:react-router-dom@4.1.1.json",
+        "npm:react-router-dom@4.1.1/withRouter.js",
+        "npm:react-router@4.1.1/index.js",
+        "npm:react-router@4.1.1.json",
+        "npm:react-router@4.1.1/withRouter.js",
+        "npm:react-router@4.1.1/Route.js",
+        "npm:react-router@4.1.1/matchPath.js",
+        "npm:path-to-regexp@1.7.0/index.js",
+        "npm:path-to-regexp@1.7.0.json",
+        "npm:isarray@0.0.1/index.js",
+        "npm:isarray@0.0.1.json",
+        "npm:prop-types@15.5.10/index.js",
+        "npm:prop-types@15.5.10/factoryWithThrowingShims.js",
+        "npm:warning@3.0.0/browser.js",
+        "npm:warning@3.0.0.json",
+        "npm:hoist-non-react-statics@1.2.0/index.js",
+        "npm:hoist-non-react-statics@1.2.0.json",
+        "npm:react-router@4.1.1/Switch.js",
+        "npm:react-router@4.1.1/StaticRouter.js",
+        "npm:react-router@4.1.1/Router.js",
+        "npm:invariant@2.2.2/browser.js",
+        "npm:invariant@2.2.2.json",
+        "npm:history@4.6.1/PathUtils.js",
+        "npm:history@4.6.1.json",
+        "npm:react-router@4.1.1/Redirect.js",
+        "npm:react-router@4.1.1/Prompt.js",
+        "npm:react-router@4.1.1/MemoryRouter.js",
+        "npm:history@4.6.1/createMemoryHistory.js",
+        "npm:history@4.6.1/createTransitionManager.js",
+        "npm:history@4.6.1/LocationUtils.js",
+        "npm:value-equal@0.2.1/index.js",
+        "npm:value-equal@0.2.1.json",
+        "npm:resolve-pathname@2.1.0/index.js",
+        "npm:resolve-pathname@2.1.0.json",
+        "npm:react-router-dom@4.1.1/matchPath.js",
+        "npm:react-router-dom@4.1.1/Switch.js",
+        "npm:react-router-dom@4.1.1/StaticRouter.js",
+        "npm:react-router-dom@4.1.1/Router.js",
+        "npm:react-router-dom@4.1.1/Route.js",
+        "npm:react-router-dom@4.1.1/Redirect.js",
+        "npm:react-router-dom@4.1.1/Prompt.js",
+        "npm:react-router-dom@4.1.1/NavLink.js",
+        "npm:react-router-dom@4.1.1/Link.js",
+        "npm:react-router-dom@4.1.1/MemoryRouter.js",
+        "npm:react-router-dom@4.1.1/HashRouter.js",
+        "npm:history@4.6.1/createHashHistory.js",
+        "npm:history@4.6.1/DOMUtils.js",
+        "npm:react-router-dom@4.1.1/BrowserRouter.js",
+        "npm:history@4.6.1/createBrowserHistory.js",
         "client/reducers.js",
         "npm:redux@3.6.0/lib/index.js",
         "npm:redux@3.6.0.json",
@@ -96,13 +147,7 @@ SystemJS.config({
         "npm:react-redux@5.0.5/lib/utils/shallowEqual.js",
         "npm:react-redux@5.0.5/lib/components/connectAdvanced.js",
         "npm:react-redux@5.0.5/lib/utils/PropTypes.js",
-        "npm:prop-types@15.5.10/index.js",
-        "npm:prop-types@15.5.10/factoryWithThrowingShims.js",
         "npm:react-redux@5.0.5/lib/utils/Subscription.js",
-        "npm:invariant@2.2.2/browser.js",
-        "npm:invariant@2.2.2.json",
-        "npm:hoist-non-react-statics@1.2.0/index.js",
-        "npm:hoist-non-react-statics@1.2.0.json",
         "npm:react-redux@5.0.5/lib/components/Provider.js",
         "npm:react-dom@15.5.4/index.js",
         "npm:react-dom@15.5.4.json",
@@ -316,74 +361,11 @@ SystemJS.config({
           "loader": "less"
         }
       }
-    },
-    "npm:babel-template@6.24.1": {
-      "map": {
-        "babel-types": "npm:babel-types@6.24.1",
-        "babel-runtime": "npm:babel-runtime@6.23.0",
-        "lodash": "npm:lodash@4.17.4",
-        "babel-traverse": "npm:babel-traverse@6.24.1",
-        "babylon": "npm:babylon@6.17.1"
-      }
-    },
-    "npm:babel-plugin-transform-strict-mode@6.24.1": {
-      "map": {
-        "babel-runtime": "npm:babel-runtime@6.23.0",
-        "babel-types": "npm:babel-types@6.24.1"
-      }
-    },
-    "npm:babel-traverse@6.24.1": {
-      "map": {
-        "babel-runtime": "npm:babel-runtime@6.23.0",
-        "babel-types": "npm:babel-types@6.24.1",
-        "invariant": "npm:invariant@2.2.2",
-        "lodash": "npm:lodash@4.17.4",
-        "babylon": "npm:babylon@6.17.1",
-        "babel-code-frame": "npm:babel-code-frame@6.22.0",
-        "babel-messages": "npm:babel-messages@6.23.0",
-        "debug": "npm:debug@2.6.8",
-        "globals": "npm:globals@9.17.0"
-      }
-    },
-    "npm:babel-code-frame@6.22.0": {
-      "map": {
-        "esutils": "npm:esutils@2.0.2",
-        "js-tokens": "npm:js-tokens@3.0.1",
-        "chalk": "npm:chalk@1.1.3"
-      }
-    },
-    "npm:babel-messages@6.23.0": {
-      "map": {
-        "babel-runtime": "npm:babel-runtime@6.23.0"
-      }
-    },
-    "npm:debug@2.6.8": {
-      "map": {
-        "ms": "npm:ms@2.0.0"
-      }
-    },
-    "npm:chalk@1.1.3": {
-      "map": {
-        "ansi-styles": "npm:ansi-styles@2.2.1",
-        "escape-string-regexp": "npm:escape-string-regexp@1.0.5",
-        "supports-color": "npm:supports-color@2.0.0",
-        "strip-ansi": "npm:strip-ansi@3.0.1",
-        "has-ansi": "npm:has-ansi@2.0.0"
-      }
-    },
-    "npm:strip-ansi@3.0.1": {
-      "map": {
-        "ansi-regex": "npm:ansi-regex@2.1.1"
-      }
-    },
-    "npm:has-ansi@2.0.0": {
-      "map": {
-        "ansi-regex": "npm:ansi-regex@2.1.1"
-      }
     }
   },
   map: {
-    "@hot": "@empty"
+    "@hot": "@empty",
+    "history": "npm:history@4.6.1"
   }
 });
 
@@ -411,6 +393,8 @@ SystemJS.config({
     "process": "npm:jspm-nodelibs-process@0.2.1",
     "react": "npm:react@15.5.4",
     "react-dom": "npm:react-dom@15.5.4",
+    "react-router": "npm:react-router@4.1.1",
+    "react-router-dom": "npm:react-router-dom@4.1.1",
     "redux": "npm:redux@3.6.0",
     "react-redux": "npm:react-redux@5.0.5",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
@@ -796,6 +780,44 @@ SystemJS.config({
     "npm:systemjs-less-plugin@2.0.0": {
       "map": {
         "css": "github:systemjs/plugin-css@0.1.35"
+      }
+    },
+    "npm:react-router@4.1.1": {
+      "map": {
+        "path-to-regexp": "npm:path-to-regexp@1.7.0",
+        "hoist-non-react-statics": "npm:hoist-non-react-statics@1.2.0",
+        "invariant": "npm:invariant@2.2.2",
+        "loose-envify": "npm:loose-envify@1.3.1",
+        "prop-types": "npm:prop-types@15.5.10",
+        "warning": "npm:warning@3.0.0",
+        "history": "npm:history@4.6.1"
+      }
+    },
+    "npm:path-to-regexp@1.7.0": {
+      "map": {
+        "isarray": "npm:isarray@0.0.1"
+      }
+    },
+    "npm:warning@3.0.0": {
+      "map": {
+        "loose-envify": "npm:loose-envify@1.3.1"
+      }
+    },
+    "npm:history@4.6.1": {
+      "map": {
+        "invariant": "npm:invariant@2.2.2",
+        "loose-envify": "npm:loose-envify@1.3.1",
+        "warning": "npm:warning@3.0.0",
+        "resolve-pathname": "npm:resolve-pathname@2.1.0",
+        "value-equal": "npm:value-equal@0.2.1"
+      }
+    },
+    "npm:react-router-dom@4.1.1": {
+      "map": {
+        "loose-envify": "npm:loose-envify@1.3.1",
+        "prop-types": "npm:prop-types@15.5.10",
+        "history": "npm:history@4.6.1",
+        "react-router": "npm:react-router@4.1.1"
       }
     }
   }
