@@ -14,7 +14,8 @@ import (
 func main() {
     mux := bone.New()
 
-    mux.GetFunc("/", homeHandler)
+    //mux.GetFunc("/", homeHandler)
+    mux.NotFoundFunc(http.HandlerFunc(homeHandler))
     mux.Get("/static/js/", http.StripPrefix("/static/js/",
         http.FileServer(http.Dir("../client/"))))
 
