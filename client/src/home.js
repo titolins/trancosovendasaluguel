@@ -2,9 +2,9 @@ import React from 'react'
 
 import bootstrap from 'twbs/bootstrap'
 import 'twbs/bootstrap/css/bootstrap.css!'
-import './styles.less'
+import './home.less'
 
-export class App extends React.Component {
+export default class Home extends React.Component {
   render() {
     return (
       <div>
