@@ -1,16 +1,14 @@
 import React from 'react'
 
-import bootstrap from 'twbs/bootstrap'
-import 'twbs/bootstrap/css/bootstrap.css!'
+import Navbar from './navbar'
+
 import './home.less'
 
 export default class Home extends React.Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-toggeable-md navbar-inverse bg-inverse mb-4">
-          <a href="#" className="navbar-brand">GoReact Starter</a>
-        </nav>
+        <Navbar />
         <div className="container">
           <div className="jumbotron">
             <h1>Hello, world!</h1>
