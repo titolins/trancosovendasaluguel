@@ -11,6 +11,8 @@
     <script>
       SystemJS.import('systemjs-hot-reloader').then(function(connect) {
         connect();
+        SystemJS.import("twbs/bootstrap/css/bootstrap.css!");
+        SystemJS.import("twbs/bootstrap");
         SystemJS.import("client");
       });
     </script>
