@@ -14,16 +14,16 @@ import { module } from '@hot'
 
 import reducers from 'client/reducers'
 
-import Navbar from 'client/navbar'
-import Home from 'client/home'
-import Todos from 'client/todos'
+import Navbar from 'client/components/navbar'
+import Home from 'client/components/home'
+import Todos from 'client/components/todos'
 
-export default ReactDOM.render(
+export let component =  ReactDOM.render(
   <Provider store={createStore(reducers)}>
     <Router>
       <div>
-        <Navbar />
         <div className="container">
+          <Navbar />
           <Route exact path="/" component={Home} />
           <Route path="/todos" component={Todos} />
         </div>
