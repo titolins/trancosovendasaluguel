@@ -16,6 +16,8 @@ func main() {
 
     //mux.GetFunc("/", homeHandler)
     mux.NotFoundFunc(http.HandlerFunc(homeHandler))
+    mux.Get("/static/img/", http.StripPrefix("/static/img/",
+        http.FileServer(http.Dir("static/img/"))))
     mux.Get("/static/js/", http.StripPrefix("/static/js/",
         http.FileServer(http.Dir("../client/"))))
 
