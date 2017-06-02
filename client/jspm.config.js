@@ -9,8 +9,8 @@ SystemJS.config({
     "bundles": {
       "build.js": [
         "client/main.js",
-        "client/todos.js",
-        "client/todos.less",
+        "client/components/todos.js",
+        "client/components/todos.less",
         "npm:systemjs-less-plugin@2.0.0.json",
         "npm:react@15.5.4/react.js",
         "npm:react@15.5.4.json",
@@ -57,8 +57,57 @@ SystemJS.config({
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/possibleConstructorReturn.js",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/createClass.js",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/classCallCheck.js",
-        "client/home.js",
-        "client/navbar.js",
+        "client/components/home.js",
+        "client/components/navbar.js",
+        "client/containers/ChooseLanguage.js",
+        "client/components/languageselector.js",
+        "client/containers/Content.js",
+        "client/actions.js",
+        "npm:react-redux@5.0.5/lib/index.js",
+        "npm:react-redux@5.0.5.json",
+        "npm:react-redux@5.0.5/lib/connect/connect.js",
+        "npm:react-redux@5.0.5/lib/connect/selectorFactory.js",
+        "npm:react-redux@5.0.5/lib/connect/verifySubselectors.js",
+        "npm:react-redux@5.0.5/lib/utils/warning.js",
+        "npm:react-redux@5.0.5/lib/connect/mergeProps.js",
+        "npm:react-redux@5.0.5/lib/utils/verifyPlainObject.js",
+        "npm:lodash@4.17.4/isPlainObject.js",
+        "npm:lodash@4.17.4.json",
+        "npm:lodash@4.17.4/isObjectLike.js",
+        "npm:lodash@4.17.4/_getPrototype.js",
+        "npm:lodash@4.17.4/_overArg.js",
+        "npm:lodash@4.17.4/_baseGetTag.js",
+        "npm:lodash@4.17.4/_objectToString.js",
+        "npm:lodash@4.17.4/_getRawTag.js",
+        "npm:lodash@4.17.4/_Symbol.js",
+        "npm:lodash@4.17.4/_root.js",
+        "npm:lodash@4.17.4/_freeGlobal.js",
+        "npm:react-redux@5.0.5/lib/connect/mapStateToProps.js",
+        "npm:react-redux@5.0.5/lib/connect/wrapMapToProps.js",
+        "npm:react-redux@5.0.5/lib/connect/mapDispatchToProps.js",
+        "npm:redux@3.6.0/lib/index.js",
+        "npm:redux@3.6.0.json",
+        "npm:redux@3.6.0/lib/utils/warning.js",
+        "npm:redux@3.6.0/lib/compose.js",
+        "npm:redux@3.6.0/lib/applyMiddleware.js",
+        "npm:redux@3.6.0/lib/bindActionCreators.js",
+        "npm:redux@3.6.0/lib/combineReducers.js",
+        "npm:redux@3.6.0/lib/createStore.js",
+        "npm:symbol-observable@1.0.4/index.js",
+        "npm:symbol-observable@1.0.4.json",
+        "npm:symbol-observable@1.0.4/lib/index.js",
+        "npm:symbol-observable@1.0.4/lib/ponyfill.js",
+        "npm:react-redux@5.0.5/lib/utils/shallowEqual.js",
+        "npm:react-redux@5.0.5/lib/components/connectAdvanced.js",
+        "npm:react-redux@5.0.5/lib/utils/PropTypes.js",
+        "npm:prop-types@15.5.10/index.js",
+        "npm:prop-types@15.5.10/factoryWithThrowingShims.js",
+        "npm:react-redux@5.0.5/lib/utils/Subscription.js",
+        "npm:invariant@2.2.2/browser.js",
+        "npm:invariant@2.2.2.json",
+        "npm:hoist-non-react-statics@1.2.0/index.js",
+        "npm:hoist-non-react-statics@1.2.0.json",
+        "npm:react-redux@5.0.5/lib/components/Provider.js",
         "npm:react-router-dom@4.1.1/index.js",
         "npm:react-router-dom@4.1.1.json",
         "npm:react-router-dom@4.1.1/withRouter.js",
@@ -71,17 +120,11 @@ SystemJS.config({
         "npm:path-to-regexp@1.7.0.json",
         "npm:isarray@0.0.1/index.js",
         "npm:isarray@0.0.1.json",
-        "npm:prop-types@15.5.10/index.js",
-        "npm:prop-types@15.5.10/factoryWithThrowingShims.js",
         "npm:warning@3.0.0/browser.js",
         "npm:warning@3.0.0.json",
-        "npm:hoist-non-react-statics@1.2.0/index.js",
-        "npm:hoist-non-react-statics@1.2.0.json",
         "npm:react-router@4.1.1/Switch.js",
         "npm:react-router@4.1.1/StaticRouter.js",
         "npm:react-router@4.1.1/Router.js",
-        "npm:invariant@2.2.2/browser.js",
-        "npm:invariant@2.2.2.json",
         "npm:history@4.6.1/PathUtils.js",
         "npm:history@4.6.1.json",
         "npm:react-router@4.1.1/Redirect.js",
@@ -110,45 +153,6 @@ SystemJS.config({
         "npm:react-router-dom@4.1.1/BrowserRouter.js",
         "npm:history@4.6.1/createBrowserHistory.js",
         "client/reducers.js",
-        "npm:redux@3.6.0/lib/index.js",
-        "npm:redux@3.6.0.json",
-        "npm:redux@3.6.0/lib/utils/warning.js",
-        "npm:redux@3.6.0/lib/compose.js",
-        "npm:redux@3.6.0/lib/applyMiddleware.js",
-        "npm:redux@3.6.0/lib/bindActionCreators.js",
-        "npm:redux@3.6.0/lib/combineReducers.js",
-        "npm:lodash@4.17.4/isPlainObject.js",
-        "npm:lodash@4.17.4.json",
-        "npm:lodash@4.17.4/isObjectLike.js",
-        "npm:lodash@4.17.4/_getPrototype.js",
-        "npm:lodash@4.17.4/_overArg.js",
-        "npm:lodash@4.17.4/_baseGetTag.js",
-        "npm:lodash@4.17.4/_objectToString.js",
-        "npm:lodash@4.17.4/_getRawTag.js",
-        "npm:lodash@4.17.4/_Symbol.js",
-        "npm:lodash@4.17.4/_root.js",
-        "npm:lodash@4.17.4/_freeGlobal.js",
-        "npm:redux@3.6.0/lib/createStore.js",
-        "npm:symbol-observable@1.0.4/index.js",
-        "npm:symbol-observable@1.0.4.json",
-        "npm:symbol-observable@1.0.4/lib/index.js",
-        "npm:symbol-observable@1.0.4/lib/ponyfill.js",
-        "npm:react-redux@5.0.5/lib/index.js",
-        "npm:react-redux@5.0.5.json",
-        "npm:react-redux@5.0.5/lib/connect/connect.js",
-        "npm:react-redux@5.0.5/lib/connect/selectorFactory.js",
-        "npm:react-redux@5.0.5/lib/connect/verifySubselectors.js",
-        "npm:react-redux@5.0.5/lib/utils/warning.js",
-        "npm:react-redux@5.0.5/lib/connect/mergeProps.js",
-        "npm:react-redux@5.0.5/lib/utils/verifyPlainObject.js",
-        "npm:react-redux@5.0.5/lib/connect/mapStateToProps.js",
-        "npm:react-redux@5.0.5/lib/connect/wrapMapToProps.js",
-        "npm:react-redux@5.0.5/lib/connect/mapDispatchToProps.js",
-        "npm:react-redux@5.0.5/lib/utils/shallowEqual.js",
-        "npm:react-redux@5.0.5/lib/components/connectAdvanced.js",
-        "npm:react-redux@5.0.5/lib/utils/PropTypes.js",
-        "npm:react-redux@5.0.5/lib/utils/Subscription.js",
-        "npm:react-redux@5.0.5/lib/components/Provider.js",
         "npm:react-dom@15.5.4/index.js",
         "npm:react-dom@15.5.4.json",
         "npm:react-dom@15.5.4/lib/ReactDOM.js",
@@ -304,7 +308,9 @@ SystemJS.config({
       "plugin-babel": "npm:systemjs-plugin-babel@0.0.21",
       "systemjs-hot-reloader": "npm:systemjs-hot-reloader@1.1.0",
       "core-js": "npm:core-js@2.4.1",
-      "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@6.24.1"
+      "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@6.24.1",
+      "babel-plugin-transform-es2015-modules-commonjs": "npm:babel-plugin-transform-es2015-modules-commonjs@6.24.1",
+      "babel-plugin-add-module-exports": "npm:babel-plugin-add-module-exports@0.2.1"
     },
     "packages": {
       "npm:systemjs-hot-reloader@1.1.0": {
@@ -338,6 +344,78 @@ SystemJS.config({
           "babel-runtime": "npm:babel-runtime@6.23.0",
           "babel-helper-builder-react-jsx": "npm:babel-helper-builder-react-jsx@6.24.1",
           "babel-plugin-syntax-jsx": "npm:babel-plugin-syntax-jsx@6.18.0"
+        }
+      },
+      "npm:babel-plugin-transform-es2015-modules-commonjs@6.24.1": {
+        "map": {
+          "babel-types": "npm:babel-types@6.24.1",
+          "babel-runtime": "npm:babel-runtime@6.23.0",
+          "babel-template": "npm:babel-template@6.24.1",
+          "babel-plugin-transform-strict-mode": "npm:babel-plugin-transform-strict-mode@6.24.1"
+        }
+      },
+      "npm:babel-template@6.24.1": {
+        "map": {
+          "lodash": "npm:lodash@4.17.4",
+          "babel-types": "npm:babel-types@6.24.1",
+          "babel-runtime": "npm:babel-runtime@6.23.0",
+          "babel-traverse": "npm:babel-traverse@6.24.1",
+          "babylon": "npm:babylon@6.17.2"
+        }
+      },
+      "npm:babel-plugin-transform-strict-mode@6.24.1": {
+        "map": {
+          "babel-runtime": "npm:babel-runtime@6.23.0",
+          "babel-types": "npm:babel-types@6.24.1"
+        }
+      },
+      "npm:babel-traverse@6.24.1": {
+        "map": {
+          "babel-runtime": "npm:babel-runtime@6.23.0",
+          "babel-types": "npm:babel-types@6.24.1",
+          "invariant": "npm:invariant@2.2.2",
+          "lodash": "npm:lodash@4.17.4",
+          "babylon": "npm:babylon@6.17.2",
+          "debug": "npm:debug@2.6.8",
+          "babel-code-frame": "npm:babel-code-frame@6.22.0",
+          "babel-messages": "npm:babel-messages@6.23.0",
+          "globals": "npm:globals@9.17.0"
+        }
+      },
+      "npm:babel-code-frame@6.22.0": {
+        "map": {
+          "esutils": "npm:esutils@2.0.2",
+          "js-tokens": "npm:js-tokens@3.0.1",
+          "chalk": "npm:chalk@1.1.3"
+        }
+      },
+      "npm:babel-messages@6.23.0": {
+        "map": {
+          "babel-runtime": "npm:babel-runtime@6.23.0"
+        }
+      },
+      "npm:debug@2.6.8": {
+        "map": {
+          "ms": "npm:ms@2.0.0"
+        }
+      },
+      "npm:chalk@1.1.3": {
+        "map": {
+          "ansi-styles": "npm:ansi-styles@2.2.1",
+          "escape-string-regexp": "npm:escape-string-regexp@1.0.5",
+          "has-ansi": "npm:has-ansi@2.0.0",
+          "strip-ansi": "npm:strip-ansi@3.0.1",
+          "supports-color": "npm:supports-color@2.0.0"
+        }
+      },
+      "npm:has-ansi@2.0.0": {
+        "map": {
+          "ansi-regex": "npm:ansi-regex@2.1.1"
+        }
+      },
+      "npm:strip-ansi@3.0.1": {
+        "map": {
+          "ansi-regex": "npm:ansi-regex@2.1.1"
         }
       }
     }
@@ -399,6 +477,7 @@ SystemJS.config({
     "react-redux": "npm:react-redux@5.0.5",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.1",
+    "systemjs-plugin-css": "npm:systemjs-plugin-css@0.1.35",
     "twbs/bootstrap": "github:twbs/bootstrap@4.0.0-alpha.6",
     "url": "npm:jspm-nodelibs-url@0.2.1",
     "util": "npm:jspm-nodelibs-util@0.2.2",
