@@ -14,7 +14,7 @@ import { module } from '@hot'
 
 import reducers from 'client/reducers'
 
-import Navbar from 'client/components/navbar'
+import Header from 'client/components/header'
 import Home from 'client/components/home'
 import Todos from 'client/components/todos'
 

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import ChooseLanguage from 'client/containers/ChooseLanguage'
 
-export default class Navbar extends React.Component {
+export default class Header extends React.Component {
   render() {
     return (
       <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4">
