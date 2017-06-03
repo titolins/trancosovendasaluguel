@@ -23,7 +23,7 @@ export let component =  ReactDOM.render(
     <Router>
       <div>
         <div className="container">
-          <Header />
+          <Header contentId="header" />
           <Route exact path="/" component={Home} />
           <Route path="/todos" component={Todos} />
         </div>
