@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { mapStateToProps } from 'client/containers/Content'
+import { mapStateToProps } from 'client/containers/content'
 
 import Logo from 'client/components/logo'
 import LanguageSelector from 'client/containers/languageselector'

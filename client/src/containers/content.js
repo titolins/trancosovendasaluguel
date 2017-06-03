@@ -8,13 +8,15 @@ export const Content = {
     mainContent: {
       test: 'teste'
     },
-    navbar: {
+    header: {
       about: 'sobre trancoso',
       contact: 'contato',
       sales: {
         title: 'vendas',
         items: [] },
-      rent: 'aluguel',
+      rent: {
+        title: 'aluguel',
+        items: [] },
       comercialRent: 'aluguel comercial',
       services: 'serviços'
     }
@@ -24,26 +26,28 @@ export const Content = {
     mainContent: {
       test: 'test'
     },
-    navbar: {
+    header: {
       about: 'about trancoso',
       contact: 'contact',
       sales: {
         title: 'sales',
         items: [] },
-      rent: 'rent',
+      rent: {
+        title: 'rent',
+        items: [] },
       comercialRent: 'comercial rent',
       services: 'services'
     }
   }
 }
 
-const getStaticContent = (lang, contentId) => {
+const getContent = (lang, contentId) => {
   return Content[lang][contentId];
 }
 
 export const mapStateToProps = (state, ownProps) => {
   return {
-    content: getStaticContent(state.lang.selected, ownProps.contentId)
+    content: getContent(state.lang.selected, ownProps.contentId)
   }
 }
 
