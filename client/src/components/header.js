@@ -18,15 +18,12 @@ class Header extends React.Component {
           <ul className="navbar-nav ml-auto">
             <li className="nav-item"><LanguageSelector lang="EN" /></li>
             <li className="nav-item"><LanguageSelector lang="PT" /></li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/todos">todos</Link>
-            </li>
           </ul>
-          <ul>
-            <li><Link to="#">{ content.sales.title }</Link></li>
-            <li><Link to="#">{ content.rent.title }</Link></li>
-            <li><Link to="#">{ content.comercialRent }</Link></li>
-            <li><Link to="#">{ content.services }</Link></li>
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item"><Link to="#">{ content.sales.title }</Link></li>
+            <li className="nav-item"><Link to="#">{ content.rent.title }</Link></li>
+            <li className="nav-item"><Link to="#">{ content.comercialRent }</Link></li>
+            <li className="nav-item"><Link to="#">{ content.services }</Link></li>
           </ul>
         </div>
       </nav>
