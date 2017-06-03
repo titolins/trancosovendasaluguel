@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { mapStateToProps } from 'client/containers/Content'
 
 import Logo from 'client/components/logo'
-import ChooseLanguage from 'client/containers/ChooseLanguage'
+import LanguageSelector from 'client/containers/languageselector'
 
 class Header extends React.Component {
   render() {

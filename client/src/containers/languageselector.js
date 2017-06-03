@@ -20,9 +20,8 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const ChooseLanguage = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(LanguageSelector)
 
-export default ChooseLanguage
