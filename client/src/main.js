@@ -16,7 +16,6 @@ import reducers from 'client/reducers'
 
 import Header from 'client/components/header'
 import Home from 'client/components/home'
-import Todos from 'client/components/todos'
 
 export let component =  ReactDOM.render(
   <Provider store={createStore(reducers)}>
@@ -25,7 +24,6 @@ export let component =  ReactDOM.render(
         <div className="container">
           <Header contentId="header" />
           <Route exact path="/" component={Home} />
-          <Route path="/todos" component={Todos} />
         </div>
       </div>
     </Router>
