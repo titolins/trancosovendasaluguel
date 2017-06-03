@@ -9,9 +9,7 @@ SystemJS.config({
     "bundles": {
       "build.js": [
         "client/main.js",
-        "client/components/todos.js",
-        "client/components/todos.less",
-        "npm:systemjs-less-plugin@2.0.0.json",
+        "client/components/home.js",
         "npm:react@15.5.4/react.js",
         "npm:react@15.5.4.json",
         "npm:jspm-nodelibs-process@0.2.1/process.js",
@@ -57,7 +55,6 @@ SystemJS.config({
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/possibleConstructorReturn.js",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/createClass.js",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/classCallCheck.js",
-        "client/components/home.js",
         "client/components/header.js",
         "client/containers/languageselector.js",
         "client/components/languageselector.js",
