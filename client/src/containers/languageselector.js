@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { selectLanguage } from 'client/actions'
-import { Languages } from 'client/containers/Content'
+import { Languages } from 'client/containers/content'
 
 import LanguageSelector from 'client/components/languageselector'
 
