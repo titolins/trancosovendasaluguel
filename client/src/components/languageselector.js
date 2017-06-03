@@ -4,7 +4,7 @@ import { PropTypes } from 'react';
 //import { activeLanguage } from './styles';
 
 export default ({ active, lang, onClick }) => {
-  let activeClass = active ? "activeLanguage" : undefined;
+  let activeClass = active ? "active" : undefined;
 
   return (
       <span><a className={activeClass} href="#" onClick={e => {
