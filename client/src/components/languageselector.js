@@ -3,7 +3,7 @@ import { PropTypes } from 'react';
 
 //import { activeLanguage } from './styles';
 
-let LanguageSelector = ({ active, lang, onClick }) => {
+export default ({ active, lang, onClick }) => {
   let activeClass = active ? "activeLanguage" : undefined;
 
   return (
@@ -16,4 +16,3 @@ let LanguageSelector = ({ active, lang, onClick }) => {
 }
 
 
-export default LanguageSelector
