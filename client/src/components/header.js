@@ -16,8 +16,8 @@ class Header extends React.Component {
         <Logo />
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav ml-auto">
-            <li className="nav-item"><ChooseLanguage lang="EN" /></li>
-            <li className="nav-item"><ChooseLanguage lang="PT" /></li>
+            <li className="nav-item"><LanguageSelector lang="EN" /></li>
+            <li className="nav-item"><LanguageSelector lang="PT" /></li>
             <li className="nav-item">
               <Link className="nav-link" to="/todos">todos</Link>
             </li>
