@@ -1,33 +1,30 @@
 package main
 
 import (
-    "github.com/go-zoo/bone"
-    "github.com/gorilla/handlers"
+    "github.com/labstack/echo"
+    "github.com/labstack/echo/middleware"
 
     "io/ioutil"
     "net/http"
-    "os"
-    "log"
 )
 
 
 func main() {
-    mux := bone.New()
+    e := echo.New()
+    e.Use(middleware.Logger())
 
-    //mux.GetFunc("/", homeHandler)
-    mux.NotFoundFunc(http.HandlerFunc(homeHandler))
-    mux.Get("/static/img/", http.StripPrefix("/static/img/",
-        http.FileServer(http.Dir("static/img/"))))
-    mux.Get("/static/js/", http.StripPrefix("/static/js/",
-        http.FileServer(http.Dir("../client/"))))
+    e.Static("/static/img", "static/img")
+    e.Static("/static/js", "../client/")
 
-    http.ListenAndServe(":8080", handlers.LoggingHandler(os.Stdout, mux))
+    e.GET("/*", func(c echo.Context) error {
+        f, err := ioutil.ReadFile("static/templates/index.html")
+        if err != nil {
+            e.Logger.Fatal(err)
+        }
+        return c.HTMLBlob(http.StatusOK, f)
+    })
+
+    e.Start(":8080")
 }
 
-func homeHandler(w http.ResponseWriter, req *http.Request) {
-    f, err := ioutil.ReadFile("static/templates/index.html")
-    if err != nil {
-        log.Fatal(err)
-    }
-    w.Write(f)
-}
+
