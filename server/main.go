@@ -13,9 +13,15 @@ func main() {
     e := echo.New()
     e.Use(middleware.Logger())
 
+    // static files
     e.Static("/static/img", "static/img")
     e.Static("/static/js", "../client/")
 
+    // api routes
+    api := &API{}
+    api.Bind(e.Group("/api"))
+
+    // all other routes must serve the index file to be handled by react-router
     e.GET("/*", func(c echo.Context) error {
         f, err := ioutil.ReadFile("static/templates/index.html")
         if err != nil {
