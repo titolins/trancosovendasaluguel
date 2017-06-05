@@ -17,13 +17,15 @@
     "dependencies": {
       "css": "github:systemjs/plugin-css@^0.1.35",
       "less": "npm:systemjs-less-plugin@^2.0.0",
+      "promise-polyfill": "npm:promise-polyfill@^6.0.2",
       "react-dom": "npm:react-dom@^15.5.4",
       "react-redux": "npm:react-redux@^5.0.5",
       "react-router": "npm:react-router@^4.1.1",
       "react-router-dom": "npm:react-router-dom@^4.1.1",
       "redux": "npm:redux@^3.6.0",
       "systemjs-plugin-css": "npm:systemjs-plugin-css@^0.1.35",
-      "twbs/bootstrap": "github:twbs/bootstrap@4.0.0-alpha.6"
+      "twbs/bootstrap": "github:twbs/bootstrap@4.0.0-alpha.6",
+      "whatwg-fetch": "npm:whatwg-fetch@^2.0.3"
     },
     "devDependencies": {
       "babel-plugin-add-module-exports": "npm:babel-plugin-add-module-exports@^0.2.1",

@@ -13,6 +13,8 @@
         connect();
         SystemJS.import("twbs/bootstrap/css/bootstrap.css!");
         SystemJS.import("twbs/bootstrap");
+        SystemJS.import("whatwg-fetch");
+        SystemJS.import("promise-polyfill");
         SystemJS.import("client/components/styles/main.less");
         SystemJS.import("client");
       });

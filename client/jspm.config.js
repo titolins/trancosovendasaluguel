@@ -469,6 +469,7 @@ SystemJS.config({
     "os": "npm:jspm-nodelibs-os@0.2.1",
     "path": "npm:jspm-nodelibs-path@0.2.3",
     "process": "npm:jspm-nodelibs-process@0.2.1",
+    "promise-polyfill": "npm:promise-polyfill@6.0.2",
     "react": "npm:react@15.5.4",
     "react-dom": "npm:react-dom@15.5.4",
     "react-router": "npm:react-router@4.1.1",
@@ -482,6 +483,7 @@ SystemJS.config({
     "url": "npm:jspm-nodelibs-url@0.2.1",
     "util": "npm:jspm-nodelibs-util@0.2.2",
     "vm": "npm:jspm-nodelibs-vm@0.2.1",
+    "whatwg-fetch": "npm:whatwg-fetch@2.0.3",
     "zlib": "npm:jspm-nodelibs-zlib@0.2.3"
   },
   packages: {
