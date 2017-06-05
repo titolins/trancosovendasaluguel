@@ -9,6 +9,7 @@ SystemJS.config({
     "bundles": {
       "build.js": [
         "client/main.js",
+        "client/containers/app.js",
         "client/components/app.js",
         "client/components/home.js",
         "npm:react@15.5.4/react.js",
@@ -153,6 +154,8 @@ SystemJS.config({
         "npm:history@4.6.1/createBrowserHistory.js",
         "client/components/logo.js",
         "client/reducers.js",
+        "npm:redux-thunk@2.2.0/lib/index.js",
+        "npm:redux-thunk@2.2.0.json",
         "npm:react-dom@15.5.4/index.js",
         "npm:react-dom@15.5.4.json",
         "npm:react-dom@15.5.4/lib/ReactDOM.js",
@@ -476,6 +479,7 @@ SystemJS.config({
     "react-router-dom": "npm:react-router-dom@4.1.1",
     "redux": "npm:redux@3.6.0",
     "react-redux": "npm:react-redux@5.0.5",
+    "redux-thunk": "npm:redux-thunk@2.2.0",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.1",
     "systemjs-plugin-css": "npm:systemjs-plugin-css@0.1.35",
