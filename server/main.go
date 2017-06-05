@@ -10,7 +10,10 @@ import (
 
 func main() {
     e := echo.New()
-    e.Use(middleware.Logger())
+
+    e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
+        Format: `${method} | ${status} | ${uri} -> ${latency_human}` + "\n",
+    }))
 
     // static files
     e.Static("/static/img", "static/img")
