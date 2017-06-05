@@ -8,7 +8,7 @@ import { module } from '@hot'
 
 import reducers from 'client/reducers'
 
-import App from 'client/components/app'
+import App from 'client/containers/app'
 
 export let component =  ReactDOM.render(
   <Provider store={createStore(reducers)}>
