@@ -9,7 +9,8 @@ SystemJS.config({
     "bundles": {
       "build.js": [
         "client/main.js",
-        "client/components/notfound.js",
+        "client/components/app.js",
+        "client/components/home.js",
         "npm:react@15.5.4/react.js",
         "npm:react@15.5.4.json",
         "npm:jspm-nodelibs-process@0.2.1/process.js",
@@ -50,7 +51,6 @@ SystemJS.config({
         "npm:react@15.5.4/lib/traverseAllChildren.js",
         "npm:react@15.5.4/lib/KeyEscapeUtils.js",
         "npm:react@15.5.4/lib/PooledClass.js",
-        "client/components/home.js",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/inherits.js",
         "npm:systemjs-plugin-babel@0.0.21.json",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/possibleConstructorReturn.js",
