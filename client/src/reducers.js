@@ -4,15 +4,13 @@ import { Languages, Content } from 'client/containers/content';
 
 const { PT, EN } = Languages;
 
-const initialState = {
-  selected: PT,
-  content: Content
-}
+const initialLangState = { selected: PT }
+const initialContentState = Content
 
-function lang(state = initialState, action) {
+function lang(state = initialLangState, action) {
   switch (action.type) {
     case CHOOSE_LANGUAGE:
-      return Object.assign({}, state, {
+      return Object.assign({}, state.lang, {
         selected: action.lang
       })
     default:
@@ -20,12 +18,12 @@ function lang(state = initialState, action) {
   }
 }
 
-function content(state = initialState, action) {
+function content(state = initialContentState, action) {
   switch (action.type) {
     case ADD_CONTENT:
       let contentState = {}
       contentState[action.contentId] = action.content
-      return Object.assign({}, state.content, { dinamic: Object.assign({}, state.content.dinamic, contentState) })
+      return Object.assign({}, state, { dinamic: Object.assign({}, state.dinamic, contentState) })
     default:
       return state
   }
