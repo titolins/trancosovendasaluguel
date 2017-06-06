@@ -4,50 +4,43 @@ export const Languages = {
 }
 
 export const Content = {
-  PT_BR: {
-    mainContent: {
-      test: 'teste'
-    },
+  static: {
     header: {
-      about: 'sobre trancoso',
-      contact: 'contato',
-      sales: {
-        title: 'vendas',
-        items: [] },
-      rent: {
-        title: 'aluguel',
-        items: [] },
-      comercialRent: 'aluguel comercial',
-      services: 'serviços'
-    }
-
+      "PT_BR": {
+        about: 'sobre trancoso',
+        contact: 'contato',
+        sales: 'vendas',
+        rent: 'aluguel',
+        comercialRent: 'aluguel comercial',
+        services: 'serviços'
+      },
+      "EN_US": {
+        about: 'about trancoso',
+        contact: 'contact',
+        sales: 'sales',
+        rent: 'rent',
+        comercialRent: 'comercial rent',
+        services: 'services' }},
   },
-  EN_US: {
-    mainContent: {
-      test: 'test'
-    },
-    header: {
-      about: 'about trancoso',
-      contact: 'contact',
-      sales: {
-        title: 'sales',
-        items: [] },
-      rent: {
-        title: 'rent',
-        items: [] },
-      comercialRent: 'comercial rent',
-      services: 'services'
-    }
-  }
+  dinamic: {}
 }
 
-const getContent = (lang, contentId) => {
-  return Content[lang][contentId];
+const getStaticContent = (lang, contentId) => {
+  return Content.static[contentId][lang];
+}
+
+const getDinamicContent = (contentId) => {
+  return (Content.dinamic[contentId] || null)
 }
 
 export const mapStateToProps = (state, ownProps) => {
+  let reqContent = {}
+  ownProps.requirements.map((req) => {
+    reqContent[req] = getDinamicContent(req)
+  })
   return {
-    content: getContent(state.lang.selected, ownProps.contentId)
+    ownContent: getStaticContent(state.lang.selected, ownProps.contentId),
+    reqContent
   }
 }
 

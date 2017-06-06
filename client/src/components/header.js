@@ -10,7 +10,15 @@ import LanguageSelector from 'client/containers/languageselector'
 
 class Header extends React.Component {
   render() {
-    let { content } = this.props;
+    let { ownContent } = this.props
+    let { categories } = this.props.reqContent
+    console.log(this.props)
+    let salesItems = null,
+        rentItems = null
+    if (categories) {
+      if (categories.sales) salesItems = categories.sales.Items
+      if (categories.rent) rentItems = categories.rent.Items
+    }
 
     return (
       <nav className="header navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4 pl-0 pr-0">
@@ -20,16 +28,16 @@ class Header extends React.Component {
         <Logo />
         <div id="navbarCollapse" className="collapse navbar-collapse flex-column ml-auto ml-3">
           <ul className="navbar-nav ml-auto subOpts">
-            <li className="nav-item"><Link className="nav-link" to="#">{ content.about }</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="#">{ content.contact }</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="#">{ ownContent.about }</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="#">{ ownContent.contact }</Link></li>
             <li className="nav-item"><LanguageSelector lang="PT"/></li>
             <li className="nav-item"><LanguageSelector lang="EN"/></li>
           </ul>
           <ul className="navbar-nav ml-auto mainOpts">
-            <CategoryDropdown category={ content.sales } />
-            <CategoryDropdown category={ content.rent } />
-            <li className="nav-item"><Link className="nav-link" to="#">{ content.comercialRent }</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="#">{ content.services }</Link></li>
+            <CategoryDropdown title={ownContent.sales} items={salesItems} />
+            <CategoryDropdown title={ownContent.rent} items={rentItems} />
+            <li className="nav-item"><Link className="nav-link" to="#">{ ownContent.comercialRent }</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="#">{ ownContent.services }</Link></li>
           </ul>
         </div>
       </nav>

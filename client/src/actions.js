@@ -28,9 +28,11 @@ export function selectLanguage(lang) {
   }
 }
 
-export function addContent(content) {
+export function addContent(content, contentId) {
   return {
     type: ADD_CONTENT,
+    contentId,
     content
   }
 }
+

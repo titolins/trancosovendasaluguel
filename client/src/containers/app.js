@@ -2,17 +2,23 @@ import { connect } from 'react-redux'
 
 import App from 'client/components/app'
 
-const fetchCategories = () => {
-  return (dispatch) => {
+import { addContent } from 'client/actions'
+
+const createFetchCategoriesHandler = (dispatch) => {
+  return  () => {
     fetch("/api/categories").then((response) => {
-      console.log(response)
-      // dispatch(response.json)
+      return response.json()
+    }).then((responseJson) => {
+      console.log(responseJson)
+      dispatch(addContent(responseJson, "categories"))
     })
   }
 }
 
-const mapStateToProps = () => {
-  return {}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchCategories: createFetchCategoriesHandler(dispatch)
+  }
 }
 
-export default connect(mapStateToProps, {fetchCategories})(App)
+export default connect(null, mapDispatchToProps)(App)

@@ -10,6 +10,7 @@ SystemJS.config({
       "build.js": [
         "client/main.js",
         "client/containers/app.js",
+        "client/actions.js",
         "client/components/app.js",
         "client/components/home.js",
         "npm:react@15.5.4/react.js",
@@ -61,7 +62,6 @@ SystemJS.config({
         "client/containers/languageselector.js",
         "client/components/languageselector.js",
         "client/containers/content.js",
-        "client/actions.js",
         "npm:react-redux@5.0.5/lib/index.js",
         "npm:react-redux@5.0.5.json",
         "npm:react-redux@5.0.5/lib/connect/connect.js",
