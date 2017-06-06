@@ -2,15 +2,16 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { mapStateToProps } from 'client/containers/content'
+import { mapStateToProps } from 'client/containers/staticcontent'
 
 import Logo from 'client/components/logo'
-import CategoryDropdown from 'client/components/categorydropdown'
+import CategoryDropdown from 'client/containers/categorydropdown'
 import LanguageSelector from 'client/containers/languageselector'
 
 class Header extends React.Component {
   render() {
     let { ownContent } = this.props
+      /*
     let { categories } = this.props.reqContent
     console.log(this.props)
     let salesItems = null,
@@ -19,6 +20,7 @@ class Header extends React.Component {
       if (categories.sales) salesItems = categories.sales.Items
       if (categories.rent) rentItems = categories.rent.Items
     }
+    */
 
     return (
       <nav className="header navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4 pl-0 pr-0">
@@ -34,8 +36,8 @@ class Header extends React.Component {
             <li className="nav-item"><LanguageSelector lang="EN"/></li>
           </ul>
           <ul className="navbar-nav ml-auto mainOpts">
-            <CategoryDropdown title={ownContent.sales} items={salesItems} />
-            <CategoryDropdown title={ownContent.rent} items={rentItems} />
+            <CategoryDropdown categoryId="sales" />
+            <CategoryDropdown categoryId="rent" />
             <li className="nav-item"><Link className="nav-link" to="#">{ ownContent.comercialRent }</Link></li>
             <li className="nav-item"><Link className="nav-link" to="#">{ ownContent.services }</Link></li>
           </ul>
