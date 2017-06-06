@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { selectLanguage } from 'client/actions'
-import { Languages } from 'client/containers/content'
+import { Languages } from 'client/containers/staticcontent'
 
 import LanguageSelector from 'client/components/languageselector'
 
