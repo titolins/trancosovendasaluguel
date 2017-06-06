@@ -22,27 +22,29 @@ export const Content = {
         comercialRent: 'comercial rent',
         services: 'services' }},
   },
-  dinamic: {}
+  dinamic: null
 }
 
-const getStaticContent = (lang, contentId) => {
-  return Content.static[contentId][lang];
+const getStaticContent = (content, lang, contentId) => {
+  return content.static[contentId][lang];
 }
 
-const getDinamicContent = (contentId) => {
-  return (Content.dinamic[contentId] || null)
+const getDinamicContent = (content, contentId) => {
+  return (content.dinamic[contentId] || null)
 }
 
 export const mapStateToProps = (state, ownProps) => {
+  /*
   let reqContent = {}
   ownProps.requirements.map((req) => {
     reqContent[req] = getDinamicContent(req)
   })
   console.log("state")
   console.log(state)
+  */
   return {
-    ownContent: getStaticContent(state.lang.selected, ownProps.contentId),
-    reqContent
+    ownContent: getStaticContent(state.content, state.lang.selected, ownProps.contentId)
+    //reqContent
   }
 }
 
