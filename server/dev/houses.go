@@ -13,13 +13,13 @@ var SalesDevData = []models.House{
         Pictures: []models.Picture{
             models.Picture{ Url: "https://placehold.it/550x338" }},
         Content: models.TranslatableContent{
-            PT: models.HouseContent{
+            PT_BR: models.HouseContent{
                     Name: "casa 1",
                     Description: "descricao da casa",
                     Features: []string{
                         "wifi",
                         "ar condicionado" }},
-            EN: models.HouseContent{
+            EN_US: models.HouseContent{
                     Name: "house 1",
                     Description: "house description",
                     Features: []string{
@@ -30,13 +30,13 @@ var SalesDevData = []models.House{
         Featured: true,
         Capacity: 4,
         Content: models.TranslatableContent{
-            PT: models.HouseContent{
+            PT_BR: models.HouseContent{
                     Name: "casa 2",
                     Description: "descricao da casa",
                     Features: []string{
                         "wifi",
                         "ar condicionado" } },
-            EN: models.HouseContent{
+            EN_US: models.HouseContent{
                     Name: "house 1",
                     Description: "house description",
                     Features: []string{
@@ -52,13 +52,13 @@ var RentDevData = []models.House{
         Pictures: []models.Picture{
             models.Picture{ Url: "https://placehold.it/550x338" }},
         Content: models.TranslatableContent{
-            PT: models.HouseContent{
+            PT_BR: models.HouseContent{
                     Name: "casa 1",
                     Description: "descricao da casa",
                     Features: []string{
                         "wifi",
                         "ar condicionado" }},
-            EN: models.HouseContent{
+            EN_US: models.HouseContent{
                     Name: "house 1",
                     Description: "house description",
                     Features: []string{
@@ -69,13 +69,13 @@ var RentDevData = []models.House{
         Featured: true,
         Capacity: 4,
         Content: models.TranslatableContent{
-            PT: models.HouseContent{
+            PT_BR: models.HouseContent{
                     Name: "casa 2",
                     Description: "descricao da casa",
                     Features: []string{
                         "wifi",
                         "ar condicionado" } },
-            EN: models.HouseContent{
+            EN_US: models.HouseContent{
                     Name: "house 1",
                     Description: "house description",
                     Features: []string{
@@ -85,15 +85,15 @@ var RentDevData = []models.House{
 var CategoriesDevData = map[string]models.Category{
     "sales": models.Category{
             Content: models.TranslatableContent{
-                PT: models.CategoryContent{
+                PT_BR: models.CategoryContent{
                     Title: "vendas" },
-                EN: models.CategoryContent{
+                EN_US: models.CategoryContent{
                     Title: "sales" }},
             Items: SalesDevData },
     "rent": models.Category{
             Content: models.TranslatableContent{
-                PT: models.CategoryContent{
+                PT_BR: models.CategoryContent{
                     Title: "aluguel" },
-                EN: models.CategoryContent{
+                EN_US: models.CategoryContent{
                     Title: "rent" }},
             Items: RentDevData }}

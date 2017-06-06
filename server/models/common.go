@@ -3,8 +3,8 @@ package models
 type Content interface{}
 
 type TranslatableContent struct {
-    PT Content
-    EN Content
+    PT_BR Content
+    EN_US Content
 }
 
 type Picture struct {
