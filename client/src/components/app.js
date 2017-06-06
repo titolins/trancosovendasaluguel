@@ -20,7 +20,7 @@ export default class App extends React.Component {
     return (
       <Router>
         <div className="container">
-          <Header contentId="header" requirements={["categories"]}/>
+          <Header contentId="header" />
           <Switch>
             <Route exact path="/" component={Home} />
             <Redirect to="/" />
