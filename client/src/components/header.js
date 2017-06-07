@@ -13,7 +13,7 @@ class Header extends React.Component {
     let { ownContent } = this.props
 
     return (
-      <nav id="nav" className="header navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4 pl-0 pr-0">
+      <nav id="nav" className="header navbar navbar-toggleable-md fixed-top px-0 mx-auto">
         <button className="navbar-toggler navbar-toggler-right align-self-center mt-3" type="button" data-toggle="collapse" data-target="#navbarCollapse">
           <span className="navbar-toggler-icon"></span>
         </button>
