@@ -23,23 +23,23 @@ class Header extends React.Component {
     */
 
     return (
-      <nav className="header navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4 pl-0 pr-0">
+      <nav id="nav" className="header navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4 pl-0 pr-0">
         <button className="navbar-toggler navbar-toggler-right align-self-center mt-3" type="button" data-toggle="collapse" data-target="#navbarCollapse">
           <span className="navbar-toggler-icon"></span>
         </button>
         <Logo />
-        <div id="navbarCollapse" className="collapse navbar-collapse flex-column ml-auto ml-3">
+        <div id="navbarCollapse" className="collapse navbar-collapse flex-column mt-auto ml-auto">
           <ul className="navbar-nav ml-auto subOpts">
-            <li className="nav-item"><Link className="nav-link" to="#">{ ownContent.about }</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="#">{ ownContent.contact }</Link></li>
-            <li className="nav-item"><LanguageSelector lang="PT"/></li>
-            <li className="nav-item"><LanguageSelector lang="EN"/></li>
+            <li className="nav-item"><Link className="nav-link text-grey px-0 mx-4" to="#">{ ownContent.about }</Link></li>
+            <li className="nav-item"><Link className="nav-link text-grey px-0 mx-4" to="#">{ ownContent.contact }</Link></li>
+            <li className="nav-item"><LanguageSelector margins={[4,1]} lang="PT"/></li>
+            <li className="nav-item"><LanguageSelector margins={[1,0]} lang="EN"/></li>
           </ul>
           <ul className="navbar-nav ml-auto mainOpts">
             <CategoryDropdown categoryId="sales" />
             <CategoryDropdown categoryId="rent" />
-            <li className="nav-item"><Link className="nav-link" to="#">{ ownContent.comercialRent }</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="#">{ ownContent.services }</Link></li>
+            <li className="nav-item"><Link className="nav-link text-green px-0 mx-4" to="#">{ ownContent.comercialRent }</Link></li>
+            <li className="nav-item"><Link className="nav-link text-green px-0 ml-4" to="#">{ ownContent.services }</Link></li>
           </ul>
         </div>
       </nav>

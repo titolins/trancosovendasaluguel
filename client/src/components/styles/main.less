@@ -3,17 +3,71 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,500|Ubuntu:300');
 
 // header stuff
+@import './colors.less';
+@import './mixin.less';
 
-nav {
+a {
+    text-decoration: none !important;
+}
+
+#nav {
     font-family: 'Montserrat', sans-serif;
     font-size: 15px;
-    text-transform: uppercase;
     letter-spacing: 0.1em;
-    .mainOpts {
-        font-weight: 500;
+    background-color: @white !important;
+}
+
+.text-green {
+    color: @green !important;
+    .linkHover()
+}
+
+.text-grey {
+    color: @grey !important;
+    .linkHover()
+}
+
+.mainOpts {
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.subOpts {
+    font-weight: 400;
+    text-transform: uppercase;
+    color: @grey;
+}
+
+.logo {
+    width: 300px;
+    height: 100%;
+    display: table;
+    & > .logoCol {
+        display: table-cell;
+        vertical-align: middle;
+        &:first-child {
+            width: 25%;
+        }
+        &:last-child {
+            width: 75%;
+        }
     }
-    .subOpts {
-        font-weight: 400;
+}
+
+.logoText {
+    color: @green;
+    font-weight: 500;
+    p {
+        margin-bottom: 0;
+        text-align: center;
+        &:first-child {
+            font-size: 36px;
+            text-transform: capitalize;
+        }
+        &:last-child {
+            font-size: 14px;
+            text-transform: lowercase;
+        }
     }
 }
 
