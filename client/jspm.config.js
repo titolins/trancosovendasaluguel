@@ -13,6 +13,8 @@ SystemJS.config({
         "client/actions.js",
         "client/components/app.js",
         "client/components/home.js",
+        "client/components/styles/home.less",
+        "npm:systemjs-less-plugin@2.0.0.json",
         "npm:react@15.5.4/react.js",
         "npm:react@15.5.4.json",
         "npm:jspm-nodelibs-process@0.2.1/process.js",
