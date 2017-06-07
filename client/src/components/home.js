@@ -5,7 +5,7 @@ import './styles/home.less'
 export default class Home extends React.Component {
   render() {
     return (
-      <div className="home">
+      <div className="mainContent">
         <div className="welcome">
           <div className="row">
             <div className="col-xs-12">
