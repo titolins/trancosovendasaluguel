@@ -14,7 +14,7 @@ const buildItemsMenu = (linkId, items) => {
 
 export default ({title, items}) => {
   if (!items) return null
-  let linkId = title + "MenuLink"
+  let linkId = `${title}MenuLink`
   let menu = buildItemsMenu(linkId, items)
 
   return (

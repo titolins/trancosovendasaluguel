@@ -5,9 +5,7 @@ import { PropTypes } from 'react';
 
 export default ({ active, lang, margins, onClick }) => {
   //let activeClass = active ? "active" : undefined;
-  let ml = "ml-" + margins[0]
-  let mr = "mr-" + margins[1]
-  let classes = "nav-link text-grey px-0 " + ml + " " + mr
+  let classes = `nav-link text-grey px-0 ml-${margins[o]} mr-${margins[1]}`
 
   return (
       <span><a className={classes} href="#" onClick={e => {
