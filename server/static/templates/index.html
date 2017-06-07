@@ -11,11 +11,17 @@
     <script>
       SystemJS.import('systemjs-hot-reloader').then(function(connect) {
         connect();
-        SystemJS.import("twbs/bootstrap/css/bootstrap.css!");
-        SystemJS.import("twbs/bootstrap");
+        // async imports
+        // polyfills
         SystemJS.import("whatwg-fetch");
         SystemJS.import("promise-polyfill");
+
+        // styles
+        SystemJS.import("twbs/bootstrap/css/bootstrap.css!");
+        SystemJS.import("twbs/bootstrap");
         SystemJS.import("client/components/styles/main.less");
+
+        // load client
         SystemJS.import("client");
       });
     </script>
