@@ -11,16 +11,6 @@ import LanguageSelector from 'client/containers/languageselector'
 class Header extends React.Component {
   render() {
     let { ownContent } = this.props
-      /*
-    let { categories } = this.props.reqContent
-    console.log(this.props)
-    let salesItems = null,
-        rentItems = null
-    if (categories) {
-      if (categories.sales) salesItems = categories.sales.Items
-      if (categories.rent) rentItems = categories.rent.Items
-    }
-    */
 
     return (
       <nav id="nav" className="header navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4 pl-0 pr-0">
