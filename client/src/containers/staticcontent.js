@@ -34,17 +34,8 @@ const getDinamicContent = (content, contentId) => {
 }
 
 export const mapStateToProps = (state, ownProps) => {
-  /*
-  let reqContent = {}
-  ownProps.requirements.map((req) => {
-    reqContent[req] = getDinamicContent(req)
-  })
-  console.log("state")
-  console.log(state)
-  */
   return {
     ownContent: getStaticContent(state.content, state.lang.selected, ownProps.contentId)
-    //reqContent
   }
 }
 
