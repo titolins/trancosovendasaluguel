@@ -15,7 +15,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 const mapStateToProps = (state, ownProps) => {
   return {
     active: (state.lang.selected === Languages[ownProps.lang]),
-    lang: ownProps.lang
+    lang: ownProps.lang,
+    margins: ownProps.margins
   }
 }
 
