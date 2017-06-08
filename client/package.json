@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "font-awesome": "^4.7.0",
     "jspm": "^0.17.0-beta.41"
   },
   "jspm": {

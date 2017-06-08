@@ -13,16 +13,16 @@ class Header extends React.Component {
     let { ownContent } = this.props
 
     return (
-      <nav id="nav" className="header navbar navbar-toggleable-md fixed-top px-0 mx-auto">
+      <nav id="nav" className="navbar navbar-toggleable-md fixed-top px-0 mx-auto">
         <button className="navbar-toggler navbar-toggler-right align-self-center mt-3" type="button" data-toggle="collapse" data-target="#navbarCollapse">
           <span className="navbar-toggler-icon"></span>
         </button>
         <Logo />
-        <div id="navbarCollapse" className="collapse navbar-collapse flex-column mt-auto ml-auto">
+        <div id="navbarCollapse" className="collapse navbar-collapse flex-column mt-auto">
           <ul className="navbar-nav ml-auto subOpts">
             <li className="nav-item"><Link className="nav-link text-grey px-0 mx-4" to="#">{ ownContent.about }</Link></li>
             <li className="nav-item"><Link className="nav-link text-grey px-0 mx-4" to="#">{ ownContent.contact }</Link></li>
-            <li className="nav-item"><LanguageSelector margins={[4,1]} lang="PT"/></li>
+            <li className="nav-item"><LanguageSelector margins={[5,1]} lang="PT"/></li>
             <li className="nav-item"><LanguageSelector margins={[1,0]} lang="EN"/></li>
           </ul>
           <ul className="navbar-nav ml-auto mainOpts">

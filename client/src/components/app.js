@@ -11,6 +11,7 @@ import { PropsRoute } from 'client/propsroute'
 
 import Header from 'client/components/header'
 import Home from 'client/components/home'
+import Footer from 'client/components/footer'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -21,12 +22,15 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <div className="container">
-          <Header contentId="header" />
-          <Switch>
-            <PropsRoute exact path="/" component={Home} contentId="home" />
-            <Redirect to="/" />
-          </Switch>
+        <div>
+          <div className="container">
+            <Header contentId="navbar" />
+            <Switch>
+              <PropsRoute exact path="/" component={Home} contentId="home" />
+              <Redirect to="/" />
+            </Switch>
+          </div>
+          <Footer contentId="navbar"/>
         </div>
       </Router>
     )

@@ -1,6 +1,7 @@
 
 // fonts
 @import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,500|Ubuntu:300');
+@import '/static/js/node_modules/font-awesome/css/font-awesome.min.css';
 
 // header stuff
 @import './colors.less';
@@ -10,26 +11,59 @@ a {
     text-decoration: none !important;
 }
 
-#nav {
+#nav, #footer {
     font-family: 'Montserrat', sans-serif;
-    font-size: 15px;
+}
+
+#nav {
     letter-spacing: 0.1em;
+    font-size: 15px;
     background-color: @white !important;
     width: inherit;
+}
+
+#footer {
+    background-color: @fadeBackground;
+    min-height: 100px;
+    font-size: 14px;
+    font-weight: 200;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.footer-bottom-row {
+    min-width: 40%;
+}
+
+.footer-border-right {
+    border-right: 1px solid @blue;
+}
+
+.footer-border-bottom {
+    border-bottom: 1px solid @blue;
 }
 
 .mainContent {
     margin-top: 131px;
 }
 
+.text-blue {
+    color: @blue !important;
+}
+
+.footerLink {
+    .text-blue();
+    .footerLinkHover();
+}
+
 .text-green {
     color: @green !important;
-    .linkHover()
+    .headerLinkHover();
 }
 
 .text-grey {
     color: @grey !important;
-    .linkHover()
+    .headerLinkHover();
 }
 
 .mainOpts {
@@ -40,7 +74,6 @@ a {
 .subOpts {
     font-weight: 400;
     text-transform: uppercase;
-    color: @grey;
 }
 
 .logo {

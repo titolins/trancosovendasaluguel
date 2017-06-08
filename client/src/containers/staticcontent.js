@@ -5,7 +5,7 @@ export const Languages = {
 
 export const Content = {
   static: {
-    header: {
+    navbar: {
       "PT_BR": {
         about: 'sobre trancoso',
         contact: 'contato',
