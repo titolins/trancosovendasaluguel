@@ -7,6 +7,8 @@ import {
   Redirect
 } from 'react-router-dom'
 
+import { PropsRoute } from 'client/propsroute'
+
 import Header from 'client/components/header'
 import Home from 'client/components/home'
 
@@ -22,7 +24,7 @@ export default class App extends React.Component {
         <div className="container">
           <Header contentId="header" />
           <Switch>
-            <Route exact path="/" component={Home} />
+            <PropsRoute exact path="/" component={Home} contentId="home" />
             <Redirect to="/" />
           </Switch>
         </div>
