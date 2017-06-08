@@ -21,6 +21,28 @@ export const Content = {
         rent: 'rent',
         comercialRent: 'comercial rent',
         services: 'services' }},
+    home: {
+      "PT_BR": {
+        welcomeText: [ `Verdes-mares, águas tépidas, altivas falésias, coqueirais, matas,
+            mangues e rios.`,
+                       `Bem vindo às paradisíacas praias do extremo sul da Bahia,
+            com suas paisagens e miragens que se estendem por 90km de costa e desenham o
+            exuberante cenário da Mata Atlântica nessa região - visões do paraíso que ainda
+            se mantém vivas aqui.`,
+                       `Somos corretores imobiliários com ampla experiência
+            na região desde 2002 e hoje contamos com os melhores preços da praça.`]
+      },
+      "EN_US": {
+        welcomeText: [ `Green seas, tepid waters, high cliffs, coconut groves, woods,
+            mangroves and rivers.`,
+                       `Welcome to the paradisiac beaches of the extreme
+            south of Bahia, with it's landscapes and mirages that extend for 90km of
+            coast and draw the exuberant scenario of the Atlantic Forest in this
+            region - visions of the paradise that exists here until today.`,
+                       `We are real estate brokers with broad experience in the region since
+            2002 and counting today with the best prices in the area.` ]
+        }
+      }
   },
   dinamic: null
 }
