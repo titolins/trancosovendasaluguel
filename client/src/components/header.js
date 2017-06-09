@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { mapStateToProps } from 'client/containers/staticcontent'
 
 import Logo from 'client/components/logo'
-import CategoryDropdown from 'client/containers/categorydropdown'
+import CategoryDropdown from 'client/components/categorydropdown'
 import LanguageSelector from 'client/containers/languageselector'
 
 class Header extends React.Component {
@@ -26,8 +26,8 @@ class Header extends React.Component {
             <li className="nav-item"><LanguageSelector margins={[1,0]} lang="EN"/></li>
           </ul>
           <ul className="navbar-nav ml-auto mainOpts">
-            <CategoryDropdown categoryId="sales" />
-            <CategoryDropdown categoryId="rent" />
+            <CategoryDropdown categoryId="sales" categoryContent="Items" />
+            <CategoryDropdown categoryId="rent" categoryContent="Items" />
             <li className="nav-item"><Link className="nav-link text-green px-0 mx-4" to="#">{ ownContent.comercialRent }</Link></li>
             <li className="nav-item"><Link className="nav-link text-green px-0 ml-4" to="#">{ ownContent.services }</Link></li>
           </ul>
