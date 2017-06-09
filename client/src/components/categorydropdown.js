@@ -6,10 +6,6 @@ const buildItemsMenu = (linkId, items) => {
   return items.map((item,i) => {
     return (<Link key={i} className="dropdown-item" to="#">{ item.Name }</Link>)
   })
-    /*itemsList.unshift((<div className="dropdown-menu" aria-labelledby={linkId}>))
-  itemsList.push((</div>))
-  return itemsList
-  */
 }
 
 export default ({title, items}) => {

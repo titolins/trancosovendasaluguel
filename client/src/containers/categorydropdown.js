@@ -12,7 +12,6 @@ const filterItems = (items, lang) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  // ownProps.categoryId
   try {
     let category = state.content.dinamic.categories[ownProps.categoryId],
         lang = state.lang.selected
@@ -21,8 +20,8 @@ const mapStateToProps = (state, ownProps) => {
       items: filterItems(category.Items, lang)
     }
   } catch (e) {
-    console.log("error parsing category data. probably we didn't received the info from the server. otherwise, there's something broken..")
-    console.log(e)
+    //console.log("error parsing category data. probably we didn't received the info from the server. otherwise, there's something broken..")
+    //console.log(e)
     return { title: null, items: null }
   }
 }

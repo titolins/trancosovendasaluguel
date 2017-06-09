@@ -8,9 +8,8 @@ import (
 
 /*
  * TODO:
- * * add update and delete methods for category
+ * * add update and delete methods (ony getters as of now)
  * * implement validators and bindings. see: https://echo.labstack.com/guide/request
- *
  */
 type API struct{}
 

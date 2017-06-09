@@ -9,7 +9,6 @@ const createFetchCategoriesHandler = (dispatch) => {
     fetch("/api/categories").then((response) => {
       return response.json()
     }).then((responseJson) => {
-      console.log(responseJson)
       dispatch(addContent(responseJson, "categories"))
     })
   }
