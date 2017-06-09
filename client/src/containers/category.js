@@ -4,7 +4,10 @@ const filterItems = (items, lang) => {
   if (items === null) return null
   return items.map((item) => {
     // in future, if we need an item id, we should enforce it here
-    return item.Content[lang]
+    return {
+      cover: item.Cover,
+      content: item.Content[lang]
+    }
   })
 }
 

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 const buildItemsMenu = (linkId, items) => {
   return items.map((item,i) => {
-    return (<Link key={i} className="dropdown-item" to="#">{ item.Name }</Link>)
+    return (<Link key={i} className="dropdown-item" to="#">{ item.content.Name }</Link>)
   })
 }
 
