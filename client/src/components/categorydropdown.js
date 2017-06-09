@@ -1,5 +1,9 @@
 import React from 'react'
 
+import { connect } from 'react-redux'
+
+import { mapStateToProps } from 'client/containers/category'
+
 import { Link } from 'react-router-dom'
 
 const buildItemsMenu = (linkId, items) => {
@@ -8,7 +12,7 @@ const buildItemsMenu = (linkId, items) => {
   })
 }
 
-export default ({title, items}) => {
+const CategoryDropdown = ({title, items}) => {
   if (!items) return null
   let linkId = `${title}MenuLink`
   let menu = buildItemsMenu(linkId, items)
@@ -23,3 +27,6 @@ export default ({title, items}) => {
   )
 }
 
+export default connect(
+  mapStateToProps
+)(CategoryDropdown)
