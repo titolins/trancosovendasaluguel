@@ -7,5 +7,6 @@ type CategoryContent struct{
 type Category struct{
     Content TranslatableContent
     Items []House
+    Featured []House
 }
 
