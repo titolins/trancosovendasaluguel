@@ -6,7 +6,7 @@ import { mapStateToProps } from 'client/containers/staticcontent'
 
 import Logo from 'client/components/logo'
 import CategoryDropdown from 'client/components/categorydropdown'
-import LanguageSelector from 'client/containers/languageselector'
+import LanguageSelector from 'client/components/languageselector'
 
 class Header extends React.Component {
   render() {
