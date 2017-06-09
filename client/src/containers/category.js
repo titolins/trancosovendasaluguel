@@ -1,6 +1,3 @@
-import { connect } from 'react-redux'
-import { Languages } from 'client/containers/staticcontent'
-
 import CategoryDropdown from 'client/components/categorydropdown'
 
 const filterItems = (items, lang) => {
@@ -11,13 +8,13 @@ const filterItems = (items, lang) => {
   })
 }
 
-const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state, ownProps) => {
   try {
     let category = state.content.dinamic.categories[ownProps.categoryId],
         lang = state.lang.selected
     return {
       title: category.Content[lang].Title,
-      items: filterItems(category.Items, lang)
+      items: filterItems(category[ownProps.categoryContent], lang)
     }
   } catch (e) {
     //console.log("error parsing category data. probably we didn't received the info from the server. otherwise, there's something broken..")
@@ -26,6 +23,3 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(CategoryDropdown)
