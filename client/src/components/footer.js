@@ -23,14 +23,14 @@ class Footer extends React.Component {
           </ul>
           <div className="row mx-auto pt-5 mb-5 footer-bottom-row">
             <div className="col-6 py-3 footer-border-right text-center my-auto">
-              <span className="fa fa-facebook-square fa-lg footerLink mr-1"></span>
-              <span className="fa fa-instagram fa-lg footerLink ml-1"></span>
+              <Link to="#"><span className="fa fa-facebook-square fa-lg footerLink mr-1"></span></Link>
+              <Link to="#"><span className="fa fa-instagram fa-lg footerLink ml-1"></span></Link>
             </div>
             <div className="col-6 py-3 text-center my-auto">
               <div>
                 <span className="text-blue">TEL. +55 73 3668-1095</span>
                 <span className="text-blue"> | </span>
-                <span className="fa fa-skype fa-lg footerLink"></span>
+                <Link to="#"><span className="fa fa-skype fa-lg footerLink"></span></Link>
               </div>
               <div>
                 <span className="text-blue">CRECI-BA 12.950</span>
