@@ -51,10 +51,6 @@ const getStaticContent = (content, lang, contentId) => {
   return content.static[contentId][lang];
 }
 
-const getDinamicContent = (content, contentId) => {
-  return (content.dinamic[contentId] || null)
-}
-
 export const mapStateToProps = (state, ownProps) => {
   return {
     ownContent: getStaticContent(state.content, state.lang.selected, ownProps.contentId)
