@@ -68,7 +68,17 @@ export const Content = {
           prev: "previous",
           next: "next"
         }
-      }}},
+      }},
+    contact: {
+      "PT_BR": {
+        phone: "telefone",
+        address: "endereço"
+      },
+      "EN_US": {
+        phone: "phone",
+        address: "address"
+      }
+    }},
   dinamic: null
 }
 

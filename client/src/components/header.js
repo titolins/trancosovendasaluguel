@@ -21,7 +21,7 @@ class Header extends React.Component {
         <div id="navbarCollapse" className="collapse navbar-collapse flex-column mt-auto">
           <ul className="navbar-nav ml-auto subOpts">
             <li className="nav-item"><Link className="nav-link text-grey px-0 mx-4" to="#">{ ownContent.about }</Link></li>
-            <li className="nav-item"><Link className="nav-link text-grey px-0 mx-4" to="#">{ ownContent.contact }</Link></li>
+            <li className="nav-item"><Link className="nav-link text-grey px-0 mx-4" to="/contato">{ ownContent.contact }</Link></li>
             <li className="nav-item"><LanguageSelector margins={[5,1]} lang="PT"/></li>
             <li className="nav-item"><LanguageSelector margins={[1,0]} lang="EN"/></li>
           </ul>
