@@ -5,6 +5,12 @@ import { connect } from 'react-redux'
 import { mapDispatchToProps } from 'client/containers/fetchcontent'
 import { mapStateToProps } from 'client/containers/house'
 
+import Carousel from 'client/components/carousel'
+
+const buildFeatures = (features) => {
+  return (<ul>{features.map((f,i) => {return (<li key={i}>{f}</li>)})}</ul>)
+}
+
 class House extends React.Component {
   constructor(props) {
     super(props)
@@ -15,16 +21,21 @@ class House extends React.Component {
 
   render() {
     let { ownContent, staticContent } = this.props
+    let features = ownContent.Features ? buildFeatures(ownContent.Features) : null
+    let carousel = ownContent.Pictures ? (<Carousel pictures={ownContent.Pictures} controls={staticContent.controls} />) : null
     return (
       <div className="container mainContent">
-        <div className="row">
+        <div className="row py-5">
           <div className="col-xs-12 col-md-7 houseCarousel">
+            { carousel }
           </div>
           <div className="col-xs-12 col-md-5">
             <h1 className="sectionTitle fullWidth pb-2">{ staticContent.description }</h1>
             <p>{ ownContent.Description }</p>
             <h1 className="sectionTitle fullWidth pb-2">{ staticContent.capacity }</h1>
             <p>{ ownContent.Capacity }</p>
+            <h1 className="sectionTitle fullWidth pb-2">{ staticContent.features }</h1>
+            { features }
           </div>
         </div>
       </div>

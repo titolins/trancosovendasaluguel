@@ -147,6 +147,7 @@ SystemJS.config({
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/createClass.js",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/classCallCheck.js",
         "client/components/house.js",
+        "client/components/carousel.js",
         "client/containers/house.js",
         "client/containers/fetchcontent.js",
         "client/actions.js",

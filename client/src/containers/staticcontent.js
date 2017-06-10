@@ -53,13 +53,21 @@ export const Content = {
         people: "pessoas",
         description: "descrição",
         capacity: "capacidade",
-        features: "mais informações"
+        features: "mais informações",
+        controls: {
+          prev: "anterior",
+          next: "próxima"
+        }
       },
       "EN_US": {
         people: "people",
         description: "description",
         capacity: "capacity",
-        features: "features"
+        features: "features",
+        controls: {
+          prev: "previous",
+          next: "next"
+        }
       }}},
   dinamic: null
 }
