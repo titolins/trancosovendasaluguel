@@ -14,16 +14,17 @@ class House extends React.Component {
   }
 
   render() {
-    let { ownContent } = this.props
+    let { ownContent, staticContent } = this.props
     return (
       <div className="container mainContent">
         <div className="row">
           <div className="col-xs-12 col-md-7 houseCarousel">
           </div>
           <div className="col-xs-12 col-md-5">
-            <div>{ ownContent.Name }</div>
-            <div>{ ownContent.Description }</div>
-            <div>{ ownContent.Capacity }</div>
+            <h1 className="sectionTitle fullWidth pb-2">{ staticContent.description }</h1>
+            <p>{ ownContent.Description }</p>
+            <h1 className="sectionTitle fullWidth pb-2">{ staticContent.capacity }</h1>
+            <p>{ ownContent.Capacity }</p>
           </div>
         </div>
       </div>
