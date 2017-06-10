@@ -3,6 +3,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { mapStateToProps } from 'client/containers/staticcontent'
 
+import FeaturedSection from 'client/components/featuredsection'
+
 import './styles/home.less'
 
 class Home extends React.Component {
@@ -28,6 +30,8 @@ class Home extends React.Component {
               </div>
             </div>
           </div>
+          <FeaturedSection categoryId="sales" categoryContent="Featured" contentId="featured" />
+          <FeaturedSection categoryId="rent" categoryContent="Featured" contentId="featured" />
         </div>
       </div>
     )
