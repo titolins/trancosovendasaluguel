@@ -17,6 +17,7 @@ func (api *API) Bind(group *echo.Group) {
     group.GET("/categories", api.GetAllCategoriesHandler)
     group.GET("/categories/:categoryId", api.GetCategoryHandler)
     group.GET("/categories/:categoryId/featured", api.GetCategoryFeaturedHandler)
+    group.GET("/categories/:categoryId/houses/:houseId", api.GetHouseHandler)
 }
 
 /*
