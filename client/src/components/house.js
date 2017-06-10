@@ -26,10 +26,10 @@ class House extends React.Component {
     return (
       <div className="container mainContent">
         <div className="row py-5">
-          <div className="col-xs-12 col-md-7 houseCarousel">
+          <div className="col-xs-12 col-md-6 houseCarousel">
             { carousel }
           </div>
-          <div className="col-xs-12 col-md-5">
+          <div className="col-xs-12 col-md-6">
             <h1 className="sectionTitle fullWidth pb-2">{ staticContent.description }</h1>
             <p>{ ownContent.Description }</p>
             <h1 className="sectionTitle fullWidth pb-2">{ staticContent.capacity }</h1>
