@@ -47,7 +47,7 @@ const FeaturedSection = ({title, items, ownContent}) => {
 
   return (
     <div>
-      <h1 className="featuredCategoryTitle pb-2">{ title }</h1>
+      <h1 className="sectionTitle pb-2">{ title }</h1>
       <div className="container py-4">
         <div className="row">{ itemsPanel }</div>
         { moreBtn }
