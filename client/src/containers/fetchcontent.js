@@ -13,6 +13,7 @@ const createFetchContentHandler = (dispatch, url, contentId) => {
   }
 }
 
+/*
 const createFetchCategoriesHandler = (dispatch) => {
   return  () => {
     fetch("/api/categories").then((response) => {
@@ -28,10 +29,11 @@ const mapDispatchToProps = (dispatch) => {
     fetchCategories: createFetchCategoriesHandler(dispatch)
   }
 }
+*/
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    fetchCategories: createFetchContentHandler(dispatch, ownProps.url, ownProps.contentId)
+    fetchContent: createFetchContentHandler(dispatch, ownProps.url, ownProps.contentId)
   }
 }
 
