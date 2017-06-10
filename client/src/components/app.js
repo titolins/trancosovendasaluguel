@@ -8,9 +8,10 @@ import {
 } from 'react-router-dom'
 
 import { connect } from 'react-redux'
+import { mapDispatchToProps } from 'client/containers/fetchcontent'
 
 import { PropsRoute } from 'client/propsroute'
-import { mapDispatchToProps } from 'client/containers/fetchcontent'
+import ScrollToTop from 'client/scrolltotop'
 
 import Header from 'client/components/header'
 import Home from 'client/components/home'
@@ -26,7 +27,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <div>
+        <ScrollToTop>
           <div id="headerFiller"></div>
           <div className="container">
             <Header contentId="navbar" />
@@ -37,7 +38,7 @@ class App extends React.Component {
             </Switch>
           </div>
           <Footer contentId="navbar"/>
-        </div>
+        </ScrollToTop>
       </Router>
     )
   }

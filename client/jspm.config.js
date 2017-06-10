@@ -161,6 +161,7 @@ SystemJS.config({
         "client/containers/languageselector.js",
         "client/components/categorydropdown.js",
         "client/components/logo.js",
+        "client/scrolltotop.js",
         "client/propsroute.js",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/objectWithoutProperties.js",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/extends.js",
