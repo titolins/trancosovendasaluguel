@@ -20,7 +20,7 @@ import Footer from 'client/components/footer'
 class App extends React.Component {
   constructor(props) {
     super(props)
-    props.fetchCategories()
+    props.fetchContent("/api/categories")
   }
 
   render() {
@@ -32,7 +32,7 @@ class App extends React.Component {
             <Header contentId="navbar" />
             <Switch>
               <PropsRoute exact path="/" component={Home} contentId="home" />
-              <Route path="/categorias/:categoryId/casas/:houseId" component={House} />
+              <PropsRoute path="/categorias/:categoryId/casas/:houseId" component={House} contentId="house" />
               <Redirect to="/" />
             </Switch>
           </div>

@@ -16,7 +16,7 @@ let store = createStore(reducers, applyMiddleware(thunk))
 
 export let component =  ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App contentId="categories" />
   </Provider>,
   document.getElementById('container')
 )
