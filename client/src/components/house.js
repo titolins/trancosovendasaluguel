@@ -8,7 +8,6 @@ import { mapStateToProps } from 'client/containers/house'
 class House extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props)
     let { categoryId, houseId } = props.match.params
     let url = `/api/categories/${categoryId}/houses/${houseId}`
     props.fetchContent(url)
