@@ -50,10 +50,16 @@ export const Content = {
         detailsBtn: "more details" }},
     house: {
       "PT_BR": {
-        people: "pessoas"
+        people: "pessoas",
+        description: "descrição",
+        capacity: "capacidade",
+        features: "mais informações"
       },
       "EN_US": {
-        people: "people"
+        people: "people",
+        description: "description",
+        capacity: "capacity",
+        features: "features"
       }}},
   dinamic: null
 }
