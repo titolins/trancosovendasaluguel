@@ -5,8 +5,8 @@ import { mapDispatchToProps, mapStateToProps } from 'client/containers/languages
 
 
 const LanguageSelector = ({ active, lang, margins, onClick }) => {
-  //let activeClass = active ? "active" : undefined;
-  let classes = `nav-link text-grey px-0 ml-${margins[0]} mr-${margins[1]}`
+  let activeClass = active ? "active" : undefined;
+  let classes = `nav-link text-grey px-0 ml-${margins[0]} mr-${margins[1]} ${activeClass}`
 
   return (
       <span><a className={classes} href="#" onClick={e => {

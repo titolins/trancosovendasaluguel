@@ -85,6 +85,10 @@ a {
 .text-grey {
     color: @grey !important;
     .headerLinkHover();
+    &.active {
+        color: @blue !important;
+        border-bottom: 1px solid @blue;
+    }
 }
 
 .mainOpts {
