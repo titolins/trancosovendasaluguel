@@ -47,7 +47,14 @@ export const Content = {
         detailsBtn: "mais detalhes" },
       "EN_US": {
         moreBtn: "see more",
-        detailsBtn: "more details" }}},
+        detailsBtn: "more details" }},
+    house: {
+      "PT_BR": {
+        people: "pessoas"
+      },
+      "EN_US": {
+        people: "people"
+      }}},
   dinamic: null
 }
 
