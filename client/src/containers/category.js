@@ -1,4 +1,4 @@
-import CategoryDropdown from 'client/components/categorydropdown'
+import { mapStateToProps as staticPropsMap } from 'client/containers/staticcontent'
 
 const filterItems = (items, lang) => {
   if (items === null) return null
@@ -17,7 +17,8 @@ export const mapStateToProps = (state, ownProps) => {
         lang = state.lang.selected
     return {
       title: category.Content[lang].Title,
-      items: filterItems(category[ownProps.categoryContent], lang)
+      items: filterItems(category[ownProps.categoryContent], lang),
+      ownContent: ownProps.contentId ? staticPropsMap(state, ownProps).ownContent : undefined
     }
   } catch (e) {
     //console.log("error parsing category data. probably we didn't received the info from the server. otherwise, there's something broken..")
