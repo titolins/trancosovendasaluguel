@@ -40,10 +40,14 @@ export const Content = {
             coast and draw the exuberant scenario of the Atlantic Forest in this
             region - visions of the paradise that exists here until today.`,
                        `We are real estate brokers with broad experience in the region since
-            2002 and counting today with the best prices in the area.` ]
-        }
-      }
-  },
+            2002 and counting today with the best prices in the area.` ] }},
+    featured: {
+      "PT_BR": {
+        moreBtn: "ver mais",
+        detailsBtn: "mais detalhes" },
+      "EN_US": {
+        moreBtn: "see more",
+        detailsBtn: "more details" }}},
   dinamic: null
 }
 
