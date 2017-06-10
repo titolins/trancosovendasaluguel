@@ -17,7 +17,7 @@ const buildItemsPanel = (items, detailsBtnText) => {
         <div className="mt-4">
           <p className="houseDescription text-blue"><span className="first">{ fWord }</span>{ rest }</p>
         </div>
-        <Link to="#">
+        <Link to={item.url}>
           <div className="btn houseBtn">
             <span className="fa fa-angle-double-right"></span> { detailsBtnText }
           </div>
@@ -42,7 +42,7 @@ const buildMoreBtn = () => {
 const FeaturedSection = ({title, items, ownContent}) => {
   if (!items) return null
 
-  let moreBtn = (items.length > 2) ? buildMoreBtn : undefined
+  let moreBtn = (items.length > 2) ? buildMoreBtn() : undefined
   let itemsPanel = buildItemsPanel(items, ownContent.detailsBtn)
 
   return (

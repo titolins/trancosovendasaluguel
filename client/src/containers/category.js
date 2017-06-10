@@ -6,7 +6,13 @@ const filterItems = (items, lang) => {
     // in future, if we need an item id, we should enforce it here
     return {
       cover: item.Cover,
-      content: item.Content[lang]
+      content: item.Content[lang],
+      // dev stuff
+      categoryId: 1,
+      id: 1,
+      // when we have the id info from the server we can build the url by
+      // concatenation with `${}`
+      url: '/categorias/1/casas/1'
     }
   })
 }
@@ -21,8 +27,6 @@ export const mapStateToProps = (state, ownProps) => {
       ownContent: ownProps.contentId ? staticPropsMap(state, ownProps).ownContent : undefined
     }
   } catch (e) {
-    //console.log("error parsing category data. probably we didn't received the info from the server. otherwise, there's something broken..")
-    //console.log(e)
     return { title: null, items: null }
   }
 }
