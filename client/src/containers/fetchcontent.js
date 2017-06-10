@@ -1,10 +1,9 @@
-
 import App from 'client/components/app'
 
 import { addContent } from 'client/actions'
 
-const createFetchContentHandler = (dispatch, url, contentId) => {
-  return  () => {
+const createFetchContentHandler = (dispatch, contentId) => {
+  return  (url) => {
     fetch(url).then((response) => {
       return response.json()
     }).then((responseJson) => {
@@ -13,28 +12,9 @@ const createFetchContentHandler = (dispatch, url, contentId) => {
   }
 }
 
-/*
-const createFetchCategoriesHandler = (dispatch) => {
-  return  () => {
-    fetch("/api/categories").then((response) => {
-      return response.json()
-    }).then((responseJson) => {
-      dispatch(addContent(responseJson, "categories"))
-    })
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchCategories: createFetchCategoriesHandler(dispatch)
-  }
-}
-*/
-
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    fetchContent: createFetchContentHandler(dispatch, ownProps.url, ownProps.contentId)
+    fetchContent: createFetchContentHandler(dispatch, ownProps.contentId)
   }
 }
 
-//export default connect(null, mapDispatchToProps)(App)
