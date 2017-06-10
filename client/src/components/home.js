@@ -15,7 +15,7 @@ class Home extends React.Component {
         <div className="welcome">
           <div className="row">
             <div className="col-xs-12">
-              <img className="mainPicture" src="/static/img/main_photo.png"></img>
+              <img className="mainPicture img-fluid" src="/static/img/main_photo.png"></img>
             </div>
           </div>
           <div className="container py-5">
@@ -26,7 +26,7 @@ class Home extends React.Component {
                 <p>{ ownContent.welcomeText[2] }</p>
               </div>
               <div className="col-xs-12 col-md-7">
-                <img className="welcomePicture" src="/static/img/welcome_picture.png"></img>
+                <img className="welcomePicture img-fluid" src="/static/img/welcome_picture.png"></img>
               </div>
             </div>
           </div>
