@@ -1,3 +1,4 @@
+import { mapStateToProps as staticPropsMap } from 'client/containers/staticcontent'
 
 const getHouseContent = (content, lang, contentId) => {
   let ownContent = content.dinamic[contentId].Content[lang]
@@ -6,9 +7,11 @@ const getHouseContent = (content, lang, contentId) => {
 }
 
 export const mapStateToProps = (state, ownProps) => {
+  let staticContent = staticPropsMap(state, ownProps).ownContent
   try {
     return {
-      ownContent: getHouseContent(state.content, state.lang.selected, ownProps.contentId)
+      ownContent: getHouseContent(state.content, state.lang.selected, ownProps.contentId),
+      staticContent
     }
   } catch (e) {
     return {
@@ -16,7 +19,8 @@ export const mapStateToProps = (state, ownProps) => {
         Name: null,
         Description: null,
         Features: null,
-      }
+      },
+      staticContent
     }
   }
 }
