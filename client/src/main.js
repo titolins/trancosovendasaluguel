@@ -10,7 +10,7 @@ import { module } from '@hot'
 
 import reducers from 'client/reducers'
 
-import App from 'client/containers/app'
+import App from 'client/components/app'
 
 let store = createStore(reducers, applyMiddleware(thunk))
 

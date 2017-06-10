@@ -7,13 +7,17 @@ import {
   Redirect
 } from 'react-router-dom'
 
+import { connect } from 'react-redux'
+
 import { PropsRoute } from 'client/propsroute'
+import { mapDispatchToProps } from 'client/containers/fetchcontent'
 
 import Header from 'client/components/header'
 import Home from 'client/components/home'
+import House from 'client/components/house'
 import Footer from 'client/components/footer'
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props)
     props.fetchCategories()
@@ -28,6 +32,7 @@ export default class App extends React.Component {
             <Header contentId="navbar" />
             <Switch>
               <PropsRoute exact path="/" component={Home} contentId="home" />
+              <Route path="/categorias/:categoryId/casas/:houseId" component={House} />
               <Redirect to="/" />
             </Switch>
           </div>
@@ -39,3 +44,4 @@ export default class App extends React.Component {
 
 }
 
+export default connect(null, mapDispatchToProps)(App)
