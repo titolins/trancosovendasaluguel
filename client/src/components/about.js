@@ -17,7 +17,7 @@ class About extends React.Component {
           </div>
         </div>
         <div className="row py-5">
-          <div className="col-xs-12 col-md-7">
+          <div className="col-xs-12 col-md-7 my-auto">
             <img className="img-fluid" src="/static/img/sobre_2.jpg"></img>
           </div>
           <div className="col-xs-12 col-md-5 my-auto">
@@ -31,7 +31,7 @@ class About extends React.Component {
             <p className="aboutText">{ ownContent.text[3] }</p>
             <p className="aboutText">{ ownContent.text[4] }</p>
           </div>
-          <div className="col-xs-12 col-md-6">
+          <div className="col-xs-12 col-md-6 my-auto">
             <img className="img-fluid" src="/static/img/sobre_3.jpg"></img>
           </div>
         </div>
