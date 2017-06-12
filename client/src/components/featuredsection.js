@@ -39,7 +39,7 @@ const buildMoreBtn = () => {
   )
 }
 
-const FeaturedSection = ({title, items, ownContent, name}) => {
+const FeaturedSection = ({title, items, ownContent, categoryId}) => {
   if (!items) return null
 
   let moreBtn = (items.length > 2) ? buildMoreBtn() : undefined
@@ -47,7 +47,7 @@ const FeaturedSection = ({title, items, ownContent, name}) => {
 
   return (
     <div>
-      <a className="anchor" id={name} name={name}><h1 className="sectionTitle halfWidth pb-2">{ title }</h1></a>
+      <a className="anchor" id={categoryId}><h1 className="sectionTitle halfWidth pb-2">{ title }</h1></a>
       <div className="container py-4">
         <div className="row">{ itemsPanel }</div>
         { moreBtn }
