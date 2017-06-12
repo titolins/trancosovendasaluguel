@@ -81,7 +81,7 @@ export const Content = {
     },
     comercialRent: {
       "PT_BR": {
-        title: "alguel comercial",
+        title: "aluguel comercial",
         text: [
           "Nós temos imóveis para venda no Quadrado e na Avenida principal.",
           "Entre em contato conosco, temos muitas oportunidades para o sucesso do seu empreendimento!"
