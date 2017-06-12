@@ -79,11 +79,27 @@ export const Content = {
         address: "address"
       }
     },
+    comercialRent: {
+      "PT_BR": {
+        title: "alguel comercial",
+        text: [
+          "Nós temos imóveis para venda no Quadrado e na Avenida principal.",
+          "Entre em contato conosco, temos muitas oportunidades para o sucesso do seu empreendimento!"
+        ]
+      },
+      "EN_US": {
+        title: "comercial rent",
+        text: [
+          "We have properties for sale at the Quadrado and on the Main Avenue.",
+          "Contact us, we have many opportunities for the success of your venture!"
+        ]
+      },
+    },
     services: {
       "PT_BR": {
         title: "serviços",
         types: {
-          title: "nós oferecemos os seguintes serviços exclusivos para nossos clientes:",
+          title: "Nós oferecemos os seguintes serviços exclusivos para nossos clientes:",
           services: [
             "Táxis",
             "Aluguel de carros e motos",
