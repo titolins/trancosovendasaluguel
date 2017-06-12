@@ -149,8 +149,11 @@ a {
     }
 }
 
-.dropdown:hover > .dropdown-menu {
-    display: block;
+.dropdown.show {
+    a.dropdown-toggle {
+        color: @blue !important;
+        border-bottom: 1px solid @blue;
+    }
 }
 
 .anchor > h1.sectionTitle {
