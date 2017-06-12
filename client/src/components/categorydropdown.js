@@ -20,7 +20,7 @@ const CategoryDropdown = ({title, items}) => {
   return (
     <li className="nav-item dropdown">
       <Link id={linkId} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className="nav-link dropdown-toggle text-green px-4" to="#">{ title }</Link>
-      <div className="dropdown-menu" aria-labelledby={linkId}>
+      <div className="dropdown-menu py-0" aria-labelledby={linkId}>
         { menu }
       </div>
     </li>

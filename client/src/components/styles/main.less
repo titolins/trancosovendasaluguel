@@ -22,6 +22,29 @@ a {
     width: inherit;
 }
 
+.dropdown-menu {
+    min-width: 100%;
+    background-color: transparent !important;
+    border-radius: 0;
+    border: 0;
+    margin: 0 !important;
+    border-bottom: 1px solid @blue;
+}
+
+.dropdown-item {
+    margin-top: 1px;
+    text-align: center;
+    background-color: @white;
+    color: @blue;
+    &:hover {
+        background-color: @blue;
+        color: @white;
+    }
+    &:last-child {
+        margin-bottom: 1px;
+    }
+}
+
 .fillBackground {
     background-color: @white !important;
 }
