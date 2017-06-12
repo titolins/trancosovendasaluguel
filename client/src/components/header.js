@@ -29,7 +29,7 @@ class Header extends React.Component {
             <CategoryDropdown categoryId="sales" categoryContent="Items" />
             <CategoryDropdown categoryId="rent" categoryContent="Items" />
             <li className="nav-item"><Link className="nav-link text-green px-0 mx-4" to="#">{ ownContent.comercialRent }</Link></li>
-            <li className="nav-item"><Link className="nav-link text-green px-0 ml-4" to="#">{ ownContent.services }</Link></li>
+            <li className="nav-item"><Link className="nav-link text-green px-0 ml-4" to="/servicos">{ ownContent.services }</Link></li>
           </ul>
         </div>
       </nav>

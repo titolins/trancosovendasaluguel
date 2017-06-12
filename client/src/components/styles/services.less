@@ -1,0 +1,34 @@
+@import './colors.less';
+
+.font {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    font-weight: 300;
+    color: @blue;
+}
+
+.serviceName {
+    .font();
+}
+
+.serviceTitle {
+    .font();
+    font-size: 1em !important;
+    font-weight: 200;
+}
+
+.serviceText {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 200;
+    font-size: .9em;
+    letter-spacing: .05em;
+    color: @blue;
+    text-transform: capitalize;
+    text-align: justify;
+}
+
+.servicesBackground {
+    background: url("/static/img/services.jpg");
+}
