@@ -21,6 +21,7 @@ import Footer from 'client/components/footer'
 import Contact from 'client/components/contact'
 import Services from 'client/components/services'
 import ComercialRent from 'client/components/comercialrent'
+import About from 'client/components/about'
 
 class App extends React.Component {
   constructor(props) {
@@ -41,6 +42,7 @@ class App extends React.Component {
               <PropsRoute path="/contato" component={Contact} contentId="contact"/>
               <PropsRoute path="/servicos" component={Services} contentId="services"/>
               <PropsRoute path="/aluguelcomercial" component={ComercialRent} contentId="comercialRent"/>
+              <PropsRoute path="/sobre" component={About} contentId="about"/>
               <Redirect to="/" />
             </Switch>
           </div>

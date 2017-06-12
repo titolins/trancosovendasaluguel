@@ -79,6 +79,40 @@ export const Content = {
         address: "address"
       }
     },
+    about: {
+      "PT_BR": {
+        title: "Sobre Trancoso",
+        text: [
+          `Trancoso foi fundada no inicio da colonização portuguesa pelos Jesuítas (1586), com o nome de São João
+          dos Índios, atualmente denominada Praça São João Batista que é chamado de Quadrado em volta do qual se
+          desenvolveu o vilarejo.`,
+          `Repleto de frondosas amendoeiras, mangueiras, flamboaiãs e diversas arvores nativas, com a bela e antiga
+          igreja de São João ao fundo e uma vista panorâmica deslumbrante para o mar e horizonte.`,
+          `Há alguns anos, deixou de ser a vila rústica e isolada, descoberta pelos hippes nos anos 70 para se tornar
+          o destino turístico dos antenados e vips.`,
+          `Nas casinhas simples e coloridas do Quadrado, hoje patrimônio cultural e histórico, a circulação é somente
+          a pé ou em bicicleta.`,
+          `Hoje há bares, restaurantes, pousadas cheias de estilo, lojinhas de artesanato e butiques de grifes famosas.
+          Todo o charme desse vilarejo é cercado por praias belíssimas e uma natureza exuberante com um clima ameno o ano inteiro.`
+        ]
+      },
+      "EN_US": {
+        title: "About Trancoso",
+        text: [
+          `Trancoso was founded at the beginning of Portuguese colonisation by the Jesuits (1586), with the
+          name of São João dos Indios, currently named Plaza São João Batista which is called "Quadrado"
+          around which developed the village.`,
+          `Full of wooded almond, mangos trees, flamboaiãs and various native trees, with beautiful and
+          ancient Church of São João and a stunning panoramic view to the sea and horizon.`,
+          `In the 1970s the isolated and rustic village was discovered by the hippies. Today it is a tourist
+          destation for the rich, cultured and famous.`,
+          `In the simple and colorful palette of the Quadrado today cultural heritage and history, the
+          movement is only by foot or by bicycle.`,
+          `All the charm of this village is surrounded by rain forest,mangrove, rivers,and beautifull beaches.
+          it's splendour is the warm  and temperate climate that lasts all year even the stars come out at night.`
+        ]
+      }
+    },
     comercialRent: {
       "PT_BR": {
         title: "aluguel comercial",
