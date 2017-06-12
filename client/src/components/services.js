@@ -12,8 +12,8 @@ class Services extends React.Component {
       <div className="row mainContent py-4">
         <div className="col-xs-12 servicesBackground">
           <div className="col-xs-12 offset-md-6 col-md-6 fillBackground fullHeight">
-            <h1 className="sectionTitle halfWidth">{ ownContent.title }</h1>
-            <ul>
+            <h1 className="sectionTitle halfWidthi pb-2">{ ownContent.title }</h1>
+            <ul className="mt-1">
               <h3 className="serviceTitle">{ ownContent.types.title }</h3>
               { ownContent.types.services.map((s, i) => {
                 return (<li className="serviceText" key={i}>{s}</li>)
