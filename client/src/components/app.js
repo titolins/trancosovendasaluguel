@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 import { mapDispatchToProps } from 'client/containers/fetchcontent'
 
 import { PropsRoute } from 'client/propsroute'
-import ScrollToTop from 'client/scrolltotop'
+import Scroll from 'client/scroll'
 
 import Header from 'client/components/header'
 import Home from 'client/components/home'
@@ -32,7 +32,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <ScrollToTop>
+        <Scroll>
           <div id="headerFiller"></div>
           <div className="container">
             <Header contentId="navbar" />
@@ -47,7 +47,7 @@ class App extends React.Component {
             </Switch>
           </div>
           <Footer contentId="navbar"/>
-        </ScrollToTop>
+        </Scroll>
       </Router>
     )
   }

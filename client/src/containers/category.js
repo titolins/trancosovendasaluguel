@@ -24,7 +24,8 @@ export const mapStateToProps = (state, ownProps) => {
     return {
       title: category.Content[lang].Title,
       items: filterItems(category[ownProps.categoryContent], lang),
-      ownContent: ownProps.contentId ? staticPropsMap(state, ownProps).ownContent : undefined
+      ownContent: ownProps.contentId ? staticPropsMap(state, ownProps).ownContent : undefined,
+      name: ownProps.categoryId
     }
   } catch (e) {
     return { title: null, items: null }
