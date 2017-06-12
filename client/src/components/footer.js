@@ -9,7 +9,7 @@ class Footer extends React.Component {
     let { ownContent } = this.props
 
     return (
-      <footer id="footer" className="navbar navbar-toggleable-sm">
+      <footer id="footer" className="navbar navbar-toggleable">
         <div id="navbarCollapse" className="collapse navbar-collapse flex-column">
           <ul className="navbar-nav px-5 mx-auto mt-5 pb-5 footer-border-bottom">
             <li className="nav-item"><Link className="nav-link footerLink px-0 mx-5" to="/#sales">{ ownContent.sales }</Link></li>
