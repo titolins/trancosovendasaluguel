@@ -5,6 +5,24 @@ export const Languages = {
 
 export const Content = {
   static: {
+    categoryTypes: {
+      "PT_BR": {
+        title: "vendas",
+        casas: "casas",
+        terrenos: "terrenos",
+        fazendas: "fazendas",
+        pontoscomerciais: "pontos comerciais",
+        pousadas: "pousadas"
+      },
+      "EN_US": {
+        title: "sales",
+        casas: "houses",
+        terrenos: "lots",
+        fazendas: "farms",
+        pontoscomerciais: "commercial points",
+        pousadas: "inns"
+      }
+    },
     navbar: {
       "PT_BR": {
         about: 'sobre trancoso',

@@ -23,6 +23,8 @@ import Services from 'client/components/services'
 import ComercialRent from 'client/components/comercialrent'
 import About from 'client/components/about'
 
+import CategoryByType from 'client/components/categorybytype'
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -39,6 +41,7 @@ class App extends React.Component {
             <Switch>
               <PropsRoute exact path="/" component={Home} contentId="home" />
               <PropsRoute path="/categorias/:categoryId/casas/:houseId" component={House} contentId="house" />
+              <PropsRoute path="/categorias/:categoryId/:typeId" component={CategoryByType} contentId="featured" />
               <PropsRoute path="/contato" component={Contact} contentId="contact"/>
               <PropsRoute path="/servicos" component={Services} contentId="services"/>
               <PropsRoute path="/aluguelcomercial" component={ComercialRent} contentId="comercialRent"/>

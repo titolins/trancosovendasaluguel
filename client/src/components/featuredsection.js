@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 import { mapStateToProps } from 'client/containers/category'
 
-const buildItemsPanel = (items, detailsBtnText) => {
+export const buildItemsPanels = (items, detailsBtnText) => {
   return items.map((item, i) => {
     let fWord = item.content.Description.split(' ')[0],
         rest  = item.content.Description.split(' ').slice(1).join(' ')
@@ -43,7 +43,7 @@ const FeaturedSection = ({title, items, ownContent, categoryId}) => {
   if (!items) return null
 
   let moreBtn = (items.length > 2) ? buildMoreBtn() : undefined
-  let itemsPanel = buildItemsPanel(items, ownContent.detailsBtn)
+  let itemsPanel = buildItemsPanels(items, ownContent.detailsBtn)
 
   return (
     <div>

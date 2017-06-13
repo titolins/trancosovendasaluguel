@@ -1,6 +1,6 @@
 import { mapStateToProps as staticPropsMap } from 'client/containers/staticcontent'
 
-const filterItems = (items, lang) => {
+export const filterItems = (items, lang) => {
   if (items === null) return null
   return items.map((item) => {
     // in future, if we need an item id, we should enforce it here

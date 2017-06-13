@@ -1,0 +1,14 @@
+[Unit]
+Description=Simple webserver for serving polen landing page
+Documentation=http://github.com/titolins/polen
+
+[Service]
+Restart=always
+
+User=ubuntu
+Group=ubuntu
+
+ExecStart=/srv/http/server/server
+
+[Install]
+WantedBy=multi-user.target

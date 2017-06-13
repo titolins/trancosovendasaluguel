@@ -18,6 +18,7 @@ func (api *API) Bind(group *echo.Group) {
     group.GET("/categories/:categoryId", api.GetCategoryHandler)
     group.GET("/categories/:categoryId/featured", api.GetCategoryFeaturedHandler)
     group.GET("/categories/:categoryId/houses/:houseId", api.GetHouseHandler)
+    group.GET("/categories/:categoryId/houses/bytype/:typeId", api.GetHousesByTypeHandler)
 }
 
 /*
@@ -34,6 +35,10 @@ func (api *API) GetCategoryHandler(c echo.Context) error {
 
 func (api *API) GetCategoryFeaturedHandler(c echo.Context) error {
     return c.JSON(200, controllers.GetCategoryFeaturedHouses(c.Param("categoryId")))
+}
+
+func (api *API) GetHousesByTypeHandler(c echo.Context) error {
+    return c.JSON(200, controllers.GetHousesByType(c.Param("categoryId"), c.Param("typeId")))
 }
 
 /*

@@ -6,6 +6,7 @@ import { mapStateToProps } from 'client/containers/staticcontent'
 
 import Logo from 'client/components/logo'
 import CategoryDropdown from 'client/components/categorydropdown'
+import SalesDropdown from 'client/components/salesdropdown'
 import LanguageSelector from 'client/components/languageselector'
 
 class Header extends React.Component {
@@ -26,7 +27,7 @@ class Header extends React.Component {
             <li className="nav-item"><LanguageSelector margins={[1,0]} lang="EN"/></li>
           </ul>
           <ul className="navbar-nav ml-auto mainOpts">
-            <CategoryDropdown categoryId="sales" categoryContent="Items" />
+            <SalesDropdown contentId="categoryTypes" />
             <CategoryDropdown categoryId="rent" categoryContent="Items" />
             <li className="nav-item"><Link className="nav-link text-green px-0 mx-4" to="/aluguelcomercial">{ ownContent.comercialRent }</Link></li>
             <li className="nav-item"><Link className="nav-link text-green px-0 ml-4" to="/servicos">{ ownContent.services }</Link></li>

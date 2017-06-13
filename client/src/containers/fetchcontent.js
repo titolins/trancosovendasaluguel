@@ -2,7 +2,7 @@ import App from 'client/components/app'
 
 import { addContent } from 'client/actions'
 
-const createFetchContentHandler = (dispatch, contentId) => {
+export const createFetchContentHandler = (dispatch, contentId) => {
   return  (url) => {
     fetch(url).then((response) => {
       return response.json()

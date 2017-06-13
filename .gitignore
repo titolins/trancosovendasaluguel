@@ -4,3 +4,7 @@ build.js
 build.js.map
 build.js
 build.js.map
+*.log
+Vagrantfile
+server/server
+.vagrant
