@@ -16,6 +16,7 @@ func main() {
         Format: `${method} | ${status} | ${uri} -> ${latency_human}` + "\n",
     }))
     e.Use(middleware.Recover())
+    e.Use(middleware.HTTPSRedirect())
 
     // static files
     e.Static("/static/img", "static/img")
