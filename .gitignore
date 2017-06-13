@@ -8,3 +8,4 @@ build.js.map
 Vagrantfile
 server/server
 .vagrant
+*.pem
