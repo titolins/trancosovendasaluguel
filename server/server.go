@@ -15,7 +15,7 @@ func BuildEngine() (e *echo.Echo) {
         Format: `${method} | ${status} | ${uri} -> ${latency_human}` + "\n",
     }))
     e.Use(middleware.Recover())
-    e.Use(middleware.HTTPSRedirect())
+    //e.Use(middleware.HTTPSRedirect())
 
     // static files
     e.Static("/static/img", "server/static/img")
@@ -32,13 +32,6 @@ func BuildEngine() (e *echo.Echo) {
 }
 
 func homeHandler(c echo.Context) (err error) {
-    /*
-    f, err := ioutil.ReadFile("static/templates/index.html")
-    if err != nil {
-        e.Logger.Fatal(err)
-    }
-    return c.HTMLBlob(http.StatusOK, f)
-    */
     pusher, ok := c.Response().Writer.(http.Pusher)
     if ok {
         if err = pusher.Push("/static/js/jspm_packages/github/twbs/bootstrap@4.0.0-alpha.6/css/bootstrap.css", nil); err != nil {
