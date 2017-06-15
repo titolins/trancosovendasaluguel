@@ -30,8 +30,6 @@ func BuildEngine() (e *echo.Echo) {
     e.GET("/*", homeHandler)
 
     return
-    //e.Start(":8080")
-    //e.StartTLS(":1323", "cert.pem", "key.pem")
 }
 
 func homeHandler(c echo.Context) (err error) {
