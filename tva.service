@@ -3,8 +3,6 @@ Description=trancoso vendas aluguel webserver
 Documentation=http://github.com/titolins/polen
 
 [Service]
-Restart=always
-
 User=ubuntu
 Group=ubuntu
 
