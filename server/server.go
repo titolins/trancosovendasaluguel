@@ -26,7 +26,6 @@ func BuildEngine() (e *echo.Echo) {
     api := &API{}
     api.Bind(e.Group("/api"))
 
-    e.GET("/request", testTLS)
     // all other routes must serve the index file to be handled by react-router
     e.GET("/*", homeHandler)
 
@@ -73,16 +72,4 @@ func homeHandler(c echo.Context) (err error) {
     return c.File("server/static/templates/index.html")
 }
 
-func testTLS (c echo.Context) (err error) {
-  req := c.Request()
-    format := `
-    <code>
-      Protocol: %s<br>
-      Host: %s<br>
-      Remote Address: %s<br>
-      Method: %s<br>
-      Path: %s<br>
-    </code>
-  `
-  return c.HTML(http.StatusOK, fmt.Sprintf(format, req.Proto, req.Host, req.RemoteAddr, req.Method, req.URL.Path))
-}
+
