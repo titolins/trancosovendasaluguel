@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
     "github.com/labstack/echo"
@@ -9,8 +9,8 @@ import (
     "fmt"
 )
 
-func main() {
-    e := echo.New()
+func BuildEngine() (e *echo.Echo) {
+    e = echo.New()
 
     e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
         Format: `${method} | ${status} | ${uri} -> ${latency_human}` + "\n",
@@ -19,8 +19,8 @@ func main() {
     e.Use(middleware.HTTPSRedirect())
 
     // static files
-    e.Static("/static/img", "static/img")
-    e.Static("/static/js", "../client/")
+    e.Static("/static/img", "server/static/img")
+    e.Static("/static/js", "client/")
 
     // api routes
     api := &API{}
@@ -30,8 +30,9 @@ func main() {
     // all other routes must serve the index file to be handled by react-router
     e.GET("/*", homeHandler)
 
+    return
     //e.Start(":8080")
-    e.StartTLS(":1323", "cert.pem", "key.pem")
+    //e.StartTLS(":1323", "cert.pem", "key.pem")
 }
 
 func homeHandler(c echo.Context) (err error) {
@@ -69,7 +70,7 @@ func homeHandler(c echo.Context) (err error) {
             return
         }
     }
-    return c.File("static/templates/index.html")
+    return c.File("server/static/templates/index.html")
 }
 
 func testTLS (c echo.Context) (err error) {

@@ -1,5 +1,5 @@
 [Unit]
-Description=Simple webserver for serving polen landing page
+Description=trancoso vendas aluguel webserver
 Documentation=http://github.com/titolins/polen
 
 [Service]
@@ -8,7 +8,7 @@ Restart=always
 User=ubuntu
 Group=ubuntu
 
-ExecStart=/srv/http/server/server
+ExecStart=/srv/http/trancosovendasaluguel
 
 [Install]
 WantedBy=multi-user.target
