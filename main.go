@@ -7,5 +7,5 @@ import (
 func main() {
     e := server.BuildEngine()
 
-    e.StartTLS(":1323", "cert.pem", "key.pem")
+    e.Start(":8080")
 }

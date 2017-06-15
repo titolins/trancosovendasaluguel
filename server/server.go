@@ -6,7 +6,6 @@ import (
 
     //"io/ioutil"
     "net/http"
-    "fmt"
 )
 
 func BuildEngine() (e *echo.Echo) {
