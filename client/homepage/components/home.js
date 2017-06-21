@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
-import { mapStateToProps } from 'client/containers/staticcontent'
+import { mapStateToProps } from 'homepage/containers/staticcontent'
 
-import FeaturedSection from 'client/components/featuredsection'
+import FeaturedSection from 'homepage/components/featuredsection'
 
 import './styles/home.less'
 

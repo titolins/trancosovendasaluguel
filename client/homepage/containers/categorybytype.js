@@ -1,7 +1,7 @@
-import { mapStateToProps as staticPropsMap } from 'client/containers/staticcontent'
+import { mapStateToProps as staticPropsMap } from 'homepage/containers/staticcontent'
 
-import { filterItems } from 'client/containers/category'
-import { createFetchContentHandler } from 'client/containers/fetchcontent'
+import { filterItems } from 'homepage/containers/category'
+import { createFetchContentHandler } from 'homepage/containers/fetchcontent'
 
 export const mapStateToProps = (state, ownProps) => {
   try {

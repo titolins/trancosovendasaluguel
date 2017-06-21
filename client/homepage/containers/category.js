@@ -1,4 +1,4 @@
-import { mapStateToProps as staticPropsMap } from 'client/containers/staticcontent'
+import { mapStateToProps as staticPropsMap } from 'homepage/containers/staticcontent'
 
 export const filterItems = (items, lang) => {
   if (items === null) return null

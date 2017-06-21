@@ -2,10 +2,10 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 
-import { mapDispatchToProps } from 'client/containers/fetchcontent'
-import { mapStateToProps } from 'client/containers/house'
+import { mapDispatchToProps } from 'homepage/containers/fetchcontent'
+import { mapStateToProps } from 'homepage/containers/house'
 
-import Carousel from 'client/components/carousel'
+import Carousel from 'homepage/components/carousel'
 
 const buildFeatures = (features) => {
   return (<ul>{features.map((f,i) => {return (<li key={i}>{f}</li>)})}</ul>)

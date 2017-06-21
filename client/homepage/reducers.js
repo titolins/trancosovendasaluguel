@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { CHOOSE_LANGUAGE, ADD_CONTENT } from './actions';
-import { Languages, Content } from 'client/containers/staticcontent';
+import { Languages, Content } from 'homepage/containers/staticcontent';
 
 const { PT, EN } = Languages;
 

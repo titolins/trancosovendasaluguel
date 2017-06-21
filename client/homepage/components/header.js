@@ -2,12 +2,12 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { mapStateToProps } from 'client/containers/staticcontent'
+import { mapStateToProps } from 'homepage/containers/staticcontent'
 
-import Logo from 'client/components/logo'
-import CategoryDropdown from 'client/components/categorydropdown'
-import SalesDropdown from 'client/components/salesdropdown'
-import LanguageSelector from 'client/components/languageselector'
+import Logo from 'homepage/components/logo'
+import CategoryDropdown from 'homepage/components/categorydropdown'
+import SalesDropdown from 'homepage/components/salesdropdown'
+import LanguageSelector from 'homepage/components/languageselector'
 
 class Header extends React.Component {
   render() {

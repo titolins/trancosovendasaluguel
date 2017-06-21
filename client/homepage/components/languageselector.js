@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux'
-import { mapDispatchToProps, mapStateToProps } from 'client/containers/languageselector'
+import { mapDispatchToProps, mapStateToProps } from 'homepage/containers/languageselector'
 
 
 const LanguageSelector = ({ active, lang, margins, onClick }) => {

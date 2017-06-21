@@ -1,11 +1,14 @@
 package server
 
 import (
-    "github.com/labstack/echo"
-    "github.com/labstack/echo/middleware"
-
     //"io/ioutil"
     "net/http"
+    "time"
+
+    jwt "github.com/dgrijalva/jwt-go"
+    "github.com/titolins/trancosovendasaluguel/server/admin"
+    "github.com/labstack/echo"
+    "github.com/labstack/echo/middleware"
 )
 
 func BuildEngine() (e *echo.Echo) {
@@ -25,6 +28,12 @@ func BuildEngine() (e *echo.Echo) {
     api := &API{}
     api.Bind(e.Group("/api"))
 
+    admin := &admin.Admin{}
+    admin.Bind(e.Group("/admin"))
+
+    // get login
+    e.GET("/admin", admin.MainHandler)
+
     // all other routes must serve the index file to be handled by react-router
     e.GET("/*", homeHandler)
 
@@ -37,10 +46,10 @@ func homeHandler(c echo.Context) (err error) {
         if err = pusher.Push("/static/js/jspm_packages/github/twbs/bootstrap@4.0.0-alpha.6/css/bootstrap.css", nil); err != nil {
             return
         }
-        if err = pusher.Push("/static/js/src/components/styles/main.less", nil); err != nil {
+        if err = pusher.Push("/static/js/homepage/components/styles/main.less", nil); err != nil {
             return
         }
-        if err = pusher.Push("/static/js/src/components/styles/mixin.less", nil); err != nil {
+        if err = pusher.Push("/static/js/homepage/components/styles/mixin.less", nil); err != nil {
             return
         }
         if err = pusher.Push("/static/img/favicon.ico", nil); err != nil {
@@ -62,4 +71,30 @@ func homeHandler(c echo.Context) (err error) {
     return c.File("server/static/templates/index.html")
 }
 
+func loginHandler(c echo.Context) error {
+    username := c.FormValue("username")
+    password := c.FormValue("password")
+
+    if username == "jon" && password == "shhh!" {
+
+        // Set custom claims
+        claims := &jwt.StandardClaims{
+            ExpiresAt: time.Now().Add(time.Hour * 72).Unix(),
+        }
+
+        // Create token with claims
+        token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+
+        // Generate encoded token and send it as response.
+        t, err := token.SignedString([]byte("secret"))
+        if err != nil {
+            return err
+        }
+        return c.JSON(http.StatusOK, echo.Map{
+            "token": t,
+        })
+    }
+
+    return echo.ErrUnauthorized
+}
 

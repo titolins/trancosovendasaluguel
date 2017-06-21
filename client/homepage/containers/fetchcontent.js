@@ -1,6 +1,6 @@
-import App from 'client/components/app'
+import App from 'homepage/components/app'
 
-import { addContent } from 'client/actions'
+import { addContent } from 'homepage/actions'
 
 export const createFetchContentHandler = (dispatch, contentId) => {
   return  (url) => {

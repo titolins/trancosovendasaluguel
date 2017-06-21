@@ -1,4 +1,4 @@
-import { mapStateToProps as staticPropsMap } from 'client/containers/staticcontent'
+import { mapStateToProps as staticPropsMap } from 'homepage/containers/staticcontent'
 
 const getHouseContent = (content, lang, contentId) => {
   let ownContent = content.dinamic[contentId].Content[lang]

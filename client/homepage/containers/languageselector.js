@@ -1,7 +1,7 @@
-import { selectLanguage } from 'client/actions'
-import { Languages } from 'client/containers/staticcontent'
+import { selectLanguage } from 'homepage/actions'
+import { Languages } from 'homepage/containers/staticcontent'
 
-import LanguageSelector from 'client/components/languageselector'
+import LanguageSelector from 'homepage/components/languageselector'
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {

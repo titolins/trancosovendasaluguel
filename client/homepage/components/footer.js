@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { mapStateToProps } from 'client/containers/staticcontent'
+import { mapStateToProps } from 'homepage/containers/staticcontent'
 
 class Footer extends React.Component {
   render() {

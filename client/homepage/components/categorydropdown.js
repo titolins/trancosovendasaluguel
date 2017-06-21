@@ -2,7 +2,7 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 
-import { mapStateToProps } from 'client/containers/category'
+import { mapStateToProps } from 'homepage/containers/category'
 
 import { Link } from 'react-router-dom'
 

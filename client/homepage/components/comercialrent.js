@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
-import { mapStateToProps } from 'client/containers/staticcontent'
+import { mapStateToProps } from 'homepage/containers/staticcontent'
 
 import './styles/comercialrent.less'
 

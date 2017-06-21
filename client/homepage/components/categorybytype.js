@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
-import { mapStateToProps, mapDispatchToProps } from 'client/containers/categorybytype'
+import { mapStateToProps, mapDispatchToProps } from 'homepage/containers/categorybytype'
 
-import { buildItemsPanels } from 'client/components/featuredsection'
+import { buildItemsPanels } from 'homepage/components/featuredsection'
 
 class CategoryByType extends React.Component {
   constructor(props) {

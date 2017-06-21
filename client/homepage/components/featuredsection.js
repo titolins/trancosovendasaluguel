@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 
-import { mapStateToProps } from 'client/containers/category'
+import { mapStateToProps } from 'homepage/containers/category'
 
 export const buildItemsPanels = (items, detailsBtnText) => {
   return items.map((item, i) => {
