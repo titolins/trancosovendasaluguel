@@ -5,9 +5,9 @@
 //export const SET_CONFIG = 'SET_CONFIG';
 
 // translation stuff
-export const CHOOSE_LANGUAGE = 'CHOOSE_LANG';
+export const CHOOSE_LANGUAGE = 'CHOOSE_LANG'
 
-export const ADD_CONTENT = 'ADD_CONTENT';
+export const ADD_CONTENT = 'ADD_CONTENT'
 
 
 /**
