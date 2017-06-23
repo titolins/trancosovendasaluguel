@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
-import { CHOOSE_LANGUAGE, ADD_CONTENT } from './actions';
-import { Languages, Content } from 'homepage/containers/staticcontent';
+import { combineReducers } from 'redux'
+import { CHOOSE_LANGUAGE, ADD_CONTENT } from './actions'
+import { Languages, Content } from 'homepage/containers/staticcontent'
 
-const { PT, EN } = Languages;
+const { PT, EN } = Languages
 
 const initialLangState = { selected: PT }
 const initialContentState = Content
@@ -32,4 +32,4 @@ function content(state = initialContentState, action) {
 export default combineReducers({
   lang,
   content
-});
+})
