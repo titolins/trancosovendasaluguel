@@ -1,14 +1,18 @@
 package server
 
 import (
-    //"io/ioutil"
     "net/http"
     "time"
+    "log"
+    "fmt"
+    "encoding/json"
 
     jwt "github.com/dgrijalva/jwt-go"
     "github.com/titolins/trancosovendasaluguel/server/admin"
     "github.com/labstack/echo"
     "github.com/labstack/echo/middleware"
+
+    "github.com/titolins/trancosovendasaluguel/server/models"
 )
 
 func BuildEngine() (e *echo.Echo) {
@@ -33,6 +37,7 @@ func BuildEngine() (e *echo.Echo) {
 
     // get login
     e.GET("/admin", admin.MainHandler)
+    e.POST("/admin", loginHandler)
 
     // all other routes must serve the index file to be handled by react-router
     e.GET("/*", homeHandler)
@@ -72,10 +77,17 @@ func homeHandler(c echo.Context) (err error) {
 }
 
 func loginHandler(c echo.Context) error {
-    username := c.FormValue("username")
-    password := c.FormValue("password")
+    var u models.User
 
-    if username == "jon" && password == "shhh!" {
+    dec := json.NewDecoder(c.Request().Body)
+    if err:= dec.Decode(&u); err != nil {
+        log.Fatal(err)
+        return err
+    }
+
+    log.Printf(fmt.Sprintf("%+v\n", u))
+
+    if u.Username == "admin" && u.Password == "tv@_2017" {
 
         // Set custom claims
         claims := &jwt.StandardClaims{

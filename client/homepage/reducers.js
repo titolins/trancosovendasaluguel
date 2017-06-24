@@ -7,7 +7,7 @@ const { PT, EN } = Languages
 const initialLangState = { selected: PT }
 const initialContentState = Content
 
-function lang(state = initialLangState, action) {
+export function lang(state = initialLangState, action) {
   switch (action.type) {
     case CHOOSE_LANGUAGE:
       return Object.assign({}, state.lang, {
@@ -18,7 +18,7 @@ function lang(state = initialLangState, action) {
   }
 }
 
-function content(state = initialContentState, action) {
+export function content(state = initialContentState, action) {
   switch (action.type) {
     case ADD_CONTENT:
       let contentState = {}
@@ -29,7 +29,3 @@ function content(state = initialContentState, action) {
   }
 }
 
-export default combineReducers({
-  lang,
-  content
-})
