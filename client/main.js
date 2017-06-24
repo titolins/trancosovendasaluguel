@@ -10,7 +10,7 @@ import thunk from 'redux-thunk'
 import { module } from '@hot'
 
 import { lang, content } from 'homepage/reducers'
-import { token } from 'admin/reducers'
+import { auth } from 'admin/reducers'
 
 import App from 'homepage/components/app'
 import Admin from 'admin/components/app'
@@ -23,7 +23,7 @@ import {
 
 import { PropsRoute } from 'homepage/propsroute'
 
-let store = createStore(combineReducers({lang,content,token}), applyMiddleware(thunk))
+let store = createStore(combineReducers({lang,content,auth}), applyMiddleware(thunk))
 
 export let component =  ReactDOM.render(
   <Provider store={store}>
