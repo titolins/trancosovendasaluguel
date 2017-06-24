@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom'
 
 import { combineReducers } from 'redux'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 
 import thunk from 'redux-thunk'
+
+import { persistStore, autoRehydrate } from 'redux-persist'
 
 import { module } from '@hot'
 
@@ -23,7 +25,12 @@ import {
 
 import { PropsRoute } from 'homepage/propsroute'
 
-let store = createStore(combineReducers({lang,content,auth}), applyMiddleware(thunk))
+let store = createStore(
+  combineReducers({lang,content,auth}),
+  undefined,
+  compose(applyMiddleware(thunk),autoRehydrate()))
+
+persistStore(store, {blacklist: ['lang', 'content']})
 
 export let component =  ReactDOM.render(
   <Provider store={store}>

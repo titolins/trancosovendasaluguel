@@ -2,14 +2,14 @@ package admin
 
 import (
     "github.com/labstack/echo"
-    "github.com/labstack/echo/middleware"
 )
 
 type Admin struct{}
 
 func (admin *Admin) Bind(group *echo.Group) {
-    // auth middleware
-    group.Use(middleware.JWT([]byte("secret")))
+    api := &API{}
+
+    api.Bind(group.Group("/api"))
 
     // fallback serving template so react handles all rendering
     group.GET("/*", admin.MainHandler)

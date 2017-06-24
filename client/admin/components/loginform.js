@@ -7,17 +7,28 @@ class LoginForm extends React.Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      user: '',
+      pass: ''
+    }
+
+    this.onChange = this.onChange.bind(this)
+
     this.login = props.login.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this)
+
+  }
+
+  onChange(e) {
+    let field = e.target.name,
+        state = this.state
+    state[field] = e.target.value
+    return this.setState(state)
   }
 
   handleSubmit(e) {
     e.preventDefault()
-    let data = {
-      user: this.username.value,
-      pass: this.password.value
-    }
-    this.login(data)
+    this.login(this.state)
   }
 
   render() {
@@ -27,11 +38,11 @@ class LoginForm extends React.Component {
           <form id="loginForm" onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label htmlFor="username">Usuário</label>
-              <input ref={ (input) => this.username = input } type="text" id="username" name="username" className="form-control"></input>
+              <input value={this.state.user} onChange={this.onChange} type="text" id="user" name="user" className="form-control"></input>
             </div>
             <div className="form-group">
               <label htmlFor="password">Senha</label>
-              <input ref={ (input) => this.password = input } type="password" id="password" name="password" className="form-control"></input>
+              <input value={this.state.pass} onChange={this.onChange} type="password" id="pass" name="pass" className="form-control"></input>
             </div>
             <input type="submit" className="btn btn-primary" value="Entrar"></input>
           </form>

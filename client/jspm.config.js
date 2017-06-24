@@ -427,6 +427,7 @@ SystemJS.config({
         "npm:systemjs-plugin-babel@0.0.21.json",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/extends.js",
         "admin/components/app.js",
+        "admin/components/adminpanel.js",
         "admin/components/intro.js",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/inherits.js",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/possibleConstructorReturn.js",
@@ -507,6 +508,20 @@ SystemJS.config({
         "homepage/scroll.js",
         "admin/reducers.js",
         "homepage/reducers.js",
+        "npm:redux-persist@4.8.1/lib/index.js",
+        "npm:redux-persist@4.8.1.json",
+        "npm:redux-persist@4.8.1/lib/purgeStoredState.js",
+        "npm:redux-persist@4.8.1/lib/constants.js",
+        "npm:redux-persist@4.8.1/lib/persistStore.js",
+        "npm:redux-persist@4.8.1/lib/utils/setImmediate.js",
+        "npm:redux-persist@4.8.1/lib/createPersistor.js",
+        "npm:json-stringify-safe@5.0.1/stringify.js",
+        "npm:json-stringify-safe@5.0.1.json",
+        "npm:redux-persist@4.8.1/lib/defaults/asyncLocalStorage.js",
+        "npm:redux-persist@4.8.1/lib/getStoredState.js",
+        "npm:redux-persist@4.8.1/lib/createTransform.js",
+        "npm:redux-persist@4.8.1/lib/autoRehydrate.js",
+        "npm:redux-persist@4.8.1/lib/utils/isStatePlainEnough.js",
         "npm:redux-thunk@2.2.0/lib/index.js",
         "npm:redux-thunk@2.2.0.json",
         "npm:react-dom@15.5.4/index.js",
@@ -795,6 +810,13 @@ SystemJS.config({
           "loader": "less"
         }
       }
+    },
+    "npm:redux-persist@4.8.1": {
+      "map": {
+        "lodash-es": "npm:lodash-es@4.17.4",
+        "json-stringify-safe": "npm:json-stringify-safe@5.0.1",
+        "lodash": "npm:lodash@4.17.4"
+      }
     }
   },
   map: {
@@ -810,6 +832,7 @@ SystemJS.config({
     "github:*/*.json"
   ],
   map: {
+    "redux-persist": "npm:redux-persist@4.8.1/lib",
     "assert": "npm:jspm-nodelibs-assert@0.2.1",
     "buffer": "npm:jspm-nodelibs-buffer@0.2.3",
     "child_process": "npm:jspm-nodelibs-child_process@0.2.1",
