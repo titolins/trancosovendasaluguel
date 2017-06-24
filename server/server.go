@@ -29,9 +29,6 @@ func BuildEngine() (e *echo.Echo) {
     admin := &admin.Admin{}
     admin.Bind(e.Group("/admin"))
 
-    // get login
-    //e.GET("/admin", admin.MainHandler)
-
     // all other routes must serve the index file to be handled by react-router
     e.GET("/*", homeHandler)
 
