@@ -18,18 +18,6 @@ class LoginForm extends React.Component {
       pass: this.password.value
     }
     this.login(data)
-    /*
-      fetch('http://httpbin.org/post', {
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({a: 7, str: 'Some string: &=&'})
-      }).then(res=>res.json())
-        .then(res => console.log(res));
-    */
-
   }
 
   render() {

@@ -1,16 +1,20 @@
 import React from 'react'
 
-import LoginForm from 'admin/components/loginform'
+import { connect } from 'react-redux'
+import { mapStateToProps } from 'admin/containers/auth'
 
-export default class App extends React.Component {
+import LoginForm from 'admin/components/loginform'
+import Intro from 'admin/components/intro'
+
+class App extends React.Component {
   render() {
-   return (
+    let page = this.props.authenticated ? ( <Intro /> ) : ( <LoginForm /> )
+    return (
       <div style={{width: "100%", height: "100%"}} className="container">
-        <div style={{height: "100%"}} className="row">
-          <LoginForm />
-        </div>
+        <div style={{height: "100%"}} className="row">{ page }</div>
       </div>
-   )
+    )
   }
 }
 
+export default connect(mapStateToProps)(App)

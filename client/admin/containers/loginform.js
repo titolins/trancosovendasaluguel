@@ -13,7 +13,10 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
         headers
       }).then(res=>res.json())
         .then(res => {
-          console.log(res)
+          console.log("headers")
+          console.log(atob(res.token.split(".")[0]))
+          console.log("payload")
+          console.log(atob(res.token.split(".")[1]))
           dispatch(setJWTToken(res))})
     }
   }

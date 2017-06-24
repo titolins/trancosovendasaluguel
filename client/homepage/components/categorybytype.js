@@ -14,10 +14,6 @@ class CategoryByType extends React.Component {
 
   render() {
     let items = this.props.items ? buildItemsPanels(this.props.items, this.props.ownContent.detailsBtn) : null
-    console.log("props")
-    console.log(this.props)
-    console.log("items")
-    console.log(items)
     return (
       <div className="mainContent">
         <h1 className="sectionTitle halfWidth pb-2">{ this.props.title }</h1>

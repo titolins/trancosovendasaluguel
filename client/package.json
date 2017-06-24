@@ -17,6 +17,7 @@
     "main": "client.js",
     "dependencies": {
       "css": "github:systemjs/plugin-css@^0.1.35",
+      "jsrsasign": "npm:jsrsasign@^7.2.1",
       "less": "npm:systemjs-less-plugin@^2.0.0",
       "promise-polyfill": "npm:promise-polyfill@^6.0.2",
       "react-dom": "npm:react-dom@^15.5.4",
@@ -141,6 +142,9 @@
         }
       },
       "npm:safe-buffer@5.0.1": {
+        "browser": "index.js"
+      },
+      "npm:safe-buffer@5.1.1": {
         "browser": "index.js"
       }
     }
