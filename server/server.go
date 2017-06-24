@@ -2,17 +2,11 @@ package server
 
 import (
     "net/http"
-    "time"
-    "log"
-    "fmt"
-    "encoding/json"
 
-    jwt "github.com/dgrijalva/jwt-go"
     "github.com/titolins/trancosovendasaluguel/server/admin"
     "github.com/labstack/echo"
     "github.com/labstack/echo/middleware"
 
-    "github.com/titolins/trancosovendasaluguel/server/models"
 )
 
 func BuildEngine() (e *echo.Echo) {
@@ -36,8 +30,7 @@ func BuildEngine() (e *echo.Echo) {
     admin.Bind(e.Group("/admin"))
 
     // get login
-    e.GET("/admin", admin.MainHandler)
-    e.POST("/admin", loginHandler)
+    //e.GET("/admin", admin.MainHandler)
 
     // all other routes must serve the index file to be handled by react-router
     e.GET("/*", homeHandler)
@@ -74,39 +67,5 @@ func homeHandler(c echo.Context) (err error) {
         }
     }
     return c.File("server/static/templates/index.html")
-}
-
-func loginHandler(c echo.Context) error {
-    var u models.User
-
-    dec := json.NewDecoder(c.Request().Body)
-    if err:= dec.Decode(&u); err != nil {
-        log.Fatal(err)
-        return err
-    }
-
-    log.Printf(fmt.Sprintf("%+v\n", u))
-
-    if u.Username == "admin" && u.Password == "tv@_2017" {
-
-        // Set custom claims
-        claims := &jwt.StandardClaims{
-            ExpiresAt: time.Now().Add(time.Hour * 72).Unix(),
-        }
-
-        // Create token with claims
-        token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-
-        // Generate encoded token and send it as response.
-        t, err := token.SignedString([]byte("secret"))
-        if err != nil {
-            return err
-        }
-        return c.JSON(http.StatusOK, echo.Map{
-            "token": t,
-        })
-    }
-
-    return echo.ErrUnauthorized
 }
 
