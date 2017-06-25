@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
-import { mapDispatchToProps } from 'admin/containers/loginform'
+import { mapDispatchToProps } from 'admin/containers/auth'
 
 class LoginForm extends React.Component {
   constructor(props) {
