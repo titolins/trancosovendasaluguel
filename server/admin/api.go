@@ -1,6 +1,8 @@
 package admin
 
 import (
+    "log"
+
     "github.com/labstack/echo"
     "github.com/labstack/echo/middleware"
 
@@ -12,7 +14,7 @@ type API struct{}
 func (api *API) Bind(group *echo.Group) {
     // auth middleware
     group.Use(middleware.JWT([]byte("secret")))
-    group.GET("/", api.TestJWTAuth)
+    group.POST("/test", api.TestJWTAuth)
     /* examples
     group.GET("/categories", api.GetAllCategoriesHandler)
     group.GET("/categories/:categoryId", api.GetCategoryHandler)
@@ -23,5 +25,8 @@ func (api *API) Bind(group *echo.Group) {
 }
 
 func (api *API) TestJWTAuth(c echo.Context) error {
-    return c.JSON(200, map[string]string{ "test": "ok" })
+    log.Printf("ok")
+    log.Printf("%s", c)
+
+    return c.NoContent(200)
 }

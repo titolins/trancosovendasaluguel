@@ -12,12 +12,7 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
         body: JSON.stringify(data),
         headers
       }).then(res=>res.json())
-        .then(res => {
-          console.log("headers")
-          console.log(atob(res.token.split(".")[0]))
-          console.log("payload")
-          console.log(atob(res.token.split(".")[1]))
-          dispatch(setJWTToken(res))})
+        .then(res => dispatch(setJWTToken(res)))
     }
   }
 }

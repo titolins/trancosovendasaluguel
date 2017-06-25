@@ -22,7 +22,9 @@ func (admin *Admin) Bind(group *echo.Group) {
     // login handler
     group.POST("", admin.loginHandler)
     // fallback serving template so react handles all rendering
+    group.GET("*", admin.mainHandler)
     group.GET("/*", admin.mainHandler)
+    group.GET("/*/*", admin.mainHandler)
 }
 
 func (admin *Admin) mainHandler(c echo.Context) error {
