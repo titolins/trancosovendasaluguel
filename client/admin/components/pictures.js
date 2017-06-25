@@ -2,21 +2,31 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 
-import { mapStateToProps, mapDispatchToProps } from 'admin/containers/requests'
+import { mapDispatchToProps } from 'admin/containers/requests'
+import { mapStateToProps } from 'admin/containers/pictures'
 
 class Pictures extends React.Component {
-  onEnter() {
-    console.log("onenter")
-    this.props.fetchContent("/admin/pictures", {})
-      .then(res=>console.log(res))
-  }
-
   render() {
+    console.log(this.props)
     return (
       <div className="card">
         <div className="card-block">
-          <h4 className="card-title">Bem-vindo ao Painel de </h4>
-          <p className="card-text">Através do menu acima você poderá administrar o conteúdo do site, adicionando e editando novas casas e imagens, ou apenas visualizando-os.</p>
+          <h3 className="card-title">Imagens</h3>
+          <button type="button" className="btn btn-success">Adicionar</button>
+          <div className="row">
+            {this.props.pictures.map((p, i) => {
+              return (
+                <div key={i} className="col-xs-12 col-md-6">
+                  <div className="card">
+                    <img className="card-img-top" src={p.Url} />
+                    <div className="card-block">
+                      <button type="button" className="btn btn-danger">Deletar</button>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </div>
     )

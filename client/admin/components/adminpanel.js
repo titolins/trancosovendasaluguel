@@ -16,18 +16,31 @@ import { getContentReq } from 'admin/requests'
 import { updatePictures } from 'admin/actions'
 
 const buildRoutes = (store, token) => {
+  //let buildRequestHandler = ({req, url, token, buildAction, parseRes}) => {
   let buildRequestHandler = ({req, url, token, buildAction}) => {
     return () => {
-      console.log("onenter")
-      req(url, token, (res) => { store.dispatch(buildAction({pictures: res})) })
+      req(url, token, res=>store.dispatch(buildAction(res)))
+      //req(url, token, res=>store.dispatch(buildAction(parseRes(res))))
     }
   }
+
+    /*
+  let pictureParser = (res) => {
+    console.log("*****res*********")
+    console.log(res)
+    let pRes =  Object.keys(res).map(i=>res[i])
+    console.log(pRes)
+    return pRes
+  }
+  */
 
   let picturesHandler = buildRequestHandler({
     req: getContentReq,
     url: '/admin/api/picture',
     token: token,
-    buildAction: updatePictures
+    buildAction: updatePictures,
+    //parseRes: pictureParser
+    //parseRes: res=>Object.keys(res).map(i=>res[i])
   })
 
   return (

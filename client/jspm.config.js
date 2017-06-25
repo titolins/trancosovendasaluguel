@@ -431,6 +431,7 @@ SystemJS.config({
         "admin/actions.js",
         "admin/requests.js",
         "admin/components/pictures.js",
+        "admin/containers/pictures.js",
         "admin/containers/requests.js",
         "npm:react-redux@5.0.5/lib/index.js",
         "npm:react-redux@5.0.5.json",

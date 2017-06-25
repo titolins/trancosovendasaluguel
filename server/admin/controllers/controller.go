@@ -2,8 +2,6 @@ package controllers
 
 import (
     "gopkg.in/mgo.v2"
-
-    //"github.com/titolins/trancosovendasaluguel/server/models"
 )
 
 type Controller struct{
@@ -14,5 +12,4 @@ type Controller struct{
 func Attach(c *Controller, db *mgo.Database) {
     c.Handler = db.C(c.Name)
 }
-
 

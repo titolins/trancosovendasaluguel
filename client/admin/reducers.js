@@ -20,7 +20,7 @@ const initialPicturesState = { pictures: [] }
 export function pictures(state = initialPicturesState, action) {
   switch (action.type) {
     case UPDATE_PICTURES:
-      return Object.assign({}, state.pictures, action.pictures )
+      return Object.assign({}, state.pictures, { pictures: action.pictures } )
     default:
       return state
   }
