@@ -428,7 +428,9 @@ SystemJS.config({
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/extends.js",
         "admin/components/app.js",
         "admin/components/adminpanel.js",
-        "admin/components/test.js",
+        "admin/actions.js",
+        "admin/requests.js",
+        "admin/components/pictures.js",
         "admin/containers/requests.js",
         "npm:react-redux@5.0.5/lib/index.js",
         "npm:react-redux@5.0.5.json",
@@ -473,13 +475,12 @@ SystemJS.config({
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/possibleConstructorReturn.js",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/createClass.js",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/classCallCheck.js",
+        "admin/components/test.js",
         "admin/components/header.js",
         "admin/components/styles/header.less",
         "npm:systemjs-less-plugin@2.0.0.json",
         "admin/components/intro.js",
         "admin/components/loginform.js",
-        "admin/containers/loginform.js",
-        "admin/actions.js",
         "admin/containers/auth.js",
         "homepage/components/app.js",
         "homepage/components/categorybytype.js",
@@ -693,12 +694,6 @@ SystemJS.config({
           "systemjs-hmr": "npm:systemjs-hmr@2.0.9"
         }
       },
-      "npm:babel-runtime@6.23.0": {
-        "map": {
-          "core-js": "npm:core-js@2.4.1",
-          "regenerator-runtime": "npm:regenerator-runtime@0.10.5"
-        }
-      },
       "npm:babel-types@6.24.1": {
         "map": {
           "esutils": "npm:esutils@2.0.2",
@@ -757,6 +752,12 @@ SystemJS.config({
           "globals": "npm:globals@9.17.0"
         }
       },
+      "npm:babel-runtime@6.23.0": {
+        "map": {
+          "core-js": "npm:core-js@2.4.1",
+          "regenerator-runtime": "npm:regenerator-runtime@0.10.5"
+        }
+      },
       "npm:babel-code-frame@6.22.0": {
         "map": {
           "esutils": "npm:esutils@2.0.2",
@@ -813,6 +814,51 @@ SystemJS.config({
         "*.less": {
           "loader": "less"
         }
+      }
+    },
+    "npm:babel-template@6.25.0": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "babylon": "npm:babylon@6.17.4",
+        "babel-types": "npm:babel-types@6.25.0",
+        "lodash": "npm:lodash@4.17.4",
+        "babel-traverse": "npm:babel-traverse@6.25.0"
+      }
+    },
+    "npm:babel-helper-function-name@6.24.1": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "babel-template": "npm:babel-template@6.25.0",
+        "babel-types": "npm:babel-types@6.25.0",
+        "babel-traverse": "npm:babel-traverse@6.25.0",
+        "babel-helper-get-function-arity": "npm:babel-helper-get-function-arity@6.24.1"
+      }
+    },
+    "npm:babel-types@6.25.0": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "lodash": "npm:lodash@4.17.4",
+        "to-fast-properties": "npm:to-fast-properties@1.0.3",
+        "esutils": "npm:esutils@2.0.2"
+      }
+    },
+    "npm:babel-traverse@6.25.0": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "babel-types": "npm:babel-types@6.25.0",
+        "babylon": "npm:babylon@6.17.4",
+        "lodash": "npm:lodash@4.17.4",
+        "debug": "npm:debug@2.6.8",
+        "globals": "npm:globals@9.18.0",
+        "babel-messages": "npm:babel-messages@6.23.0",
+        "babel-code-frame": "npm:babel-code-frame@6.22.0",
+        "invariant": "npm:invariant@2.2.2"
+      }
+    },
+    "npm:babel-helper-get-function-arity@6.24.1": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "babel-types": "npm:babel-types@6.25.0"
       }
     }
   },

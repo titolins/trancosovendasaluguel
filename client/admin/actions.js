@@ -13,3 +13,12 @@ export function revokeJWTToken() {
     type: REVOKE_JWT_TOKEN
   }
 }
+
+export const UPDATE_PICTURES = 'UPDATE_PICTURES'
+
+export function updatePictures(pictures) {
+  return {
+    type: UPDATE_PICTURES,
+    pictures
+  }
+}

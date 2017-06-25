@@ -33,6 +33,7 @@
     },
     "devDependencies": {
       "babel-plugin-add-module-exports": "npm:babel-plugin-add-module-exports@^0.2.1",
+      "babel-plugin-transform-class-properties": "npm:babel-plugin-transform-class-properties@^6.24.1",
       "babel-plugin-transform-es2015-modules-commonjs": "npm:babel-plugin-transform-es2015-modules-commonjs@^6.24.1",
       "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@^6.24.1",
       "core-js": "npm:core-js@^2.4.1",

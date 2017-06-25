@@ -3,7 +3,8 @@ import { revokeJWTToken } from 'admin/actions'
 
 export const mapStateToProps = (state, ownProps) => {
   return {
-    authenticated: (state.auth.token !== "") ? true : false
+    store: ownProps.store,
+    token: state.auth.token,
   }
 }
 

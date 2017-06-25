@@ -1,6 +1,6 @@
 import { SET_JWT_TOKEN } from './actions'
 import { REVOKE_JWT_TOKEN } from './actions'
-
+import { UPDATE_PICTURES } from './actions'
 
 const initialTokenState = { token: "" }
 
@@ -15,3 +15,13 @@ export function auth(state = initialTokenState, action) {
   }
 }
 
+const initialPicturesState = { pictures: [] }
+
+export function pictures(state = initialPicturesState, action) {
+  switch (action.type) {
+    case UPDATE_PICTURES:
+      return Object.assign({}, state.pictures, action.pictures )
+    default:
+      return state
+  }
+}

@@ -8,7 +8,9 @@ import AdminPanel from 'admin/components/adminpanel'
 
 class App extends React.Component {
   render() {
-    let page = this.props.authenticated ? ( <AdminPanel /> ) : ( <LoginForm /> )
+    let page = (this.props.token !== "") ?
+      ( <AdminPanel token={this.props.token} store={this.props.store} /> ) :
+      ( <LoginForm /> )
     return (
       <div style={{width: "100%", height: "100%"}} className="container">
         <div style={{height: "100%"}} className="row">{ page }</div>

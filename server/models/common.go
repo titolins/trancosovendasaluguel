@@ -1,5 +1,7 @@
 package models
 
+type Model interface{}
+
 type Content interface{}
 
 type TranslatableContent struct {
@@ -8,7 +10,7 @@ type TranslatableContent struct {
 }
 
 type Picture struct {
-    Url string
+    Url string `json: "url" bson:"url"`
 }
 
 

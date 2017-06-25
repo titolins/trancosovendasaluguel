@@ -3,13 +3,17 @@ package server
 import (
     "net/http"
 
-    "github.com/titolins/trancosovendasaluguel/server/admin"
     "github.com/labstack/echo"
     "github.com/labstack/echo/middleware"
 
+    "github.com/titolins/trancosovendasaluguel/server/admin"
+    "github.com/titolins/trancosovendasaluguel/server/admin/models"
 )
 
 func BuildEngine() (e *echo.Echo) {
+    // initialize db handler
+    models.InitDB("mongodb://localhost:27017", "tva")
+
     e = echo.New()
 
     e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
