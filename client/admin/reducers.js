@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux'
+
 import { SET_JWT_TOKEN } from './actions'
 import { REVOKE_JWT_TOKEN } from './actions'
 import { UPDATE_PICTURES } from './actions'
@@ -15,13 +17,15 @@ export function auth(state = initialTokenState, action) {
   }
 }
 
-const initialPicturesState = { pictures: [] }
+const initialPicturesState = []
 
-export function pictures(state = initialPicturesState, action) {
+let pictures = (state = initialPicturesState, action) => {
   switch (action.type) {
     case UPDATE_PICTURES:
-      return Object.assign({}, state.pictures, { pictures: action.pictures } )
+      return action.pictures.slice()
     default:
       return state
   }
 }
+
+export const data = combineReducers({pictures})

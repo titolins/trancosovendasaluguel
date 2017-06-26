@@ -12,7 +12,7 @@ import { persistStore, autoRehydrate } from 'redux-persist'
 import { module } from '@hot'
 
 import { lang, content } from 'homepage/reducers'
-import { auth, pictures } from 'admin/reducers'
+import { auth, data } from 'admin/reducers'
 
 import App from 'homepage/components/app'
 import Admin from 'admin/components/app'
@@ -25,7 +25,7 @@ import {
 import { PropsRoute } from 'homepage/propsroute'
 
 let store = createStore(
-  combineReducers({lang,content,auth,pictures}),
+  combineReducers({lang,content,auth,data}),
   undefined,
   compose(applyMiddleware(thunk),autoRehydrate()))
 

@@ -17,7 +17,7 @@ class Pictures extends React.Component {
               return (
                 <div key={i} className="col-xs-12 col-md-6">
                   <div className="card">
-                    <img className="card-img-top" src={p.Url} />
+                    <img className="card-img-top" src={p.url} />
                     <div className="card-block">
                       <button type="button" className="btn btn-danger">Deletar</button>
                     </div>
