@@ -19,7 +19,9 @@ const buildRoutes = (store, token) => {
   //let buildRequestHandler = ({req, url, token, buildAction, parseRes}) => {
   let buildRequestHandler = ({req, url, token, buildAction}) => {
     return () => {
-      req(url, token, res=>store.dispatch(buildAction(res)))
+      req(url, token, res=> {
+        console.log(res)
+        store.dispatch(buildAction(res))})
       //req(url, token, res=>store.dispatch(buildAction(parseRes(res))))
     }
   }

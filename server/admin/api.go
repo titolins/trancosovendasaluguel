@@ -1,41 +1,54 @@
 package admin
 
 import (
+    //"net/http"
     "log"
+    //"encoding/json"
 
     "github.com/labstack/echo"
     "github.com/labstack/echo/middleware"
 
-    "github.com/titolins/trancosovendasaluguel/server/admin/controllers"
-    admModels "github.com/titolins/trancosovendasaluguel/server/admin/models"
+    "gopkg.in/mgo.v2"
+    "gopkg.in/mgo.v2/bson"
+
     "github.com/titolins/trancosovendasaluguel/server/models"
 )
 
-type API struct{}
+type API struct{
+    DB *mgo.Session
+}
 
 func (api *API) Bind(group *echo.Group) {
     // auth middleware
     group.Use(middleware.JWT([]byte("secret")))
 
-    pictureController := &controllers.Controller{ Name: "pictures" }
-    controllers.Attach(pictureController, admModels.DB)
-
-    group.GET("/picture", api.GetAllPictures(pictureController))//controllers.GetAllPictures, pictureController))
+    group.GET("/picture", api.GetAllPictures())
 }
 
 func buildErrorResponse(err error) map[string]string{
     return map[string]string{
         "error": "true",
-        "msg": err.Error() }
+        "message": err.Error() }
 }
 
-func (api *API) GetAllPictures(c *controllers.Controller) func(echo.Context) error {
-    return func(context echo.Context) error {
-        var res []models.Picture
-        if err := controllers.GetAllPictures(c, &res); err != nil {
-            return context.JSON(500, buildErrorResponse(err))
+func (api *API) GetAllPictures() func(echo.Context) error {
+    return func(c echo.Context) (err error) {
+        var ps []models.Picture
+        /*
+        if err = c.Bind(ps); err != nil {
+            return
         }
-        return context.JSON(200, res)
+        */
+        db := api.DB.Clone()
+        defer db.Close()
+
+        if err = db.DB("tva").C("pictures").
+            Find(bson.M{}).All(&ps); err != nil {
+                return
+        }
+
+        log.Printf("%s", ps)
+        return c.JSON(200, ps)
     }
 
 }

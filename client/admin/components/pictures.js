@@ -7,7 +7,6 @@ import { mapStateToProps } from 'admin/containers/pictures'
 
 class Pictures extends React.Component {
   render() {
-    console.log(this.props)
     return (
       <div className="card">
         <div className="card-block">

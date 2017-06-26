@@ -5,20 +5,23 @@ import (
 
     "github.com/labstack/echo"
     "github.com/labstack/echo/middleware"
+    "github.com/labstack/gommon/log"
 
     "github.com/titolins/trancosovendasaluguel/server/admin"
-    "github.com/titolins/trancosovendasaluguel/server/admin/models"
+    //"github.com/titolins/trancosovendasaluguel/server/admin/models"
 )
 
 func BuildEngine() (e *echo.Echo) {
     // initialize db handler
-    models.InitDB("mongodb://localhost:27017", "tva")
+    //models.InitDB("mongodb://localhost:27017", "tva")
 
     e = echo.New()
 
     e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
         Format: `${method} | ${status} | ${uri} -> ${latency_human}` + "\n",
     }))
+    e.Logger.SetLevel(log.DEBUG)
+    log.Printf("%s", e.Logger.Level())
     e.Use(middleware.Recover())
     //e.Use(middleware.HTTPSRedirect())
 

@@ -7,6 +7,7 @@ import (
     "encoding/json"
     "log"
 
+    "gopkg.in/mgo.v2"
     jwt "github.com/dgrijalva/jwt-go"
     "github.com/labstack/echo"
 
@@ -16,7 +17,21 @@ import (
 type Admin struct{}
 
 func (admin *Admin) Bind(group *echo.Group) {
-    api := &API{}
+    db, err := mgo.Dial("localhost")
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // Create indices
+    /*
+    if err = db.Copy().DB("twitter").C("users").EnsureIndex(mgo.Index{
+        Key:    []string{"email"},
+        Unique: true,
+    }); err != nil {
+        log.Fatal(err)
+    }
+    */
+    api := &API{ DB: db }
     api.Bind(group.Group("/api"))
 
     // login handler
