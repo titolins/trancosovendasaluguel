@@ -22,7 +22,6 @@ class Pictures extends React.Component {
 
   loadPreview() {
     for(var i = 0; i < this.state.uploadFiles.length; i++) {
-      console.log(`ok${i}`)
       let id = `up-img-${i}`,
           file = this.state.uploadFiles[i],
           reader = new FileReader(),
@@ -30,15 +29,12 @@ class Pictures extends React.Component {
 
         window.reader = reader
         reader.onload = e=>document.getElementById(id).setAttribute('src', [reader.result])
-        console.log("url")
-        console.log(url)
     }
   }
 
   onChange(e) {
     let field = e.target.name,
         state = this.state
-    //console.log(e.target)
     switch(field) {
       case 'pictures':
         state[field] = e.target.value
@@ -48,7 +44,6 @@ class Pictures extends React.Component {
       default:
         state[field] = e.target.value
     }
-    console.log(state)
     return this.setState(state)
   }
 
@@ -65,7 +60,6 @@ class Pictures extends React.Component {
                 </div>
               </div>)
     }
-    console.log(fs)
 
     return (
       <div className="card">
