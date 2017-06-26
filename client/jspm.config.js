@@ -357,36 +357,38 @@ SystemJS.config({
         "npm:prop-types@15.5.10/factoryWithTypeCheckers.js",
         "npm:prop-types@15.5.10/checkPropTypes.js",
         "npm:fbjs@0.8.12/lib/warning.js",
-        "npm:react@15.5.4/react.js",
-        "npm:react@15.5.4.json",
-        "npm:react@15.5.4/lib/React.js",
-        "npm:react@15.5.4/lib/ReactElementValidator.js",
-        "npm:react@15.5.4/lib/getIteratorFn.js",
-        "npm:react@15.5.4/lib/canDefineProperty.js",
-        "npm:react@15.5.4/lib/checkReactTypeSpec.js",
-        "npm:react@15.5.4/lib/ReactComponentTreeHook.js",
-        "npm:react@15.5.4/lib/ReactCurrentOwner.js",
-        "npm:react@15.5.4/lib/reactProdInvariant.js",
-        "npm:react@15.5.4/lib/ReactPropTypesSecret.js",
-        "npm:react@15.5.4/lib/ReactPropTypeLocationNames.js",
-        "npm:react@15.5.4/lib/ReactElement.js",
-        "npm:react@15.5.4/lib/ReactElementSymbol.js",
+        "npm:react@15.6.1/react.js",
+        "npm:react@15.6.1.json",
+        "npm:react@15.6.1/lib/React.js",
+        "npm:react@15.6.1/lib/ReactElementValidator.js",
+        "npm:react@15.6.1/lib/lowPriorityWarning.js",
+        "npm:react@15.6.1/lib/getIteratorFn.js",
+        "npm:react@15.6.1/lib/canDefineProperty.js",
+        "npm:react@15.6.1/lib/checkReactTypeSpec.js",
+        "npm:react@15.6.1/lib/ReactComponentTreeHook.js",
+        "npm:react@15.6.1/lib/ReactCurrentOwner.js",
+        "npm:react@15.6.1/lib/reactProdInvariant.js",
+        "npm:react@15.6.1/lib/ReactPropTypesSecret.js",
+        "npm:react@15.6.1/lib/ReactPropTypeLocationNames.js",
+        "npm:react@15.6.1/lib/ReactElement.js",
+        "npm:react@15.6.1/lib/ReactElementSymbol.js",
         "npm:object-assign@4.1.1/index.js",
         "npm:object-assign@4.1.1.json",
-        "npm:react@15.5.4/lib/onlyChild.js",
-        "npm:react@15.5.4/lib/ReactVersion.js",
-        "npm:react@15.5.4/lib/ReactPropTypes.js",
-        "npm:prop-types@15.5.10/factory.js",
-        "npm:react@15.5.4/lib/ReactDOMFactories.js",
-        "npm:react@15.5.4/lib/ReactClass.js",
+        "npm:react@15.6.1/lib/onlyChild.js",
+        "npm:react@15.6.1/lib/createClass.js",
+        "npm:create-react-class@15.6.0/factory.js",
+        "npm:create-react-class@15.6.0.json",
         "npm:fbjs@0.8.12/lib/emptyObject.js",
-        "npm:react@15.5.4/lib/ReactNoopUpdateQueue.js",
-        "npm:react@15.5.4/lib/ReactComponent.js",
-        "npm:react@15.5.4/lib/ReactPureComponent.js",
-        "npm:react@15.5.4/lib/ReactChildren.js",
-        "npm:react@15.5.4/lib/traverseAllChildren.js",
-        "npm:react@15.5.4/lib/KeyEscapeUtils.js",
-        "npm:react@15.5.4/lib/PooledClass.js",
+        "npm:react@15.6.1/lib/ReactNoopUpdateQueue.js",
+        "npm:react@15.6.1/lib/ReactBaseClasses.js",
+        "npm:react@15.6.1/lib/ReactVersion.js",
+        "npm:react@15.6.1/lib/ReactPropTypes.js",
+        "npm:prop-types@15.5.10/factory.js",
+        "npm:react@15.6.1/lib/ReactDOMFactories.js",
+        "npm:react@15.6.1/lib/ReactChildren.js",
+        "npm:react@15.6.1/lib/traverseAllChildren.js",
+        "npm:react@15.6.1/lib/KeyEscapeUtils.js",
+        "npm:react@15.6.1/lib/PooledClass.js",
         "npm:warning@3.0.0/browser.js",
         "npm:warning@3.0.0.json",
         "npm:hoist-non-react-statics@1.2.0/index.js",
@@ -553,7 +555,7 @@ SystemJS.config({
         "npm:react-dom@15.5.4/lib/createMicrosoftUnsafeLocalFunction.js",
         "npm:react-dom@15.5.4/lib/DOMNamespaces.js",
         "npm:react-dom@15.5.4/lib/instantiateReactComponent.js",
-        "npm:react@15.5.4/lib/getNextDebugID.js",
+        "npm:react@15.6.1/lib/getNextDebugID.js",
         "npm:react-dom@15.5.4/lib/ReactHostComponent.js",
         "npm:react-dom@15.5.4/lib/ReactEmptyComponent.js",
         "npm:react-dom@15.5.4/lib/ReactCompositeComponent.js",
@@ -816,51 +818,6 @@ SystemJS.config({
           "loader": "less"
         }
       }
-    },
-    "npm:babel-template@6.25.0": {
-      "map": {
-        "babel-runtime": "npm:babel-runtime@6.23.0",
-        "babylon": "npm:babylon@6.17.4",
-        "babel-types": "npm:babel-types@6.25.0",
-        "lodash": "npm:lodash@4.17.4",
-        "babel-traverse": "npm:babel-traverse@6.25.0"
-      }
-    },
-    "npm:babel-helper-function-name@6.24.1": {
-      "map": {
-        "babel-runtime": "npm:babel-runtime@6.23.0",
-        "babel-template": "npm:babel-template@6.25.0",
-        "babel-types": "npm:babel-types@6.25.0",
-        "babel-traverse": "npm:babel-traverse@6.25.0",
-        "babel-helper-get-function-arity": "npm:babel-helper-get-function-arity@6.24.1"
-      }
-    },
-    "npm:babel-types@6.25.0": {
-      "map": {
-        "babel-runtime": "npm:babel-runtime@6.23.0",
-        "lodash": "npm:lodash@4.17.4",
-        "to-fast-properties": "npm:to-fast-properties@1.0.3",
-        "esutils": "npm:esutils@2.0.2"
-      }
-    },
-    "npm:babel-traverse@6.25.0": {
-      "map": {
-        "babel-runtime": "npm:babel-runtime@6.23.0",
-        "babel-types": "npm:babel-types@6.25.0",
-        "babylon": "npm:babylon@6.17.4",
-        "lodash": "npm:lodash@4.17.4",
-        "debug": "npm:debug@2.6.8",
-        "globals": "npm:globals@9.18.0",
-        "babel-messages": "npm:babel-messages@6.23.0",
-        "babel-code-frame": "npm:babel-code-frame@6.22.0",
-        "invariant": "npm:invariant@2.2.2"
-      }
-    },
-    "npm:babel-helper-get-function-arity@6.24.1": {
-      "map": {
-        "babel-runtime": "npm:babel-runtime@6.23.0",
-        "babel-types": "npm:babel-types@6.25.0"
-      }
     }
   },
   map: {
@@ -894,7 +851,7 @@ SystemJS.config({
     "path": "npm:jspm-nodelibs-path@0.2.3",
     "process": "npm:jspm-nodelibs-process@0.2.1",
     "promise-polyfill": "npm:promise-polyfill@6.0.2",
-    "react": "npm:react@15.5.4",
+    "react": "npm:react@15.6.1",
     "react-dom": "npm:react-dom@15.5.4",
     "react-router": "npm:react-router@4.1.1",
     "react-router-dom": "npm:react-router-dom@4.1.1",
@@ -932,8 +889,8 @@ SystemJS.config({
         "object-assign": "npm:object-assign@4.1.1",
         "setimmediate": "npm:setimmediate@1.0.5",
         "isomorphic-fetch": "npm:isomorphic-fetch@2.2.1",
-        "promise": "npm:promise@7.1.1",
-        "ua-parser-js": "npm:ua-parser-js@0.7.12",
+        "promise": "npm:promise@7.3.1",
+        "ua-parser-js": "npm:ua-parser-js@0.7.13",
         "core-js": "npm:core-js@1.2.7"
       }
     },
@@ -942,34 +899,15 @@ SystemJS.config({
         "js-tokens": "npm:js-tokens@3.0.1"
       }
     },
-    "npm:react@15.5.4": {
-      "map": {
-        "loose-envify": "npm:loose-envify@1.3.1",
-        "object-assign": "npm:object-assign@4.1.1",
-        "prop-types": "npm:prop-types@15.5.10",
-        "fbjs": "npm:fbjs@0.8.12"
-      }
-    },
     "npm:isomorphic-fetch@2.2.1": {
       "map": {
         "whatwg-fetch": "npm:whatwg-fetch@2.0.3",
-        "node-fetch": "npm:node-fetch@1.7.0"
-      }
-    },
-    "npm:promise@7.1.1": {
-      "map": {
-        "asap": "npm:asap@2.0.5"
-      }
-    },
-    "npm:node-fetch@1.7.0": {
-      "map": {
-        "is-stream": "npm:is-stream@1.1.0",
-        "encoding": "npm:encoding@0.1.12"
+        "node-fetch": "npm:node-fetch@1.7.1"
       }
     },
     "npm:encoding@0.1.12": {
       "map": {
-        "iconv-lite": "npm:iconv-lite@0.4.17"
+        "iconv-lite": "npm:iconv-lite@0.4.18"
       }
     },
     "npm:jspm-nodelibs-stream@0.2.1": {
@@ -986,22 +924,6 @@ SystemJS.config({
       "map": {
         "inherits": "npm:inherits@2.0.3",
         "readable-stream": "npm:readable-stream@2.3.2"
-      }
-    },
-    "npm:readable-stream@2.2.9": {
-      "map": {
-        "inherits": "npm:inherits@2.0.3",
-        "buffer-shims": "npm:buffer-shims@1.0.0",
-        "isarray": "npm:isarray@1.0.0",
-        "core-util-is": "npm:core-util-is@1.0.2",
-        "process-nextick-args": "npm:process-nextick-args@1.0.7",
-        "string_decoder": "npm:string_decoder@1.0.1",
-        "util-deprecate": "npm:util-deprecate@1.0.2"
-      }
-    },
-    "npm:string_decoder@1.0.1": {
-      "map": {
-        "safe-buffer": "npm:safe-buffer@5.0.1"
       }
     },
     "npm:jspm-nodelibs-buffer@0.2.3": {
@@ -1212,22 +1134,13 @@ SystemJS.config({
     },
     "npm:browserify-zlib@0.1.4": {
       "map": {
-        "readable-stream": "npm:readable-stream@2.2.9",
+        "readable-stream": "npm:readable-stream@2.3.2",
         "pako": "npm:pako@0.2.9"
       }
     },
     "npm:jspm-nodelibs-http@0.2.0": {
       "map": {
-        "http-browserify": "npm:stream-http@2.7.1"
-      }
-    },
-    "npm:stream-http@2.7.1": {
-      "map": {
-        "inherits": "npm:inherits@2.0.3",
-        "readable-stream": "npm:readable-stream@2.2.9",
-        "to-arraybuffer": "npm:to-arraybuffer@1.0.1",
-        "builtin-status-codes": "npm:builtin-status-codes@3.0.0",
-        "xtend": "npm:xtend@4.0.1"
+        "http-browserify": "npm:stream-http@2.7.2"
       }
     },
     "npm:jspm-nodelibs-url@0.2.1": {
@@ -1353,6 +1266,42 @@ SystemJS.config({
         "lodash": "npm:lodash@4.17.4",
         "lodash-es": "npm:lodash-es@4.17.4",
         "json-stringify-safe": "npm:json-stringify-safe@5.0.1"
+      }
+    },
+    "npm:react@15.6.1": {
+      "map": {
+        "loose-envify": "npm:loose-envify@1.3.1",
+        "create-react-class": "npm:create-react-class@15.6.0",
+        "prop-types": "npm:prop-types@15.5.10",
+        "object-assign": "npm:object-assign@4.1.1",
+        "fbjs": "npm:fbjs@0.8.12"
+      }
+    },
+    "npm:create-react-class@15.6.0": {
+      "map": {
+        "loose-envify": "npm:loose-envify@1.3.1",
+        "object-assign": "npm:object-assign@4.1.1",
+        "fbjs": "npm:fbjs@0.8.12"
+      }
+    },
+    "npm:promise@7.3.1": {
+      "map": {
+        "asap": "npm:asap@2.0.5"
+      }
+    },
+    "npm:node-fetch@1.7.1": {
+      "map": {
+        "encoding": "npm:encoding@0.1.12",
+        "is-stream": "npm:is-stream@1.1.0"
+      }
+    },
+    "npm:stream-http@2.7.2": {
+      "map": {
+        "inherits": "npm:inherits@2.0.3",
+        "readable-stream": "npm:readable-stream@2.3.2",
+        "to-arraybuffer": "npm:to-arraybuffer@1.0.1",
+        "builtin-status-codes": "npm:builtin-status-codes@3.0.0",
+        "xtend": "npm:xtend@4.0.1"
       }
     }
   }
