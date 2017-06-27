@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux'
 
-import { SET_JWT_TOKEN } from './actions'
-import { REVOKE_JWT_TOKEN } from './actions'
-import { UPDATE_PICTURES } from './actions'
+import {
+  SET_JWT_TOKEN,
+  REVOKE_JWT_TOKEN,
+  UPDATE_PICTURES,
+  UPLOAD_STATE,
+  SET_UPLOAD_STATE,
+} from './actions'
 
 const initialTokenState = { token: "" }
 
@@ -29,3 +33,17 @@ let pictures = (state = initialPicturesState, action) => {
 }
 
 export const data = combineReducers({pictures})
+
+const initialUploadState = {
+  state: UPLOAD_STATE.AVAILABLE
+}
+
+export function upload(state = initialUploadState, action) {
+  switch (action.type) {
+    case SET_UPLOAD_STATE:
+      return Object.assign({}, state, action.state)
+    default:
+      return state
+  }
+}
+

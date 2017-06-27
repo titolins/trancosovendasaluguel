@@ -11,17 +11,31 @@ import Header from 'admin/components/header'
 import Test from 'admin/components/test'
 import Pictures from 'admin/components/pictures'
 
-import { getContentReq } from 'admin/requests'
+import { getContentReq, postFilesReq } from 'admin/requests'
 
-import { updatePictures } from 'admin/actions'
+import { updatePictures, setUploadState, UPLOAD_STATE } from 'admin/actions'
 
 const buildRoutes = (store, token) => {
+  const url = '/admin/api/picture'
   //let buildRequestHandler = ({req, url, token, buildAction, parseRes}) => {
-  let buildRequestHandler = ({req, url, token, buildAction}) => {
+  let buildRequestHandler = ({req, token, buildAction}) => {
     return () => {
       req(url, token, res=> {
         store.dispatch(buildAction(res))})
       //req(url, token, res=>store.dispatch(buildAction(parseRes(res))))
+    }
+  }
+
+  let buildPostRequestHandler = ({req, token}) => {
+    return (data) => {
+      return (e) => {
+        e.preventDefault()
+        store.dispatch(setUploadState({state:UPLOAD_STATE.BUSY}))
+        req(url, token, data, (res) => {
+          console.log(res)
+          store.dispatch(setUploadState({state:UPLOAD_STATE.AVAILABLE}))
+        })
+      }
     }
   }
 
@@ -35,13 +49,17 @@ const buildRoutes = (store, token) => {
   }
   */
 
-  let picturesHandler = buildRequestHandler({
+  let getPicturesHandler = buildRequestHandler({
     req: getContentReq,
-    url: '/admin/api/picture',
     token: token,
     buildAction: updatePictures,
     //parseRes: pictureParser
     //parseRes: res=>Object.keys(res).map(i=>res[i])
+  })
+
+  let postPicturesHandler = buildPostRequestHandler({
+    req: postFilesReq,
+    token
   })
 
   return (
@@ -49,8 +67,8 @@ const buildRoutes = (store, token) => {
       <Route exact path="/admin/" component={Intro} />
       <Route path="/admin/test" component={Test} />
       <Route path="/admin/imagens" render={ () => {
-        picturesHandler()
-        return (<Pictures />)
+        getPicturesHandler()
+        return (<Pictures handleSubmit={postPicturesHandler}/>)
       } } />
       <Redirect to="/admin/" />
     </Switch>

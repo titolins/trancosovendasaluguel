@@ -22,3 +22,18 @@ export function updatePictures(pictures) {
     pictures
   }
 }
+
+export const UPLOAD_STATE = {
+  AVAILABLE: 'AVAILABLE',
+  BUSY: 'BUSY'
+}
+
+export const SET_UPLOAD_STATE = 'SET_UPLOAD_STATE'
+
+export function setUploadState(state) {
+  return {
+    type: SET_UPLOAD_STATE,
+    state
+  }
+}
+

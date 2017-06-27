@@ -5,19 +5,32 @@ import { connect } from 'react-redux'
 import { mapDispatchToProps } from 'admin/containers/requests'
 import { mapStateToProps } from 'admin/containers/pictures'
 
+import { UPLOAD_STATE } from 'admin/actions'
+
 class Pictures extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
       pictures: "",
-      uploadFiles: ""
+      uploadFiles: "",
     }
 
     window.pictures = this
 
     this.onChange = this.onChange.bind(this)
     this.loadPreview = this.loadPreview.bind(this)
+    this.getPostData = this.getPostData.bind(this)
+    console.log(props)
+  }
+
+  getPostData() {
+    let nFiles = this.state.uploadFiles.length,
+        data = new FormData()
+    data.append('name', 'uploadPictures')
+    data.append('pictures', this.state.uploadFiles)
+
+    return new FormData(data)
   }
 
   loadPreview() {
@@ -103,14 +116,18 @@ class Pictures extends React.Component {
                   <h5 className="modal-title" id="add-modal-title">Adicionar imagens</h5>
                 </div>
                 <div className="modal-body">
+                  <form id="addModal" onSubmit={this.props.handleSubmit(this.getPostData())}>
+                    <input label="Subir imagens" type="file"
+                      name="pictures" multiple accept=".jpg,.png"
+                      value={this.state.pictures} onChange={this.onChange}/>
+                    { this.props.uploadState === UPLOAD_STATE.AVAILABLE ?
+                        (<input type="submit" className="btn btn-primary" value="Subir imagens" />) :
+                        (<div className="alert alert-info" role="alert">Subindo imagens. Por favor aguarde..</div>)
+                    }
+                  </form>
                   <div className="container-fluid">
                     <div className="row">{fs}</div>
                   </div>
-                  <form id="addModal">
-                    <input label="Subir imagens" type="file"
-                      name="pictures" multiple 
-                      value={this.state.pictures} onChange={this.onChange}/>
-                  </form>
                 </div>
               </div>
             </div>
