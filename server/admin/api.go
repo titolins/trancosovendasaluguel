@@ -8,7 +8,7 @@ import (
     "path"
     //"errors"
     "mime/multipart"
-    "log"
+    //"log"
     //"encoding/json"
 
     "github.com/labstack/echo"
@@ -35,6 +35,8 @@ func (api *API) Bind(group *echo.Group) {
     group.GET("/picture", api.GetAllPictures)
     group.PUT("/picture", api.UploadPictures)
     group.DELETE("/picture", api.DeletePicture)
+
+    group.GET("/house", api.GetAllHouses)
 }
 
 func (api *API) DeletePicture(c echo.Context) (err error) {
@@ -55,9 +57,21 @@ func (api *API) DeletePicture(c echo.Context) (err error) {
     return os.Remove(path.Join("server",p.Url))
 }
 
+func (api *API) GetAllHouses(c echo.Context) (err error) {
+    var hs []models.House
+
+    db := api.DB.Clone()
+    defer db.Close()
+
+    if err = db.DB("tva").C("houses").Find(bson.M{}).All(&hs); err != nil {
+        return
+    }
+
+    return c.JSON(200, hs)
+}
+
 func (api *API) GetAllPictures(c echo.Context) (err error) {
     var ps []models.Picture
-    log.Printf("%s", c.Request())
     /*
     if err = c.Bind(&ps); err != nil {
         return
@@ -66,9 +80,8 @@ func (api *API) GetAllPictures(c echo.Context) (err error) {
     db := api.DB.Clone()
     defer db.Close()
 
-    if err = db.DB("tva").C("pictures").
-        Find(bson.M{}).All(&ps); err != nil {
-            return
+    if err = db.DB("tva").C("pictures").Find(bson.M{}).All(&ps); err != nil {
+        return
     }
 
     return c.JSON(200, ps)
