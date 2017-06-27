@@ -23,7 +23,7 @@ export function postContentReq(url, token, data, callback) {
 
 export function postFilesReq(url, token, data, callback) {
   let content = {
-    method: 'post',
+    method: 'put',
     headers: {
       'Authorization': `Bearer ${token}`,
     },
