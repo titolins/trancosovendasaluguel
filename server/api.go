@@ -1,6 +1,8 @@
 package server
 
 import (
+    "gopkg.in/mgo.v2"
+
     "github.com/labstack/echo"
     "github.com/titolins/trancosovendasaluguel/server/controllers"
 )
@@ -11,7 +13,9 @@ import (
  * * add update and delete methods (ony getters as of now)
  * * implement validators and bindings. see: https://echo.labstack.com/guide/request
  */
-type API struct{}
+type API struct{
+    DB *mgo.Session
+}
 
 func (api *API) Bind(group *echo.Group) {
     group.GET("/categories", api.GetAllCategoriesHandler)

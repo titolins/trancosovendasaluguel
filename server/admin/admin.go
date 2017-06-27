@@ -7,23 +7,24 @@ import (
     "encoding/json"
     "log"
 
-    "gopkg.in/mgo.v2"
     jwt "github.com/dgrijalva/jwt-go"
     "github.com/labstack/echo"
 
     "github.com/titolins/trancosovendasaluguel/server/models"
 )
 
-type Admin struct{}
+type Admin struct{
+    API *API
+}
 
 func (admin *Admin) Bind(group *echo.Group) {
+    /*
     db, err := mgo.Dial("localhost")
     if err != nil {
         log.Fatal(err)
     }
 
     // Create indices
-    /*
     if err = db.Copy().DB("twitter").C("users").EnsureIndex(mgo.Index{
         Key:    []string{"email"},
         Unique: true,
@@ -31,8 +32,8 @@ func (admin *Admin) Bind(group *echo.Group) {
         log.Fatal(err)
     }
     */
-    api := &API{ DB: db }
-    api.Bind(group.Group("/api"))
+    //api := &API{ DB: db }
+    admin.API.Bind(group.Group("/api"))
 
     // login handler
     group.POST("", admin.loginHandler)

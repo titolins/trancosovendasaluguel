@@ -2,6 +2,9 @@ package server
 
 import (
     "net/http"
+    "log"
+
+    "gopkg.in/mgo.v2"
 
     "github.com/labstack/echo"
     "github.com/labstack/echo/middleware"
@@ -10,6 +13,11 @@ import (
 )
 
 func BuildEngine() (e *echo.Echo) {
+    db, err := mgo.Dial("localhost")
+    if err != nil {
+        log.Fatal(err)
+    }
+
     e = echo.New()
 
     e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
@@ -25,10 +33,11 @@ func BuildEngine() (e *echo.Echo) {
     e.Static("/static/uploads", "server/static/uploads")
 
     // api routes
-    api := &API{}
+    api := &API{ DB: db }
     api.Bind(e.Group("/api"))
 
-    admin := &admin.Admin{}
+    adminAPI := &admin.API{ DB: db }
+    admin := &admin.Admin{ API: adminAPI }
     admin.Bind(e.Group("/admin"))
 
     // all other routes must serve the index file to be handled by react-router
