@@ -125,17 +125,20 @@ class Pictures extends React.Component {
                       null
                   }
                   <form name="uploadPictures" id="addModal" onSubmit={this.props.handleSubmit(this.getPostData())}>
-                    <input label="Subir imagens" type="file"
-                      name="pictures" multiple accept=".jpg,.png"
-                      value={this.state.pictures} onChange={this.onChange}/>
+                    <label className="custom-file">
+                      <input type="file" id="file" className="custom-file-input"
+                        name="pictures" multiple accept=".jpg,.png"
+                        value={this.state.pictures} onChange={this.onChange}/>
+                      <span className="custom-file-control"></span>
+                    </label>
+                    <div className="container-fluid">
+                      <div className="row">{fs}</div>
+                    </div>
                     { this.props.uploadState.state === UPLOAD_STATE.AVAILABLE ?
                         (<input type="submit" className="btn btn-primary" value="Subir imagens" />) :
                         (<div className="alert alert-info" role="alert">Subindo imagens. Por favor aguarde..</div>)
                     }
                   </form>
-                  <div className="container-fluid">
-                    <div className="row">{fs}</div>
-                  </div>
                 </div>
               </div>
             </div>
