@@ -2,7 +2,6 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 
-import { mapDispatchToProps } from 'admin/containers/requests'
 import { mapStateToProps } from 'admin/containers/pictures'
 
 import { UPLOAD_STATE } from 'admin/actions'
@@ -145,4 +144,4 @@ class Pictures extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Pictures)
+export default connect(mapStateToProps)(Pictures)

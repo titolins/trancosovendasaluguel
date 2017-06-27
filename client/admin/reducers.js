@@ -7,6 +7,8 @@ import {
   UPLOAD_STATE,
   SET_UPLOAD_STATE,
   SET_UPLOAD_ERRORS,
+  UPDATE_HOUSES,
+  SET_POST_ERRORS,
 } from './actions'
 
 const initialTokenState = { token: "" }
@@ -33,7 +35,18 @@ let pictures = (state = initialPicturesState, action) => {
   }
 }
 
-export const data = combineReducers({pictures})
+const initialHousesState = []
+
+let houses = (state = initialHousesState, action) => {
+  switch (action.type) {
+    case UPDATE_HOUSES:
+      return action.houses ? actions.houses.slice() : []
+    default:
+      return state
+  }
+}
+
+export const data = combineReducers({pictures, houses})
 
 const initialUploadState = {
   state: UPLOAD_STATE.AVAILABLE,
@@ -45,6 +58,19 @@ export function upload(state = initialUploadState, action) {
     case SET_UPLOAD_STATE:
       return Object.assign({}, state, action.state)
     case SET_UPLOAD_ERRORS:
+      return Object.assign({}, state, action.errors)
+    default:
+      return state
+  }
+}
+
+const initialPostState = {
+  errors: []
+}
+
+export function post(state = initialPostState, action) {
+  switch (action.type) {
+    case SET_POST_ERRORS:
       return Object.assign({}, state, action.errors)
     default:
       return state

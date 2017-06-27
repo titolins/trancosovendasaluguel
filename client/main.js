@@ -12,7 +12,7 @@ import { persistStore, autoRehydrate } from 'redux-persist'
 import { module } from '@hot'
 
 import { lang, content } from 'homepage/reducers'
-import { auth, upload, data } from 'admin/reducers'
+import { auth, upload, post, data } from 'admin/reducers'
 
 import App from 'homepage/components/app'
 import Admin from 'admin/components/app'
@@ -29,7 +29,7 @@ let store = createStore(
   undefined,
   compose(applyMiddleware(thunk),autoRehydrate()))
 
-persistStore(store, {blacklist: ['lang', 'content', 'upload', 'data']})
+persistStore(store, {blacklist: ['lang', 'content', 'upload', 'post', 'data']})
 
 export let component =  ReactDOM.render(
   <Provider store={store}>

@@ -46,3 +46,20 @@ export function setUploadErrors(errors) {
   }
 }
 
+export const UPDATE_HOUSES = 'UPDATE_HOUSES'
+
+export function updateHouses(houses) {
+  return {
+    type: UPDATE_HOUSES,
+    houses
+  }
+}
+
+export const SET_POST_ERRORS = 'SET_POST_ERRORS'
+
+export function setPostErrors(errors) {
+  return {
+    type: SET_POST_ERRORS,
+    errors
+  }
+}
