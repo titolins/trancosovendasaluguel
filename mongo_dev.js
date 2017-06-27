@@ -1,16 +1,35 @@
 
+function getHandler() {
+  conn = new Mongo();
+  return conn.getDB("tva");
+}
+
+const TYPES = {
+  HOUSE: 0,
+  LOT: 1,
+  FARM: 2,
+  STORE: 3,
+  INN: 4
+};
+
+function buildSalesHouse() {
+  var db = getHandler();
+  var c = db.categories.findOne({'name':'sales'}, {'_id':1,'name':1})
+  return buildHouse(c)
+}
+
 function buildHouse(c) {
-    h = house
-    h.category = c
-    return h
+    h = house;
+    h.category = c;
+    return h;
 }
 
 var house = {
   category: {
     id: 1
   },
-  type: 'house', // only available on houses for sale
-                 // can be: house, lot, farm, store, inn
+  type: TYPES.HOUSE, // only available on houses for sale
+                     // can be: house, lot, farm, store, inn
   featured: true,
   capacity: 4,
   cover: { url: "https://placehold.it/550x338" },
@@ -48,9 +67,9 @@ var salesCategory = {
       house
 ]}
 
-var rentCategory = salesCategory
+var rentCategory = salesCategory;
 
 var categoriesDevData = {
     "sales": salesCategory,
-    "rent": rentCategory }
+    "rent": rentCategory };
 
