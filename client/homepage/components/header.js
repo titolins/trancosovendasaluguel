@@ -28,7 +28,7 @@ class Header extends React.Component {
           </ul>
           <ul className="navbar-nav ml-auto mainOpts">
             <SalesDropdown contentId="categoryTypes" />
-            <CategoryDropdown categoryId="rent" categoryContent="Items" />
+            <CategoryDropdown categoryId="rent" categoryContent="items" />
             <li className="nav-item"><Link className="nav-link text-green px-0 mx-4" to="/aluguelcomercial">{ ownContent.comercialRent }</Link></li>
             <li className="nav-item"><Link className="nav-link text-green px-0 ml-4" to="/servicos">{ ownContent.services }</Link></li>
           </ul>
