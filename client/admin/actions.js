@@ -37,3 +37,12 @@ export function setUploadState(state) {
   }
 }
 
+export const SET_UPLOAD_ERRORS = 'SET_UPLOAD_ERRORS'
+
+export function setUploadErrors(errors) {
+  return {
+    type: SET_UPLOAD_ERRORS,
+    errors
+  }
+}
+

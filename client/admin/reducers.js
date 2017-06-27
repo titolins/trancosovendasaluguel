@@ -6,6 +6,7 @@ import {
   UPDATE_PICTURES,
   UPLOAD_STATE,
   SET_UPLOAD_STATE,
+  SET_UPLOAD_ERRORS,
 } from './actions'
 
 const initialTokenState = { token: "" }
@@ -26,7 +27,7 @@ const initialPicturesState = []
 let pictures = (state = initialPicturesState, action) => {
   switch (action.type) {
     case UPDATE_PICTURES:
-      return action.pictures.slice()
+      return action.pictures ? action.pictures.slice() : []
     default:
       return state
   }
@@ -35,13 +36,16 @@ let pictures = (state = initialPicturesState, action) => {
 export const data = combineReducers({pictures})
 
 const initialUploadState = {
-  state: UPLOAD_STATE.AVAILABLE
+  state: UPLOAD_STATE.AVAILABLE,
+  errors: []
 }
 
 export function upload(state = initialUploadState, action) {
   switch (action.type) {
     case SET_UPLOAD_STATE:
       return Object.assign({}, state, action.state)
+    case SET_UPLOAD_ERRORS:
+      return Object.assign({}, state, action.errors)
     default:
       return state
   }

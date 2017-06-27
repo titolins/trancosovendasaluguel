@@ -113,6 +113,6 @@ func (api *API) UploadPictures(c echo.Context) (err error) {
         }()
 
     }
-    return c.JSON(200, map[string]string{ "error": "false", "msg": "sucessfully uploaded files"})
+    return c.JSON(200, res )
 }
 

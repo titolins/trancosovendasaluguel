@@ -12,7 +12,7 @@ import Pictures from 'admin/components/pictures'
 
 import { getContentReq, postFilesReq } from 'admin/requests'
 
-import { updatePictures, setUploadState, UPLOAD_STATE } from 'admin/actions'
+import { updatePictures, setUploadState, UPLOAD_STATE, setUploadErrors } from 'admin/actions'
 
 const buildRoutes = (store, token) => {
   const url = '/admin/api/picture'
@@ -32,6 +32,10 @@ const buildRoutes = (store, token) => {
         store.dispatch(setUploadState({state:UPLOAD_STATE.BUSY}))
         req(url, token, data, (res) => {
           store.dispatch(setUploadState({state:UPLOAD_STATE.AVAILABLE}))
+          res.json().then((json)=>{
+            if(json.errors.length === 0) window.location = window.location
+            store.dispatch(setUploadErrors({errors:json.errors}))
+          })
         })
       }
     }

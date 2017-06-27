@@ -29,7 +29,7 @@ let store = createStore(
   undefined,
   compose(applyMiddleware(thunk),autoRehydrate()))
 
-persistStore(store, {blacklist: ['lang', 'content']})
+persistStore(store, {blacklist: ['lang', 'content', 'upload', 'data']})
 
 export let component =  ReactDOM.render(
   <Provider store={store}>

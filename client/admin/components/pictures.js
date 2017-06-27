@@ -115,11 +115,21 @@ class Pictures extends React.Component {
                   <h5 className="modal-title" id="add-modal-title">Adicionar imagens</h5>
                 </div>
                 <div className="modal-body">
+                  { this.props.uploadState.errors.length > 0 ?
+                      (<div className="alert alert-danger"><ul>
+                        {this.props.uploadState.errors.map((e,i)=>{
+                          return (
+                            <li key={i}>{e}</li>
+                          )
+                        })}
+                      </ul></div>) :
+                      null
+                  }
                   <form name="uploadPictures" id="addModal" onSubmit={this.props.handleSubmit(this.getPostData())}>
                     <input label="Subir imagens" type="file"
                       name="pictures" multiple accept=".jpg,.png"
                       value={this.state.pictures} onChange={this.onChange}/>
-                    { this.props.uploadState === UPLOAD_STATE.AVAILABLE ?
+                    { this.props.uploadState.state === UPLOAD_STATE.AVAILABLE ?
                         (<input type="submit" className="btn btn-primary" value="Subir imagens" />) :
                         (<div className="alert alert-info" role="alert">Subindo imagens. Por favor aguarde..</div>)
                     }
