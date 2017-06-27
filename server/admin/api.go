@@ -37,12 +37,6 @@ func (api *API) Bind(group *echo.Group) {
     group.DELETE("/picture", api.DeletePicture)
 }
 
-func buildErrorResponse(err error) map[string]string{
-    return map[string]string{
-        "error": "true",
-        "message": err.Error() }
-}
-
 func (api *API) DeletePicture(c echo.Context) (err error) {
     var p models.Picture
     if err = c.Bind(&p); err != nil {
@@ -65,7 +59,7 @@ func (api *API) GetAllPictures(c echo.Context) (err error) {
     var ps []models.Picture
     log.Printf("%s", c.Request())
     /*
-    if err = c.Bind(ps); err != nil {
+    if err = c.Bind(&ps); err != nil {
         return
     }
     */
@@ -83,7 +77,7 @@ func (api *API) GetAllPictures(c echo.Context) (err error) {
 func (api *API) UploadPictures(c echo.Context) (err error) {
     var form *multipart.Form
     if form, err = c.MultipartForm(); err != nil {
-        return c.JSON(500, buildErrorResponse(err))
+        return
     }
 
     res := map[string][]string{
