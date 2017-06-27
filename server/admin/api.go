@@ -24,7 +24,7 @@ func (api *API) Bind(group *echo.Group) {
     group.Use(middleware.JWT([]byte("secret")))
 
     group.GET("/picture", api.GetAllPictures)
-    group.POST("/picture", api.UploadPictures)
+    group.PUT("/picture", api.UploadPictures)
 }
 
 func buildErrorResponse(err error) map[string]string{
