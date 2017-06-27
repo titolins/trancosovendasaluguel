@@ -24,12 +24,14 @@ class Pictures extends React.Component {
   }
 
   getPostData() {
+    /*
     let nFiles = this.state.uploadFiles.length,
         data = new FormData()
     data.append('name', 'uploadPictures')
     data.append('pictures', this.state.uploadFiles)
+    */
 
-    return new FormData(data)
+    return new FormData(document.getElementById("addModal"))
   }
 
   loadPreview() {
@@ -67,8 +69,6 @@ class Pictures extends React.Component {
       fs.push(<div className="col-xs-12 col-md-6" key={i}>
                 <div className="card">
                   <img id={id} className="card-img-top img-fluid" src="" />
-                  <div className="card-block">
-                  </div>
                 </div>
               </div>)
     }
@@ -115,7 +115,7 @@ class Pictures extends React.Component {
                   <h5 className="modal-title" id="add-modal-title">Adicionar imagens</h5>
                 </div>
                 <div className="modal-body">
-                  <form id="addModal" onSubmit={this.props.handleSubmit(this.getPostData())}>
+                  <form name="uploadPictures" id="addModal" onSubmit={this.props.handleSubmit(this.getPostData())}>
                     <input label="Subir imagens" type="file"
                       name="pictures" multiple accept=".jpg,.png"
                       value={this.state.pictures} onChange={this.onChange}/>

@@ -478,7 +478,6 @@ SystemJS.config({
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/possibleConstructorReturn.js",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/createClass.js",
         "npm:systemjs-plugin-babel@0.0.21/babel-helpers/classCallCheck.js",
-        "admin/components/test.js",
         "admin/components/header.js",
         "admin/components/styles/header.less",
         "npm:systemjs-less-plugin@2.0.0.json",

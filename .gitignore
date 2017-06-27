@@ -10,3 +10,4 @@ server/server
 .vagrant
 *.pem
 trancosovendasaluguel
+uploads/

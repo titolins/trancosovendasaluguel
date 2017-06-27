@@ -22,6 +22,7 @@ func BuildEngine() (e *echo.Echo) {
     // static files
     e.Static("/static/img", "server/static/img")
     e.Static("/static/js", "client/")
+    e.Static("/static/uploads", "server/static/uploads")
 
     // api routes
     api := &API{}
