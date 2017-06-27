@@ -113,7 +113,9 @@ class Pictures extends React.Component {
                 </div>
                 <div className="modal-body">
                   { this.props.uploadState.errors.length > 0 ?
-                      (<div className="alert alert-danger"><ul>
+                      (<div className="alert alert-danger" role="alert">
+                        <h4 className="alert-heading">Oops! Tivemos algum problema durante o envio dos arquivos</h4>
+                        <ul>
                         {this.props.uploadState.errors.map((e,i)=>{
                           return (
                             <li key={i}>{e}</li>
