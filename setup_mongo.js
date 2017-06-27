@@ -9,11 +9,12 @@ function getHandler() {
 //   en_us: "" }
 function buildCategory(title) {
   return {
+    name: title["en_us"],
     content: {
       "pt_br": { title: title["pt_br"] },
       "en_us": { title: title["en_us"] }
     },
-    houses: [],
+    items: [],
     featured: []
   }
 }
