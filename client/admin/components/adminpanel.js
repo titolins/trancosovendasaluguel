@@ -54,7 +54,7 @@ const buildPicturesHandler = (store, token) => {
 }
 
 const buildHousesHandler = (store, token) => {
-  let url = '/admin/api/houses'
+  let url = '/admin/api/house'
   return {
     get: () => {
       getContentReq(url, token, res=> {
