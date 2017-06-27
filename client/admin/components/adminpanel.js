@@ -10,12 +10,14 @@ import Intro from 'admin/components/intro'
 import Header from 'admin/components/header'
 import Pictures from 'admin/components/pictures'
 
-import { getContentReq, postFilesReq } from 'admin/requests'
+import { getContentReq, postFilesReq, deleteFilesReq } from 'admin/requests'
 
 import { updatePictures, setUploadState, UPLOAD_STATE, setUploadErrors } from 'admin/actions'
 
 const buildRoutes = (store, token) => {
   const url = '/admin/api/picture'
+
+  let reload = ()=>window.location = window.location
 
   let getPicturesHandler = () => {
     getContentReq(url, token, res=> {
@@ -30,9 +32,18 @@ const buildRoutes = (store, token) => {
       postFilesReq(url, token, data, (res) => {
         store.dispatch(setUploadState({state:UPLOAD_STATE.AVAILABLE}))
         res.json().then((json)=>{
-          if(json.errors.length === 0) window.location = window.location
+          if(json.errors.length === 0) reload()
           store.dispatch(setUploadErrors({errors:json.errors}))
         })
+      })
+    }
+  }
+
+  let deletePictureHandler = (data) => {
+    return () => {
+      deleteFilesReq(url, token, data, (res)=> {
+        console.log(res)
+        reload()
       })
     }
   }
@@ -42,7 +53,7 @@ const buildRoutes = (store, token) => {
       <Route exact path="/admin/" component={Intro} />
       <Route path="/admin/imagens" render={ () => {
         getPicturesHandler()
-        return (<Pictures handleSubmit={postPicturesHandler}/>)
+        return (<Pictures handleDelete={deletePictureHandler} handleSubmit={postPicturesHandler}/>)
       } } />
       <Redirect to="/admin/" />
     </Switch>

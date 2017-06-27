@@ -85,7 +85,7 @@ class Pictures extends React.Component {
                       <img className="card-img-top img-fluid" src={p.url} />
                     </a>
                     <div className="card-block">
-                      <button type="button" className="btn btn-danger">Deletar</button>
+                      <button type="button" onClick={this.props.handleDelete(p)} className="btn btn-danger">Deletar</button>
                     </div>
                   </div>
                   <div className="modal fade" id={`p-modal-${i}`} tabIndex="-1" role="dialog" aria-labelledby={`p-modal-${i}-title`} aria-hidden="true">

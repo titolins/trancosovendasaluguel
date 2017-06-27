@@ -18,7 +18,7 @@ export function postContentReq(url, token, data, callback) {
     },
     body: JSON.stringify(data)
   }
-  fetch(url, content).then(res=>res.json()).then(res=>callback(res))
+  fetch(url, content).then(res=>res.json()).then(callback)
 }
 
 export function postFilesReq(url, token, data, callback) {
@@ -29,7 +29,7 @@ export function postFilesReq(url, token, data, callback) {
     },
     body: data
   }
-  fetch(url, content).then(res=>callback(res))
+  fetch(url, content).then(callback)
 }
 
 export function deleteFilesReq(url, token, data, callback) {
@@ -42,5 +42,5 @@ export function deleteFilesReq(url, token, data, callback) {
     },
     body: JSON.stringify(data)
   }
-  fetch(url, content).then(res=>res.json()).then(res=>callback(res))
+  fetch(url, content).then(callback)
 }
