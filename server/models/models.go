@@ -4,6 +4,16 @@ import (
     "gopkg.in/mgo.v2/bson"
 )
 
+type Type int
+
+const (
+    HOUSE Type = iota
+    LOT
+    FARM
+    STORE
+    INN
+)
+
 type (
     User struct {
         ID       string `json:"id" bson:"_id,omitempty"`
@@ -45,6 +55,7 @@ type (
         // we use interface here because we won't actually use the full
         // category struct (only id will matter to us here)
         Category Category `json:"category" bson:"category"`
+        Type Type `json:"type" bson:"type"`
         Featured bool `json:"featured" bson:"featured"`
         Capacity int `json:"capacity" bson:"capacity"`
         Cover Picture `json:"cover" bson:"cover"`
