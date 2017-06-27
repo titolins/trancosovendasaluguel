@@ -49,14 +49,16 @@ func (api *API) DeletePicture(c echo.Context) (err error) {
         return
     }
 
-    if err = os.Remove(path.Join("server",p.Url)); err != nil {
-        return
-    }
+    // here, we will need to removed any references made to pictures from other collections
 
     db := api.DB.Clone()
     defer db.Close()
 
-    return db.DB("tva").C("pictures").Remove(p)
+    if err = db.DB("tva").C("pictures").Remove(p); err != nil {
+        return
+    }
+
+    return os.Remove(path.Join("server",p.Url))
 }
 
 func (api *API) GetAllPictures(c echo.Context) (err error) {
