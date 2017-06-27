@@ -32,7 +32,7 @@ export function postFilesReq(url, token, data, callback) {
   fetch(url, content).then(callback)
 }
 
-export function deleteFilesReq(url, token, data, callback) {
+export function deleteContentReq(url, token, data, callback) {
   let content = {
     method: 'delete',
     headers: {
