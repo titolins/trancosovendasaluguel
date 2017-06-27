@@ -25,7 +25,6 @@ type (
         Url string `json:"url" bson:"url"`
     }
 
-
     CategoryContent struct{
         Title string
     }
