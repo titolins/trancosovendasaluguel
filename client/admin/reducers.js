@@ -40,7 +40,7 @@ const initialHousesState = []
 let houses = (state = initialHousesState, action) => {
   switch (action.type) {
     case UPDATE_HOUSES:
-      return action.houses ? actions.houses.slice() : []
+      return action.houses ? action.houses.slice() : []
     default:
       return state
   }
