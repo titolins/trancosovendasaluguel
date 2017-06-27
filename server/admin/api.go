@@ -34,6 +34,7 @@ func (api *API) Bind(group *echo.Group) {
 
     group.GET("/picture", api.GetAllPictures)
     group.PUT("/picture", api.UploadPictures)
+    group.DELETE("/picture", api.DeletePicture)
 }
 
 func buildErrorResponse(err error) map[string]string{
@@ -42,8 +43,25 @@ func buildErrorResponse(err error) map[string]string{
         "message": err.Error() }
 }
 
+func (api *API) DeletePicture(c echo.Context) (err error) {
+    var p models.Picture
+    if err = c.Bind(&p); err != nil {
+        return
+    }
+
+    if err = os.Remove(path.Join("server",p.Url)); err != nil {
+        return
+    }
+
+    db := api.DB.Clone()
+    defer db.Close()
+
+    return db.DB("tva").C("pictures").Remove(p)
+}
+
 func (api *API) GetAllPictures(c echo.Context) (err error) {
     var ps []models.Picture
+    log.Printf("%s", c.Request())
     /*
     if err = c.Bind(ps); err != nil {
         return
@@ -57,7 +75,6 @@ func (api *API) GetAllPictures(c echo.Context) (err error) {
             return
     }
 
-    log.Printf("%s", ps)
     return c.JSON(200, ps)
 }
 
@@ -69,7 +86,6 @@ func (api *API) UploadPictures(c echo.Context) (err error) {
 
     res := map[string][]string{
         "errors": []string{} }
-    //files := form.File["pictures"]
     for _, file := range form.File["pictures"] {
         func() (fErr error) {
             // Source
@@ -85,10 +101,7 @@ func (api *API) UploadPictures(c echo.Context) (err error) {
                 return
             }
 
-            // dst = "server/static/uploads"
             filepath := fmt.Sprintf("server/static/uploads/%s", file.Filename)
-
-            // Destination
             dst, fErr := os.Create(filepath)
             if fErr != nil {
                 res["errors"] = append(res["errors"], fmt.Sprintf("Erro ao tentar criar arquivo '%s'", file.Filename))
