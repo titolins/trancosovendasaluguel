@@ -14,10 +14,8 @@ export default class Header extends React.Component {
         </button>
         <div id="navbarCollapse" className="collapse navbar-collapse">
           <ul className="navbar-nav">
-            <li className="nav-item"><Link className="nav-link" to="/admin/imagens">Ver Imagens</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="#">Adicionar Imagens</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="#">Ver Casas</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="#">Cadastrar Casas</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/admin/imagens">Imagens</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/admin/casas">Casas</Link></li>
           </ul>
         </div>
       </nav>
