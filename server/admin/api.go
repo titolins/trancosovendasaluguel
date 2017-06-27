@@ -8,7 +8,7 @@ import (
     "path"
     //"errors"
     "mime/multipart"
-    //"log"
+    "log"
     //"encoding/json"
 
     "github.com/labstack/echo"
@@ -37,6 +37,24 @@ func (api *API) Bind(group *echo.Group) {
     group.DELETE("/picture", api.DeletePicture)
 
     group.GET("/house", api.GetAllHouses)
+    group.DELETE("/house", api.DeleteHouse)
+}
+
+func (api *API) DeleteHouse(c echo.Context) (err error) {
+    var h models.House
+    if err = c.Bind(&h); err != nil {
+        log.Printf("%s", err)
+        return
+    }
+    log.Printf("%s", h)
+    db := api.DB.Clone()
+    defer db.Close()
+
+    if err = db.DB("tva").C("houses").RemoveId(h.ID); err != nil {
+        log.Printf("%s", err)
+        return
+    }
+    return
 }
 
 func (api *API) DeletePicture(c echo.Context) (err error) {
