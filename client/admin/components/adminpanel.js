@@ -16,53 +16,26 @@ import { updatePictures, setUploadState, UPLOAD_STATE, setUploadErrors } from 'a
 
 const buildRoutes = (store, token) => {
   const url = '/admin/api/picture'
-  //let buildRequestHandler = ({req, url, token, buildAction, parseRes}) => {
-  let buildRequestHandler = ({req, token, buildAction}) => {
-    return () => {
-      req(url, token, res=> {
-        store.dispatch(buildAction(res))})
-      //req(url, token, res=>store.dispatch(buildAction(parseRes(res))))
-    }
+
+  let getPicturesHandler = () => {
+    getContentReq(url, token, res=> {
+      store.dispatch(updatePictures(res))})
+    //req(url, token, res=>store.dispatch(buildAction(parseRes(res))))
   }
 
-  let buildPostRequestHandler = ({req, token}) => {
-    return (data) => {
-      return (e) => {
-        e.preventDefault()
-        store.dispatch(setUploadState({state:UPLOAD_STATE.BUSY}))
-        req(url, token, data, (res) => {
-          store.dispatch(setUploadState({state:UPLOAD_STATE.AVAILABLE}))
-          res.json().then((json)=>{
-            if(json.errors.length === 0) window.location = window.location
-            store.dispatch(setUploadErrors({errors:json.errors}))
-          })
+  let postPicturesHandler = (data) => {
+    return (e) => {
+      e.preventDefault()
+      store.dispatch(setUploadState({state:UPLOAD_STATE.BUSY}))
+      postFilesReq(url, token, data, (res) => {
+        store.dispatch(setUploadState({state:UPLOAD_STATE.AVAILABLE}))
+        res.json().then((json)=>{
+          if(json.errors.length === 0) window.location = window.location
+          store.dispatch(setUploadErrors({errors:json.errors}))
         })
-      }
+      })
     }
   }
-
-    /*
-  let pictureParser = (res) => {
-    console.log("*****res*********")
-    console.log(res)
-    let pRes =  Object.keys(res).map(i=>res[i])
-    console.log(pRes)
-    return pRes
-  }
-  */
-
-  let getPicturesHandler = buildRequestHandler({
-    req: getContentReq,
-    token: token,
-    buildAction: updatePictures,
-    //parseRes: pictureParser
-    //parseRes: res=>Object.keys(res).map(i=>res[i])
-  })
-
-  let postPicturesHandler = buildPostRequestHandler({
-    req: postFilesReq,
-    token
-  })
 
   return (
     <Switch>
