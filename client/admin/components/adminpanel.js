@@ -8,7 +8,6 @@ import {
 
 import Intro from 'admin/components/intro'
 import Header from 'admin/components/header'
-import Test from 'admin/components/test'
 import Pictures from 'admin/components/pictures'
 
 import { getContentReq, postFilesReq } from 'admin/requests'
@@ -32,7 +31,6 @@ const buildRoutes = (store, token) => {
         e.preventDefault()
         store.dispatch(setUploadState({state:UPLOAD_STATE.BUSY}))
         req(url, token, data, (res) => {
-          console.log(res)
           store.dispatch(setUploadState({state:UPLOAD_STATE.AVAILABLE}))
         })
       }
@@ -65,7 +63,6 @@ const buildRoutes = (store, token) => {
   return (
     <Switch>
       <Route exact path="/admin/" component={Intro} />
-      <Route path="/admin/test" component={Test} />
       <Route path="/admin/imagens" render={ () => {
         getPicturesHandler()
         return (<Pictures handleSubmit={postPicturesHandler}/>)

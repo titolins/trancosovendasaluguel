@@ -21,7 +21,6 @@ class Pictures extends React.Component {
     this.onChange = this.onChange.bind(this)
     this.loadPreview = this.loadPreview.bind(this)
     this.getPostData = this.getPostData.bind(this)
-    console.log(props)
   }
 
   getPostData() {

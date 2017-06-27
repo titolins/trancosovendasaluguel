@@ -22,12 +22,10 @@ export function postContentReq(url, token, data, callback) {
 }
 
 export function postFilesReq(url, token, data, callback) {
-  console.log(data)
   let content = {
     method: 'post',
     headers: {
       'Authorization': `Bearer ${token}`,
-      //'Content-Type': 'multipart/form-data; charset=utf-8; boundary=--'
     },
     body: data
   }
