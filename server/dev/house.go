@@ -2,10 +2,17 @@ package dev
 
 import (
     "github.com/titolins/trancosovendasaluguel/server/models"
+
+    "gopkg.in/mgo.v2/bson"
 )
 
+var c1ID = bson.NewObjectId()
+var c2ID = bson.NewObjectId()
+
 var House =  models.House{
-    Category: "1",
+    Category: models.Category {
+        ID: c1ID,
+    },
     Featured: true,
     Capacity: 4,
     Cover: models.Picture{ Url: "https://placehold.it/550x338" },
@@ -27,7 +34,9 @@ var House =  models.House{
 
 var SalesItemsDevData = []models.House{
     models.House{
-        Category: "1",
+        Category: models.Category {
+            ID: c1ID,
+        },
         Featured: true,
         Capacity: 4,
         Cover: models.Picture{ Url: "https://placehold.it/550x338" },
@@ -47,7 +56,9 @@ var SalesItemsDevData = []models.House{
                         "wifi",
                         "air conditioning" }}}},
     models.House{
-        Category: "1",
+        Category: models.Category {
+            ID: c2ID,
+        },
         Featured: true,
         Capacity: 4,
         Cover: models.Picture{ Url: "https://placehold.it/550x338" },
@@ -69,7 +80,9 @@ var SalesItemsDevData = []models.House{
 
 var RentItemsDevData = []models.House{
     models.House{
-        Category: "2",
+        Category: models.Category {
+            ID: c2ID,
+        },
         Featured: true,
         Capacity: 4,
         Cover: models.Picture{ Url: "https://placehold.it/550x338" },
@@ -89,7 +102,9 @@ var RentItemsDevData = []models.House{
                         "wifi",
                         "air conditioning" }}}},
     models.House{
-        Category: "2",
+        Category: models.Category {
+            ID: c2ID,
+        },
         Featured: true,
         Capacity: 4,
         Cover: models.Picture{ Url: "https://placehold.it/550x338" },

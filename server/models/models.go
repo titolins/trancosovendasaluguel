@@ -11,43 +11,45 @@ type (
         Password string `json:"pass" bson:"password"`
     }
 
-    Model interface{}
-
-    Content interface{}
-
-    TranslatableContent struct {
-        PT_BR Content
-        EN_US Content
-    }
-
     Picture struct {
         ID  bson.ObjectId `json:"id" bson:"_id,omitempty"`
         Url string `json:"url" bson:"url"`
     }
 
-    CategoryContent struct{
-        Title string
+    Content interface{}
+
+    TranslatableContent struct {
+        PT_BR Content `json:"pt_br" bson:"pt_br"`
+        EN_US Content `json:"en_us" bson:"en_us"`
     }
 
-    Category struct{
-        Content TranslatableContent
-        Items []House
-        Featured []House
+    CategoryContent struct{
+        Title string `json:"title" bson:"title"`
     }
 
     HouseContent struct {
-        Name string
-        Description string
-        Features []string
+        Name string `json:"name" bson:"name"`
+        Description string `json:"description" bson:"description"`
+        Features []string `json:"features" bson:"features"`
+    }
+
+    Category struct{
+        ID  bson.ObjectId `json:"id" bson:"_id,omitempty"`
+        Content TranslatableContent `json:"content" bson:"content"`
+        Items []House `json:"items" bson:"items"`
+        Featured []House `json:"featured" bson:"featured"`
     }
 
     House struct {
-        Category string
-        Featured bool
-        Capacity int
-        Cover Picture
-        Pictures []Picture
-        Content TranslatableContent
+        ID  bson.ObjectId `json:"id" bson:"_id,omitempty"`
+        // we use interface here because we won't actually use the full
+        // category struct (only id will matter to us here)
+        Category Category `json:"category" bson:"category"`
+        Featured bool `json:"featured" bson:"featured"`
+        Capacity int `json:"capacity" bson:"capacity"`
+        Cover Picture `json:"cover" bson:"cover"`
+        Pictures []Picture `json:"pictures" bson:"pictures"`
+        Content TranslatableContent `json:"content" bson:"content"`
     }
 )
 

@@ -30,8 +30,8 @@ class Home extends React.Component {
               </div>
             </div>
           </div>
-          <FeaturedSection categoryId="sales" categoryContent="Featured" contentId="featured" />
-          <FeaturedSection categoryId="rent" categoryContent="Featured" contentId="featured" />
+          <FeaturedSection categoryId="sales" categoryContent="featured" contentId="featured" />
+          <FeaturedSection categoryId="rent" categoryContent="featured" contentId="featured" />
         </div>
       </div>
     )

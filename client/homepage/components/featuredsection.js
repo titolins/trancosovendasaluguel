@@ -8,12 +8,12 @@ import { mapStateToProps } from 'homepage/containers/category'
 
 export const buildItemsPanels = (items, detailsBtnText) => {
   return items.map((item, i) => {
-    let fWord = item.content.Description.split(' ')[0],
-        rest  = item.content.Description.split(' ').slice(1).join(' ')
+    let fWord = item.content.description.split(' ')[0],
+        rest  = item.content.description.split(' ').slice(1).join(' ')
 
     return (
       <div key={i} className="col-xs-12 col-md-6 py-3 housePanel">
-        <img className="houseCover" src={item.cover.Url} />
+        <img className="houseCover" src={item.cover.url} />
         <div className="mt-4">
           <p className="houseDescription text-blue"><span className="first">{ fWord }</span>{ rest }</p>
         </div>

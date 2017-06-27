@@ -1,12 +1,12 @@
 export const Languages = {
-  PT: 'PT_BR',
-  EN: 'EN_US'
+  PT: 'pt_br',
+  EN: 'en_us'
 }
 
 export const Content = {
   static: {
     categoryTypes: {
-      "PT_BR": {
+      "pt_br": {
         title: "vendas",
         casas: "casas",
         terrenos: "terrenos",
@@ -14,7 +14,7 @@ export const Content = {
         pontoscomerciais: "pontos comerciais",
         pousadas: "pousadas"
       },
-      "EN_US": {
+      "en_us": {
         title: "sales",
         casas: "houses",
         terrenos: "lots",
@@ -24,7 +24,7 @@ export const Content = {
       }
     },
     navbar: {
-      "PT_BR": {
+      "pt_br": {
         about: 'sobre trancoso',
         contact: 'contato',
         sales: 'vendas',
@@ -32,7 +32,7 @@ export const Content = {
         comercialRent: 'aluguel comercial',
         services: 'serviços'
       },
-      "EN_US": {
+      "en_us": {
         about: 'about trancoso',
         contact: 'contact',
         sales: 'sales',
@@ -40,7 +40,7 @@ export const Content = {
         comercialRent: 'comercial rent',
         services: 'services' }},
     home: {
-      "PT_BR": {
+      "pt_br": {
         welcomeText: [ `Verdes-mares, águas tépidas, altivas falésias, coqueirais, matas,
             mangues e rios.`,
                        `Bem vindo às paradisíacas praias do extremo sul da Bahia,
@@ -50,7 +50,7 @@ export const Content = {
                        `Somos corretores imobiliários com ampla experiência
             na região desde 2002 e hoje contamos com os melhores preços da praça.`]
       },
-      "EN_US": {
+      "en_us": {
         welcomeText: [ `Green seas, tepid waters, high cliffs, coconut groves, woods,
             mangroves and rivers.`,
                        `Welcome to the paradisiac beaches of the extreme
@@ -60,14 +60,14 @@ export const Content = {
                        `We are real estate brokers with broad experience in the region since
             2002 and counting today with the best prices in the area.` ] }},
     featured: {
-      "PT_BR": {
+      "pt_br": {
         moreBtn: "ver mais",
         detailsBtn: "mais detalhes" },
-      "EN_US": {
+      "en_us": {
         moreBtn: "see more",
         detailsBtn: "more details" }},
     house: {
-      "PT_BR": {
+      "pt_br": {
         people: "pessoas",
         description: "descrição",
         capacity: "capacidade",
@@ -77,7 +77,7 @@ export const Content = {
           next: "próxima"
         }
       },
-      "EN_US": {
+      "en_us": {
         people: "people",
         description: "description",
         capacity: "capacity",
@@ -88,17 +88,17 @@ export const Content = {
         }
       }},
     contact: {
-      "PT_BR": {
+      "pt_br": {
         phone: "telefone",
         address: "endereço"
       },
-      "EN_US": {
+      "en_us": {
         phone: "phone",
         address: "address"
       }
     },
     about: {
-      "PT_BR": {
+      "pt_br": {
         title: "Sobre Trancoso",
         text: [
           `Trancoso foi fundada no inicio da colonização portuguesa pelos Jesuítas (1586), com o nome de São João
@@ -114,7 +114,7 @@ export const Content = {
           Todo o charme desse vilarejo é cercado por praias belíssimas e uma natureza exuberante com um clima ameno o ano inteiro.`
         ]
       },
-      "EN_US": {
+      "en_us": {
         title: "About Trancoso",
         text: [
           `Trancoso was founded at the beginning of Portuguese colonisation by the Jesuits (1586), with the
@@ -132,14 +132,14 @@ export const Content = {
       }
     },
     comercialRent: {
-      "PT_BR": {
+      "pt_br": {
         title: "aluguel comercial",
         text: [
           "Nós temos imóveis para venda no Quadrado e na Avenida principal.",
           "Entre em contato conosco, temos muitas oportunidades para o sucesso do seu empreendimento!"
         ]
       },
-      "EN_US": {
+      "en_us": {
         title: "comercial rent",
         text: [
           "We have properties for sale at the Quadrado and on the Main Avenue.",
@@ -148,7 +148,7 @@ export const Content = {
       },
     },
     services: {
-      "PT_BR": {
+      "pt_br": {
         title: "serviços",
         types: {
           title: "Nós oferecemos os seguintes serviços exclusivos para nossos clientes:",
@@ -190,7 +190,7 @@ export const Content = {
           coordinates: [
             "Latitude: 16º26'59",
             "Longitude: 39º03'53" ]}},
-      "EN_US": {
+      "en_us": {
         title: "services",
         types: {
           title: "We also offer the following exclusive services to our clients",

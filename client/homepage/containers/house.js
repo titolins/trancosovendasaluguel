@@ -1,9 +1,9 @@
 import { mapStateToProps as staticPropsMap } from 'homepage/containers/staticcontent'
 
 const getHouseContent = (content, lang, contentId) => {
-  let ownContent = content.dinamic[contentId].Content[lang]
-  ownContent.Capacity = `${content.dinamic[contentId].Capacity} ${content.static[contentId][lang].people}`
-  ownContent.Pictures = content.dinamic[contentId].Pictures
+  let ownContent = content.dinamic[contentId].content[lang]
+  ownContent.capacity = `${content.dinamic[contentId].capacity} ${content.static[contentId][lang].people}`
+  ownContent.pictures = content.dinamic[contentId].pictures
   return ownContent
 }
 
@@ -17,11 +17,11 @@ export const mapStateToProps = (state, ownProps) => {
   } catch (e) {
     return {
       ownContent: {
-        Name: null,
-        Description: null,
-        Features: null,
-        Capacity: null,
-        Pictures: null,
+        name: null,
+        description: null,
+        features: null,
+        capacity: null,
+        pictures: null,
       },
       staticContent
     }
