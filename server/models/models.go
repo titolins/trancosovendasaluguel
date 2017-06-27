@@ -7,11 +7,11 @@ import (
 type Type int
 
 const (
-    HOUSE Type = iota
-    LOT
-    FARM
-    STORE
-    INN
+    HOUSE_TYPE Type = iota
+    LOT_TYPE
+    FARM_TYPE
+    STORE_TYPE
+    INN_TYPE
 )
 
 type (
