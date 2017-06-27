@@ -13,49 +13,69 @@ import Houses from 'admin/components/houses'
 
 import { getContentReq, postFilesReq, deleteFilesReq } from 'admin/requests'
 
-import { updatePictures, setUploadState, UPLOAD_STATE, setUploadErrors } from 'admin/actions'
+import {
+  updatePictures,
+  setUploadState,
+  UPLOAD_STATE,
+  setUploadErrors,
+  updateHouses,
+} from 'admin/actions'
+
+const reload = () => window.location = window.location
+
+const buildPicturesHandler = (store, token) => {
+  let url = '/admin/api/picture'
+  return {
+    get: () => {
+      getContentReq(url, token, res=> {
+        store.dispatch(updatePictures(res))})
+    },
+    post: (data) => {
+      return (e) => {
+        e.preventDefault()
+        store.dispatch(setUploadState({state:UPLOAD_STATE.BUSY}))
+        postFilesReq(url, token, data, (res) => {
+          store.dispatch(setUploadState({state:UPLOAD_STATE.AVAILABLE}))
+          res.json().then((json)=>{
+            if(json.errors.length === 0) reload()
+            store.dispatch(setUploadErrors({errors:json.errors}))
+          })
+        })
+      }
+    },
+    del: (data) => {
+      return () => {
+        deleteFilesReq(url, token, data, (res)=> {
+          reload()
+        })
+      }
+    }
+  }
+}
+
+const buildHousesHandler = (store, token) => {
+  let url = '/admin/api/houses'
+  return {
+    get: () => {
+      getContentReq(url, token, res=> {
+        store.dispatch(updateHouses(res))})
+    },
+  }
+}
 
 const buildRoutes = (store, token) => {
-  const url = '/admin/api/picture'
+  let picturesHandler = buildPicturesHandler(store, token)
+  let housesHandler = buildHousesHandler(store, token)
 
-  let reload = ()=>window.location = window.location
-
-  let getPicturesHandler = () => {
-    getContentReq(url, token, res=> {
-      store.dispatch(updatePictures(res))})
-  }
-
-  let postPicturesHandler = (data) => {
-    return (e) => {
-      e.preventDefault()
-      store.dispatch(setUploadState({state:UPLOAD_STATE.BUSY}))
-      postFilesReq(url, token, data, (res) => {
-        store.dispatch(setUploadState({state:UPLOAD_STATE.AVAILABLE}))
-        res.json().then((json)=>{
-          if(json.errors.length === 0) reload()
-          store.dispatch(setUploadErrors({errors:json.errors}))
-        })
-      })
-    }
-  }
-
-  let deletePictureHandler = (data) => {
-    return () => {
-      deleteFilesReq(url, token, data, (res)=> {
-        reload()
-      })
-    }
-  }
-
-  return (
+   return (
     <Switch>
       <Route exact path="/admin/" component={Intro} />
       <Route path="/admin/imagens" render={ () => {
-        getPicturesHandler()
-        return (<Pictures handleDelete={deletePictureHandler} handleSubmit={postPicturesHandler}/>)
+        picturesHandler.get()
+        return (<Pictures handleDelete={picturesHandler.del} handleSubmit={picturesHandler.post}/>)
       } } />
       <Route path="/admin/casas" render={ () => {
-        //getHousesHandler()
+        housesHandler.get()
         return (<Houses />)
       } } />
       <Redirect to="/admin/" />
