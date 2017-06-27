@@ -5,6 +5,18 @@ import { connect } from 'react-redux'
 import { mapStateToProps } from 'admin/containers/houses'
 
 class Houses extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      house: {
+        category: {
+          name: "",
+          id: "" }
+      }
+    }
+  }
+
   render() {
     return (
       <div className="card">
@@ -17,10 +29,12 @@ class Houses extends React.Component {
                 <div key={i} className="col-xs-12 col-md-6">
                   <div className="card">
                     <a href="#" data-toggle="modal" data-target={`#p-modal-${i}`}>
-                      <img className="card-img-top img-fluid" src="" />
+                      <img className="card-img-top img-fluid" src={h.cover.url} />
                     </a>
                     <div className="card-block">
-                      <button type="button" onClick={this.props.handleDelete(p)} className="btn btn-danger">Deletar</button>
+                      <h3 className="card-title">{h.content['pt_br'].name}</h3>
+                      <p className="card-text">{h.content['pt_br'].description}</p>
+                      <button type="button" onClick={this.props.handleDelete(h)} className="btn btn-danger">Deletar</button>
                     </div>
                   </div>
                   <div className="modal fade" id={`p-modal-${i}`} tabIndex="-1" role="dialog" aria-labelledby={`p-modal-${i}-title`} aria-hidden="true">
