@@ -32,21 +32,22 @@ func (api *API) Bind(group *echo.Group) {
     // auth middleware
     group.Use(middleware.JWT([]byte("secret")))
 
-    group.GET("/picture", api.GetAllPictures)
-    group.PUT("/picture", api.UploadPictures)
-    group.DELETE("/picture", api.DeletePicture)
+    group.GET("/picture", api.getAllPictures)
+    group.PUT("/picture", api.uploadPictures)
+    group.DELETE("/picture", api.deletePicture)
 
-    group.GET("/house", api.GetAllHouses)
-    group.DELETE("/house", api.DeleteHouse)
+    group.GET("/house", api.getAllHouses)
+    group.PUT("/house", api.createHouse)
+    group.DELETE("/house", api.deleteHouse)
 }
 
-func (api *API) DeleteHouse(c echo.Context) (err error) {
+func (api *API) deleteHouse(c echo.Context) (err error) {
+    log.Printf("%s", c.Request())
     var h models.House
     if err = c.Bind(&h); err != nil {
         log.Printf("%s", err)
         return
     }
-    log.Printf("%s", h)
     db := api.DB.Clone()
     defer db.Close()
 
@@ -57,7 +58,7 @@ func (api *API) DeleteHouse(c echo.Context) (err error) {
     return
 }
 
-func (api *API) DeletePicture(c echo.Context) (err error) {
+func (api *API) deletePicture(c echo.Context) (err error) {
     var p models.Picture
     if err = c.Bind(&p); err != nil {
         return
@@ -75,7 +76,7 @@ func (api *API) DeletePicture(c echo.Context) (err error) {
     return os.Remove(path.Join("server",p.Url))
 }
 
-func (api *API) GetAllHouses(c echo.Context) (err error) {
+func (api *API) getAllHouses(c echo.Context) (err error) {
     var hs []models.House
 
     db := api.DB.Clone()
@@ -88,7 +89,7 @@ func (api *API) GetAllHouses(c echo.Context) (err error) {
     return c.JSON(200, hs)
 }
 
-func (api *API) GetAllPictures(c echo.Context) (err error) {
+func (api *API) getAllPictures(c echo.Context) (err error) {
     var ps []models.Picture
     /*
     if err = c.Bind(&ps); err != nil {
@@ -105,7 +106,17 @@ func (api *API) GetAllPictures(c echo.Context) (err error) {
     return c.JSON(200, ps)
 }
 
-func (api *API) UploadPictures(c echo.Context) (err error) {
+func (api *API) createHouse(c echo.Context) (err error) {
+    var h models.House
+    if err = c.Bind(&h); err != nil {
+        log.Printf("%s", err)
+        return
+    }
+    log.Printf("%s", h)
+    return
+}
+
+func (api *API) uploadPictures(c echo.Context) (err error) {
     var form *multipart.Form
     if form, err = c.MultipartForm(); err != nil {
         return
