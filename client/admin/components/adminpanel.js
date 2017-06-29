@@ -31,23 +31,23 @@ const buildPicturesHandler = (store, token) => {
       getContentReq(url, token, res=> {
         store.dispatch(updatePictures(res))})
     },
-    post: (data) => {
+    post: (data, callback) => {
       return (e) => {
         e.preventDefault()
         store.dispatch(setUploadState({state:UPLOAD_STATE.BUSY}))
         postFilesReq(url, token, data, (res) => {
           store.dispatch(setUploadState({state:UPLOAD_STATE.AVAILABLE}))
           res.json().then((json)=>{
-            if(json.errors.length === 0) reload()
-            store.dispatch(setUploadErrors({errors:json.errors}))
+            if(json.errors.length > 0) store.dispatch(setUploadErrors({errors:json.errors}))
+            else callback()
           })
         })
       }
     },
-    del: (data) => {
+    del: (data, callback) => {
       return () => {
         deleteContentReq(url, token, data, (res)=> {
-          reload()
+          callback()
         })
       }
     }
@@ -61,23 +61,23 @@ const buildHousesHandler = (store, token) => {
       getContentReq(url, token, res=> {
         store.dispatch(updateHouses(res))})
     },
-    create: (data) => {
+    create: (data, callback) => {
       return (e) => {
         e.preventDefault()
         //store.dispatch(setUploadState({state:UPLOAD_STATE.BUSY}))
         putContentReq(url, token, data, (res) => {
           //store.dispatch(setUploadState({state:UPLOAD_STATE.AVAILABLE}))
           res.json().then((json)=>{
-            if(json.errors.length === 0) reload()
-            store.dispatch(setPostErrors({errors:json.errors}))
+            if(json.errors.length > 0) store.dispatch(setPostErrors({errors:json.errors}))
+            else callback()
           })
         })
       }
     },
-    del: (data) => {
+    del: (data, callback) => {
       return () => {
         deleteContentReq(url, token, data, (res) => {
-          reload()
+          callback()
         })
       }
     }
@@ -93,12 +93,12 @@ const buildRoutes = (store, token) => {
       <Route exact path="/admin/" component={Intro} />
       <Route path="/admin/imagens" render={ () => {
         picturesHandler.get()
-        return (<Pictures handleDelete={picturesHandler.del} handleSubmit={picturesHandler.post}/>)
+        return (<Pictures update={picturesHandler.get} handleDelete={picturesHandler.del} handleSubmit={picturesHandler.post}/>)
       } } />
       <Route path="/admin/casas" render={ () => {
         housesHandler.get()
         picturesHandler.get()
-        return (<Houses handleDelete={housesHandler.del} handleCreate={housesHandler.create}/>)
+        return (<Houses update={housesHandler.get} handleDelete={housesHandler.del} handleCreate={housesHandler.create}/>)
       } } />
       <Redirect to="/admin/" />
     </Switch>
