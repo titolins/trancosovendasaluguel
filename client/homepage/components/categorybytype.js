@@ -7,7 +7,7 @@ import { buildItemsPanels } from 'homepage/components/featuredsection'
 
 class CategoryByType extends React.Component {
   render() {
-    let { categoryId, typeId } = props.match.params
+    let { categoryId, typeId } = this.props.match.params
     this.props.fetchContent(`/api/categories/${categoryId}/houses/bytype/${typeId}`)
     let items = this.props.items ? buildItemsPanels(this.props.items, this.props.ownContent.detailsBtn) : null
     return (

@@ -13,7 +13,7 @@ const buildFeatures = (features) => {
 
 class House extends React.Component {
   render() {
-    let { categoryId, houseId } = props.match.params
+    let { categoryId, houseId } = this.props.match.params
     let url = `/api/categories/${categoryId}/houses/${houseId}`
     this.props.fetchContent(url)
 
