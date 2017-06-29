@@ -113,7 +113,26 @@ func (api *API) createHouse(c echo.Context) (err error) {
         return
     }
     log.Printf("%s", h)
-    return
+
+    /* validation should be done below
+    res := map[string][]string{
+        "errors": []string{} }
+    for _, field := range []interface{ Cover, Pictures, Content } {
+        func() (fErr error) {
+            // validate
+
+
+            return
+        }()
+    }
+    if len(res.errors) == 0 {
+        err = db.DB("tva").C("pictures").Insert(&models.Picture{ Url: url })
+    }
+    */
+    db := api.DB.Clone()
+    defer db.Close()
+
+    return db.DB("tva").C("houses").Insert(&h)
 }
 
 func (api *API) uploadPictures(c echo.Context) (err error) {
@@ -122,6 +141,8 @@ func (api *API) uploadPictures(c echo.Context) (err error) {
         return
     }
 
+    db := api.DB.Clone()
+    defer db.Close()
     res := map[string][]string{
         "errors": []string{} }
     for _, file := range form.File["pictures"] {
@@ -152,9 +173,6 @@ func (api *API) uploadPictures(c echo.Context) (err error) {
                 res["errors"] = append(res["errors"], fmt.Sprintf("Erro ao tentar copiar arquivo '%s'", file.Filename))
                 return
             }
-
-            db := api.DB.Clone()
-            defer db.Close()
 
             url := fmt.Sprintf("/static/uploads/%s", file.Filename)
             if fErr = db.DB("tva").C("pictures").Insert(&models.Picture{ Url: url }); err != nil {
