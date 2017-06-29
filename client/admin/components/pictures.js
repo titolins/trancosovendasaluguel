@@ -18,6 +18,15 @@ class Pictures extends React.Component {
     this.onChange = this.onChange.bind(this)
     this.loadPreview = this.loadPreview.bind(this)
     this.getPostData = this.getPostData.bind(this)
+    this.updateData = this.updateData.bind(this)
+  }
+
+  updateData() {
+    let state = this.state
+    state.uploadFiles = ""
+    this.setState(state)
+
+    this.props.update()
   }
 
   getPostData() {
@@ -84,7 +93,7 @@ class Pictures extends React.Component {
                       <img className="card-img-top img-fluid" src={p.url} />
                     </a>
                     <div className="card-block">
-                      <button type="button" onClick={this.props.handleDelete(p)} className="btn btn-danger">Deletar</button>
+                      <button type="button" onClick={this.props.handleDelete(p,this.updateData)} className="btn btn-danger">Deletar</button>
                     </div>
                   </div>
                   <div className="modal fade" id={`p-modal-${i}`} tabIndex="-1" role="dialog" aria-labelledby={`p-modal-${i}-title`} aria-hidden="true">
@@ -110,6 +119,9 @@ class Pictures extends React.Component {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title" id="add-modal-title">Adicionar imagens</h5>
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
                 <div className="modal-body">
                   { this.props.uploadState.errors.length > 0 ?
@@ -124,7 +136,7 @@ class Pictures extends React.Component {
                       </ul></div>) :
                       null
                   }
-                  <form name="uploadPictures" id="addModal" onSubmit={this.props.handleSubmit(this.getPostData())}>
+                  <form name="uploadPictures" id="addModal" onSubmit={this.props.handleSubmit(this.getPostData(),this.updateData)}>
                     <label className="custom-file">
                       <input type="file" id="file" className="custom-file-input"
                         name="pictures" multiple accept=".jpg,.png"
