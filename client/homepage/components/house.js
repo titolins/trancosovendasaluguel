@@ -12,17 +12,14 @@ const buildFeatures = (features) => {
 }
 
 class House extends React.Component {
-  constructor(props) {
-    super(props)
+  render() {
     let { categoryId, houseId } = props.match.params
     let url = `/api/categories/${categoryId}/houses/${houseId}`
-    props.fetchContent(url)
-  }
+    this.props.fetchContent(url)
 
-  render() {
     let { ownContent, staticContent } = this.props
-    let features = ownContent.Features ? buildFeatures(ownContent.Features) : null
-    let carousel = ownContent.Pictures ? (<Carousel pictures={ownContent.Pictures} controls={staticContent.controls} />) : null
+    let features = ownContent.features ? buildFeatures(ownContent.features) : null
+    let carousel = ownContent.pictures ? (<Carousel pictures={ownContent.pictures} controls={staticContent.controls} />) : null
     return (
       <div className="container mainContent">
         <div className="row py-5">
@@ -31,9 +28,9 @@ class House extends React.Component {
           </div>
           <div className="col-xs-12 col-md-6">
             <h1 className="sectionTitle fullWidth pb-2">{ staticContent.description }</h1>
-            <p>{ ownContent.Description }</p>
+            <p>{ ownContent.description }</p>
             <h1 className="sectionTitle fullWidth pb-2">{ staticContent.capacity }</h1>
-            <p>{ ownContent.Capacity }</p>
+            <p>{ ownContent.capacity }</p>
             <h1 className="sectionTitle fullWidth pb-2">{ staticContent.features }</h1>
             { features }
           </div>

@@ -6,13 +6,9 @@ import { mapStateToProps, mapDispatchToProps } from 'homepage/containers/categor
 import { buildItemsPanels } from 'homepage/components/featuredsection'
 
 class CategoryByType extends React.Component {
-  constructor(props) {
-    super(props)
-    let { categoryId, typeId } = props.match.params
-    props.fetchContent(`/api/categories/${categoryId}/houses/bytype/${typeId}`)
-  }
-
   render() {
+    let { categoryId, typeId } = props.match.params
+    this.props.fetchContent(`/api/categories/${categoryId}/houses/bytype/${typeId}`)
     let items = this.props.items ? buildItemsPanels(this.props.items, this.props.ownContent.detailsBtn) : null
     return (
       <div className="mainContent">
