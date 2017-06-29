@@ -25,8 +25,12 @@ import About from 'homepage/components/about'
 import CategoryByType from 'homepage/components/categorybytype'
 
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+    props.fetchContent("/api/categories")
+  }
+
   render() {
-    this.props.fetchContent("/api/categories")
     return (
       <Scroll>
         <div id="headerFiller"></div>

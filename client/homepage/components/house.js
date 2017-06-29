@@ -12,11 +12,14 @@ const buildFeatures = (features) => {
 }
 
 class House extends React.Component {
-  render() {
-    let { categoryId, houseId } = this.props.match.params
+  constructor(props) {
+    super(props)
+    let { categoryId, houseId } = props.match.params
     let url = `/api/categories/${categoryId}/houses/${houseId}`
-    this.props.fetchContent(url)
+    props.fetchContent(url)
+  }
 
+  render() {
     let { ownContent, staticContent } = this.props
     let features = ownContent.features ? buildFeatures(ownContent.features) : null
     let carousel = ownContent.pictures ? (<Carousel pictures={ownContent.pictures} controls={staticContent.controls} />) : null
