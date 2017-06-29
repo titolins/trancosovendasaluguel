@@ -55,7 +55,7 @@ class Pictures extends React.Component {
       default:
         state[field] = e.target.value
     }
-    return this.setState(state)
+    this.setState(state)
   }
 
   render() {
