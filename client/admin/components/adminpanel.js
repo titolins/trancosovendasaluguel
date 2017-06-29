@@ -11,7 +11,7 @@ import Header from 'admin/components/header'
 import Pictures from 'admin/components/pictures'
 import Houses from 'admin/components/houses'
 
-import { getContentReq, postFilesReq, deleteContentReq } from 'admin/requests'
+import { getContentReq, postFilesReq, deleteContentReq, putContentReq } from 'admin/requests'
 
 import {
   updatePictures,
@@ -19,6 +19,7 @@ import {
   UPLOAD_STATE,
   setUploadErrors,
   updateHouses,
+  setPostErrors,
 } from 'admin/actions'
 
 const reload = () => window.location = window.location
@@ -60,6 +61,19 @@ const buildHousesHandler = (store, token) => {
       getContentReq(url, token, res=> {
         store.dispatch(updateHouses(res))})
     },
+    create: (data) => {
+      return (e) => {
+        e.preventDefault()
+        //store.dispatch(setUploadState({state:UPLOAD_STATE.BUSY}))
+        putContentReq(url, token, data, (res) => {
+          //store.dispatch(setUploadState({state:UPLOAD_STATE.AVAILABLE}))
+          res.json().then((json)=>{
+            if(json.errors.length === 0) reload()
+            store.dispatch(setPostErrors({errors:json.errors}))
+          })
+        })
+      }
+    },
     del: (data) => {
       return () => {
         deleteContentReq(url, token, data, (res) => {
@@ -83,7 +97,8 @@ const buildRoutes = (store, token) => {
       } } />
       <Route path="/admin/casas" render={ () => {
         housesHandler.get()
-        return (<Houses handleDelete={housesHandler.del} />)
+        picturesHandler.get()
+        return (<Houses handleDelete={housesHandler.del} handleCreate={housesHandler.create}/>)
       } } />
       <Redirect to="/admin/" />
     </Switch>
