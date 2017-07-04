@@ -17,15 +17,13 @@ func BuildEngine() (e *echo.Echo) {
     if err != nil {
         log.Fatal(err)
     }
-    /*
     // Create indices
-    if err = db.Copy().DB("twitter").C("users").EnsureIndex(mgo.Index{
-        Key:    []string{"email"},
+    if err = db.Copy().DB("tva").C("categories").EnsureIndex(mgo.Index{
+        Key:    []string{"name"},
         Unique: true,
     }); err != nil {
         log.Fatal(err)
     }
-    */
 
     e = echo.New()
 
