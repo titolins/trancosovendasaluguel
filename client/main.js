@@ -25,7 +25,7 @@ import {
 import { PropsRoute } from 'homepage/propsroute'
 
 let store = createStore(
-  combineReducers({lang,content,auth,upload,data}),
+  combineReducers({lang,content,auth,upload,post,data}),
   undefined,
   compose(applyMiddleware(thunk),autoRehydrate()))
 
