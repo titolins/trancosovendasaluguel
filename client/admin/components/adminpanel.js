@@ -20,6 +20,7 @@ import {
   setUploadErrors,
   updateHouses,
   setPostErrors,
+  revokeJWTToken,
 } from 'admin/actions'
 
 const reload = () => window.location = window.location
@@ -29,7 +30,8 @@ const buildPicturesHandler = (store, token) => {
   return {
     get: () => {
       getContentReq(url, token, res=> {
-        store.dispatch(updatePictures(res))})
+        if(res.message && res.message === "Unauthorized") store.dispatch(revokeJWTToken())
+        else store.dispatch(updatePictures(res))})
     },
     post: (data, callback) => {
       return (e) => {
@@ -59,7 +61,8 @@ const buildHousesHandler = (store, token) => {
   return {
     get: () => {
       getContentReq(url, token, res=> {
-        store.dispatch(updateHouses(res))})
+        if(res.message && res.message === "Unauthorized") store.dispatch(revokeJWTToken())
+        else store.dispatch(updateHouses(res))})
     },
     create: (data, callback) => {
       return (e) => {
