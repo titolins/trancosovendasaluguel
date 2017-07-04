@@ -42,7 +42,6 @@ func (api *API) Bind(group *echo.Group) {
 }
 
 func (api *API) deleteHouse(c echo.Context) (err error) {
-    log.Printf("%s", c.Request())
     var h models.House
     if err = c.Bind(&h); err != nil {
         log.Printf("%s", err)
@@ -50,6 +49,12 @@ func (api *API) deleteHouse(c echo.Context) (err error) {
     }
     db := api.DB.Clone()
     defer db.Close()
+
+    if err = db.DB("tva").C("categories").Update(h.Category, map[string]interface{}{
+        "$pull": map[string]interface{}{ "items": h },
+    }); err != nil {
+        log.Printf("error getting category")
+    }
 
     if err = db.DB("tva").C("houses").RemoveId(h.ID); err != nil {
         log.Printf("%s", err)
@@ -108,34 +113,72 @@ func (api *API) getAllPictures(c echo.Context) (err error) {
 
 func (api *API) createHouse(c echo.Context) (err error) {
     var h models.House
+
     if err = c.Bind(&h); err != nil {
         log.Printf("%s", err)
         return
     }
-    log.Printf("%s", h)
+
+    ptContent := h.Content.PT_BR.(map[string]interface{})
+    enContent := h.Content.EN_US.(map[string]interface{})
 
     /* validation should be done below
-    res := map[string][]string{
-        "errors": []string{} }
-    for _, field := range []interface{ Cover, Pictures, Content } {
-        func() (fErr error) {
-            // validate
-
-
-            return
-        }()
+    */
+    hErrors := map[string]interface{}{
+        "name": nil,
+        "description": nil,
+        "cover": nil,
     }
+    /*
     if len(res.errors) == 0 {
         err = db.DB("tva").C("pictures").Insert(&models.Picture{ Url: url })
     }
     */
+    if len(ptContent["name"].(string)) < 4 || len(enContent["name"].(string)) < 4 {
+        hErrors["name"] = "Campo 'nome' deve ter ao menos 4 caractéres"
+    }
+
+    if len(ptContent["description"].(string)) < 10 || len(enContent["description"].(string)) < 10 {
+        hErrors["description"] = "Campo 'descrição' deve ter ao menos 10 caractéres"
+    }
+
+    /*
+    for _, f := range h.Content.Features {
+    }
+    */
+
     db := api.DB.Clone()
     defer db.Close()
+    if n, err := db.DB("tva").C("pictures").FindId(h.Cover.ID).Count(); err != nil || n == 0 {
+        hErrors["cover"] = "Selecione uma imagem válida"
+    }
 
+    if hErrors["name"] != nil ||
+        hErrors["description"] != nil ||
+        //hErrors["featured"] != nil ||
+        hErrors["cover"] != nil {
+        return c.JSON(500, map[string]interface{}{
+            "error": true,
+            "errors": hErrors,
+        })
+    }
+
+    h.ID = bson.NewObjectId()
     if err = db.DB("tva").C("houses").Insert(&h); err != nil {
         log.Printf("error inserting house into db:\n%s", err)
+        return
     }
-    return
+
+    log.Printf("category from house:\n%s", h.Category)
+    if err = db.DB("tva").C("categories").Update(h.Category, map[string]interface{}{
+        "$push": map[string]interface{}{ "items": h },
+    }); err != nil {
+        log.Printf("error getting category")
+    }
+
+    return c.JSON(200, map[string]bool{
+        "error": false,
+    })
 }
 
 func (api *API) uploadPictures(c echo.Context) (err error) {
