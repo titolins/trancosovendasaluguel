@@ -30,7 +30,7 @@ const buildPicturesHandler = (store, token) => {
   return {
     get: () => {
       getContentReq(url, token, res=> {
-        if(res.message && res.message === "Unauthorized") store.dispatch(revokeJWTToken())
+        if(res && res.message && res.message === "Unauthorized") store.dispatch(revokeJWTToken())
         else store.dispatch(updatePictures(res))})
     },
     post: (data, callback) => {
@@ -61,19 +61,15 @@ const buildHousesHandler = (store, token) => {
   return {
     get: () => {
       getContentReq(url, token, res=> {
-        if(res.message && res.message === "Unauthorized") store.dispatch(revokeJWTToken())
+        if(res && res.message && res.message === "Unauthorized") store.dispatch(revokeJWTToken())
         else store.dispatch(updateHouses(res))})
     },
     create: (data, callback) => {
       return (e) => {
         e.preventDefault()
-        //store.dispatch(setUploadState({state:UPLOAD_STATE.BUSY}))
         putContentReq(url, token, data, (res) => {
-          //store.dispatch(setUploadState({state:UPLOAD_STATE.AVAILABLE}))
-          res.json().then((json)=>{
-            if(json.errors.length > 0) store.dispatch(setPostErrors({errors:json.errors}))
-            else callback()
-          })
+          if(res.error) store.dispatch(setPostErrors({errors:res.errors}))
+          else callback()
         })
       }
     },
