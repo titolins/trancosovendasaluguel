@@ -7,8 +7,8 @@ import { mapStateToProps } from 'admin/containers/houses'
 class Houses extends React.Component {
   constructor(props) {
     super(props)
-    window.houses = this
 
+    this.showTranslatableContent = this.showTranslatableContent.bind(this)
     this.getData = this.getData.bind(this)
     this.updateData = this.updateData.bind(this)
     this.addFeature = this.addFeature.bind(this)
@@ -40,16 +40,26 @@ class Houses extends React.Component {
         }
       }
     }
-    this.state = this.initialState
+    this.state = Object.assign({}, this.initialState)
+  }
+
+  showTranslatableContent(e) {
+    let activeBtn = document.getElementsByClassName('triggerCollapse active')[0],
+        target = e.target
+    if (target === activeBtn) return
+    // remove active from active btn and hide it's target
+    $(activeBtn.dataset.trigger).collapse('hide')
+    activeBtn.classList.remove("active")
+
+    // add active to target and show it's target
+    $(target.dataset.trigger).collapse('show')
+    target.classList.add("active")
   }
 
   getData() {
-    console.log("getData()")
     if(this.state.category.name === "sales") return this.state
     let data = Object.assign({}, this.state)
     delete data.type
-    console.log("data after delete")
-    console.log(data)
     return data
   }
 
@@ -79,7 +89,6 @@ class Houses extends React.Component {
   handleChange(e) {
     let field = e.target.name,
         state = this.state
-    console.log(e.target)
     switch(field) {
       case 'category':
         state[field].name = e.target.value
@@ -126,7 +135,6 @@ class Houses extends React.Component {
       e.preventDefault()
       let state = this.state
       state.pictures.splice(state.pictures.indexOf(p),1)
-      console.log(state)
       this.setState(state)
     }
   }
@@ -216,7 +224,7 @@ class Houses extends React.Component {
                   Se marcada essa opção, essa casa irá aparecer na página principal, na área de destaque da sua respectiva categoria. Caso contrário, para o usuário visualizá-la ele precisará entrar na página da categoria, através do link na barra de navegação.
                 </p>
               </div>
-              <div className="form-group row">
+              <div className={`form-group row${this.props.postState.errors.cover? " has-danger" : "" }`}>
                 <div className="col-sm-2">
                   <label className="col-form-label">Foto de capa</label>
                   <div>
@@ -225,6 +233,9 @@ class Houses extends React.Component {
                 </div>
                 <div className="col-sm-10">
                   <img className="img-fluid" src={this.state.cover.url}></img>
+                  {this.props.postState.errors.cover? (
+                    <div className="form-control-feedback">{this.props.postState.errors.cover}</div>
+                  ) : ''}
                 </div>
                 { buildImagesModal(true) }
               </div>
@@ -249,21 +260,30 @@ class Houses extends React.Component {
                 </div>
                 { buildImagesModal(false) }
               </div>
-              <div className="btn-group" role="group">
-                <button data-toggle="collapse" data-target="#ptContent" type="button" className="btn btn-secondary">PT</button>
-                <button data-toggle="collapse" data-target="#enContent" type="button" className="btn btn-secondary">EN</button>
+              <div className="form-group row">
+                <label className="col-sm-2 col-form-label">Conteúdo</label>
+                <div className="btn-group col-sm-4" role="group">
+                  <button onClick={this.showTranslatableContent} data-trigger="#ptContent" type="button" className="btn btn-secondary active triggerCollapse">PT</button>
+                  <button onClick={this.showTranslatableContent} data-trigger="#enContent" type="button" className="btn btn-secondary triggerCollapse">EN</button>
+                </div>
               </div>
-              <div id="ptContent" className="collapse">
-                <div className="form-group row">
+              <div id="ptContent" className="collapse show">
+                <div className={`form-group row${this.props.postState.errors.name? " has-danger" : "" }`}>
                   <label className="col-sm-2 col-form-label" htmlFor="name_pt">Nome</label>
                   <div className="col-sm-10">
                     <input className="form-control" type="text" id="name_pt" name="name_pt" value={this.state.content['pt_br'].name} onChange={this.handleChange}></input>
+                    {this.props.postState.errors.name? (
+                      <div className="form-control-feedback">{this.props.postState.errors.name}</div>
+                    ) : ''}
                   </div>
                 </div>
-                <div className="form-group row">
+                <div className={`form-group row${this.props.postState.errors.description? " has-danger" : "" }`}>
                   <label className="col-sm-2 col-form-label" htmlFor="description_pt">Descrição</label>
                   <div className="col-sm-10">
                     <textarea className="form-control" id="description_pt" name="description_pt" value={this.state.content['pt_br'].description} onChange={this.handleChange}></textarea>
+                    {this.props.postState.errors.description? (
+                      <div className="form-control-feedback">{this.props.postState.errors.description}</div>
+                    ) : ''}
                   </div>
                 </div>
                 <div className="form-group row">
@@ -287,16 +307,22 @@ class Houses extends React.Component {
                 </div>
               </div>
               <div id="enContent" className="collapse">
-                <div className="form-group row">
+                <div className={`form-group row${this.props.postState.errors.name? " has-danger" : "" }`}>
                   <label className="col-sm-2 col-form-label" htmlFor="name_en">Nome</label>
                   <div className="col-sm-10">
                     <input className="form-control" type="text" id="name_en" name="name_en" value={this.state.content['en_us'].name} onChange={this.handleChange}></input>
+                    {this.props.postState.errors.name? (
+                      <div className="form-control-feedback">{this.props.postState.errors.name}</div>
+                    ) : ''}
                   </div>
                 </div>
-                <div className="form-group row">
+                <div className={`form-group row${this.props.postState.errors.description? " has-danger" : "" }`}>
                   <label className="col-sm-2 col-form-label" htmlFor="description_en">Descrição</label>
                   <div className="col-sm-10">
                     <textarea className="form-control" id="description_en" name="description_en" value={this.state.content['en_us'].description} onChange={this.handleChange}></textarea>
+                    {this.props.postState.errors.description? (
+                      <div className="form-control-feedback">{this.props.postState.errors.description}</div>
+                    ) : ''}
                   </div>
                 </div>
                 <div className="form-group row">
