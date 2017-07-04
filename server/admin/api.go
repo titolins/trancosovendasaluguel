@@ -132,7 +132,10 @@ func (api *API) createHouse(c echo.Context) (err error) {
     db := api.DB.Clone()
     defer db.Close()
 
-    return db.DB("tva").C("houses").Insert(&h)
+    if err = db.DB("tva").C("houses").Insert(&h); err != nil {
+        log.Printf("error inserting house into db:\n%s", err)
+    }
+    return
 }
 
 func (api *API) uploadPictures(c echo.Context) (err error) {
