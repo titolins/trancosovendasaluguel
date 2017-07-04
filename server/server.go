@@ -35,9 +35,9 @@ func BuildEngine() (e *echo.Echo) {
     //e.Use(middleware.HTTPSRedirect())
 
     // static files
-    e.Static("/static/img", "server/static/img")
-    e.Static("/static/js", "client/")
-    e.Static("/static/uploads", "server/static/uploads")
+    e.Static("/static/img", "/srv/http/server/static/img")
+    e.Static("/static/js", "/srv/http/client/")
+    e.Static("/static/uploads", "/srv/http/server/static/uploads")
 
     // api routes
     api := &API{ DB: db }
@@ -81,6 +81,6 @@ func homeHandler(c echo.Context) (err error) {
             return
         }
     }
-    return c.File("server/static/templates/index.html")
+    return c.File("/srv/http/server/static/templates/index.html")
 }
 
