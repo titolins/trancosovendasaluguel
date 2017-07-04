@@ -22,7 +22,7 @@ type (
     }
 
     Picture struct {
-        ID  bson.ObjectId `json:"id,omitempty" bson:"_id,omitempty"`
+        ID  bson.ObjectId `json:"id" bson:"_id,omitempty"`
         Url string `json:"url" bson:"url"`
     }
 
@@ -52,7 +52,7 @@ type (
     }
 
     House struct {
-        ID  bson.ObjectId `json:"id,omitempty" bson:"_id,omitempty"`
+        ID  bson.ObjectId `json:"id" bson:"_id,omitempty"`
         // we use interface here because we won't actually use the full
         // category struct (only id will matter to us here)
         Category Category `json:"category" bson:"category"`
