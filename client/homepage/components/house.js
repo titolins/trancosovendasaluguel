@@ -15,7 +15,7 @@ class House extends React.Component {
   constructor(props) {
     super(props)
     let { categoryId, houseId } = props.match.params
-    let url = `/api/categories/${categoryId}/houses/${houseId}`
+    let url = `/api/categorias/${categoryId}/casas/${houseId}`
     props.fetchContent(url)
   }
 

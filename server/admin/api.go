@@ -50,7 +50,9 @@ func (api *API) deleteHouse(c echo.Context) (err error) {
     db := api.DB.Clone()
     defer db.Close()
 
-    if err = db.DB("tva").C("categories").Update(h.Category, map[string]interface{}{
+    if err = db.DB("tva").C("categories").Update(&bson.M{
+        "name": h.Category.Name,
+    }, map[string]interface{}{
         "$pull": map[string]interface{}{ "items": h },
     }); err != nil {
         log.Printf("error getting category")
@@ -170,7 +172,9 @@ func (api *API) createHouse(c echo.Context) (err error) {
     }
 
     log.Printf("category from house:\n%s", h.Category)
-    if err = db.DB("tva").C("categories").Update(h.Category, map[string]interface{}{
+    if err = db.DB("tva").C("categories").Update(&bson.M{
+        "name": h.Category.Name,
+    }, map[string]interface{}{
         "$push": map[string]interface{}{ "items": h },
     }); err != nil {
         log.Printf("error getting category")

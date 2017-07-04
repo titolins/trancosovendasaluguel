@@ -27,7 +27,7 @@ import CategoryByType from 'homepage/components/categorybytype'
 class App extends React.Component {
   constructor(props) {
     super(props)
-    props.fetchContent("/api/categories")
+    props.fetchContent("/api/categorias")
   }
 
   render() {

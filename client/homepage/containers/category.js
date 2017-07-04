@@ -8,11 +8,13 @@ export const filterItems = (items, lang) => {
       cover: item.cover,
       content: item.content[lang],
       // dev stuff
-      categoryId: 1,
-      id: 1,
+      pictures: item.pictures,
+      categoryId: item.category.name,
+      id: item.id,
+      url: `/categorias/${item.category.name}/casas/${item.id}`
       // when we have the id info from the server we can build the url by
       // concatenation with `${}`
-      url: '/categorias/1/casas/1'
+      //url: '/categorias/1/casas/1'
     }
   })
 }

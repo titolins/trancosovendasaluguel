@@ -46,9 +46,9 @@ type (
     Category struct{
         ID  bson.ObjectId `json:"id,omitempty" bson:"_id,omitempty"`
         Name string `json:"name" bson:"name"`
-        Content TranslatableContent `json:"content,omitempty" bson:"content,omitempty"`
-        Items []House `json:"items,omitempty" bson:"items,omitempty"`
-        Featured []House `json:"featured,omitempty" bson:"featured,omitempty"`
+        Content TranslatableContent `json:"content" bson:"content"`
+        Items []House `json:"items" bson:"items"`
+        Featured []House `json:"featured" bson:"featured"`
     }
 
     House struct {
@@ -56,11 +56,11 @@ type (
         // we use interface here because we won't actually use the full
         // category struct (only id will matter to us here)
         Category Category `json:"category" bson:"category"`
-        Type Type `json:"type,string,omitempty" bson:"type,omitempty"`
+        Type Type `json:"type,string" bson:"type"`
         Featured bool `json:"featured" bson:"featured"`
         Capacity int `json:"capacity,string" bson:"capacity"`
         Cover Picture `json:"cover" bson:"cover"`
-        Pictures []Picture `json:"pictures" bson:"pictures"`
+        Pictures []Picture `json:"pictures,omitempty" bson:"pictures,omitempty"`
         Content TranslatableContent `json:"content" bson:"content"`
     }
 )

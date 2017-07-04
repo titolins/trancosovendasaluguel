@@ -41,6 +41,7 @@ class Houses extends React.Component {
       }
     }
     this.state = Object.assign({}, this.initialState)
+    window.house = this
   }
 
   showTranslatableContent(e) {

@@ -9,7 +9,7 @@ class CategoryByType extends React.Component {
   constructor(props) {
     super(props)
     let { categoryId, typeId } = props.match.params
-    props.fetchContent(`/api/categories/${categoryId}/houses/bytype/${typeId}`)
+    props.fetchContent(`/api/categorias/${categoryId}/portipo/${typeId}`)
   }
 
   render() {
