@@ -9,13 +9,14 @@ class Houses extends React.Component {
     super(props)
     window.houses = this
 
+    this.updateData = this.updateData.bind(this)
     this.addFeature = this.addFeature.bind(this)
     this.removeFeature = this.removeFeature.bind(this)
     this.selectImg = this.selectImg.bind(this)
     this.removeImg = this.removeImg.bind(this)
     this.setCoverImg = this.setCoverImg.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.state = {
+    this.initialState = {
       category: { name: "rent" },
       type: "0",
       featured: false,
@@ -38,6 +39,12 @@ class Houses extends React.Component {
         }
       }
     }
+    this.state = this.initialState
+  }
+
+  updateData() {
+    this.setState(this.initialState)
+    this.props.update()
   }
 
   addFeature() {
@@ -161,7 +168,7 @@ class Houses extends React.Component {
         <div className="collapse" id="addHouse">
           <div className="card card-block">
             <h3 className="card-title">Adicionar casa</h3>
-            <form name="createHouse" onSubmit={this.props.handleCreate(this.state, this.props.update)}>
+            <form name="createHouse" onSubmit={this.props.handleCreate(this.state, this.updateData)}>
               <div className="row">
                 <div className="form-group col-4">
                   <label className="col-form-label" htmlFor="category">Categoria</label>
@@ -172,18 +179,19 @@ class Houses extends React.Component {
                     </select>
                   </div>
                 </div>
-                <div className="form-group col-4">
-                  <label className="col-form-label" htmlFor="type">Tipo de imóvel</label>
-                  <div>
-                    <select name="type" id="type" className="custom-select" value={this.state.type} onChange={this.handleChange}>
-                      <option value="0">Casa</option>
-                      <option value="1">Terreno</option>
-                      <option value="2">Fazenda</option>
-                      <option value="3">Terreno</option>
-                      <option value="4">Pousada</option>
-                    </select>
-                  </div>
-                </div>
+                { this.state.category.name === "sales" ?
+                  (<div className="form-group col-4">
+                    <label className="col-form-label" htmlFor="type">Tipo de imóvel</label>
+                    <div>
+                      <select name="type" id="type" className="custom-select" value={this.state.type} onChange={this.handleChange}>
+                        <option value="0">Casa</option>
+                        <option value="1">Terreno</option>
+                        <option value="2">Fazenda</option>
+                        <option value="3">Terreno</option>
+                        <option value="4">Pousada</option>
+                      </select>
+                    </div>
+                  </div>) : '' }
                 <div className="form-group col-4">
                   <label className="col-form-label" htmlFor="capacity">Capacidade</label>
                   <input className="form-control" type="number" step="1" min="1" id="capacity" name="capacity" value={this.state.capacity} onChange={this.handleChange}></input>
@@ -320,7 +328,7 @@ class Houses extends React.Component {
                     <div className="card-block">
                       <h3 className="card-title">{h.content['pt_br'].name}</h3>
                       <p className="card-text">{h.content['pt_br'].description}</p>
-                      <button type="button" onClick={this.props.handleDelete(h,this.props.update)} className="btn btn-danger">Deletar</button>
+                      <button type="button" onClick={this.props.handleDelete(h,this.updateData)} className="btn btn-danger">Deletar</button>
                     </div>
                   </div>
                   <div className="modal fade" id={`p-modal-${i}`} tabIndex="-1" role="dialog" aria-labelledby={`p-modal-${i}-title`} aria-hidden="true">
