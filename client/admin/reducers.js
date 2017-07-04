@@ -65,7 +65,7 @@ export function upload(state = initialUploadState, action) {
 }
 
 const initialPostState = {
-  errors: []
+  errors: {}
 }
 
 export function post(state = initialPostState, action) {
