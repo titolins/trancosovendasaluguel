@@ -9,6 +9,7 @@ class Houses extends React.Component {
     super(props)
     window.houses = this
 
+    this.getData = this.getData.bind(this)
     this.updateData = this.updateData.bind(this)
     this.addFeature = this.addFeature.bind(this)
     this.removeFeature = this.removeFeature.bind(this)
@@ -40,6 +41,16 @@ class Houses extends React.Component {
       }
     }
     this.state = this.initialState
+  }
+
+  getData() {
+    console.log("getData()")
+    if(this.state.category.name === "sales") return this.state
+    let data = Object.assign({}, this.state)
+    delete data.type
+    console.log("data after delete")
+    console.log(data)
+    return data
   }
 
   updateData() {
@@ -168,7 +179,7 @@ class Houses extends React.Component {
         <div className="collapse" id="addHouse">
           <div className="card card-block">
             <h3 className="card-title">Adicionar casa</h3>
-            <form name="createHouse" onSubmit={this.props.handleCreate(this.state, this.updateData)}>
+            <form name="createHouse" onSubmit={this.props.handleCreate(this.getData(), this.updateData)}>
               <div className="row">
                 <div className="form-group col-4">
                   <label className="col-form-label" htmlFor="category">Categoria</label>
