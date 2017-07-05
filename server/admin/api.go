@@ -6,6 +6,7 @@ import (
     "os"
     "fmt"
     "path"
+    "strings"
     //"errors"
     "mime/multipart"
     "log"
@@ -205,7 +206,7 @@ func (api *API) uploadPictures(c echo.Context) (err error) {
             }
             defer src.Close()
 
-            if !ACCEPTED_EXT[path.Ext(file.Filename)] {
+            if !ACCEPTED_EXT[strings.ToLower(path.Ext(file.Filename))] {
                 res["errors"] = append(res["errors"], fmt.Sprintf("Extensão '%s' inválida ('%s')", path.Ext(file.Filename), file.Filename))
                 return
             }
