@@ -26,7 +26,6 @@ func BuildEngine() (e *echo.Echo) {
     }
 
     e = echo.New()
-    e.Pre(middleware.NonWWWRedirect())
 
     e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
         Format: `${method} | ${status} | ${uri} -> ${latency_human}` + "\n",
