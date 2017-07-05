@@ -11,15 +11,12 @@ class Houses extends React.Component {
     this.showTranslatableContent = this.showTranslatableContent.bind(this)
     this.getData = this.getData.bind(this)
     this.updateData = this.updateData.bind(this)
-      /*
-    this.addFeature = this.addFeature.bind(this)
-    this.removeFeature = this.removeFeature.bind(this)
-    */
     this.selectImg = this.selectImg.bind(this)
     this.removeImg = this.removeImg.bind(this)
     this.setCoverImg = this.setCoverImg.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.initialState = {
+      name: "",
       category: { name: "rent" },
       type: "0",
       featured: false,
@@ -32,12 +29,10 @@ class Houses extends React.Component {
       pictures: [],
       content: {
         'pt_br': {
-          name: "",
           description: "",
           features: "",
         },
         'en_us': {
-          name: "",
           description: "",
           features: "",
         }
@@ -76,26 +71,6 @@ class Houses extends React.Component {
     this.props.update()
   }
 
-    /*
-  addFeature() {
-    let state = this.state
-    state.content['pt_br'].features.push('')
-    state.content['en_us'].features.push('')
-
-    this.setState(state)
-  }
-
-  removeFeature(i) {
-    return () => {
-      let state = this.state
-      state.content['pt_br'].features.splice(i,1)
-      state.content['en_us'].features.splice(i,1)
-
-      this.setState(state)
-    }
-  }
-  */
-
   handleChange(e) {
     let field = e.target.name,
         state = this.state
@@ -111,12 +86,6 @@ class Houses extends React.Component {
         break
       case 'features_en':
         state.content['en_us'].features = e.target.value
-        break
-      case 'name_pt':
-        state.content['pt_br'].name = e.target.value
-        break
-      case 'name_en':
-        state.content['en_us'].name = e.target.value
         break
       case 'description_pt':
         state.content['pt_br'].description = e.target.value
@@ -198,6 +167,15 @@ class Houses extends React.Component {
           <div className="card card-block">
             <h3 className="card-title">Adicionar casa</h3>
             <form name="createHouse" onSubmit={this.props.handleCreate(this.getData(), this.updateData)}>
+              <div className={`form-group row${this.props.postState.errors.name? " has-danger" : "" }`}>
+                <label className="col-sm-2 col-form-label" htmlFor="name">Nome</label>
+                <div className="col-sm-10">
+                  <input className="form-control" type="text" id="name" name="name" value={this.state.name} onChange={this.handleChange}></input>
+                  {this.props.postState.errors.name? (
+                    <div className="form-control-feedback">{this.props.postState.errors.name}</div>
+                  ) : ''}
+                </div>
+              </div>
               <div className="row">
                 <div className="form-group col-4">
                   <label className="col-form-label" htmlFor="category">Categoria</label>
@@ -282,15 +260,6 @@ class Houses extends React.Component {
                 </div>
               </div>
               <div id="ptContent" className="collapse show">
-                <div className={`form-group row${this.props.postState.errors.name? " has-danger" : "" }`}>
-                  <label className="col-sm-2 col-form-label" htmlFor="name_pt">Nome</label>
-                  <div className="col-sm-10">
-                    <input className="form-control" type="text" id="name_pt" name="name_pt" value={this.state.content['pt_br'].name} onChange={this.handleChange}></input>
-                    {this.props.postState.errors.name? (
-                      <div className="form-control-feedback">{this.props.postState.errors.name}</div>
-                    ) : ''}
-                  </div>
-                </div>
                 <div className={`form-group row${this.props.postState.errors.description? " has-danger" : "" }`}>
                   <label className="col-sm-2 col-form-label" htmlFor="description_pt">Descrição</label>
                   <div className="col-sm-10">
@@ -310,15 +279,6 @@ class Houses extends React.Component {
                 </div>
               </div>
               <div id="enContent" className="collapse">
-                <div className={`form-group row${this.props.postState.errors.name? " has-danger" : "" }`}>
-                  <label className="col-sm-2 col-form-label" htmlFor="name_en">Nome</label>
-                  <div className="col-sm-10">
-                    <input className="form-control" type="text" id="name_en" name="name_en" value={this.state.content['en_us'].name} onChange={this.handleChange}></input>
-                    {this.props.postState.errors.name? (
-                      <div className="form-control-feedback">{this.props.postState.errors.name}</div>
-                    ) : ''}
-                  </div>
-                </div>
                 <div className={`form-group row${this.props.postState.errors.description? " has-danger" : "" }`}>
                   <label className="col-sm-2 col-form-label" htmlFor="description_en">Descrição</label>
                   <div className="col-sm-10">

@@ -138,7 +138,7 @@ func (api *API) createHouse(c echo.Context) (err error) {
         err = db.DB("tva").C("pictures").Insert(&models.Picture{ Url: url })
     }
     */
-    if len(ptContent["name"].(string)) < 4 || len(enContent["name"].(string)) < 4 {
+    if len(h.Name) < 4 {
         hErrors["name"] = "Campo 'nome' deve ter ao menos 4 caractéres"
     }
 

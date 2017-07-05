@@ -38,7 +38,6 @@ type (
     }
 
     HouseContent struct {
-        Name string `json:"name" bson:"name"`
         Description string `json:"description" bson:"description"`
         Features []string `json:"features" bson:"features"`
     }
@@ -53,6 +52,7 @@ type (
 
     House struct {
         ID  bson.ObjectId `json:"id" bson:"_id,omitempty"`
+        Name string `json:"name" bson:"name"`
         // we use interface here because we won't actually use the full
         // category struct (only id will matter to us here)
         Category Category `json:"category" bson:"category"`
