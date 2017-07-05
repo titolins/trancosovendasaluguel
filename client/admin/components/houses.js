@@ -61,12 +61,12 @@ class Houses extends React.Component {
   }
 
   getData() {
-    let data = Object.assign({}, this.state)
+    let data = JSON.parse(JSON.stringify(this.state))
     data.capacity = `${data.minCapacity}/${data.maxCapacity}`
-    data.content['pt_br'].features = data.content['pt_br'].features.split(';')
-    data.content['en_us'].features = data.content['en_us'].features.split(';')
     delete data.minCapacity
     delete data.maxCapacity
+    data.content['pt_br'].features = this.state.content['pt_br'].features.split(';')
+    data.content['en_us'].features = this.state.content['en_us'].features.split(';')
     if(this.state.category.name !== "sales") delete data.type
     return data
   }
