@@ -333,9 +333,7 @@ class Houses extends React.Component {
                     <label className="col-form-label">Mais informações</label>
                   </div>
                   <div className="col-sm-10">
-                    <div className="form-group" key={i}>
-                      <input className="form-control" type="text" name="features_en" value={this.state.content['en_us'].features} onChange={this.handleChange}></input>
-                    </div>
+                    <input className="form-control" type="text" name="features_en" value={this.state.content['en_us'].features} onChange={this.handleChange}></input>
                   </div>
                 </div>
               </div>
