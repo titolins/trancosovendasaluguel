@@ -36,7 +36,7 @@ func (admin *Admin) mainHandler(c echo.Context) error {
             return
         }
     }*/
-    return c.File("server/static/templates/admin.html")
+    return c.File("/srv/http/server/static/templates/admin.html")
 }
 
 
