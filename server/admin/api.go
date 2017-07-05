@@ -211,7 +211,7 @@ func (api *API) uploadPictures(c echo.Context) (err error) {
                 return
             }
 
-            filepath := fmt.Sprintf("server/static/uploads/%s", file.Filename)
+            filepath := fmt.Sprintf("/srv/http/server/static/uploads/%s", file.Filename)
             dst, fErr := os.Create(filepath)
             if fErr != nil {
                 res["errors"] = append(res["errors"], fmt.Sprintf("Erro ao tentar criar arquivo '%s'", file.Filename))
