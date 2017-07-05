@@ -11,8 +11,10 @@ class Houses extends React.Component {
     this.showTranslatableContent = this.showTranslatableContent.bind(this)
     this.getData = this.getData.bind(this)
     this.updateData = this.updateData.bind(this)
+      /*
     this.addFeature = this.addFeature.bind(this)
     this.removeFeature = this.removeFeature.bind(this)
+    */
     this.selectImg = this.selectImg.bind(this)
     this.removeImg = this.removeImg.bind(this)
     this.setCoverImg = this.setCoverImg.bind(this)
@@ -21,7 +23,8 @@ class Houses extends React.Component {
       category: { name: "rent" },
       type: "0",
       featured: false,
-      capacity: "1",
+      minCapacity: "1",
+      maxCapacity: "1",
       cover: {
         id: "",
         url: ""
@@ -31,12 +34,12 @@ class Houses extends React.Component {
         'pt_br': {
           name: "",
           description: "",
-          features: []
+          features: "",
         },
         'en_us': {
           name: "",
           description: "",
-          features: []
+          features: "",
         }
       }
     }
@@ -58,9 +61,13 @@ class Houses extends React.Component {
   }
 
   getData() {
-    if(this.state.category.name === "sales") return this.state
     let data = Object.assign({}, this.state)
-    delete data.type
+    data.capacity = `${data.minCapacity}/${data.maxCapacity}`
+    data.content['pt_br'].features = data.content['pt_br'].features.split(';')
+    data.content['en_us'].features = data.content['en_us'].features.split(';')
+    delete data.minCapacity
+    delete data.maxCapacity
+    if(this.state.category.name !== "sales") delete data.type
     return data
   }
 
@@ -69,6 +76,7 @@ class Houses extends React.Component {
     this.props.update()
   }
 
+    /*
   addFeature() {
     let state = this.state
     state.content['pt_br'].features.push('')
@@ -86,6 +94,7 @@ class Houses extends React.Component {
       this.setState(state)
     }
   }
+  */
 
   handleChange(e) {
     let field = e.target.name,
@@ -98,10 +107,10 @@ class Houses extends React.Component {
         state[field] = e.target.checked
         break
       case 'features_pt':
-        state.content['pt_br'].features[e.target.id.split('_')[1]] = e.target.value
+        state.content['pt_br'].features = e.target.value
         break
       case 'features_en':
-        state.content['en_us'].features[e.target.id.split('_')[1]] = e.target.value
+        state.content['en_us'].features = e.target.value
         break
       case 'name_pt':
         state.content['pt_br'].name = e.target.value
@@ -212,9 +221,13 @@ class Houses extends React.Component {
                       </select>
                     </div>
                   </div>) : '' }
-                <div className="form-group col-4">
-                  <label className="col-form-label" htmlFor="capacity">Capacidade</label>
-                  <input className="form-control" type="number" step="1" min="1" id="capacity" name="capacity" value={this.state.capacity} onChange={this.handleChange}></input>
+                <div className="form-group col-2">
+                  <label className="col-form-label" htmlFor="minCapacity">Capacidade mínima</label>
+                  <input className="form-control" type="number" step="1" min="1" id="minCapacity" name="minCapacity" value={this.state.capacity} onChange={this.handleChange}></input>
+                </div>
+                <div className="form-group col-2">
+                  <label className="col-form-label" htmlFor="maxCapacity">Capacidade máxima</label>
+                  <input className="form-control" type="number" step="1" min="1" id="maxCapacity" name="maxCapacity" value={this.state.capacity} onChange={this.handleChange}></input>
                 </div>
               </div>
               <div className="form-group">
@@ -290,20 +303,9 @@ class Houses extends React.Component {
                 <div className="form-group row">
                   <div className="col-sm-2">
                     <label className="col-form-label">Mais informações</label>
-                    <div>
-                      <button type="button" className="btn btn-info" onClick={this.addFeature}>Adicionar</button>
-                    </div>
                   </div>
                   <div className="col-sm-10">
-                    { this.state.content['pt_br'].features.map((f,i) => {
-                        return (
-                          <div className="form-group" key={i}>
-                            <input className="form-control" type="text" id={`f_${i}`} name="features_pt" value={this.state.content['pt_br'].features[i]} onChange={this.handleChange}></input>
-                            <button type="button" className="btn btn-danger" onClick={this.removeFeature(i)}>Remover</button>
-                          </div>
-                        )
-                      })
-                    }
+                    <input className="form-control" type="text" name="features_pt" value={this.state.content['pt_br'].features} onChange={this.handleChange}></input>
                   </div>
                 </div>
               </div>
@@ -329,20 +331,11 @@ class Houses extends React.Component {
                 <div className="form-group row">
                   <div className="col-sm-2">
                     <label className="col-form-label">Mais informações</label>
-                    <div>
-                      <button type="button" className="btn btn-info" onClick={this.addFeature}>Adicionar</button>
-                    </div>
                   </div>
                   <div className="col-sm-10">
-                    { this.state.content['en_us'].features.map((f,i) => {
-                        return (
-                          <div className="form-group" key={i}>
-                            <input className="form-control" type="text" id={`f_${i}`} name="features_en" value={this.state.content['en_us'].features[i]} onChange={this.handleChange}></input>
-                            <button type="button" className="btn btn-danger" onClick={this.removeFeature(i)}>Remover</button>
-                          </div>
-                        )
-                      })
-                    }
+                    <div className="form-group" key={i}>
+                      <input className="form-control" type="text" name="features_en" value={this.state.content['en_us'].features} onChange={this.handleChange}></input>
+                    </div>
                   </div>
                 </div>
               </div>

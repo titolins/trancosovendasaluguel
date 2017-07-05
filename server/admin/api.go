@@ -121,6 +121,7 @@ func (api *API) createHouse(c echo.Context) (err error) {
         log.Printf("%s", err)
         return
     }
+    log.Printf("%s", h)
 
     ptContent := h.Content.PT_BR.(map[string]interface{})
     enContent := h.Content.EN_US.(map[string]interface{})

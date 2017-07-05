@@ -58,7 +58,7 @@ type (
         Category Category `json:"category" bson:"category"`
         Type Type `json:"type,string" bson:"type"`
         Featured bool `json:"featured" bson:"featured"`
-        Capacity int `json:"capacity,string" bson:"capacity"`
+        Capacity string `json:"capacity" bson:"capacity"`
         Cover Picture `json:"cover" bson:"cover"`
         Pictures []Picture `json:"pictures,omitempty" bson:"pictures,omitempty"`
         Content TranslatableContent `json:"content" bson:"content"`
