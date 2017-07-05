@@ -1,11 +1,23 @@
 package main
 
 import (
+    "os"
     "github.com/titolins/trancosovendasaluguel/server"
 )
 
 func main() {
-    e := server.BuildEngine()
+    var p string
+    env := os.Getenv("ENV")
 
-    e.Start(":8080")
+    if env == "PROD" {
+        p = ":80"
+    } else if env == "TLS" {
+        p = ":443"
+    } else {
+        p = ":8080"
+    }
+
+
+    e := server.BuildEngine()
+    e.Start(p)
 }
