@@ -5,6 +5,7 @@ Documentation=http://github.com/titolins/polen
 [Service]
 User=ubuntu
 Group=ubuntu
+Environment=ENV=TLS
 
 ExecStart=/srv/http/trancosovendasaluguel
 
