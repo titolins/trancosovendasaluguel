@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { mapDispatchToProps, mapStateToProps } from 'homepage/containers/languageselector'
 
 
-const LanguageSelector = ({ active, lang, margins, onClick }) => {
+const LanguageSelector = ({ active, lang, marginsClass, onClick }) => {
   let activeClass = active ? "active" : undefined;
-  let classes = `nav-link text-grey px-0 ml-${margins[0]} mr-${margins[1]} ${activeClass}`
+  let classes = `nav-link text-grey px-0 ${marginsClass} ${activeClass}`
 
   return (
       <span><a className={classes} href="#" onClick={e => {
