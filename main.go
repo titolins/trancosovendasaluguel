@@ -14,7 +14,7 @@ func main() {
     if env == "PROD" {
         e.Logger.Fatal(e.Start(":80"))
     } else if env == "TLS" {
-        e.AutoTLSManager.HostPolicy =  autocert.HostWhitelist("trancosovendasaluguel.com")
+        e.AutoTLSManager.HostPolicy =  autocert.HostWhitelist("trancosovendasaluguel.com", "www.trancosovendasaluguel.com")
         // Cache certificates
         e.AutoTLSManager.Cache = autocert.DirCache("/srv/http/.cache")
         e.Pre(middleware.HTTPSRedirect())
