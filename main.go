@@ -2,22 +2,23 @@ package main
 
 import (
     "os"
+    "golang.org/x/crypto/acme/autocert"
     "github.com/titolins/trancosovendasaluguel/server"
 )
 
 func main() {
-    var p string
     env := os.Getenv("ENV")
 
+    e := server.BuildEngine()
     if env == "PROD" {
-        p = ":80"
+        e.Logger.Fatal(e.Start(":80"))
     } else if env == "TLS" {
-        p = ":443"
+        e.AutoTLSManager.HostPolicy =  autocert.HostWhitelist("trancosovendasaluguel.com")
+        // Cache certificates
+        e.AutoTLSManager.Cache = autocert.DirCache("/var/www/.cache")
+        e.Logger.Fatal(e.StartAutoTLS(":443"))
     } else {
-        p = ":8080"
+        e.Logger.Fatal(e.Start(":8080"))
     }
 
-
-    e := server.BuildEngine()
-    e.Start(p)
 }
