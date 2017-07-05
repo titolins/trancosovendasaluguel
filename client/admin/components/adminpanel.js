@@ -109,7 +109,7 @@ export default class AdminPanel extends React.Component {
     return (
       <div style={{ width: "100%" }}>
         <Header />
-        <div className="container">{ buildRoutes(this.props.store, this.props.token) }</div>
+        <div style={{"marginTop": "2em" }}className="container">{ buildRoutes(this.props.store, this.props.token) }</div>
       </div>
     )
   }

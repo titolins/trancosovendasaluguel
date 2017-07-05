@@ -82,8 +82,14 @@ class Pictures extends React.Component {
     return (
       <div className="card">
         <div className="card-block">
-          <h3 className="card-title">Imagens</h3>
-          <button type="button" className="btn btn-success" data-toggle="modal" data-target="#add-modal">Adicionar</button>
+          <div className="row">
+            <div className="col-6">
+              <h3 className="card-title">Imagens</h3>
+            </div>
+            <div className="col-6">
+              <button type="button" className="btn btn-success float-right" data-toggle="modal" data-target="#add-modal">Adicionar</button>
+            </div>
+          </div>
           <div className="row">
             {this.props.pictures.map((p, i) => {
               return (

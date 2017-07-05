@@ -353,8 +353,14 @@ class Houses extends React.Component {
           </div>
         </div>
         <div className="card card-block">
-          <h3 className="card-title">Casas</h3>
-          <button type="button" className="btn btn-primary" data-toggle="collapse" data-target="#addHouse">Adicionar casa</button>
+          <div className="row">
+            <div className="col-6">
+              <h3 className="card-title">Casas</h3>
+            </div>
+            <div className="col-6">
+              <button type="button" className="btn btn-primary float-right" data-toggle="collapse" data-target="#addHouse">Adicionar casa</button>
+            </div>
+          </div>
           <div className="row">
             {this.props.houses.map((h, i) => {
               return (
