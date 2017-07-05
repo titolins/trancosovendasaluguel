@@ -20,7 +20,7 @@ class Contact extends React.Component {
           </ul>
           <ul>
             <h3 className="contactTitle">e-mail</h3>
-            <li className="ml-5 contactText">contact@trancosovendasaluguel.com</li>
+            <li className="ml-5 contactText">contato@trancosovendasaluguel.com</li>
             <li className="ml-5 contactText">tamitrancoso@hotmail.com</li>
             <li className="ml-5 contactText">tamitrancoso@gmail.com</li>
           </ul>
