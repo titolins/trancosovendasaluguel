@@ -6,6 +6,8 @@ import { mapStateToProps } from 'admin/containers/pictures'
 
 import { UPLOAD_STATE } from 'admin/actions'
 
+import Modal from 'admin/components/modal'
+
 class Pictures extends React.Component {
   constructor(props) {
     super(props)
@@ -81,13 +83,26 @@ class Pictures extends React.Component {
 
     return (
       <div className="card">
+        <div className="card-header">
+          <ul className="nav nav-pills card-header-pills">
+            <li className="nav-item">
+              <a data-toggle="modal" data-target="#createFolderModal" className="nav-link" href="#">Criar pasta</a>
+            </li>
+          </ul>
+        </div>
+        <Modal id="createFolderModal" title="Criar pasta">
+          <form id="createFolder" method="PUT" action="/admin/api/folder">
+            <input type="text" name="name" id="name"></input>
+            <input type="submit" className="btn btn-primary" value="Enviar"></input>
+          </form>
+        </Modal>
         <div className="card-block">
           <div className="row">
             <div className="col-6">
               <h3 className="card-title">Imagens</h3>
             </div>
             <div className="col-6">
-              <button type="button" className="btn btn-success float-right" data-toggle="modal" data-target="#add-modal">Adicionar</button>
+              <button type="button" className="btn btn-success float-right" data-toggle="modal" data-target="#addModal">Adicionar</button>
             </div>
           </div>
           <div className="row">
@@ -95,72 +110,51 @@ class Pictures extends React.Component {
               return (
                 <div key={i} className="col-xs-12 col-md-6">
                   <div className="card">
-                    <a href="#" data-toggle="modal" data-target={`#p-modal-${i}`}>
+                    <a href="#" data-toggle="modal" data-target={`#pModal${i}`}>
                       <img className="card-img-top img-fluid" src={p.url} />
                     </a>
                     <div className="card-block">
                       <button type="button" onClick={this.props.handleDelete(p,this.updateData)} className="btn btn-danger">Deletar</button>
                     </div>
                   </div>
-                  <div className="modal fade" id={`p-modal-${i}`} tabIndex="-1" role="dialog" aria-labelledby={`p-modal-${i}-title`} aria-hidden="true">
-                    <div className="modal-dialog" role="document">
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <button type="button" className="close" data-dismiss="modal" aria-label="Fechar">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div className="modal-body">
-                          <img className="img-fluid" src={p.url} />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <Modal id={`pModal${i}`}>
+                    <img className="img-fluid" src={p.url} />
+                  </Modal>
                 </div>
               )
             })}
           </div>
-          <div className="modal fade" id="add-modal" tabIndex="-1" role="dialog" aria-labelledby="add-modal-title">
-            <div className="modal-dialog" role="document">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title" id="add-modal-title">Adicionar imagens</h5>
-                  <button type="button" className="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+          <Modal id="addModal" title="Adicionar Imagens">
+            <div>
+              { this.props.uploadState.errors.length > 0 ?
+                  (<div className="alert alert-danger" role="alert">
+                    <h4 className="alert-heading">Oops! Tivemos algum problema durante o envio dos arquivos</h4>
+                    <ul>
+                    {this.props.uploadState.errors.map((e,i)=>{
+                      return (
+                        <li key={i}>{e}</li>
+                      )
+                    })}
+                  </ul></div>) :
+                  null
+              }
+              <form name="uploadPictures" id="addModal" onSubmit={this.props.handleSubmit(this.getPostData(),this.updateData)}>
+                <label className="custom-file">
+                  <input type="file" id="file" className="custom-file-input"
+                    name="pictures" multiple accept=".jpg,.png"
+                    value={this.state.pictures} onChange={this.onChange}/>
+                  <span className="custom-file-control"></span>
+                </label>
+                <div className="container-fluid">
+                  <div className="row">{fs}</div>
                 </div>
-                <div className="modal-body">
-                  { this.props.uploadState.errors.length > 0 ?
-                      (<div className="alert alert-danger" role="alert">
-                        <h4 className="alert-heading">Oops! Tivemos algum problema durante o envio dos arquivos</h4>
-                        <ul>
-                        {this.props.uploadState.errors.map((e,i)=>{
-                          return (
-                            <li key={i}>{e}</li>
-                          )
-                        })}
-                      </ul></div>) :
-                      null
-                  }
-                  <form name="uploadPictures" id="addModal" onSubmit={this.props.handleSubmit(this.getPostData(),this.updateData)}>
-                    <label className="custom-file">
-                      <input type="file" id="file" className="custom-file-input"
-                        name="pictures" multiple accept=".jpg,.png"
-                        value={this.state.pictures} onChange={this.onChange}/>
-                      <span className="custom-file-control"></span>
-                    </label>
-                    <div className="container-fluid">
-                      <div className="row">{fs}</div>
-                    </div>
-                    { this.props.uploadState.state === UPLOAD_STATE.AVAILABLE ?
-                        (<input type="submit" className="btn btn-primary" value="Subir imagens" />) :
-                        (<div className="alert alert-info" role="alert">Subindo imagens. Por favor aguarde..</div>)
-                    }
-                  </form>
-                </div>
-              </div>
+                { this.props.uploadState.state === UPLOAD_STATE.AVAILABLE ?
+                    (<input type="submit" className="btn btn-primary" value="Subir imagens" />) :
+                    (<div className="alert alert-info" role="alert">Subindo imagens. Por favor aguarde..</div>)
+                }
+              </form>
             </div>
-          </div>
+          </Modal>
         </div>
       </div>
     )
