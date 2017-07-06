@@ -38,7 +38,7 @@ class Houses extends React.Component {
         }
       }
     }
-    this.state = Object.assign({}, this.initialState)
+    this.state = JSON.parse(JSON.stringify(this.initialState))
     window.house = this
   }
 
@@ -57,9 +57,6 @@ class Houses extends React.Component {
 
   getData() {
     let data = JSON.parse(JSON.stringify(this.state))
-    data.capacity = `${data.minCapacity}/${data.maxCapacity}`
-    delete data.minCapacity
-    delete data.maxCapacity
     data.content['pt_br'].features = this.state.content['pt_br'].features.split(';')
     data.content['en_us'].features = this.state.content['en_us'].features.split(';')
     if(this.state.category.name !== "sales") delete data.type
@@ -80,6 +77,14 @@ class Houses extends React.Component {
         break
       case 'featured':
         state[field] = e.target.checked
+        break
+      case 'minCapacity':
+        if (e.target.value > document.getElementById('maxCapacity').value) return
+        state[field] = e.target.value
+        break
+      case 'maxCapacity':
+        if (e.target.value < document.getElementById('minCapacity').value) return
+        state[field] = e.target.value
         break
       case 'features_pt':
         state.content['pt_br'].features = e.target.value
@@ -201,11 +206,11 @@ class Houses extends React.Component {
                   </div>) : '' }
                 <div className="form-group col-2">
                   <label className="col-form-label" htmlFor="minCapacity">Capacidade mínima</label>
-                  <input className="form-control" type="number" step="1" min="1" id="minCapacity" name="minCapacity" value={this.state.capacity} onChange={this.handleChange}></input>
+                  <input className="form-control" type="number" step="1" min="1" id="minCapacity" name="minCapacity" value={this.state.minCapacity} onChange={this.handleChange}></input>
                 </div>
                 <div className="form-group col-2">
                   <label className="col-form-label" htmlFor="maxCapacity">Capacidade máxima</label>
-                  <input className="form-control" type="number" step="1" min="1" id="maxCapacity" name="maxCapacity" value={this.state.capacity} onChange={this.handleChange}></input>
+                  <input className="form-control" type="number" step="1" min="1" id="maxCapacity" name="maxCapacity" value={this.state.maxCapacity} onChange={this.handleChange}></input>
                 </div>
               </div>
               <div className="form-group">
