@@ -6,6 +6,7 @@ export const filterItems = (items, lang) => {
     // in future, if we need an item id, we should enforce it here
     return {
       cover: item.cover,
+      name: item.name,
       content: item.content[lang],
       // dev stuff
       pictures: item.pictures,

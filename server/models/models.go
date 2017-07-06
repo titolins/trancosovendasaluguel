@@ -50,6 +50,11 @@ type (
         Featured []House `json:"featured" bson:"featured"`
     }
 
+    Capacity struct{
+        Min int `json:"min,string" bson:"min"`
+        Max int `json:"max,string" bson:"max"`
+    }
+
     House struct {
         ID  bson.ObjectId `json:"id" bson:"_id,omitempty"`
         Name string `json:"name" bson:"name"`
@@ -58,8 +63,7 @@ type (
         Category Category `json:"category" bson:"category"`
         Type Type `json:"type,string" bson:"type"`
         Featured bool `json:"featured" bson:"featured"`
-        MinCapacity int `json:"minCapacity,string" bson:"minCapacity"`
-        MaxCapacity int `json:"maxCapacity,string" bson:"maxCapacity"`
+        Capacity Capacity `json:"capacity" bson:"capacity"`
         Cover Picture `json:"cover" bson:"cover"`
         Pictures []Picture `json:"pictures,omitempty" bson:"pictures,omitempty"`
         Content TranslatableContent `json:"content" bson:"content"`

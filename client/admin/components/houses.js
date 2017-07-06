@@ -20,8 +20,10 @@ class Houses extends React.Component {
       category: { name: "rent" },
       type: "0",
       featured: false,
-      minCapacity: "1",
-      maxCapacity: "1",
+      capacity: {
+        min: "1",
+        max: "1",
+      },
       cover: {
         id: "",
         url: ""
@@ -64,8 +66,9 @@ class Houses extends React.Component {
   }
 
   updateData() {
-    this.setState(this.initialState)
+    this.setState(JSON.parse(JSON.stringify(this.initialState)))
     this.props.update()
+    $("#addHouse").collapse("hide")
   }
 
   handleChange(e) {
@@ -79,12 +82,12 @@ class Houses extends React.Component {
         state[field] = e.target.checked
         break
       case 'minCapacity':
-        if (e.target.value > document.getElementById('maxCapacity').value) return
-        state[field] = e.target.value
+        if (e.target.value > state.capacity.max) return
+        state.capacity.min = e.target.value
         break
       case 'maxCapacity':
-        if (e.target.value < document.getElementById('minCapacity').value) return
-        state[field] = e.target.value
+        if (e.target.value < state.capacity.min) return
+        state.capacity.max = e.target.value
         break
       case 'features_pt':
         state.content['pt_br'].features = e.target.value
@@ -206,11 +209,11 @@ class Houses extends React.Component {
                   </div>) : '' }
                 <div className="form-group col-2">
                   <label className="col-form-label" htmlFor="minCapacity">Capacidade mínima</label>
-                  <input className="form-control" type="number" step="1" min="1" id="minCapacity" name="minCapacity" value={this.state.minCapacity} onChange={this.handleChange}></input>
+                  <input className="form-control" type="number" step="1" min="1" id="minCapacity" name="minCapacity" value={this.state.capacity.min} onChange={this.handleChange}></input>
                 </div>
                 <div className="form-group col-2">
                   <label className="col-form-label" htmlFor="maxCapacity">Capacidade máxima</label>
-                  <input className="form-control" type="number" step="1" min="1" id="maxCapacity" name="maxCapacity" value={this.state.maxCapacity} onChange={this.handleChange}></input>
+                  <input className="form-control" type="number" step="1" min="1" id="maxCapacity" name="maxCapacity" value={this.state.capacity.max} onChange={this.handleChange}></input>
                 </div>
               </div>
               <div className="form-group">
@@ -326,7 +329,7 @@ class Houses extends React.Component {
                       <img className="card-img-top img-fluid" src={h.cover.url} />
                     </a>
                     <div className="card-block">
-                      <h3 className="card-title">{h.content['pt_br'].name}</h3>
+                      <h3 className="card-title">{h.name}</h3>
                       <p className="card-text">{h.content['pt_br'].description}</p>
                       <button type="button" onClick={this.props.handleDelete(h,this.updateData)} className="btn btn-danger">Deletar</button>
                     </div>

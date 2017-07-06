@@ -31,7 +31,11 @@ const buildPicturesHandler = (store, token) => {
     get: () => {
       getContentReq(url, token, res=> {
         if(res && res.message && res.message === "Unauthorized") store.dispatch(revokeJWTToken())
-        else store.dispatch(updatePictures(res))})
+        else {
+          store.dispatch(setUploadErrors({errors:[]}))
+          store.dispatch(updatePictures(res))
+        }
+      })
     },
     post: (data, callback) => {
       return (e) => {
@@ -62,7 +66,11 @@ const buildHousesHandler = (store, token) => {
     get: () => {
       getContentReq(url, token, res=> {
         if(res && res.message && res.message === "Unauthorized") store.dispatch(revokeJWTToken())
-        else store.dispatch(updateHouses(res))})
+        else {
+          store.dispatch(setPostErrors({errors:{}}))
+          store.dispatch(updateHouses(res))
+        }
+      })
     },
     create: (data, callback) => {
       return (e) => {
