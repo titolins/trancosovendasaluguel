@@ -20,10 +20,31 @@ import {
   setUploadErrors,
   updateHouses,
   setPostErrors,
+  setPostSuccess,
   revokeJWTToken,
 } from 'admin/actions'
 
 const reload = () => window.location = window.location
+
+const buildFoldersHandler = (store, token) => {
+  let url = '/admin/api/folder'
+  return {
+    create: (data) => {//, callback) => {
+      console.log(data)
+      return (e) => {
+        e.preventDefault()
+        putContentReq(url, token, data, (res) => {
+          if(res.error) store.dispatch(setPostErrors(res.errors))
+          else {
+            store.dispatch(setPostSuccess())
+            //store.dispatch(updateHouses(res))
+            //callback()
+          }
+        })
+      }
+    },
+  }
+}
 
 const buildPicturesHandler = (store, token) => {
   let url = '/admin/api/picture'
@@ -67,7 +88,7 @@ const buildHousesHandler = (store, token) => {
       getContentReq(url, token, res=> {
         if(res && res.message && res.message === "Unauthorized") store.dispatch(revokeJWTToken())
         else {
-          store.dispatch(setPostErrors({errors:{}}))
+          store.dispatch(setPostSuccess())
           store.dispatch(updateHouses(res))
         }
       })
@@ -76,8 +97,11 @@ const buildHousesHandler = (store, token) => {
       return (e) => {
         e.preventDefault()
         putContentReq(url, token, data, (res) => {
-          if(res.error) store.dispatch(setPostErrors({errors:res.errors}))
-          else callback()
+          if(res.error) store.dispatch(setPostErrors(res.errors))
+          else {
+            store.dispatch(setPostSuccess())
+            callback()
+          }
         })
       }
     },
@@ -94,13 +118,14 @@ const buildHousesHandler = (store, token) => {
 const buildRoutes = (store, token) => {
   let picturesHandler = buildPicturesHandler(store, token)
   let housesHandler = buildHousesHandler(store, token)
+  let foldersHandler = buildFoldersHandler(store, token)
 
    return (
     <Switch>
       <Route exact path="/admin/" component={Intro} />
       <Route path="/admin/imagens" render={ () => {
         picturesHandler.get()
-        return (<Pictures update={picturesHandler.get} handleDelete={picturesHandler.del} handleSubmit={picturesHandler.post}/>)
+        return (<Pictures handleCreateFolder={foldersHandler.create} update={picturesHandler.get} handleDelete={picturesHandler.del} handleSubmit={picturesHandler.post}/>)
       } } />
       <Route path="/admin/casas" render={ () => {
         housesHandler.get()
