@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 
 import { mapStateToProps } from 'admin/containers/houses'
 
+import Modal from 'admin/components/modal'
+
 class Houses extends React.Component {
   constructor(props) {
     super(props)
@@ -136,37 +138,26 @@ class Houses extends React.Component {
 
   render() {
     let buildImagesModal = (cover) => {
-      let id = `select${cover ? 'Cover' : 'Images'}Modal`,
-          title = `${id}Title`
+      let id = `select${cover ? 'Cover' : 'Images'}Modal`
 
       return (
-        <div className="modal fade" id={id} tabIndex="-1" role="dialog" aria-labelledby={title} aria-hidden="true">
-          <div className="modal-dialog" role="document">
-            <div className="modal-header">
-              <h5 className="modal-title" id={title}>Selecionar {cover ? "imagem de capa" : "imagens"}</h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Fechar">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <div className="row">
-                { this.props.pictures.map((p,i) => {
-                    let selected = (this.state.pictures.indexOf(p) !== -1)
-                    let key = cover ? `cover-${i}` : `imgs-${i}`
-                    return (
-                      <div className="col-xs-12 col-md-6" key={key}>
-                        <div className={`card${(this.state.cover.id === p.id || selected) ? ' selected' : ''}`} onClick={cover ? this.setCoverImg(p) : (this.state.cover.id === p.id) ? '' : this.selectImg(p)}>
-                          <img className="card-img-top img-fluid" src={p.url} />
-                        </div>
-                        { selected ? <button className="close" onClick={this.removeImg(p)} aria-label="Remover"><span aria-hidden="true">&times;</span></button> : '' }
-                      </div>
-                    )
-                  })
-                }
-              </div>
-            </div>
+        <Modal id={id} title={`Selecionar ${cover ? "imagem de capa" : "imagens"}`}>
+          <div className="row">
+            { this.props.pictures.map((p,i) => {
+                let selected = (this.state.pictures.indexOf(p) !== -1)
+                let key = cover ? `cover-${i}` : `imgs-${i}`
+                return (
+                  <div className="col-xs-12 col-md-6" key={key}>
+                    <div className={`card${(this.state.cover.id === p.id || selected) ? ' selected' : ''}`} onClick={cover ? this.setCoverImg(p) : (this.state.cover.id === p.id) ? '' : this.selectImg(p)}>
+                      <img className="card-img-top img-fluid" src={p.url} />
+                    </div>
+                    { selected ? <button className="close" onClick={this.removeImg(p)} aria-label="Remover"><span aria-hidden="true">&times;</span></button> : '' }
+                  </div>
+                )
+              })
+            }
           </div>
-        </div>
+        </Modal>
       )
     }
     return (
@@ -325,7 +316,7 @@ class Houses extends React.Component {
               return (
                 <div key={i} className="col-xs-12 col-md-6">
                   <div className="card">
-                    <a href="#" data-toggle="modal" data-target={`#p-modal-${i}`}>
+                    <a href="#" data-toggle="modal" data-target={`#pModal${i}`}>
                       <img className="card-img-top img-fluid" src={h.cover.url} />
                     </a>
                     <div className="card-block">
@@ -334,20 +325,9 @@ class Houses extends React.Component {
                       <button type="button" onClick={this.props.handleDelete(h,this.updateData)} className="btn btn-danger">Deletar</button>
                     </div>
                   </div>
-                  <div className="modal fade" id={`p-modal-${i}`} tabIndex="-1" role="dialog" aria-labelledby={`p-modal-${i}-title`} aria-hidden="true">
-                    <div className="modal-dialog" role="document">
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <button type="button" className="close" data-dismiss="modal" aria-label="Fechar">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div className="modal-body">
-                          <img className="img-fluid" src="" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <Modal id={`pModal${i}`}>
+                    <img className="img-fluid" src={h.cover.url} />
+                  </Modal>
                 </div>
               )
             })}
