@@ -53,8 +53,8 @@ func (api *API) deleteHouse(c echo.Context) (err error) {
 
     if err = db.DB("tva").C("categories").Update(&bson.M{
         "name": h.Category.Name,
-    }, map[string]interface{}{
-        "$pull": map[string]interface{}{ "items": h },
+    }, &bson.M{
+        "$pull": &bson.M{ "items": h },
     }); err != nil {
         log.Printf("error getting category")
     }
@@ -176,8 +176,10 @@ func (api *API) createHouse(c echo.Context) (err error) {
     log.Printf("category from house:\n%s", h.Category)
     if err = db.DB("tva").C("categories").Update(&bson.M{
         "name": h.Category.Name,
-    }, map[string]interface{}{
-        "$push": map[string]interface{}{ "items": h },
+    }, &bson.M{
+        "$push": &bson.M{ "items": &bson.M{
+            "$each": []models.House{ h },
+            "$sort": &bson.M{ "capacity.max": 1 } } },
     }); err != nil {
         log.Printf("error getting category")
     }
