@@ -8,7 +8,7 @@ import {
   SET_UPLOAD_STATE,
   SET_UPLOAD_ERRORS,
   UPDATE_HOUSES,
-  SET_POST_ERRORS,
+  SET_POST_STATE,
 } from './actions'
 
 const initialTokenState = { token: "" }
@@ -65,13 +65,15 @@ export function upload(state = initialUploadState, action) {
 }
 
 const initialPostState = {
-  errors: {}
+  errors: {},
+  success: false
 }
 
 export function post(state = initialPostState, action) {
   switch (action.type) {
-    case SET_POST_ERRORS:
-      return Object.assign({}, state, action.errors)
+    case SET_POST_STATE:
+      console.log(action.state)
+      return Object.assign({}, state, action.state)
     default:
       return state
   }

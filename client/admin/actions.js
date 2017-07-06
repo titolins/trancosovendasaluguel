@@ -55,11 +55,27 @@ export function updateHouses(houses) {
   }
 }
 
-export const SET_POST_ERRORS = 'SET_POST_ERRORS'
+
+export const SET_POST_STATE = 'SET_POST_STATE'
 
 export function setPostErrors(errors) {
   return {
-    type: SET_POST_ERRORS,
-    errors
+    type: SET_POST_STATE,
+    state: {
+      success: false,
+      errors
+    },
   }
 }
+
+export function setPostSuccess() {
+  return {
+    type: SET_POST_STATE,
+    state: {
+      success: true,
+      errors: {}
+    }
+  }
+}
+
+
