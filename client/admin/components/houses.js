@@ -314,14 +314,13 @@ class Houses extends React.Component {
             <div className="row">
               {this.props.houses.map((h, i) => {
                 return (
-                  <div key={i} className="col-xs-12 col-md-6">
+                  <div key={i} className="col-xs-12 col-sm-6 col-md-4 col-lg-2">
                     <div className="card">
                       <a href="#" data-toggle="modal" data-target={`#pModal${i}`}>
                         <img className="card-img-top img-fluid" src={h.cover.url} />
                       </a>
                       <div className="card-block">
-                        <h3 className="card-title">{h.name}</h3>
-                        <p className="card-text">{h.content['pt_br'].description}</p>
+                        <h5 className="card-title">{h.name}</h5>
                         <button type="button" onClick={this.props.handleDelete(h,this.updateData)} className="btn btn-danger">Deletar</button>
                       </div>
                     </div>
