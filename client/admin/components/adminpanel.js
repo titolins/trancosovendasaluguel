@@ -21,6 +21,7 @@ import {
   updateHouses,
   setPostErrors,
   setPostSuccess,
+  updateFolders,
   revokeJWTToken,
 } from 'admin/actions'
 
@@ -29,8 +30,15 @@ const reload = () => window.location = window.location
 const buildFoldersHandler = (store, token) => {
   let url = '/admin/api/folder'
   return {
+    get: () => {
+      getContentReq(url, token, res=> {
+        if(res && res.message && res.message === "Unauthorized") store.dispatch(revokeJWTToken())
+        else {
+          store.dispatch(updateFolders(res))
+        }
+      })
+    },
     create: (data) => {//, callback) => {
-      console.log(data)
       return (e) => {
         e.preventDefault()
         putContentReq(url, token, data, (res) => {
@@ -53,7 +61,6 @@ const buildPicturesHandler = (store, token) => {
       getContentReq(url, token, res=> {
         if(res && res.message && res.message === "Unauthorized") store.dispatch(revokeJWTToken())
         else {
-          store.dispatch(setUploadErrors({errors:[]}))
           store.dispatch(updatePictures(res))
         }
       })
@@ -88,7 +95,6 @@ const buildHousesHandler = (store, token) => {
       getContentReq(url, token, res=> {
         if(res && res.message && res.message === "Unauthorized") store.dispatch(revokeJWTToken())
         else {
-          store.dispatch(setPostSuccess())
           store.dispatch(updateHouses(res))
         }
       })
@@ -125,11 +131,13 @@ const buildRoutes = (store, token) => {
       <Route exact path="/admin/" component={Intro} />
       <Route path="/admin/imagens" render={ () => {
         picturesHandler.get()
+        foldersHandler.get()
         return (<Pictures handleCreateFolder={foldersHandler.create} update={picturesHandler.get} handleDelete={picturesHandler.del} handleSubmit={picturesHandler.post}/>)
       } } />
       <Route path="/admin/casas" render={ () => {
         housesHandler.get()
         picturesHandler.get()
+        foldersHandler.get()
         return (<Houses update={housesHandler.get} handleDelete={housesHandler.del} handleCreate={housesHandler.create}/>)
       } } />
       <Redirect to="/admin/" />

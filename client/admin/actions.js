@@ -55,6 +55,15 @@ export function updateHouses(houses) {
   }
 }
 
+export const UPDATE_FOLDERS = 'UPDATE_FOLDERS'
+
+export function updateFolders(folders) {
+  return {
+    type: UPDATE_FOLDERS,
+    folders
+  }
+}
+
 
 export const SET_POST_STATE = 'SET_POST_STATE'
 
