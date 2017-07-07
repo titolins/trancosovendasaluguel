@@ -87,7 +87,6 @@ class Pictures extends React.Component {
           reader = new FileReader(),
           url = reader.readAsDataURL(file)
 
-        window.reader = reader
         reader.onload = e=>document.getElementById(id).setAttribute('src', [reader.result])
     }
   }
@@ -135,10 +134,10 @@ class Pictures extends React.Component {
           </div>
           <div className="card-block">
             <h3 className="card-title">{folder.name}</h3>
-            <div className="card-deck">
+            <div className="row">
               { folder.pictures.map((p,i) => {
                 return (
-                  <Picture key={i} url={p.url} pictureId={`${id}_Picture${i}`} handleDelete={this.props.handleDelete(p, this.updateData)} />
+                  <Picture key={i} url={p.url} pictureId={`${id}_Picture${i}`} handleDelete={this.props.handleDelete(p, folder, this.updateData)} />
                 )})
               }
             </div>
@@ -146,7 +145,7 @@ class Pictures extends React.Component {
         </div>
       </div>)
 
-      cs.push(<Folder key={i} handleClick={this.openFolder(folder)} target={`#${id}`} />)
+      cs.push(<Folder key={i} handleClick={this.openFolder(folder)} folderName={folder.name} target={`#${id}`} />)
     })
 
     return (
@@ -161,7 +160,7 @@ class Pictures extends React.Component {
             </ul>
           </div>
           <div className="card-block">
-            <div className="card-deck">
+            <div className="row">
               { cs }
             </div>
           </div>
@@ -205,6 +204,11 @@ class Pictures extends React.Component {
                   </ul></div>) :
                   null
               }
+              { this.props.uploadState.state === UPLOAD_STATE.SUCCESS ? 
+                  (<div className="alert alert-success" role="alert">
+                    Imagens adicionadas com sucesso!
+                  </div>) :
+                  '' }
               <form name="uploadPictures" id="uploadForm" onSubmit={this.props.handleSubmit(this.getPostData(),this.updateData)}>
                 <input type="hidden" name="folderId" id="folderId" value={this.state.openFolder.id} />
                 <label className="custom-file">
@@ -216,9 +220,9 @@ class Pictures extends React.Component {
                 <div className="container-fluid">
                   <div className="row">{fs}</div>
                 </div>
-                { this.props.uploadState.state === UPLOAD_STATE.AVAILABLE ?
-                    (<input type="submit" className="btn btn-primary" value="Subir imagens" />) :
-                    (<div className="alert alert-info" role="alert">Subindo imagens. Por favor aguarde..</div>)
+                { this.props.uploadState.state === UPLOAD_STATE.BUSY ?
+                    (<div className="alert alert-info" role="alert">Subindo imagens. Por favor aguarde..</div>) :
+                    (<input type="submit" className="btn btn-primary" value="Subir imagens" />)
                 }
               </form>
             </div>

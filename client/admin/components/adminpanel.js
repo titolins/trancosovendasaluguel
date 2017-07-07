@@ -64,19 +64,23 @@ const buildPicturesHandler = (store, token) => {
         postFilesReq(url, token, data, (res) => {
           res.json().then((json)=>{
             if(json.error) {
+              // 2 dispatches isn't cool... we should merge upload state and
+              // errors (it does make sense afterall.. - similar to how we did
+              // with post status)
               store.dispatch(setUploadState({state:UPLOAD_STATE.AVAILABLE}))
               store.dispatch(setUploadErrors({errors:json.errors}))
             } else {
               store.dispatch(setUploadState({state:UPLOAD_STATE.SUCCESS}))
+              store.dispatch(setUploadErrors({errors:[]}))
               callback()
             }
           })
         })
       }
     },
-    del: (data, callback) => {
+    del: (picture, folder, callback) => {
       return () => {
-        deleteContentReq(url, token, data, (res)=> {
+        deleteContentReq(url, token, {picture, folder}, (res)=> {
           callback()
         })
       }

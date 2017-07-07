@@ -43,7 +43,6 @@ class Houses extends React.Component {
       }
     }
     this.state = JSON.parse(JSON.stringify(this.initialState))
-    window.house = this
   }
 
   showTranslatableContent(e) {
