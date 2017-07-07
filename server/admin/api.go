@@ -43,6 +43,7 @@ func (api *API) Bind(group *echo.Group) {
 
     group.GET("/folder", api.getAllFolders)
     group.PUT("/folder", api.createFolder)
+    group.DELETE("/folder", api.deleteFolder)
 }
 
 func (api *API) deleteHouse(c echo.Context) (err error) {
@@ -66,6 +67,24 @@ func (api *API) deleteHouse(c echo.Context) (err error) {
         log.Printf("%s", err)
         return
     }
+    return
+}
+
+func (api *API) deleteFolder(c echo.Context) (err error) {
+    var f models.PictureFolder
+
+    if err = c.Bind(&f); err != nil {
+        return
+    }
+
+    db := api.DB.Clone()
+    defer db.Close()
+
+    if err = db.DB("tva").C("folders").RemoveId(f.ID); err != nil {
+        log.Printf("%s", err)
+        return
+    }
+
     return
 }
 

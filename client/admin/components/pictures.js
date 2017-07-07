@@ -145,7 +145,7 @@ class Pictures extends React.Component {
         </div>
       </div>)
 
-      cs.push(<Folder key={i} handleClick={this.openFolder(folder)} folderName={folder.name} target={`#${id}`} />)
+      cs.push(<Folder key={i} handleDelete={this.props.deleteFolder(folder, this.props.update)} handleClick={this.openFolder(folder)} folderName={folder.name} target={`#${id}`} />)
     })
 
     return (
@@ -165,7 +165,7 @@ class Pictures extends React.Component {
             </div>
           </div>
           <Modal id="createFolderModal" title="Criar pasta">
-            <form id="createFolder" onSubmit={this.props.handleCreateFolder(this.state.folder)}>
+            <form id="createFolder" onSubmit={this.props.handleCreateFolder(this.state.folder, this.props.update)}>
               { this.props.postState.success ? (
                 <div className="alert alert-success" role="alert">
                   Pasta criada com sucesso!
