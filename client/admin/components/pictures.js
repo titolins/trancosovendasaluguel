@@ -135,10 +135,13 @@ class Pictures extends React.Component {
           </div>
           <div className="card-block">
             <h3 className="card-title">{folder.name}</h3>
-            { folder.pictures.map((p,i) => {
-              <Picture key={i} url={p.url} pictureId={`${id}_Picture${i}`} handleDelete={this.props.handleDelete(p, this.updateData)} />
-              })
-            }
+            <div className="card-deck">
+              { folder.pictures.map((p,i) => {
+                return (
+                  <Picture key={i} url={p.url} pictureId={`${id}_Picture${i}`} handleDelete={this.props.handleDelete(p, this.updateData)} />
+                )})
+              }
+            </div>
           </div>
         </div>
       </div>)
