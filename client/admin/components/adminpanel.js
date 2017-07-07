@@ -57,23 +57,19 @@ const buildFoldersHandler = (store, token) => {
 const buildPicturesHandler = (store, token) => {
   let url = '/admin/api/picture'
   return {
-    get: () => {
-      getContentReq(url, token, res=> {
-        if(res && res.message && res.message === "Unauthorized") store.dispatch(revokeJWTToken())
-        else {
-          store.dispatch(updatePictures(res))
-        }
-      })
-    },
     post: (data, callback) => {
       return (e) => {
         e.preventDefault()
         store.dispatch(setUploadState({state:UPLOAD_STATE.BUSY}))
         postFilesReq(url, token, data, (res) => {
-          store.dispatch(setUploadState({state:UPLOAD_STATE.AVAILABLE}))
           res.json().then((json)=>{
-            if(json.errors.length > 0) store.dispatch(setUploadErrors({errors:json.errors}))
-            else callback()
+            if(json.error) {
+              store.dispatch(setUploadState({state:UPLOAD_STATE.AVAILABLE}))
+              store.dispatch(setUploadErrors({errors:json.errors}))
+            } else {
+              store.dispatch(setUploadState({state:UPLOAD_STATE.SUCCESS}))
+              callback()
+            }
           })
         })
       }
@@ -130,13 +126,11 @@ const buildRoutes = (store, token) => {
     <Switch>
       <Route exact path="/admin/" component={Intro} />
       <Route path="/admin/imagens" render={ () => {
-        picturesHandler.get()
         foldersHandler.get()
-        return (<Pictures handleCreateFolder={foldersHandler.create} update={picturesHandler.get} handleDelete={picturesHandler.del} handleSubmit={picturesHandler.post}/>)
+        return (<Pictures handleCreateFolder={foldersHandler.create} update={foldersHandler.get} handleDelete={picturesHandler.del} handleSubmit={picturesHandler.post}/>)
       } } />
       <Route path="/admin/casas" render={ () => {
         housesHandler.get()
-        picturesHandler.get()
         foldersHandler.get()
         return (<Houses update={housesHandler.get} handleDelete={housesHandler.del} handleCreate={housesHandler.create}/>)
       } } />
