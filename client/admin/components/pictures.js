@@ -128,7 +128,7 @@ class Pictures extends React.Component {
           <div className="card-header">
             <ul className="nav nav-pills card-header-pills">
               <li className="nav-item">
-                <a data-toggle="modal" data-target="#uploadModal" className="nav-link active" href="#">Subir imagens</a>
+                <button type="button" data-toggle="modal" data-target="#uploadModal" className="btn btn-primary">Subir imagens</button>
               </li>
             </ul>
           </div>
@@ -155,11 +155,12 @@ class Pictures extends React.Component {
           <div className="card-header">
             <ul className="nav nav-pills card-header-pills">
               <li className="nav-item">
-                <a data-toggle="modal" data-target="#createFolderModal" className="nav-link active" href="#">Criar pasta</a>
+                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#createFolderModal">Criar pasta</button>
               </li>
             </ul>
           </div>
           <div className="card-block">
+            <h3 className="card-title">Pastas de Imagens</h3>
             <div className="row">
               { cs }
             </div>
