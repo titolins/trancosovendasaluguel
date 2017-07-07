@@ -301,35 +301,37 @@ class Houses extends React.Component {
             </form>
           </div>
         </div>
-        <div className="card card-block">
-          <div className="row">
-            <div className="col-6">
-              <h3 className="card-title">Casas</h3>
-            </div>
-            <div className="col-6">
-              <button type="button" className="btn btn-primary float-right" data-toggle="collapse" data-target="#addHouse">Adicionar casa</button>
-            </div>
+        <div className="card">
+          <div className="card-header">
+            <ul className="nav nav-pills card-header-pills">
+              <li className="nav-item">
+                <button type="button" className="btn btn-primary" data-toggle="collapse" data-target="#addHouse">Adicionar casa</button>
+              </li>
+            </ul>
           </div>
-          <div className="row">
-            {this.props.houses.map((h, i) => {
-              return (
-                <div key={i} className="col-xs-12 col-md-6">
-                  <div className="card">
-                    <a href="#" data-toggle="modal" data-target={`#pModal${i}`}>
-                      <img className="card-img-top img-fluid" src={h.cover.url} />
-                    </a>
-                    <div className="card-block">
-                      <h3 className="card-title">{h.name}</h3>
-                      <p className="card-text">{h.content['pt_br'].description}</p>
-                      <button type="button" onClick={this.props.handleDelete(h,this.updateData)} className="btn btn-danger">Deletar</button>
+          <div className="card-block">
+            <h3 className="card-title">Casas</h3>
+            <div className="row">
+              {this.props.houses.map((h, i) => {
+                return (
+                  <div key={i} className="col-xs-12 col-md-6">
+                    <div className="card">
+                      <a href="#" data-toggle="modal" data-target={`#pModal${i}`}>
+                        <img className="card-img-top img-fluid" src={h.cover.url} />
+                      </a>
+                      <div className="card-block">
+                        <h3 className="card-title">{h.name}</h3>
+                        <p className="card-text">{h.content['pt_br'].description}</p>
+                        <button type="button" onClick={this.props.handleDelete(h,this.updateData)} className="btn btn-danger">Deletar</button>
+                      </div>
                     </div>
+                    <Modal id={`pModal${i}`}>
+                      <img className="img-fluid" src={h.cover.url} />
+                    </Modal>
                   </div>
-                  <Modal id={`pModal${i}`}>
-                    <img className="img-fluid" src={h.cover.url} />
-                  </Modal>
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
           </div>
         </div>
       </div>
