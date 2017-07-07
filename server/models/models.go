@@ -16,13 +16,19 @@ const (
 
 type (
     User struct {
-        ID       string `json:"id,omitempty" bson:"_id,omitempty"`
+        ID       bson.ObjectId `json:"id,omitempty" bson:"_id,omitempty"`
         Username string `json:"user" bson:"username"`
         Password string `json:"pass" bson:"password"`
     }
 
+    PictureFolder struct {
+        ID bson.ObjectId `json:"id,omitempty" bson:"_id,omitempty"`
+        Name string `json:"name" bson:"name"`
+        Pictures []Picture `json:"pictures" bson:"pictures"`
+    }
+
     Picture struct {
-        ID  bson.ObjectId `json:"id" bson:"_id,omitempty"`
+        ID  bson.ObjectId `json:"id,omitempty" bson:"_id,omitempty"`
         Url string `json:"url" bson:"url"`
     }
 
