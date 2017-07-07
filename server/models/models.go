@@ -74,6 +74,11 @@ type (
         Pictures []Picture `json:"pictures,omitempty" bson:"pictures,omitempty"`
         Content TranslatableContent `json:"content" bson:"content"`
     }
+
+    DeletePicture struct {
+        Folder PictureFolder `json:"folder"`
+        Picture Picture `json:"picture"`
+    }
 )
 
 

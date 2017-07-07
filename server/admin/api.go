@@ -70,8 +70,8 @@ func (api *API) deleteHouse(c echo.Context) (err error) {
 }
 
 func (api *API) deletePicture(c echo.Context) (err error) {
-    var p models.Picture
-    if err = c.Bind(&p); err != nil {
+    var d models.DeletePicture
+    if err = c.Bind(&d); err != nil {
         return
     }
 
@@ -80,11 +80,14 @@ func (api *API) deletePicture(c echo.Context) (err error) {
     db := api.DB.Clone()
     defer db.Close()
 
-    if err = db.DB("tva").C("pictures").Remove(p); err != nil {
+    if err = db.DB("tva").C("folders").UpdateId(d.Folder.ID, &bson.M{
+        "$pull": &bson.M{ "pictures": d.Picture },
+    }); err != nil {
         return
     }
 
-    return os.Remove(path.Join("server",p.Url))
+    return
+    //return os.Remove(path.Join("server",p.Url))
 }
 
 func (api *API) getAllFolders(c echo.Context) (err error) {
