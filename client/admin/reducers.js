@@ -8,6 +8,7 @@ import {
   SET_UPLOAD_STATE,
   SET_UPLOAD_ERRORS,
   UPDATE_HOUSES,
+  UPDATE_FOLDERS,
   SET_POST_STATE,
 } from './actions'
 
@@ -46,7 +47,18 @@ let houses = (state = initialHousesState, action) => {
   }
 }
 
-export const data = combineReducers({pictures, houses})
+const initialFoldersState = []
+
+let folders = (state = initialFoldersState, action) => {
+  switch (action.type) {
+    case UPDATE_FOLDERS:
+      return action.folders ? action.folders.slice() : []
+    default:
+      return state
+  }
+}
+
+export const data = combineReducers({pictures, houses, folders})
 
 const initialUploadState = {
   state: UPLOAD_STATE.AVAILABLE,
@@ -72,7 +84,6 @@ const initialPostState = {
 export function post(state = initialPostState, action) {
   switch (action.type) {
     case SET_POST_STATE:
-      console.log(action.state)
       return Object.assign({}, state, action.state)
     default:
       return state

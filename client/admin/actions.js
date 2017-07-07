@@ -24,8 +24,9 @@ export function updatePictures(pictures) {
 }
 
 export const UPLOAD_STATE = {
-  AVAILABLE: 'AVAILABLE',
-  BUSY: 'BUSY'
+  AVAILABLE: 'UPLOAD_STATE_AVAILABLE',
+  BUSY: 'UPLOAD_STATE_BUSY',
+  SUCCESS: 'UPLOAD_STATE_SUCCESS'
 }
 
 export const SET_UPLOAD_STATE = 'SET_UPLOAD_STATE'
