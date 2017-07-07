@@ -8,19 +8,64 @@ import { UPLOAD_STATE } from 'admin/actions'
 
 import Modal from 'admin/components/modal'
 
+import Folder from 'admin/components/folder'
+import Picture from 'admin/components/picture'
+
+
 class Pictures extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
+      openFolder: {},
       pictures: "",
       uploadFiles: "",
+      folder: {
+        name: "",
+      }
     }
 
+    this.openFolder = this.openFolder.bind(this)
+    this.handleChange = this.handleChange.bind(this)
     this.onChange = this.onChange.bind(this)
     this.loadPreview = this.loadPreview.bind(this)
     this.getPostData = this.getPostData.bind(this)
     this.updateData = this.updateData.bind(this)
+  }
+
+  openFolder(f) {
+    return (e) => {
+      e.preventDefault()
+
+      let openFolder = document.getElementsByClassName('triggerCollapse active')[0],
+          target = e.target,
+          state = this.state
+      while(!target.classList.contains('triggerCollapse')) target = target.parentNode
+
+      // remove active from active btn and hide it's target
+      if (openFolder) {
+        $(openFolder.dataset.trigger).collapse('hide')
+        openFolder.classList.remove("active")
+        state.openFolder = {}
+      }
+
+      if (target === openFolder) {
+        this.setState(state)
+        return
+      }
+
+      // add active to target and show it's target
+      $(target.dataset.trigger).collapse('show')
+      target.classList.add("active")
+      state.openFolder = f
+      this.setState(state)
+    }
+  }
+
+  handleChange(e) {
+    let state = this.state
+    state.folder[e.target.name] = e.target.value
+    this.setState(state)
   }
 
   updateData() {
@@ -32,14 +77,7 @@ class Pictures extends React.Component {
   }
 
   getPostData() {
-    /*
-    let nFiles = this.state.uploadFiles.length,
-        data = new FormData()
-    data.append('name', 'uploadPictures')
-    data.append('pictures', this.state.uploadFiles)
-    */
-
-    return new FormData(document.getElementById("addModal"))
+    return new FormData(document.getElementById("uploadForm"))
   }
 
   loadPreview() {
@@ -70,8 +108,10 @@ class Pictures extends React.Component {
   }
 
   render() {
-    let fs = []
-    for(var i = 0; i < this.state.uploadFiles.length; i++) {
+    let fs = [],
+        ps = [],
+        cs = []
+    for(let i = 0; i < this.state.uploadFiles.length; i++) {
       let id = `up-img-${i}`,
           file = this.state.uploadFiles[i]
       fs.push(<div className="col-xs-12 col-md-6" key={i}>
@@ -81,50 +121,74 @@ class Pictures extends React.Component {
               </div>)
     }
 
-    return (
-      <div className="card">
-        <div className="card-header">
-          <ul className="nav nav-pills card-header-pills">
-            <li className="nav-item">
-              <a data-toggle="modal" data-target="#createFolderModal" className="nav-link" href="#">Criar pasta</a>
-            </li>
-          </ul>
+    this.props.folders.map((folder,i) => {
+      let id = `folderPanel${i}`
+
+      ps.push(<div className="collapse folderPanel" key={i} id={id}>
+        <div className="card">
+          <div className="card-header">
+            <ul className="nav nav-pills card-header-pills">
+              <li className="nav-item">
+                <a data-toggle="modal" data-target="#uploadModal" className="nav-link active" href="#">Subir imagens</a>
+              </li>
+            </ul>
+          </div>
+          <div className="card-block">
+            <h3 className="card-title">{folder.name}</h3>
+            { folder.pictures.map((p,i) => {
+              <Picture key={i} url={p.url} pictureId={`${id}_Picture${i}`} handleDelete={this.props.handleDelete(p, this.updateData)} />
+              })
+            }
+          </div>
         </div>
-        <Modal id="createFolderModal" title="Criar pasta">
-          <form id="createFolder" method="PUT" action="/admin/api/folder">
-            <input type="text" name="name" id="name"></input>
-            <input type="submit" className="btn btn-primary" value="Enviar"></input>
-          </form>
-        </Modal>
-        <div className="card-block">
-          <div className="row">
-            <div className="col-6">
-              <h3 className="card-title">Imagens</h3>
-            </div>
-            <div className="col-6">
-              <button type="button" className="btn btn-success float-right" data-toggle="modal" data-target="#addModal">Adicionar</button>
+      </div>)
+
+      cs.push(<Folder key={i} handleClick={this.openFolder(folder)} target={`#${id}`} />)
+    })
+
+    return (
+      <div>
+        { ps }
+        <div className="card">
+          <div className="card-header">
+            <ul className="nav nav-pills card-header-pills">
+              <li className="nav-item">
+                <a data-toggle="modal" data-target="#createFolderModal" className="nav-link active" href="#">Criar pasta</a>
+              </li>
+            </ul>
+          </div>
+          <div className="card-block">
+            <div className="card-deck">
+              { cs }
             </div>
           </div>
-          <div className="row">
-            {this.props.pictures.map((p, i) => {
-              return (
-                <div key={i} className="col-xs-12 col-md-6">
-                  <div className="card">
-                    <a href="#" data-toggle="modal" data-target={`#pModal${i}`}>
-                      <img className="card-img-top img-fluid" src={p.url} />
-                    </a>
-                    <div className="card-block">
-                      <button type="button" onClick={this.props.handleDelete(p,this.updateData)} className="btn btn-danger">Deletar</button>
-                    </div>
-                  </div>
-                  <Modal id={`pModal${i}`}>
-                    <img className="img-fluid" src={p.url} />
-                  </Modal>
+          <Modal id="createFolderModal" title="Criar pasta">
+            <form id="createFolder" onSubmit={this.props.handleCreateFolder(this.state.folder)}>
+              { this.props.postState.success ? (
+                <div className="alert alert-success" role="alert">
+                  Pasta criada com sucesso!
                 </div>
-              )
-            })}
-          </div>
-          <Modal id="addModal" title="Adicionar Imagens">
+              ) : '' }
+              { this.props.postState.errors.create ? (
+                <div className="alert alert-danger" role="alert">
+                  { this.props.postState.errors.create }
+                </div>
+              ) : "" }
+              <div className={`form-group row${this.props.postState.errors.name ? " has-danger" : "" }`}>
+                <div className="col-sm-2">
+                  <label htmlFor="name" className="col-form-label">Nome</label>
+                </div>
+                <div className="col-sm-10">
+                  <input className="form-control" type="text" name="name" id="name" onChange={this.handleChange} value={this.state.folder.name}></input>
+                  {this.props.postState.errors.name? (
+                    <div className="form-control-feedback">{this.props.postState.errors.name}</div>
+                  ) : ''}
+                </div>
+              </div>
+              <input type="submit" className="btn btn-primary" value="Criar"></input>
+            </form>
+          </Modal>
+          <Modal id="uploadModal" title="Subir Imagens">
             <div>
               { this.props.uploadState.errors.length > 0 ?
                   (<div className="alert alert-danger" role="alert">
@@ -138,7 +202,8 @@ class Pictures extends React.Component {
                   </ul></div>) :
                   null
               }
-              <form name="uploadPictures" id="addModal" onSubmit={this.props.handleSubmit(this.getPostData(),this.updateData)}>
+              <form name="uploadPictures" id="uploadForm" onSubmit={this.props.handleSubmit(this.getPostData(),this.updateData)}>
+                <input type="hidden" name="folderId" id="folderId" value={this.state.openFolder.id} />
                 <label className="custom-file">
                   <input type="file" id="file" className="custom-file-input"
                     name="pictures" multiple accept=".jpg,.png"
