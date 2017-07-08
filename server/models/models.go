@@ -4,8 +4,6 @@ import (
     "gopkg.in/mgo.v2/bson"
 )
 
-type Type int
-
 const (
     HOUSE_TYPE Type = iota
     LOT_TYPE
@@ -15,6 +13,10 @@ const (
 )
 
 type (
+    Content interface{}
+
+    Type int
+
     User struct {
         ID       bson.ObjectId `json:"id,omitempty" bson:"_id,omitempty"`
         Username string `json:"user" bson:"username"`
@@ -24,6 +26,7 @@ type (
     PictureFolder struct {
         ID bson.ObjectId `json:"id,omitempty" bson:"_id,omitempty"`
         Name string `json:"name" bson:"name"`
+        Cover Picture `json:"cover" bson:"cover"`
         Pictures []Picture `json:"pictures" bson:"pictures"`
     }
 
@@ -32,14 +35,12 @@ type (
         Url string `json:"url" bson:"url"`
     }
 
-    Content interface{}
-
     TranslatableContent struct {
         PT_BR Content `json:"pt_br" bson:"pt_br"`
         EN_US Content `json:"en_us" bson:"en_us"`
     }
 
-    CategoryContent struct{
+    CategoryContent struct {
         Title string `json:"title" bson:"title"`
     }
 
@@ -48,7 +49,7 @@ type (
         Features []string `json:"features" bson:"features"`
     }
 
-    Category struct{
+    Category struct {
         ID  bson.ObjectId `json:"id,omitempty" bson:"_id,omitempty"`
         Name string `json:"name" bson:"name"`
         Content TranslatableContent `json:"content" bson:"content"`
@@ -56,7 +57,7 @@ type (
         Featured []House `json:"featured" bson:"featured"`
     }
 
-    Capacity struct{
+    Capacity struct {
         Min int `json:"min,string" bson:"min"`
         Max int `json:"max,string" bson:"max"`
     }
@@ -70,15 +71,14 @@ type (
         Type Type `json:"type,string" bson:"type"`
         Featured bool `json:"featured" bson:"featured"`
         Capacity Capacity `json:"capacity" bson:"capacity"`
-        Cover Picture `json:"cover" bson:"cover"`
-        Pictures []Picture `json:"pictures,omitempty" bson:"pictures,omitempty"`
+        PictureFolder PictureFolder `json:"pictureFolder,omitempty" bson:"pictureFolder,omitempty"`
+        Pictures []Picture `json:"pictures" bson:"pictures"`
         Content TranslatableContent `json:"content" bson:"content"`
     }
 
-    DeletePicture struct {
+    PictureOpPayload struct {
         Folder PictureFolder `json:"folder"`
         Picture Picture `json:"picture"`
     }
 )
-
 

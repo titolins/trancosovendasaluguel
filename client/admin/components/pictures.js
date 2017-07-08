@@ -22,15 +22,34 @@ class Pictures extends React.Component {
       uploadFiles: "",
       folder: {
         name: "",
-      }
+      },
+      cover: {}
     }
 
+    this.selectCover = this.selectCover.bind(this)
     this.openFolder = this.openFolder.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.onChange = this.onChange.bind(this)
     this.loadPreview = this.loadPreview.bind(this)
     this.getPostData = this.getPostData.bind(this)
     this.updateData = this.updateData.bind(this)
+  }
+
+  selectCover(p) {
+    return (e) => {
+      e.preventDefault()
+
+      let selImg = document.getElementsByClassName("card selected")[0],
+          target = e.target
+      while (!target.classList.contains("card")) target = target.parentNode
+
+      if (selImg) selImg.classList.remove("selected")
+      target.classList.add("selected")
+
+      let state = this.state
+      state.cover = p
+      this.setState(state)
+    }
   }
 
   openFolder(f) {
@@ -135,6 +154,39 @@ class Pictures extends React.Component {
           <div className="card-block">
             <h3 className="card-title">{folder.name}</h3>
             <div className="row">
+              <div className="col-sm-4">
+                <h5>Imagem de capa</h5>
+                <button type="button" data-toggle="modal" data-target="#coverModal" className="btn btn-primary">Selecionar capa</button>
+                <Modal id="coverModal">
+                  <div className="row">
+                    { folder.pictures.map((p,i) => {
+                      return (
+                        <div key={i} className="col-sm-6 col-md-4">
+                          <div className="card">
+                            <a href="#" onClick={this.selectCover(p)}>
+                              <img className="card-img-top img-fluid" src={p.url} />
+                            </a>
+                          </div>
+                        </div>
+                      )})
+                    }
+                  </div>
+                  <button className="btn btn-primary" onClick={this.props.selectCover(this.state.cover, folder, this.props.update) }>Selecionar</button>
+                </Modal>
+              </div>
+              { folder.cover.url ?
+                  (<div className="col-sm-6 col-md-4">
+                    <div className="card">
+                      <img className="card-img-top img-fluid" src={folder.cover.url} />
+                    </div>
+                  </div>) :
+                  'Você não selecionou uma imagem de capa para esta pasta ainda.'
+              }
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <h5>Imagens</h5>
+              </div>
               { folder.pictures.map((p,i) => {
                 return (
                   <Picture key={i} url={p.url} pictureId={`${id}_Picture${i}`} handleDelete={this.props.handleDelete(p, folder, this.updateData)} />

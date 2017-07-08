@@ -51,6 +51,14 @@ const buildFoldersHandler = (store, token) => {
         })
       }
     },
+    selectCover: (picture, folder, callback) => {
+      return (e) => {
+        e.preventDefault()
+        putContentReq(`${url}/cover`, token, {picture, folder}, (res) => {
+          if(!res.error) callback()
+        })
+      }
+    },
     delete: (data, callback) => {
       return (e) => {
         e.preventDefault()
@@ -139,7 +147,7 @@ const buildRoutes = (store, token) => {
       <Route exact path="/admin/" component={Intro} />
       <Route path="/admin/imagens" render={ () => {
         foldersHandler.get()
-        return (<Pictures deleteFolder={foldersHandler.delete} handleCreateFolder={foldersHandler.create} update={foldersHandler.get} handleDelete={picturesHandler.del} handleSubmit={picturesHandler.post}/>)
+        return (<Pictures selectCover={foldersHandler.selectCover} deleteFolder={foldersHandler.delete} handleCreateFolder={foldersHandler.create} update={foldersHandler.get} handleDelete={picturesHandler.del} handleSubmit={picturesHandler.post}/>)
       } } />
       <Route path="/admin/casas" render={ () => {
         housesHandler.get()

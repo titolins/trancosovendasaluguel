@@ -5,11 +5,13 @@ import { connect } from 'react-redux'
 import { mapStateToProps } from 'admin/containers/houses'
 
 import Modal from 'admin/components/modal'
+import Folder from 'admin/components/folder'
 
 class Houses extends React.Component {
   constructor(props) {
     super(props)
 
+    this.selectFolder = this.selectFolder.bind(this)
     this.showTranslatableContent = this.showTranslatableContent.bind(this)
     this.getData = this.getData.bind(this)
     this.updateData = this.updateData.bind(this)
@@ -26,11 +28,7 @@ class Houses extends React.Component {
         min: "1",
         max: "1",
       },
-      cover: {
-        id: "",
-        url: ""
-      },
-      pictures: [],
+      pictureFolder: {},
       content: {
         'pt_br': {
           description: "",
@@ -43,6 +41,18 @@ class Houses extends React.Component {
       }
     }
     this.state = JSON.parse(JSON.stringify(this.initialState))
+
+    window.houses = this
+  }
+
+  selectFolder(folder) {
+    return (e) => {
+      e.preventDefault()
+      let state = this.state
+      console.log(state)
+      state.pictureFolder = folder
+      this.setState(state)
+    }
   }
 
   showTranslatableContent(e) {
@@ -136,6 +146,7 @@ class Houses extends React.Component {
   }
 
   render() {
+    /*
     let buildImagesModal = (cover) => {
       let id = `select${cover ? 'Cover' : 'Images'}Modal`
 
@@ -159,8 +170,19 @@ class Houses extends React.Component {
         </Modal>
       )
     }
+    */
     return (
       <div>
+        <Modal title="Pastas de imagens" id="foldersModal">
+          <div className="row">
+          {this.props.folders.map((f,i) => {
+            return (
+              <div key={i} className="col-sm-6 col-md-4">
+                <Folder folderName={f.name} handleClick={this.selectFolder(f)} />
+              </div>)
+          })}
+          </div>
+        </Modal>
         <div className="collapse" id="addHouse">
           <div className="card card-block">
             <h3 className="card-title">Adicionar casa</h3>
@@ -214,41 +236,19 @@ class Houses extends React.Component {
                   Se marcada essa opção, essa casa irá aparecer na página principal, na área de destaque da sua respectiva categoria. Caso contrário, para o usuário visualizá-la ele precisará entrar na página da categoria, através do link na barra de navegação.
                 </p>
               </div>
-              <div className={`form-group row${this.props.postState.errors.cover? " has-danger" : "" }`}>
-                <div className="col-sm-2">
-                  <label className="col-form-label">Foto de capa</label>
-                  <div>
-                    <button type="button" data-toggle="modal" data-target="#selectCoverModal" className="btn btn-info">Selecionar</button>
-                  </div>
-                </div>
-                <div className="col-sm-10">
-                  <img className="img-fluid" src={this.state.cover.url}></img>
-                  {this.props.postState.errors.cover? (
-                    <div className="form-control-feedback">{this.props.postState.errors.cover}</div>
-                  ) : ''}
-                </div>
-                { buildImagesModal(true) }
-              </div>
               <div className="form-group row">
-                <div className="col-sm-2">
-                  <label className="col-form-label">Fotos</label>
+                <div className="col-sm-4">
+                  <label className="col-form-label">Pasta de imagens</label>
                   <div>
-                    <button type="button" data-toggle="modal" data-target="#selectImagesModal" className="btn btn-info">Selecionar</button>
+                    <a href="#" className="btn btn-info" data-toggle="modal" data-target="#foldersModal">Selecionar pasta</a>
                   </div>
                 </div>
-                <div className="col-sm-10">
-                  <div className="row">
-                    { this.state.pictures.map((p,i) => {
-                      return (
-                        <div className="col-xs-12 col-md-6" key={i}>
-                          <img className="img-fluid" src={p.url}></img>
-                        </div>
-                      )
-                      })
-                    }
-                  </div>
+                <div className="col-sm-8">
+                  { this.state.pictureFolder.name ?
+                      (<Folder folderName={this.state.pictureFolder.name} />) :
+                      ''
+                  }
                 </div>
-                { buildImagesModal(false) }
               </div>
               <div className="form-group row">
                 <label className="col-sm-2 col-form-label">Conteúdo</label>
@@ -317,7 +317,7 @@ class Houses extends React.Component {
                   <div key={i} className="col-xs-12 col-sm-6 col-md-4 col-lg-2">
                     <div className="card">
                       <a href="#" data-toggle="modal" data-target={`#pModal${i}`}>
-                        <img className="card-img-top img-fluid" src={h.cover.url} />
+                        <img className="card-img-top img-fluid" src={''/*h.cover.url*/} />
                       </a>
                       <div className="card-block">
                         <h5 className="card-title">{h.name}</h5>
@@ -325,7 +325,7 @@ class Houses extends React.Component {
                       </div>
                     </div>
                     <Modal id={`pModal${i}`}>
-                      <img className="img-fluid" src={h.cover.url} />
+                      <img className="img-fluid" src={''/*h.cover.url*/} />
                     </Modal>
                   </div>
                 )

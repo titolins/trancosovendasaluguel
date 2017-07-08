@@ -44,6 +44,8 @@ func (api *API) Bind(group *echo.Group) {
     group.GET("/folder", api.getAllFolders)
     group.PUT("/folder", api.createFolder)
     group.DELETE("/folder", api.deleteFolder)
+
+    group.PUT("/folder/cover", api.selectCover)
 }
 
 func (api *API) deleteHouse(c echo.Context) (err error) {
@@ -89,7 +91,7 @@ func (api *API) deleteFolder(c echo.Context) (err error) {
 }
 
 func (api *API) deletePicture(c echo.Context) (err error) {
-    var d models.DeletePicture
+    var d models.PictureOpPayload
     if err = c.Bind(&d); err != nil {
         return
     }
@@ -169,7 +171,7 @@ func (api *API) createHouse(c echo.Context) (err error) {
     hErrors := map[string]interface{}{
         "name": nil,
         "description": nil,
-        "cover": nil,
+        //"cover": nil,
     }
     /*
     if len(res.errors) == 0 {
@@ -189,29 +191,30 @@ func (api *API) createHouse(c echo.Context) (err error) {
     }
     */
 
-    db := api.DB.Clone()
-    defer db.Close()
+    /*
     if n, err := db.DB("tva").C("pictures").FindId(h.Cover.ID).Count(); err != nil || n == 0 {
         hErrors["cover"] = "Selecione uma imagem válida"
     }
+    */
 
     if hErrors["name"] != nil ||
-        hErrors["description"] != nil ||
+        hErrors["description"] != nil {
         //hErrors["featured"] != nil ||
-        hErrors["cover"] != nil {
+        //hErrors["cover"] != nil {
         return c.JSON(500, map[string]interface{}{
             "error": true,
             "errors": hErrors,
         })
     }
 
+    db := api.DB.Clone()
+    defer db.Close()
     h.ID = bson.NewObjectId()
     if err = db.DB("tva").C("houses").Insert(&h); err != nil {
         log.Printf("error inserting house into db:\n%s", err)
         return
     }
 
-    log.Printf("category from house:\n%s", h.Category)
     if err = db.DB("tva").C("categories").Update(&bson.M{
         "name": h.Category.Name,
     }, &bson.M{
@@ -219,7 +222,8 @@ func (api *API) createHouse(c echo.Context) (err error) {
             "$each": []models.House{ h },
             "$sort": &bson.M{ "capacity.max": 1 } } },
     }); err != nil {
-        log.Printf("error getting category")
+        log.Printf("error getting category:\n%s", err)
+        return
     }
 
     return c.JSON(200, map[string]bool{
@@ -307,6 +311,24 @@ func (api *API) uploadPictures(c echo.Context) (err error) {
     return c.JSON(200, map[string]bool{ "error": false })
 }
 
+func (api *API) selectCover(c echo.Context) (err error) {
+    var p models.PictureOpPayload
+
+    if err = c.Bind(&p); err != nil {
+        log.Printf("%s", err)
+        return
+    }
+
+    db := api.DB.Clone()
+    defer db.Close()
+    if err = db.DB("tva").C("folders").UpdateId(p.Folder.ID, &bson.M{ "$set": &bson.M{ "cover": p.Picture }}); err != nil {
+        return
+    }
+
+    return c.JSON(200, map[string]bool{ "error": false })
+
+}
+
 func (api *API) createFolder(c echo.Context) (err error) {
     var f models.PictureFolder
     errors := make(map[string]string)
@@ -315,10 +337,6 @@ func (api *API) createFolder(c echo.Context) (err error) {
         log.Printf("%s", err)
         return
     }
-
-    log.Printf("f:\n%s", f)
-    log.Printf("f.Name:\n%s", f.Name)
-    log.Printf("len(f.Name):\n%d", len(f.Name))
 
     if len(f.Name) < 4 {
         log.Printf("thats it")
