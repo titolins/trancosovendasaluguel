@@ -87,6 +87,10 @@ func (api *API) deleteFolder(c echo.Context) (err error) {
         return
     }
 
+    if err = updateHouseFolder(db, f.ID); err != nil {
+        return
+    }
+
     return
 }
 
@@ -104,6 +108,10 @@ func (api *API) deletePicture(c echo.Context) (err error) {
     if err = db.DB("tva").C("folders").UpdateId(d.Folder.ID, &bson.M{
         "$pull": &bson.M{ "pictures": d.Picture },
     }); err != nil {
+        return
+    }
+
+    if err = updateHouseFolder(db, d.Folder.ID); err != nil {
         return
     }
 
@@ -294,10 +302,16 @@ func (api *API) uploadPictures(c echo.Context) (err error) {
         defer db.Close()
 
         if bson.IsObjectIdHex(form.Value["folderId"][0]) {
-            if err = db.DB("tva").C("folders").UpdateId(bson.ObjectIdHex(form.Value["folderId"][0]), &bson.M{
+            fId := bson.ObjectIdHex(form.Value["folderId"][0])
+            if err = db.DB("tva").C("folders").UpdateId(fId, &bson.M{
                 "$push": &bson.M{ "pictures": &bson.M{
                     "$each": validPictures}}}); err != nil {
                 errors = append(errors, "Erro ao inserir imagens no banco de dados")
+            } else {
+                if err = updateHouseFolder(db, fId); err != nil {
+                    log.Printf("error updating houses:\n%s", err)
+                    return
+                }
             }
         } else {
             errors = append(errors, "Id da pasta inválido")
@@ -404,4 +418,15 @@ func (api *API) createFolder(c echo.Context) (err error) {
     }
 
     return c.JSON(200, map[string]bool{"error":false})
+}
+
+// helpers
+
+func updateHouseFolder(db *mgo.Session, fId bson.ObjectId) (err error) {
+    var f models.PictureFolder
+    if err = db.DB("tva").C("folders").FindId(fId).One(&f); err != nil && err != mgo.ErrNotFound {
+        return
+    }
+
+    return db.DB("tva").C("houses").Update(&bson.M{"pictureFolder._id":fId}, &bson.M{ "$set": &bson.M{ "pictureFolder": f }})
 }

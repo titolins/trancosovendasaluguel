@@ -72,7 +72,6 @@ type (
         Featured bool `json:"featured" bson:"featured"`
         Capacity Capacity `json:"capacity" bson:"capacity"`
         PictureFolder PictureFolder `json:"pictureFolder,omitempty" bson:"pictureFolder,omitempty"`
-        Pictures []Picture `json:"pictures" bson:"pictures"`
         Content TranslatableContent `json:"content" bson:"content"`
     }
 
