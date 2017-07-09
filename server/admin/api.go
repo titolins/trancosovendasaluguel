@@ -57,6 +57,17 @@ func (api *API) deleteHouse(c echo.Context) (err error) {
     db := api.DB.Clone()
     defer db.Close()
 
+    for _, c := range h.Categories {
+        if err = db.DB("tva").C("categories").Update(&bson.M{
+            "name": c,
+        }, &bson.M{
+            "$pull": &bson.M{ "items": h.ID },
+        }); err != nil {
+            log.Printf("error removing house from category:\n%s", err)
+            return
+        }
+    }
+    /*
     if err = db.DB("tva").C("categories").Update(&bson.M{
         "name": h.Category.Name,
     }, &bson.M{
@@ -64,6 +75,7 @@ func (api *API) deleteHouse(c echo.Context) (err error) {
     }); err != nil {
         log.Printf("error getting category")
     }
+    */
 
     if err = db.DB("tva").C("houses").RemoveId(h.ID); err != nil {
         log.Printf("%s", err)
@@ -87,7 +99,7 @@ func (api *API) deleteFolder(c echo.Context) (err error) {
         return
     }
 
-    if err = updateHouseFolder(db, f.ID); err != nil {
+    if err = updateHouseFolder(db, f.ID); err != nil && err != mgo.ErrNotFound {
         return
     }
 
@@ -111,7 +123,7 @@ func (api *API) deletePicture(c echo.Context) (err error) {
         return
     }
 
-    if err = updateHouseFolder(db, d.Folder.ID); err != nil {
+    if err = updateHouseFolder(db, d.Folder.ID); err != nil && err != mgo.ErrNotFound {
         return
     }
 
@@ -174,11 +186,11 @@ func (api *API) createHouse(c echo.Context) (err error) {
     ptContent := h.Content.PT_BR.(map[string]interface{})
     enContent := h.Content.EN_US.(map[string]interface{})
 
-    /* validation should be done below
-    */
+    // validation should be done below
     hErrors := map[string]interface{}{
         "name": nil,
         "description": nil,
+        "categories": nil,
         //"cover": nil,
     }
     /*
@@ -186,6 +198,9 @@ func (api *API) createHouse(c echo.Context) (err error) {
         err = db.DB("tva").C("pictures").Insert(&models.Picture{ Url: url })
     }
     */
+    if len(h.Categories) < 1 {
+        hErrors["categories"] = "A casa deve ter ao menos uma categoria"
+    }
     if len(h.Name) < 4 {
         hErrors["name"] = "Campo 'nome' deve ter ao menos 4 caractéres"
     }
@@ -223,6 +238,17 @@ func (api *API) createHouse(c echo.Context) (err error) {
         return
     }
 
+    for _, c:= range h.Categories {
+        if err = db.DB("tva").C("categories").Update(&bson.M{
+            "name": c,
+        }, &bson.M{
+            "$push": &bson.M{ "items": h.ID },
+        }); err != nil {
+            log.Printf("error pushing house into category:\n%s", err)
+            return
+        }
+    }
+    /*
     if err = db.DB("tva").C("categories").Update(&bson.M{
         "name": h.Category.Name,
     }, &bson.M{
@@ -233,6 +259,7 @@ func (api *API) createHouse(c echo.Context) (err error) {
         log.Printf("error getting category:\n%s", err)
         return
     }
+    */
 
     return c.JSON(200, map[string]bool{
         "error": false,
@@ -308,7 +335,7 @@ func (api *API) uploadPictures(c echo.Context) (err error) {
                     "$each": validPictures}}}); err != nil {
                 errors = append(errors, "Erro ao inserir imagens no banco de dados")
             } else {
-                if err = updateHouseFolder(db, fId); err != nil {
+                if err = updateHouseFolder(db, fId); err != nil && err != mgo.ErrNotFound {
                     log.Printf("error updating houses:\n%s", err)
                     return
                 }

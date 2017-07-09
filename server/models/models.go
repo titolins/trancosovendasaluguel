@@ -53,7 +53,9 @@ type (
         ID  bson.ObjectId `json:"id,omitempty" bson:"_id,omitempty"`
         Name string `json:"name" bson:"name"`
         Content TranslatableContent `json:"content" bson:"content"`
-        Items []House `json:"items" bson:"items"`
+        Items []House `json:"items,omitempty" bson:"items,omitempty"`
+        // houses comes from aggregation, so no bson?
+        //Houses []House `json:"houses" bson:"houses"`
         Featured []House `json:"featured" bson:"featured"`
     }
 
@@ -67,7 +69,7 @@ type (
         Name string `json:"name" bson:"name"`
         // we use interface here because we won't actually use the full
         // category struct (only id will matter to us here)
-        Category Category `json:"category" bson:"category"`
+        Categories []string `json:"categories" bson:"categories"`
         Type Type `json:"type,string" bson:"type"`
         Featured bool `json:"featured" bson:"featured"`
         Capacity Capacity `json:"capacity" bson:"capacity"`

@@ -10,9 +10,9 @@ export const filterItems = (items, lang) => {
       content: item.content[lang],
       // dev stuff
       pictures: item.pictures,
-      categoryId: item.category.name,
+      //categoryId: item.category.name,
       id: item.id,
-      url: `/categorias/${item.category.name}/casas/${item.id}`
+      url: `/categorias/${item.categories[0]}/casas/${item.id}`
       // when we have the id info from the server we can build the url by
       // concatenation with `${}`
       //url: '/categorias/1/casas/1'

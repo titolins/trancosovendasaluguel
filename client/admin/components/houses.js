@@ -11,6 +11,8 @@ class Houses extends React.Component {
   constructor(props) {
     super(props)
 
+    this.removeCategory = this.removeCategory.bind(this)
+    this.addCategory = this.addCategory.bind(this)
     this.selectFolder = this.selectFolder.bind(this)
     this.showTranslatableContent = this.showTranslatableContent.bind(this)
     this.getData = this.getData.bind(this)
@@ -21,7 +23,7 @@ class Houses extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.initialState = {
       name: "",
-      category: { name: "rent" },
+      categories: [],
       type: "0",
       featured: false,
       capacity: {
@@ -41,8 +43,27 @@ class Houses extends React.Component {
       }
     }
     this.state = JSON.parse(JSON.stringify(this.initialState))
+    this.categories = {
+      sales: "Vendas",
+      rent: "Aluguel",
+    }
+    this.selectedCategory = ''
 
     window.houses = this
+  }
+
+  removeCategory(i) {
+    return () => {
+      let state = this.state
+      state.categories.splice(i,1)
+      this.setState(state)
+    }
+  }
+
+  addCategory() {
+    let state = this.state
+    state.categories.push(this.selectedCategory.value)
+    this.setState(state)
   }
 
   selectFolder(folder) {
@@ -72,7 +93,7 @@ class Houses extends React.Component {
     let data = JSON.parse(JSON.stringify(this.state))
     data.content['pt_br'].features = this.state.content['pt_br'].features.split(';')
     data.content['en_us'].features = this.state.content['en_us'].features.split(';')
-    if(this.state.category.name !== "sales") delete data.type
+    //if(this.state.category.name !== "sales") delete data.type
     return data
   }
 
@@ -86,9 +107,6 @@ class Houses extends React.Component {
     let field = e.target.name,
         state = this.state
     switch(field) {
-      case 'category':
-        state[field].name = e.target.value
-        break
       case 'featured':
         state[field] = e.target.checked
         break
@@ -197,34 +215,65 @@ class Houses extends React.Component {
                 </div>
               </div>
               <div className="row">
-                <div className="form-group col-4">
-                  <label className="col-form-label" htmlFor="category">Categoria</label>
+                <div className={`form-group col-4${this.props.postState.errors.categories? " has-danger" : "" }`}>
+                  <label className="col-form-label" htmlFor="categories">Categorias</label>
                   <div>
-                    <select id="category" name="category" className="custom-select" value={this.state.category.name} onChange={this.handleChange}>
-                      <option value="rent">Aluguel</option>
-                      <option value="sales">Vendas</option>
+                    <select id="category" name="category" className="custom-select" ref={(input)=>this.selectedCategory = input}>
+                      { Object.keys(this.categories).map((c,i)=>{
+                        if (this.state.categories.indexOf(c) === -1) return (<option key={i} value={c}>{this.categories[c]}</option>)
+                      })}
+                    </select>
+                  </div>
+                  <a href="#" className="btn btn-info" onClick={this.addCategory}>Adicionar</a>
+                </div>
+                <div className="col-8">
+                  { this.state.categories.length < 1 ?
+                      "Você ainda não selecionou nenhuma categoria" :
+                      this.state.categories.map((c, i) => {
+                        return (
+                          <div key={i} className="row">
+                            <div className="col-10">
+                              <input value={this.categories[c]} disabled className="form-control" />
+                            </div>
+                            <div className="col-2">
+                              <a href="#" onClick={this.removeCategory(i)} className="btn btn-danger">
+                                <span aria-hidden="true">&times;</span>
+                              </a>
+                            </div>
+                          </div>
+                        )
+                      })
+                  }
+                  { this.props.postState.errors.categories ?
+                      (<div className="alert alert-danger" role="alert">{this.props.postState.errors.categories}</div>) :
+                      ''
+                  }
+                </div>
+              </div>
+              <div className="row">
+                <div className="form-group col-4">
+                  <label className="col-form-label" htmlFor="type">Tipo de imóvel</label>
+                  <div>
+                    <select name="type" id="type" className="custom-select" value={this.state.type} onChange={this.handleChange}>
+                      <option value="0">Casa</option>
+                      <option value="1">Terreno</option>
+                      <option value="2">Fazenda</option>
+                      <option value="3">Terreno</option>
+                      <option value="4">Pousada</option>
                     </select>
                   </div>
                 </div>
-                { this.state.category.name === "sales" ?
-                  (<div className="form-group col-4">
-                    <label className="col-form-label" htmlFor="type">Tipo de imóvel</label>
-                    <div>
-                      <select name="type" id="type" className="custom-select" value={this.state.type} onChange={this.handleChange}>
-                        <option value="0">Casa</option>
-                        <option value="1">Terreno</option>
-                        <option value="2">Fazenda</option>
-                        <option value="3">Terreno</option>
-                        <option value="4">Pousada</option>
-                      </select>
-                    </div>
-                  </div>) : '' }
-                <div className="form-group col-2">
-                  <label className="col-form-label" htmlFor="minCapacity">Capacidade mínima</label>
+              </div>
+              <div className="row form-group">
+                <div className="col-2">
+                  <label className="col-form-label">Capacidade</label>
+                </div>
+                <div className="col-2">
+                  <label className="col-form-label" htmlFor="minCapacity">Mínima</label>
                   <input className="form-control" type="number" step="1" min="1" id="minCapacity" name="minCapacity" value={this.state.capacity.min} onChange={this.handleChange}></input>
                 </div>
-                <div className="form-group col-2">
-                  <label className="col-form-label" htmlFor="maxCapacity">Capacidade máxima</label>
+                <div className="col-2">
+                  <label className="col-form-label" htmlFor="maxCapacity">Máxima</label>
                   <input className="form-control" type="number" step="1" min="1" id="maxCapacity" name="maxCapacity" value={this.state.capacity.max} onChange={this.handleChange}></input>
                 </div>
               </div>
