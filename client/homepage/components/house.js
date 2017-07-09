@@ -12,12 +12,10 @@ const buildFeatures = (features) => {
 }
 
 class House extends React.Component {
-  constructor(props) {
-    super(props)
-    let { categoryId, houseId } = props.match.params
+  componentWillMount() {
+    let { categoryId, houseId } = this.props.match.params
     let url = `/api/categorias/${categoryId}/casas/${houseId}`
-    props.fetchContent(url)
-    window.house = this
+    this.props.fetchContent(url)
   }
 
   render() {

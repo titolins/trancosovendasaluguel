@@ -7,7 +7,6 @@ export const createFetchContentHandler = (dispatch, contentId) => {
     fetch(url).then((response) => {
       return response.json()
     }).then((responseJson) => {
-      console.log(responseJson)
       dispatch(addContent(responseJson, contentId))
     })
   }

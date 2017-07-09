@@ -4,7 +4,7 @@ const getHouseContent = (content, lang, contentId) => {
   let ownContent = content.dinamic[contentId].content[lang],
       capacity = content.dinamic[contentId].capacity,
       pictures = content.dinamic[contentId].pictureFolder.pictures
-  ownContent.capacity = `${capacity.min}/${capacity.max} ${content.static[contentId][lang].people}`
+  ownContent.capacity = `${capacity.min} ${lang === 'pt_br'? 'a' : 'to'} ${capacity.max} ${content.static[contentId][lang].people}`
   ownContent.pictures = pictures ? pictures : []
 
   return ownContent

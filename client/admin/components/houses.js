@@ -48,8 +48,6 @@ class Houses extends React.Component {
       rent: "Aluguel",
     }
     this.selectedCategory = ''
-
-    window.houses = this
   }
 
   removeCategory(i) {
@@ -70,7 +68,6 @@ class Houses extends React.Component {
     return (e) => {
       e.preventDefault()
       let state = this.state
-      console.log(state)
       state.pictureFolder = folder
       this.setState(state)
     }

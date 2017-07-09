@@ -25,9 +25,8 @@ import About from 'homepage/components/about'
 import CategoryByType from 'homepage/components/categorybytype'
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-    props.fetchContent("/api/categorias")
+  componentWillMount() {
+    this.props.fetchContent("/api/categorias")
   }
 
   render() {

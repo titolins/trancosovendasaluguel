@@ -9,7 +9,6 @@ export function getContentReq(url, token, callback){
 }
 
 export function putContentReq(url, token, data, callback) {
-  console.log(data)
   let content = {
     method: 'put',
     headers: {

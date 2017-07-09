@@ -6,10 +6,16 @@ import { mapStateToProps, mapDispatchToProps } from 'homepage/containers/categor
 import { buildItemsPanels } from 'homepage/components/featuredsection'
 
 class CategoryByType extends React.Component {
-  constructor(props) {
-    super(props)
-    let { categoryId, typeId } = props.match.params
-    props.fetchContent(`/api/categorias/${categoryId}/portipo/${typeId}`)
+  componentWillMount() {
+    let { categoryId, typeId } = this.props.match.params
+    this.props.fetchContent(`/api/categorias/${categoryId}/portipo/${typeId}`)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.match.params.typeId !== this.props.match.params.typeId) {
+      let { categoryId, typeId } = nextProps.match.params
+      this.props.fetchContent(`/api/categorias/${categoryId}/portipo/${typeId}`)
+    }
   }
 
   render() {
