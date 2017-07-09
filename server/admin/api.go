@@ -67,15 +67,6 @@ func (api *API) deleteHouse(c echo.Context) (err error) {
             return
         }
     }
-    /*
-    if err = db.DB("tva").C("categories").Update(&bson.M{
-        "name": h.Category.Name,
-    }, &bson.M{
-        "$pull": &bson.M{ "items": h },
-    }); err != nil {
-        log.Printf("error getting category")
-    }
-    */
 
     if err = db.DB("tva").C("houses").RemoveId(h.ID); err != nil {
         log.Printf("%s", err)
@@ -88,6 +79,7 @@ func (api *API) deleteFolder(c echo.Context) (err error) {
     var f models.PictureFolder
 
     if err = c.Bind(&f); err != nil {
+        log.Printf("error binding picturefolder model:\n%s", err)
         return
     }
 
@@ -95,11 +87,12 @@ func (api *API) deleteFolder(c echo.Context) (err error) {
     defer db.Close()
 
     if err = db.DB("tva").C("folders").RemoveId(f.ID); err != nil {
-        log.Printf("%s", err)
+        log.Printf("error removing folder:\n%s", err)
         return
     }
 
     if err = updateHouseFolder(db, f.ID); err != nil && err != mgo.ErrNotFound {
+        log.Printf("error updating house folder:\n%s", err)
         return
     }
 
@@ -120,10 +113,12 @@ func (api *API) deletePicture(c echo.Context) (err error) {
     if err = db.DB("tva").C("folders").UpdateId(d.Folder.ID, &bson.M{
         "$pull": &bson.M{ "pictures": d.Picture },
     }); err != nil {
+        log.Printf("error pulling picture from folder:\n%s", err)
         return
     }
 
     if err = updateHouseFolder(db, d.Folder.ID); err != nil && err != mgo.ErrNotFound {
+        log.Printf("error updating house folder:\n%s", err)
         return
     }
 
@@ -138,6 +133,7 @@ func (api *API) getAllFolders(c echo.Context) (err error) {
     defer db.Close()
 
     if err = db.DB("tva").C("folders").Find(bson.M{}).All(&fs); err != nil {
+        log.Printf("error getting all folders:\n%s", err)
         return
     }
 
@@ -151,6 +147,7 @@ func (api *API) getAllHouses(c echo.Context) (err error) {
     defer db.Close()
 
     if err = db.DB("tva").C("houses").Find(bson.M{}).All(&hs); err != nil {
+        log.Printf("error getting all houses:\n%s", err)
         return
     }
 
@@ -168,6 +165,7 @@ func (api *API) getAllPictures(c echo.Context) (err error) {
     defer db.Close()
 
     if err = db.DB("tva").C("pictures").Find(bson.M{}).All(&ps); err != nil {
+        log.Printf("error getting all pictures:\n%s", err)
         return
     }
 
@@ -178,10 +176,9 @@ func (api *API) createHouse(c echo.Context) (err error) {
     var h models.House
 
     if err = c.Bind(&h); err != nil {
-        log.Printf("%s", err)
+        log.Printf("error binding house model:\n%s", err)
         return
     }
-    log.Printf("%s", h)
 
     ptContent := h.Content.PT_BR.(map[string]interface{})
     enContent := h.Content.EN_US.(map[string]interface{})
@@ -248,18 +245,6 @@ func (api *API) createHouse(c echo.Context) (err error) {
             return
         }
     }
-    /*
-    if err = db.DB("tva").C("categories").Update(&bson.M{
-        "name": h.Category.Name,
-    }, &bson.M{
-        "$push": &bson.M{ "items": &bson.M{
-            "$each": []models.House{ h },
-            "$sort": &bson.M{ "capacity.max": 1 } } },
-    }); err != nil {
-        log.Printf("error getting category:\n%s", err)
-        return
-    }
-    */
 
     return c.JSON(200, map[string]bool{
         "error": false,
@@ -271,13 +256,7 @@ func (api *API) uploadPictures(c echo.Context) (err error) {
     if form, err = c.MultipartForm(); err != nil {
         return
     }
-    log.Printf("%s", form)
-    log.Printf("%s", form.Value["folderId"][0])
 
-    /*
-    res := map[string][]string{
-        "errors": []string{} }
-    */
     var errors []string
 
     if len(form.File["pictures"]) < 1 {
@@ -315,11 +294,7 @@ func (api *API) uploadPictures(c echo.Context) (err error) {
 
                 url := fmt.Sprintf("/static/uploads/%s", file.Filename)
                 validPictures = append(validPictures, models.Picture{ Url: url})
-                /*
-                if fErr = db.DB("tva").C("pictures").Insert(&models.Picture{ Url: url }); err != nil {
-                    errors = append(errors, fmt.Sprintf("Erro ao tentar inserir arquivo '%s' no banco de dados", file.Filename))
-                }
-                */
+
                 return
             }()
 
@@ -356,13 +331,14 @@ func (api *API) selectCover(c echo.Context) (err error) {
     var p models.PictureOpPayload
 
     if err = c.Bind(&p); err != nil {
-        log.Printf("%s", err)
+        log.Printf("error binding pictureoppayload model:\n%s", err)
         return
     }
 
     db := api.DB.Clone()
     defer db.Close()
     if err = db.DB("tva").C("folders").UpdateId(p.Folder.ID, &bson.M{ "$set": &bson.M{ "cover": p.Picture }}); err != nil {
+        log.Printf("error setting picturefolder cover")
         return
     }
 
@@ -375,12 +351,11 @@ func (api *API) createFolder(c echo.Context) (err error) {
     errors := make(map[string]string)
 
     if err = c.Bind(&f); err != nil {
-        log.Printf("%s", err)
+        log.Printf("error binding picturefolder model:\n%s", err)
         return
     }
 
     if len(f.Name) < 4 {
-        log.Printf("thats it")
         errors["name"] = "Nome da pasta deve ter ao menos 4 caractéres"
         return c.JSON(500, map[string]interface{}{ "error": true, "errors": errors})
     }
@@ -420,16 +395,6 @@ func (api *API) createFolder(c echo.Context) (err error) {
         return c.JSON(500, map[string]interface{}{ "error": true, "errors": errors })
     }
 
-    /* No need to actually mkdir
-    if err = os.Mkdir(path.Join("/srv/http/server/static/uploads",f.Name),os.ModeDir); err != nil {
-        if os.IsExist(err) {
-            errors["create"] = fmt.Sprintf("Pasta com nome '%s' já existe.", f.Name)
-        } else {
-            errors["create"] = fmt.Sprintf("Erro ao tentar criar diretório:\n%s", err)
-        }
-        return c.JSON(500, map[string]interface{}{ "error": true, "errors": errors })
-    }
-    */
 
     db := api.DB.Clone()
     defer db.Close()
@@ -452,6 +417,7 @@ func (api *API) createFolder(c echo.Context) (err error) {
 func updateHouseFolder(db *mgo.Session, fId bson.ObjectId) (err error) {
     var f models.PictureFolder
     if err = db.DB("tva").C("folders").FindId(fId).One(&f); err != nil && err != mgo.ErrNotFound {
+        log.Printf("error updating house folder:\n%s", err)
         return
     }
 

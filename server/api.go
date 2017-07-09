@@ -64,6 +64,7 @@ func (api *API) getAllCategoriesHandler(c echo.Context) (err error) {
                 "as": "f",
                 "cond": &bson.M{"$eq": []interface{}{"$$f.featured", true}}}}}},
     }).All(&cs); err != nil {
+        log.Printf("error getting all categories:\n%s", err)
         return
     }
 
@@ -74,26 +75,6 @@ func (api *API) getAllCategoriesHandler(c echo.Context) (err error) {
 
     return c.JSON(200, cMap)
 }
-
-/*
-func (api *API) GetCategoryHandler(c echo.Context) (err error) {
-    var cat models.Category
-
-    db := api.DB.Clone()
-    defer db.Close()
-
-    if err = db.DB("tva").Collection("categories")
-
-
-    return c.JSON(200, controllers.GetCategory(c.Param("categoryId")))
-}
-*/
-
-/*
-func (api *API) GetCategoryFeaturedHandler(c echo.Context) error {
-    return c.JSON(200, controllers.GetCategoryFeaturedHouses(c.Param("categoryId")))
-}
-*/
 
 func (api *API) getHousesByTypeHandler(c echo.Context) error {
     var hs []models.House
@@ -114,18 +95,14 @@ func (api *API) getHousesByTypeHandler(c echo.Context) error {
     } else {
         return c.JSON(500, "categoria não existe")
     }
-    log.Printf("type = %d", t)
 
     db := api.DB.Clone()
     defer db.Close()
 
-    log.Printf(c.Param("categoryId"))
-    log.Printf("%d", t)
     db.DB("tva").C("houses").Find(&bson.M{
         "categories": "sales",
         "type": t,
     }).All(&hs)
-    log.Printf("%s", hs)
 
     return c.JSON(200, hs)
 }
@@ -143,13 +120,11 @@ func (api *API) getHouseHandler(c echo.Context) (err error) {
     var h models.House
     db := api.DB.Clone()
     defer db.Close()
-    log.Printf("%s", c.Param("houseId"))
 
     if err = db.DB("tva").C("houses").FindId(bson.ObjectIdHex(c.Param("houseId"))).One(&h); err != nil {
         log.Printf("error getting house from db:\n%s", err)
         return
     }
-    log.Printf("%s", h)
 
     return c.JSON(200, h)
 }
