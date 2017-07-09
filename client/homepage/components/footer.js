@@ -19,7 +19,7 @@ class Footer extends React.Component {
           </ul>
           <ul className="navbar-nav px-5 mx-auto py-5 footer-border-bottom">
             <li className="nav-item"><Link className="nav-link footerLink px-0 mx-5" to="/sobre">{ ownContent.about }</Link></li>
-            <li className="nav-item"><Link className="nav-link footerLink px-0 mx-5" to="/contact">{ ownContent.contact }</Link></li>
+            <li className="nav-item"><Link className="nav-link footerLink px-0 mx-5" to="/contato">{ ownContent.contact }</Link></li>
           </ul>
           <div className="row mx-auto pt-5 mb-5 footer-bottom-row">
             <div className="col-6 py-3 footer-border-right text-center my-auto">
