@@ -114,6 +114,7 @@ func (api *API) getHousesByTypeHandler(c echo.Context) error {
     } else {
         return c.JSON(500, "categoria não existe")
     }
+    log.Printf("type = %d", t)
 
     db := api.DB.Clone()
     defer db.Close()
@@ -145,6 +146,7 @@ func (api *API) getHouseHandler(c echo.Context) (err error) {
     log.Printf("%s", c.Param("houseId"))
 
     if err = db.DB("tva").C("houses").FindId(bson.ObjectIdHex(c.Param("houseId"))).One(&h); err != nil {
+        log.Printf("error getting house from db:\n%s", err)
         return
     }
     log.Printf("%s", h)

@@ -17,6 +17,7 @@ class House extends React.Component {
     let { categoryId, houseId } = props.match.params
     let url = `/api/categorias/${categoryId}/casas/${houseId}`
     props.fetchContent(url)
+    window.house = this
   }
 
   render() {

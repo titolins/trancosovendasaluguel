@@ -5,11 +5,11 @@ export const filterItems = (items, lang) => {
   return items.map((item) => {
     // in future, if we need an item id, we should enforce it here
     return {
-      cover: item.cover,
+      cover: item.pictureFolder.cover,
       name: item.name,
       content: item.content[lang],
       // dev stuff
-      pictures: item.pictures,
+      pictures: item.pictureFolder.pictures,
       //categoryId: item.category.name,
       id: item.id,
       url: `/categorias/${item.categories[0]}/casas/${item.id}`
