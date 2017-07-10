@@ -41,6 +41,7 @@ const buildMoreBtn = () => {
 
 const FeaturedSection = ({title, items, ownContent, categoryId}) => {
   if (!items) return null
+  console.log(items)
 
   let moreBtn = (items.length > 2) ? buildMoreBtn() : undefined
   let itemsPanel = buildItemsPanels(items, ownContent.detailsBtn)
