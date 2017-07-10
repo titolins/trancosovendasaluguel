@@ -16,7 +16,6 @@ class LoginForm extends React.Component {
 
     this.login = props.login.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-
   }
 
   onChange(e) {

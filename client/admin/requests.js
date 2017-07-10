@@ -8,9 +8,9 @@ export function getContentReq(url, token, callback){
   fetch(url, content).then(res=>res.json()).then(res=>callback(res))
 }
 
-export function putContentReq(url, token, data, callback) {
+function sendDataReq(method, url, token, data, callback) {
   let content = {
-    method: 'put',
+    method: method,
     headers: {
       'Authorization': `Bearer ${token}`,
       'Accept': 'application/json',
@@ -21,17 +21,16 @@ export function putContentReq(url, token, data, callback) {
   fetch(url, content).then(res=>res.json()).then(callback)
 }
 
+export function putContentReq(url, token, data, callback) {
+  sendDataReq('put', url, token, data, callback)
+}
+
+export function patchContentReq(url, token, data, callback) {
+  sendDataReq('PATCH', url, token, data, callback)
+}
+
 export function postContentReq(url, token, data, callback) {
-  let content = {
-    method: 'post',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  }
-  fetch(url, content).then(res=>res.json()).then(callback)
+  sendDataReq('post', url, token, data, callback)
 }
 
 export function postFilesReq(url, token, data, callback) {

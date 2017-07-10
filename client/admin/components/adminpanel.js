@@ -11,7 +11,7 @@ import Header from 'admin/components/header'
 import Pictures from 'admin/components/pictures'
 import Houses from 'admin/components/houses'
 
-import { getContentReq, postFilesReq, deleteContentReq, putContentReq } from 'admin/requests'
+import { getContentReq, postFilesReq, deleteContentReq, putContentReq, patchContentReq } from 'admin/requests'
 
 import {
   updatePictures,
@@ -127,6 +127,18 @@ const buildHousesHandler = (store, token) => {
         })
       }
     },
+    edit: (data, callback) => {
+      return (e) => {
+        e.preventDefault()
+        patchContentReq(url, token, data, (res) => {
+          if(res.error) store.dispatch(setPostErrors(res.errors))
+          else {
+            store.dispatch(setPostSuccess())
+            callback()
+          }
+        })
+      }
+    },
     del: (data, callback) => {
       return () => {
         deleteContentReq(url, token, data, (res) => {
@@ -152,7 +164,7 @@ const buildRoutes = (store, token) => {
       <Route path="/admin/casas" render={ () => {
         housesHandler.get()
         foldersHandler.get()
-        return (<Houses update={housesHandler.get} handleDelete={housesHandler.del} handleCreate={housesHandler.create}/>)
+        return (<Houses handleEdit={housesHandler.edit} update={housesHandler.get} handleDelete={housesHandler.del} handleCreate={housesHandler.create}/>)
       } } />
       <Redirect to="/admin/" />
     </Switch>

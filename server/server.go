@@ -30,6 +30,11 @@ func BuildEngine() (e *echo.Echo) {
     }); err != nil {
         log.Fatal(err)
     }
+    if err = db.Copy().DB("tva").C("categories").EnsureIndex(mgo.Index{
+        Key:    []string{"items"},
+    }); err != nil {
+        log.Fatal(err)
+    }
     if err = db.Copy().DB("tva").C("houses").EnsureIndex(mgo.Index{
         Key:    []string{"type","featured"},
     }); err != nil {

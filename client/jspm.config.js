@@ -433,6 +433,7 @@ SystemJS.config({
         "admin/actions.js",
         "admin/requests.js",
         "admin/components/houses.js",
+        "admin/components/houseform.js",
         "admin/components/folder.js",
         "npm:octicons@5.0.1/index.js",
         "npm:octicons@5.0.1.json",

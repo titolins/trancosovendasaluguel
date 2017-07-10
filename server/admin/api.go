@@ -40,6 +40,7 @@ func (api *API) Bind(group *echo.Group) {
     group.GET("/house", api.getAllHouses)
     group.PUT("/house", api.createHouse)
     group.DELETE("/house", api.deleteHouse)
+    group.PATCH("/house", api.editHouse)
 
     group.GET("/folder", api.getAllFolders)
     group.PUT("/folder", api.createFolder)
@@ -172,6 +173,71 @@ func (api *API) getAllPictures(c echo.Context) (err error) {
     return c.JSON(200, ps)
 }
 
+func (api *API) editHouse(c echo.Context) (err error) {
+    var h models.House
+    var category models.Category
+
+    if err = c.Bind(&h); err !=nil {
+        log.Printf("error binding house model:\n%s", err)
+        return
+    }
+
+    if hErrors := validateHouse(h); hErrors != nil {
+        return c.JSON(500, map[string]interface{}{
+            "error": true,
+            "errors": hErrors,
+        })
+    }
+
+    db := api.DB.Clone()
+    defer db.Close()
+
+    if err = db.DB("tva").C("houses").UpdateId(h.ID, h); err != nil {
+        log.Printf("error updating house:\n%s", err)
+        return
+    }
+
+    for _, houseC := range h.Categories {
+        if err = db.DB("tva").C("categories").Update(&bson.M{
+            "name": houseC,
+        }, &bson.M{
+            "$addToSet": &bson.M{ "items": h.ID },
+        }); err != nil {
+            log.Printf("error pushing house into category:\n%s", err)
+            return
+        }
+    }
+
+    iter := db.DB("tva").C("categories").Find(&bson.M{"items":h.ID}).Iter()
+    // iter.Next returns a boolean
+    for iter.Next(&category) {
+        found := false
+        for _, houseC := range h.Categories {
+            if houseC == category.Name {
+                found = true
+            }
+        }
+        if found {
+            if err = db.DB("tva").C("categories").Update(&bson.M{
+                "name": category.Name,
+            }, &bson.M{
+                "$pull": &bson.M{ "items": h.ID },
+            }); err != nil {
+                log.Printf("error removing house from category:\n%s", err)
+                return
+            }
+        }
+    }
+    if err = iter.Close(); err != nil {
+        log.Printf("error closing iter:\n%s", err)
+        return
+    }
+
+    return c.JSON(200, map[string]bool{
+        "error": false,
+    })
+}
+
 func (api *API) createHouse(c echo.Context) (err error) {
     var h models.House
 
@@ -180,47 +246,7 @@ func (api *API) createHouse(c echo.Context) (err error) {
         return
     }
 
-    ptContent := h.Content.PT_BR.(map[string]interface{})
-    enContent := h.Content.EN_US.(map[string]interface{})
-
-    // validation should be done below
-    hErrors := map[string]interface{}{
-        "name": nil,
-        "description": nil,
-        "categories": nil,
-        //"cover": nil,
-    }
-    /*
-    if len(res.errors) == 0 {
-        err = db.DB("tva").C("pictures").Insert(&models.Picture{ Url: url })
-    }
-    */
-    if len(h.Categories) < 1 {
-        hErrors["categories"] = "A casa deve ter ao menos uma categoria"
-    }
-    if len(h.Name) < 4 {
-        hErrors["name"] = "Campo 'nome' deve ter ao menos 4 caractéres"
-    }
-
-    if len(ptContent["description"].(string)) < 10 || len(enContent["description"].(string)) < 10 {
-        hErrors["description"] = "Campo 'descrição' deve ter ao menos 10 caractéres"
-    }
-
-    /*
-    for _, f := range h.Content.Features {
-    }
-    */
-
-    /*
-    if n, err := db.DB("tva").C("pictures").FindId(h.Cover.ID).Count(); err != nil || n == 0 {
-        hErrors["cover"] = "Selecione uma imagem válida"
-    }
-    */
-
-    if hErrors["name"] != nil ||
-        hErrors["description"] != nil {
-        //hErrors["featured"] != nil ||
-        //hErrors["cover"] != nil {
+    if hErrors := validateHouse(h); hErrors != nil {
         return c.JSON(500, map[string]interface{}{
             "error": true,
             "errors": hErrors,
@@ -235,7 +261,7 @@ func (api *API) createHouse(c echo.Context) (err error) {
         return
     }
 
-    for _, c:= range h.Categories {
+    for _, c := range h.Categories {
         if err = db.DB("tva").C("categories").Update(&bson.M{
             "name": c,
         }, &bson.M{
@@ -423,3 +449,41 @@ func updateHouseFolder(db *mgo.Session, fId bson.ObjectId) (err error) {
 
     return db.DB("tva").C("houses").Update(&bson.M{"pictureFolder._id":fId}, &bson.M{ "$set": &bson.M{ "pictureFolder": f }})
 }
+
+func validateHouse(h models.House) map[string]interface{}{
+    hErrors := map[string]interface{}{
+        "name": nil,
+        "description": nil,
+        "categories": nil,
+    }
+
+    ptContent := h.Content.PT_BR.(map[string]interface{})
+    enContent := h.Content.EN_US.(map[string]interface{})
+
+    // validation should be done below
+    if len(h.Categories) < 1 {
+        hErrors["categories"] = "A casa deve ter ao menos uma categoria"
+    }
+
+    if len(h.Name) < 4 {
+        hErrors["name"] = "Campo 'nome' deve ter ao menos 4 caractéres"
+    }
+
+    if len(ptContent["description"].(string)) < 10 || len(enContent["description"].(string)) < 10 {
+        hErrors["description"] = "Campo 'descrição' deve ter ao menos 10 caractéres"
+    }
+
+    /* we are not validating features for now
+    for _, f := range h.Content.Features {
+    }
+    */
+
+    if hErrors["name"] != nil ||
+       hErrors["description"] != nil ||
+       hErrors["categories"] != nil {
+        return hErrors
+    }
+
+    return nil
+}
+
