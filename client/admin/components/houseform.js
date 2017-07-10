@@ -164,7 +164,7 @@ export default class HouseForm extends React.Component {
               <div>
                 <select id="category" name="category" className="custom-select" ref={(input)=>this.selectedCategory = input}>
                   { Object.keys(this.categories).map((c,i)=>{
-                    if (this.state.categories.indexOf(c) === -1) return (<option key={i} value={c}>{this.categories[c]}</option>)
+                    if (this.state.categories && this.state.categories.indexOf(c) === -1) return (<option key={i} value={c}>{this.categories[c]}</option>)
                   })}
                 </select>
               </div>
