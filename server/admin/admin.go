@@ -32,10 +32,11 @@ func (admin *Admin) mainHandler(c echo.Context) error {
     /* nothing to push yet..
     Pusher, ok := c.Response().Writer.(http.Pusher)
     if ok {
-        if err = pusher.Push("/static/js/jspm_packages/github/twbs/bootstrap@4.0.0-alpha.6/css/bootstrap.css", nil); err != nil {
-            return
+        if err := pusher.Push("/static/js/jspm_packages/github/twbs/bootstrap@4.0.0-alpha.6/css/bootstrap.css", nil); err != nil {
+            return err
         }
-    }*/
+    }
+    */
     return c.File("/srv/http/server/static/templates/admin.html")
 }
 

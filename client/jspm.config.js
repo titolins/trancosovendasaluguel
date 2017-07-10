@@ -539,6 +539,12 @@ SystemJS.config({
         "npm:redux-persist@4.8.1/lib/utils/isStatePlainEnough.js",
         "npm:redux-thunk@2.2.0/lib/index.js",
         "npm:redux-thunk@2.2.0.json",
+        "github:twbs/bootstrap@4.0.0-alpha.6/js/bootstrap.js",
+        "github:twbs/bootstrap@4.0.0-alpha.6.json",
+        "github:HubSpot/tether@1.4.0/js/tether.js",
+        "github:HubSpot/tether@1.4.0.json",
+        "npm:jquery@2.2.4/dist/jquery.js",
+        "npm:jquery@2.2.4.json",
         "npm:react-dom@15.5.4/index.js",
         "npm:react-dom@15.5.4.json",
         "npm:react-dom@15.5.4/lib/ReactDOM.js",
@@ -840,6 +846,7 @@ SystemJS.config({
     "github:*/*.json"
   ],
   map: {
+    "bootstrap": "github:twbs/bootstrap@4.0.0-alpha.6",
     "jsrsasign": "npm:jsrsasign@7.2.1",
     "octicons": "npm:octicons@5.0.1",
     "redux-persist": "npm:redux-persist@4.8.1",
@@ -869,7 +876,6 @@ SystemJS.config({
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.1",
     "systemjs-plugin-css": "npm:systemjs-plugin-css@0.1.35",
-    "twbs/bootstrap": "github:twbs/bootstrap@4.0.0-alpha.6",
     "url": "npm:jspm-nodelibs-url@0.2.1",
     "util": "npm:jspm-nodelibs-util@0.2.2",
     "vm": "npm:jspm-nodelibs-vm@0.2.1",

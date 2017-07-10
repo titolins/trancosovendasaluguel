@@ -16,6 +16,7 @@
     "name": "client",
     "main": "client.js",
     "dependencies": {
+      "bootstrap": "github:twbs/bootstrap@4.0.0-alpha.6",
       "css": "github:systemjs/plugin-css@^0.1.35",
       "jsrsasign": "npm:jsrsasign@^7.2.1",
       "less": "npm:systemjs-less-plugin@^2.0.0",
