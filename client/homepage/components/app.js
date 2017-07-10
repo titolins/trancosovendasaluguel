@@ -23,6 +23,7 @@ import ComercialRent from 'homepage/components/comercialrent'
 import About from 'homepage/components/about'
 
 import CategoryByType from 'homepage/components/categorybytype'
+import Category from 'homepage/components/category'
 
 class App extends React.Component {
   componentWillMount() {
@@ -39,6 +40,7 @@ class App extends React.Component {
             <PropsRoute exact path="/" component={Home} contentId="home" />
             <PropsRoute path="/categorias/:categoryId/casas/:houseId" component={House} contentId="house" />
             <PropsRoute path="/categorias/:categoryId/:typeId" component={CategoryByType} contentId="featured" />
+            <PropsRoute path="/categorias/:categoryId" component={Category} contentId="featured" categoryContent="category" />
             <PropsRoute path="/contato" component={Contact} contentId="contact"/>
             <PropsRoute path="/servicos" component={Services} contentId="services"/>
             <PropsRoute path="/aluguelcomercial" component={ComercialRent} contentId="comercialRent"/>
@@ -50,7 +52,6 @@ class App extends React.Component {
       </Scroll>
     )
   }
-
 }
 
 export default connect(null, mapDispatchToProps)(App)

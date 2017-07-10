@@ -11,6 +11,18 @@ import (
     "github.com/titolins/trancosovendasaluguel/server/models"
 )
 
+var categories = map[string]string{
+    "aluguel": "rent",
+    "vendas": "sales",
+}
+
+var types = map[string]models.Type {
+    "casas": models.HOUSE_TYPE,
+    "terrenos": models.LOT_TYPE,
+    "fazendas": models.FARM_TYPE,
+    "pontoscomerciais": models.STORE_TYPE,
+    "pousadas": models.INN_TYPE,
+}
 
 /*
  * TODO:
@@ -23,10 +35,8 @@ type API struct{
 
 func (api *API) Bind(group *echo.Group) {
     group.GET("/categorias", api.getAllCategoriesHandler)
-    /*
-    group.GET("/categories/:categoryId", api.GetCategoryHandler)
-    group.GET("/categories/:categoryId/featured", api.GetCategoryFeaturedHandler)
-    */
+
+    group.GET("/categorias/:categoryId", api.getCategoryHouses)
     group.GET("/categorias/:categoryId/casas/:houseId", api.getHouseHandler)
     group.GET("/categorias/:categoryId/portipo/:typeId", api.getHousesByTypeHandler)
 }
@@ -76,25 +86,23 @@ func (api *API) getAllCategoriesHandler(c echo.Context) (err error) {
     return c.JSON(200, cMap)
 }
 
+func (api *API) getCategoryHouses(c echo.Context) (err error) {
+    var hs []models.House
+
+    db := api.DB.Clone()
+    defer db.Close()
+
+    db.DB("tva").C("houses").Find(&bson.M{
+        "categories": categories[c.Param("categoryId")],
+    }).All(&hs)
+
+    return c.JSON(200, hs)
+}
+
 func (api *API) getHousesByTypeHandler(c echo.Context) error {
     var hs []models.House
-    var t models.Type
 
-    tStr := c.Param("typeId")
-
-    if tStr == "casas" {
-        t = models.HOUSE_TYPE
-    } else if tStr == "terrenos" {
-        t = models.LOT_TYPE
-    } else if tStr == "fazendas" {
-        t = models.FARM_TYPE
-    } else if tStr == "pontoscomerciais" {
-        t = models.STORE_TYPE
-    } else if tStr == "pousadas" {
-        t = models.INN_TYPE
-    } else {
-        return c.JSON(500, "categoria não existe")
-    }
+    t := types[c.Param("typeId")]
 
     db := api.DB.Clone()
     defer db.Close()

@@ -1,20 +1,20 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
-import { mapStateToProps, mapDispatchToProps } from 'homepage/containers/categorybytype'
+import { mapStateToProps, mapDispatchToProps } from 'homepage/containers/category'
 
 import { buildItemsPanels } from 'homepage/components/featuredsection'
 
-class CategoryByType extends React.Component {
+class Category extends React.Component {
   componentWillMount() {
-    let { categoryId, typeId } = this.props.match.params
-    this.props.fetchContent(`/api/categorias/${categoryId}/portipo/${typeId}`)
+    let { categoryId } = this.props.match.params
+    this.props.fetchContent(`/api/categorias/${categoryId}`)
   }
 
   componentWillReceiveProps(nextProps) {
-    let { categoryId, typeId } = nextProps.match.params
-    if (typeId !== this.props.match.params.typeId) {
-      this.props.fetchContent(`/api/categorias/${categoryId}/portipo/${typeId}`)
+    let { categoryId } = nextProps.match.params
+    if (nextProps.match.params.categoryId !== categoryId) {
+      this.props.fetchContent(`/api/categorias/${categoryId}`)
     }
   }
 
@@ -22,7 +22,7 @@ class CategoryByType extends React.Component {
     let items = this.props.items ? buildItemsPanels(this.props.items, this.props.ownContent.detailsBtn) : null
     return (
       <div className="mainContent">
-        <h1 className="sectionTitle halfWidth pb-2">{ this.props.title }</h1>
+        <h1 className="sectionTitle halfWidth pb-2">{ this.props.categoryTypes.title }</h1>
         <div className="row">
           { items ?
               items :
@@ -36,4 +36,4 @@ class CategoryByType extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryByType)
+export default connect(mapStateToProps, mapDispatchToProps)(Category)

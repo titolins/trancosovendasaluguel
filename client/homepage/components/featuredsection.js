@@ -6,6 +6,11 @@ import { connect } from 'react-redux'
 
 import { mapStateToProps } from 'homepage/containers/category'
 
+const CATEGORIES = {
+  sales: "vendas",
+  rent: "aluguel",
+}
+
 export const buildItemsPanels = (items, detailsBtnText) => {
   return items.map((item, i) => {
     let fWord = item.content.description.split(' ')[0],
@@ -27,12 +32,12 @@ export const buildItemsPanels = (items, detailsBtnText) => {
   })
 }
 
-const buildMoreBtn = () => {
+const buildMoreBtn = (btnText, categoryId) => {
   return (
     <div className="row mt-4">
-      <Link className="mx-auto" to="#">
+      <Link className="mx-auto" to={`/categorias/${CATEGORIES[categoryId]}`}>
         <div className="btn moreBtn">
-          <span className="fa fa-plus"></span> { ownContent.moreBtn }
+          <span className="fa fa-plus"></span> { btnText }
         </div>
       </Link>
     </div>
@@ -41,9 +46,8 @@ const buildMoreBtn = () => {
 
 const FeaturedSection = ({title, items, ownContent, categoryId}) => {
   if (!items) return null
-  console.log(items)
 
-  let moreBtn = (items.length > 2) ? buildMoreBtn() : undefined
+  let moreBtn = (items.length > 2) ? buildMoreBtn(ownContent.moreBtn, categoryId) : undefined
   let itemsPanel = buildItemsPanels(items, ownContent.detailsBtn)
 
   return (
