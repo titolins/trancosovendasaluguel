@@ -197,7 +197,7 @@ class Pictures extends React.Component {
         </div>
       </div>)
 
-      cs.push(<Folder key={i} handleDelete={this.props.deleteFolder(folder, this.props.update)} handleClick={this.openFolder(folder)} folderName={folder.name} target={`#${id}`} />)
+      cs.push(<Folder key={i} handleDelete={this.props.deleteFolder(folder, this.props.update)} handleClick={this.openFolder(folder)} folderName={folder.name} data-trigger={`#${id}`} />)
     })
 
     return (
