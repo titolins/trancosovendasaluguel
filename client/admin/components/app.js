@@ -6,6 +6,8 @@ import { mapStateToProps } from 'admin/containers/auth'
 import LoginForm from 'admin/components/loginform'
 import AdminPanel from 'admin/components/adminpanel'
 
+import 'admin/components/styles/main.less'
+
 class App extends React.Component {
   render() {
     let page = (this.props.token !== "") ?

@@ -31,9 +31,6 @@ import {
 
 import { PropsRoute } from 'homepage/propsroute'
 
-import 'homepage/components/styles/main.less'
-import 'admin/components/styles/main.less'
-
 let store = createStore(
   combineReducers({lang,content,auth,upload,post,data}),
   undefined,
