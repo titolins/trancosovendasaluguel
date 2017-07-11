@@ -332,6 +332,9 @@ SystemJS.config({
       ],
       "client/build.js": [
         "client/main.js",
+        "admin/components/styles/main.less",
+        "npm:systemjs-less-plugin@2.0.0.json",
+        "homepage/components/styles/main.less",
         "homepage/propsroute.js",
         "npm:react-router-dom@4.1.1/index.js",
         "npm:react-router-dom@4.1.1.json",
@@ -501,7 +504,6 @@ SystemJS.config({
         "homepage/containers/categorybytype.js",
         "homepage/components/about.js",
         "homepage/components/styles/about.less",
-        "npm:systemjs-less-plugin@2.0.0.json",
         "homepage/components/comercialrent.js",
         "homepage/components/styles/comercialrent.less",
         "homepage/components/services.js",
