@@ -14,13 +14,12 @@ export default class HouseForm extends React.Component {
     this.addCategory = this.addCategory.bind(this)
     this.getData = this.getData.bind(this)
     this.showTranslatableContent = this.showTranslatableContent.bind(this)
-    let initialState
     if (this.props.house) {
-      initialState = this.props.house
-      initialState.content['pt_br'].features = this.props.house.content['pt_br'].features.join(';')
-      initialState.content['en_us'].features = this.props.house.content['en_us'].features.join(';')
+      this.props.house.content['pt_br'].features = this.props.house.content['pt_br'].features.join(';')
+      this.props.house.content['en_us'].features = this.props.house.content['en_us'].features.join(';')
+      this.state = this.props.house
     } else {
-      initialState = {
+      this.state = {
         name: "",
         categories: [],
         type: "0",
@@ -39,8 +38,7 @@ export default class HouseForm extends React.Component {
             description: "",
             features: "", } } }
     }
-    this.initialState = initialState
-    this.state = JSON.parse(JSON.stringify(this.initialState))
+    this.initialState = JSON.parse(JSON.stringify(this.state))
     this.categories = {
       sales: "Vendas",
       rent: "Aluguel",
@@ -127,7 +125,7 @@ export default class HouseForm extends React.Component {
   }
 
   getData() {
-    let data = JSON.parse(JSON.stringify(this.state))
+    let data = this.state !== null ? JSON.parse(JSON.stringify(this.state)) : JSON.parse(JSON.stringify(this.initialState))
     data.content['pt_br'].features = this.state.content['pt_br'].features.split(';')
     data.content['en_us'].features = this.state.content['en_us'].features.split(';')
     return data
@@ -171,22 +169,24 @@ export default class HouseForm extends React.Component {
               <a href="#" className="btn btn-info" onClick={this.addCategory}>Adicionar</a>
             </div>
             <div className="col-8">
-              { this.state.categories.length < 1 ?
-                  "Você ainda não selecionou nenhuma categoria" :
-                  this.state.categories.map((c, i) => {
-                    return (
-                      <div key={i} className="row">
-                        <div className="col-10">
-                          <input value={this.categories[c]} disabled className="form-control" />
+              { this.state.categories !== null ?
+                  this.state.categories.length < 1 ?
+                    "Você ainda não selecionou nenhuma categoria" :
+                    this.state.categories.map((c, i) => {
+                      return (
+                        <div key={i} className="row">
+                          <div className="col-10">
+                            <input value={this.categories[c]} disabled className="form-control" />
+                          </div>
+                          <div className="col-2">
+                            <a href="#" onClick={this.removeCategory(i)} className="btn btn-danger">
+                              <span aria-hidden="true">&times;</span>
+                            </a>
+                          </div>
                         </div>
-                        <div className="col-2">
-                          <a href="#" onClick={this.removeCategory(i)} className="btn btn-danger">
-                            <span aria-hidden="true">&times;</span>
-                          </a>
-                        </div>
-                      </div>
-                    )
-                  })
+                      )
+                    }) :
+                  ''
               }
               { this.props.postState.errors.categories ?
                   (<div className="alert alert-danger" role="alert">{this.props.postState.errors.categories}</div>) :
