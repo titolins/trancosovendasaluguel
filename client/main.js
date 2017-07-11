@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom'
 import fetch from "whatwg-fetch"
 import promise from "promise-polyfill"
 
-
 import $ from 'npm:jquery@2.2.4'
 import 'twbs/bootstrap'
 import 'twbs/bootstrap/css/bootstrap.css!'
@@ -31,6 +30,9 @@ import {
 } from 'react-router-dom'
 
 import { PropsRoute } from 'homepage/propsroute'
+
+import 'homepage/components/styles/main.less'
+import 'admin/components/styles/main.less'
 
 let store = createStore(
   combineReducers({lang,content,auth,upload,post,data}),

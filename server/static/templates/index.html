@@ -11,19 +11,19 @@
   <body style="width:100%; height: 100%;">
     <div style="width:100%; height: 100%;" id="container"></div>
     <script>
-      SystemJS.import('systemjs-hot-reloader').then(function(connect) {
-        connect();
+      //SystemJS.import('systemjs-hot-reloader').then(function(connect) {
+        //connect();
         // async imports
         // polyfills
-        SystemJS.import("whatwg-fetch");
-        SystemJS.import("promise-polyfill");
+        //SystemJS.import("whatwg-fetch");
+        //SystemJS.import("promise-polyfill");
 
         // styles
-        SystemJS.import("homepage/components/styles/main.less");
+        //SystemJS.import("homepage/components/styles/main.less");
 
         // load client
         SystemJS.import("client");
-      });
+      //});
     </script>
   </body>
 </html>
