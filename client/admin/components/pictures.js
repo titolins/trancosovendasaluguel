@@ -147,7 +147,7 @@ class Pictures extends React.Component {
           <div className="card-header">
             <ul className="nav nav-pills card-header-pills">
               <li className="nav-item">
-                <button type="button" data-toggle="modal" data-target={`#uploadModal${i}`} className="btn btn-primary">Subir imagens</button>
+                <button type="button" data-toggle="modal" data-target="#uploadModal" className="btn btn-primary">Subir imagens</button>
               </li>
             </ul>
           </div>
@@ -243,7 +243,7 @@ class Pictures extends React.Component {
               <input type="submit" className="btn btn-primary" value="Criar"></input>
             </form>
           </Modal>
-          <Modal id={`uploadModal${i}`} title="Subir Imagens">
+          <Modal id="uploadModal" title="Subir Imagens">
             <div>
               { this.props.uploadState.errors.length > 0 ?
                   (<div className="alert alert-danger" role="alert">
