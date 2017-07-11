@@ -40,7 +40,7 @@ class Houses extends React.Component {
           </a>
           <div className="card-block">
             <h5 className="card-title">{h.name}</h5>
-            <button type="button" onClick={this.props.handleDelete(h,this.updateData)} className="btn btn-danger">Deletar</button>
+            <button type="button" onClick={this.props.handleDelete(h,this.props.update)} className="btn btn-danger">Deletar</button>
             <a href="#" onClick={this.openMenu} data-trigger={`#editHouse${i}`} className="btn btn-warning triggerCollapse">Editar</a>
           </div>
         </div>
