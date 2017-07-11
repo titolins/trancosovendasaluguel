@@ -72,6 +72,12 @@ func BuildEngine() (e *echo.Echo) {
 func homeHandler(c echo.Context) (err error) {
     pusher, ok := c.Response().Writer.(http.Pusher)
     if ok {
+        if err = pusher.Push("/static/js/jspm_packages/npm/jquery@2.2.4/dist/jquery.js", nil); err != nil {
+            return
+        }
+        if err = pusher.Push("/static/js/jspm_packages/github/twbs/bootstrap@4.0.0-alpha.6/js/bootstrap.js", nil); err != nil {
+            return
+        }
         if err = pusher.Push("/static/js/jspm_packages/github/twbs/bootstrap@4.0.0-alpha.6/css/bootstrap.css", nil); err != nil {
             return
         }

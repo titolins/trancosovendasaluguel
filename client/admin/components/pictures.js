@@ -147,7 +147,7 @@ class Pictures extends React.Component {
           <div className="card-header">
             <ul className="nav nav-pills card-header-pills">
               <li className="nav-item">
-                <button type="button" data-toggle="modal" data-target="#uploadModal" className="btn btn-primary">Subir imagens</button>
+                <button type="button" data-toggle="modal" data-target={`#uploadModal${i}`} className="btn btn-primary">Subir imagens</button>
               </li>
             </ul>
           </div>
@@ -156,8 +156,8 @@ class Pictures extends React.Component {
             <div className="row">
               <div className="col-sm-4">
                 <h5>Imagem de capa</h5>
-                <button type="button" data-toggle="modal" data-target="#coverModal" className="btn btn-primary">Selecionar capa</button>
-                <Modal id="coverModal">
+                <button type="button" data-toggle="modal" data-target={`#coverModal${i}`} className="btn btn-primary">Selecionar capa</button>
+                <Modal id={`coverModal${i}`}>
                   <div className="row">
                     { folder.pictures.map((p,i) => {
                       return (
@@ -197,7 +197,7 @@ class Pictures extends React.Component {
         </div>
       </div>)
 
-      cs.push(<Folder key={i} handleDelete={this.props.deleteFolder(folder, this.props.update)} handleClick={this.openFolder(folder)} folderName={folder.name} data-trigger={`#${id}`} />)
+      cs.push(<Folder key={i} handleDelete={this.props.deleteFolder(folder, this.props.update)} handleClick={this.openFolder(folder)} folderName={folder.name} target={`#${id}`} />)
     })
 
     return (
@@ -243,7 +243,7 @@ class Pictures extends React.Component {
               <input type="submit" className="btn btn-primary" value="Criar"></input>
             </form>
           </Modal>
-          <Modal id="uploadModal" title="Subir Imagens">
+          <Modal id={`uploadModal${i}`} title="Subir Imagens">
             <div>
               { this.props.uploadState.errors.length > 0 ?
                   (<div className="alert alert-danger" role="alert">

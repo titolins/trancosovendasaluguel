@@ -1,7 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import bootstrap from 'bootstrap'
+import fetch from "whatwg-fetch"
+import promise from "promise-polyfill"
+
+
+import $ from 'npm:jquery@2.2.4'
+import 'twbs/bootstrap'
+import 'twbs/bootstrap/css/bootstrap.css!'
 
 import { combineReducers } from 'redux'
 import { Provider } from 'react-redux'
