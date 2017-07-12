@@ -197,17 +197,7 @@ func (api *API) editHouse(c echo.Context) (err error) {
         return
     }
 
-    for _, houseC := range h.Categories {
-        if err = db.DB("tva").C("categories").Update(&bson.M{
-            "name": houseC,
-        }, &bson.M{
-            "$addToSet": &bson.M{ "items": h.ID },
-        }); err != nil {
-            log.Printf("error pushing house into category:\n%s", err)
-            return
-        }
-    }
-
+    log.Printf("finding categories which have")
     iter := db.DB("tva").C("categories").Find(&bson.M{"items":h.ID}).Iter()
     // iter.Next returns a boolean
     for iter.Next(&category) {
@@ -217,7 +207,7 @@ func (api *API) editHouse(c echo.Context) (err error) {
                 found = true
             }
         }
-        if found {
+        if !found {
             if err = db.DB("tva").C("categories").Update(&bson.M{
                 "name": category.Name,
             }, &bson.M{
@@ -228,6 +218,20 @@ func (api *API) editHouse(c echo.Context) (err error) {
             }
         }
     }
+
+    log.Printf("iterating house categories")
+    for _, houseC := range h.Categories {
+        log.Printf("categoryName = %s", houseC)
+        if err = db.DB("tva").C("categories").Update(&bson.M{
+            "name": houseC,
+        }, &bson.M{
+            "$addToSet": &bson.M{ "items": h.ID },
+        }); err != nil {
+            log.Printf("error pushing house into category:\n%s", err)
+            return
+        }
+    }
+
     if err = iter.Close(); err != nil {
         log.Printf("error closing iter:\n%s", err)
         return
