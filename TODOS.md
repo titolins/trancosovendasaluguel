@@ -1,6 +1,5 @@
 
 * detaques separados (vendas e aluguel)
-* nome da casa
 * bandeira
 * capacidade (máxima tem que ser preenchida primeiro?)
 * melhorar carousel página de casas
