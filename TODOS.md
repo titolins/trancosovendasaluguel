@@ -1,6 +1,5 @@
 
 * detaques separados (vendas e aluguel)
-    * e propriedades diferentes?
 * nome da casa
 * bandeira
 * capacidade (máxima tem que ser preenchida primeiro?)
@@ -10,6 +9,8 @@
     * pasta foi criada sem imagens
     * depois adicionada na casa
     * casa não foi atualizada?
+* muitas imagens ao mesmo tempo está crashing
+    * limit file size
 * site tami (passar)
 * subir imagens
     * *script*
