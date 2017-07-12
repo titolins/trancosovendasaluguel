@@ -294,12 +294,14 @@ func (api *API) uploadPictures(c echo.Context) (err error) {
                 // Source
                 src, fErr := file.Open()
                 if fErr != nil {
+                    log.Printf("error on file.Open:\n%s", err)
                     errors = append(errors, fmt.Sprintf("Erro ao tentar abrir arquivo '%s'", file.Filename))
                     return
                 }
                 defer src.Close()
 
                 if !ACCEPTED_EXT[strings.ToLower(path.Ext(file.Filename))] {
+                    log.Printf("invalid ext")
                     errors = append(errors, fmt.Sprintf("Extensão '%s' inválida ('%s')", path.Ext(file.Filename), file.Filename))
                     return
                 }
@@ -307,6 +309,7 @@ func (api *API) uploadPictures(c echo.Context) (err error) {
                 filepath := fmt.Sprintf("/srv/http/server/static/uploads/%s", file.Filename)
                 dst, fErr := os.Create(filepath)
                 if fErr != nil {
+                    log.Printf("error on os.Create:\n%s", err)
                     errors = append(errors, fmt.Sprintf("Erro ao tentar criar arquivo '%s'", file.Filename))
                     return
                 }
@@ -314,6 +317,7 @@ func (api *API) uploadPictures(c echo.Context) (err error) {
 
                 // Copy
                 if _, fErr = io.Copy(dst, src); err != nil {
+                    log.Printf("error on io.Copy:\n%s", err)
                     errors = append(errors, fmt.Sprintf("Erro ao tentar copiar arquivo '%s'", file.Filename))
                     return
                 }
@@ -473,10 +477,10 @@ func validateHouse(h models.House) map[string]interface{}{
         hErrors["description"] = "Campo 'descrição' deve ter ao menos 10 caractéres"
     }
 
-    /* we are not validating features for now
-    for _, f := range h.Content.Features {
+    for i, f := range enContent["features"].([]interface{}) {
+        ptContent["features"].([]interface{})[i] = strings.Trim(f.(string), " ")
+        enContent["features"].([]interface{})[i] = strings.Trim(f.(string), " ")
     }
-    */
 
     if hErrors["name"] != nil ||
        hErrors["description"] != nil ||

@@ -14,7 +14,6 @@ export default class HouseForm extends React.Component {
     this.addCategory = this.addCategory.bind(this)
     this.getData = this.getData.bind(this)
     this.showTranslatableContent = this.showTranslatableContent.bind(this)
-    window.houseForm = this
     if (this.props.house) {
       let h = JSON.parse(JSON.stringify(this.props.house))
       h.content['pt_br'].features = this.props.house.content['pt_br'].features.join(';')
