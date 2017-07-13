@@ -1,4 +1,6 @@
 
+* mudar foto
+* link para o site
 * detaques separados (vendas e aluguel)
 * bandeira
 * capacidade (máxima tem que ser preenchida primeiro?)
