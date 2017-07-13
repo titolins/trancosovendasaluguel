@@ -18,9 +18,9 @@ export const buildItemsPanels = (items, detailsBtnText) => {
 
     return (
       <div key={i} className="col-xs-12 col-md-6 py-3 housePanel">
-        <h5 className="houseName pb-2">{item.name}</h5>
         <img className="houseCover" src={item.cover.url} />
         <div className="mt-4">
+          <h5 className="houseName pb-2">{item.name}</h5>
           <p className="houseDescription text-blue"><span className="first">{ fWord }</span>{ rest }</p>
         </div>
         <Link to={item.url}>
