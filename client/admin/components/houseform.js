@@ -155,7 +155,7 @@ export default class HouseForm extends React.Component {
           <label className="col-form-label" htmlFor="maxCapacity">Máxima</label>
           <input className="form-control" type="number" step="1" min="1" id="maxCapacity" name="maxCapacity" value={this.state.capacity.max} onChange={this.handleChange}></input>
         </div>
-      </div>) : ''
+      </div>) : null
 
     return (
       <div>
