@@ -7,8 +7,6 @@ export default class HouseForm extends React.Component {
   constructor(props) {
     super(props)
 
-    window.houseform = this
-
     this.handleChange = this.handleChange.bind(this)
     this.updateData = this.updateData.bind(this)
     this.selectFolder = this.selectFolder.bind(this)
@@ -17,7 +15,6 @@ export default class HouseForm extends React.Component {
     this.getData = this.getData.bind(this)
     this.showTranslatableContent = this.showTranslatableContent.bind(this)
     if (this.props.house) {
-      console.log(this.props.house)
       let h = JSON.parse(JSON.stringify(this.props.house))
       h.content['pt_br'].features = this.props.house.content['pt_br'].features.join(';')
       h.content['en_us'].features = this.props.house.content['en_us'].features.join(';')
