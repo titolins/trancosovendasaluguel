@@ -513,6 +513,7 @@ SystemJS.config({
         "homepage/components/footer.js",
         "homepage/components/house.js",
         "homepage/components/carousel.js",
+        "homepage/components/styles/carousel.less",
         "homepage/containers/house.js",
         "homepage/components/home.js",
         "homepage/components/styles/home.less",

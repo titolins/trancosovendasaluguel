@@ -5,7 +5,6 @@
 
 * melhorar carousel página de casas
 
-* home - mudar foto
 * admin - link para o site
 * bandeira
 * capacidade (máxima tem que ser preenchida primeiro?)
@@ -14,6 +13,4 @@
     * pasta foi criada sem imagens
     * depois adicionada na casa
     * casa não foi atualizada?
-* muitas imagens ao mesmo tempo está crashing
-    * limit file size
 

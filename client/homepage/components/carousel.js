@@ -1,15 +1,21 @@
 import React from 'react'
 
+import './styles/carousel.less'
+
 const buildIndicators = (items) => {
   return (
-    <ol className="carousel-indicators">
+    <ul className="carousel-indicators list-inline">
       { items.map((item, i) => {
-        let active = (i === 0) ? "active" : null
+        let active = (i === 0) ? true : false
         return (
-          <li key={i} data-target="#carousel" data-slide-to={i} className={active}></li>
+          <li key={i} className={`list-inline-item${active ? " active" : ""}`}>
+            <a id={`selector-${i}`} className={active ? "selected" : "" } data-slide-to={i} data-target="#carousel">
+              <img className="img-fluid" src={item.url} />
+            </a>
+          </li>
         )
       }) }
-    </ol>
+    </ul>
   )
 }
 
@@ -30,17 +36,9 @@ const buildPictures = (pictures) => {
 
 export default ({ pictures, controls }) => {
   return (
-    <div id="carousel" className="carousel slide" data-ride="carousel">
-      { buildIndicators(pictures) }
+    <div id="carousel" className="carousel slide">
       { buildPictures(pictures) }
-      <a className="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span className="sr-only">{ controls.prev }</span>
-      </a>
-      <a className="carousel-control-next" href="#carousel" role="button" data-slide="next">
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        <span className="sr-only">{ controls.next }</span>
-      </a>
+      { buildIndicators(pictures) }
     </div>
   )
 }
