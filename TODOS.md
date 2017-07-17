@@ -3,7 +3,13 @@
 * subir imagens
     * *script*
 
-* melhorar carousel página de casas
+* remover links footer
+* colocar whatsapp no lugar do skype
+* foto sobre -> capa
+
+* capacidade em branco quando tenta editar?
+    * mas capacidade deveria poder ficar em branco (venda de terrenos, p. ex) -
+        deixar apenas em aluguel
 
 * admin - link para o site
 * bandeira

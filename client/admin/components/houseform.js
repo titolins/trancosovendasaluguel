@@ -7,6 +7,8 @@ export default class HouseForm extends React.Component {
   constructor(props) {
     super(props)
 
+    window.houseform = this
+
     this.handleChange = this.handleChange.bind(this)
     this.updateData = this.updateData.bind(this)
     this.selectFolder = this.selectFolder.bind(this)
@@ -15,6 +17,7 @@ export default class HouseForm extends React.Component {
     this.getData = this.getData.bind(this)
     this.showTranslatableContent = this.showTranslatableContent.bind(this)
     if (this.props.house) {
+      console.log(this.props.house)
       let h = JSON.parse(JSON.stringify(this.props.house))
       h.content['pt_br'].features = this.props.house.content['pt_br'].features.join(';')
       h.content['en_us'].features = this.props.house.content['en_us'].features.join(';')
@@ -27,7 +30,7 @@ export default class HouseForm extends React.Component {
         featured: false,
         capacity: {
           min: "1",
-          max: "1",
+          max: "2",
         },
         pictureFolder: {},
         content: {
@@ -135,6 +138,25 @@ export default class HouseForm extends React.Component {
   render() {
     let h = this.props.house ? this.props.house : undefined
 
+    let rent
+    this.state.categories.map((c) => {
+      if(c === 'rent') rent = true
+    })
+
+    let capacity = rent ? (<div className="row form-group">
+        <div className="col-2">
+          <label className="col-form-label">Capacidade</label>
+        </div>
+        <div className="col-2">
+          <label className="col-form-label" htmlFor="minCapacity">Mínima</label>
+          <input className="form-control" type="number" step="1" min="1" id="minCapacity" name="minCapacity" value={this.state.capacity.min} onChange={this.handleChange}></input>
+        </div>
+        <div className="col-2">
+          <label className="col-form-label" htmlFor="maxCapacity">Máxima</label>
+          <input className="form-control" type="number" step="1" min="1" id="maxCapacity" name="maxCapacity" value={this.state.capacity.max} onChange={this.handleChange}></input>
+        </div>
+      </div>) : ''
+
     return (
       <div>
         <Modal title="Pastas de imagens" id={`foldersModal${this.props.triggerClass}`}>
@@ -209,19 +231,7 @@ export default class HouseForm extends React.Component {
               </div>
             </div>
           </div>
-          <div className="row form-group">
-            <div className="col-2">
-              <label className="col-form-label">Capacidade</label>
-            </div>
-            <div className="col-2">
-              <label className="col-form-label" htmlFor="minCapacity">Mínima</label>
-              <input className="form-control" type="number" step="1" min="1" id="minCapacity" name="minCapacity" value={this.state.capacity.min} onChange={this.handleChange}></input>
-            </div>
-            <div className="col-2">
-              <label className="col-form-label" htmlFor="maxCapacity">Máxima</label>
-              <input className="form-control" type="number" step="1" min="1" id="maxCapacity" name="maxCapacity" value={this.state.capacity.max} onChange={this.handleChange}></input>
-            </div>
-          </div>
+          { capacity }
           <div className="form-group">
             <label className="form-check-label">
               <input value={this.state.featured} onChange={this.handleChange} type="checkbox" className="form-check-input" name="featured"></input> Destaque
