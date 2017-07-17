@@ -31,8 +31,9 @@ class House extends React.Component {
           <div className="col-xs-12 col-md-6">
             <h1 className="sectionTitle fullWidth pb-2">{ staticContent.description }</h1>
             <p>{ ownContent.description }</p>
-            <h1 className="sectionTitle fullWidth pb-2">{ staticContent.capacity }</h1>
-            <p>{ ownContent.capacity }</p>
+            { this.props.match.params.categoryId === 'rent' ? (<div>
+              <h1 className="sectionTitle fullWidth pb-2">{ staticContent.capacity }</h1>
+              <p>{ ownContent.capacity }</p></div>) : '' }
             <h1 className="sectionTitle fullWidth pb-2">{ staticContent.features }</h1>
             { features }
           </div>
