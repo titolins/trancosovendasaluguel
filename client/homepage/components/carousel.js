@@ -20,7 +20,7 @@ const buildPictures = (pictures) => {
         let active = (i === 0) ? "active" : null
         return (
           <div key={i} className={`carousel-item ${active}`}>
-            <img className="d-block img-fluid" src={p.url}></img>
+            <img className="d-block img-fluid maxHeight" src={p.url}></img>
           </div>
         )
       }) }
