@@ -11,11 +11,11 @@ class Footer extends React.Component {
     return (
       <footer id="footer" className="navbar navbar-toggleable">
         <div id="navbarCollapse" className="collapse navbar-collapse flex-column">
-          <div className="row mx-auto pt-5 mb-5 footer-bottom-row">
+          <div className="row pt-5 mb-5 footer-bottom-row">
             <div className="col-6 py-3 footer-border-right text-center my-auto">
-              <div>
-                <span className="fa fa-envelope-o fa-lg footerLink"></span>
-                <span className="text-blue"> contato@trancosovendasaluguel.com</span>
+              <div className="logoText mb-1">
+                <p>Trancoso</p>
+                <p>vendas e aluguel</p>
               </div>
               <div>
                 <Link to="#"><span className="fa fa-facebook-square fa-lg footerLink mr-1"></span></Link>
@@ -24,12 +24,16 @@ class Footer extends React.Component {
             </div>
             <div className="col-6 py-3 text-center my-auto">
               <div>
+                <span className="fa fa-envelope-o fa-lg footerLink"></span>
+                <span className="footerText"> contato@trancosovendasaluguel.com</span>
+              </div>
+              <div>
                 <span className="fa fa-whatsapp fa-lg footerLink"></span>
-                <span className="text-blue"> +55 73 98129-0825</span>
+                <span className="footerText"> +55 73 98129-0825</span>
               </div>
               <div>
                 <span className="fa fa-phone fa-lg footerLink"></span>
-                <span className="text-blue"> +55 73 3668-1095</span>
+                <span className="footerText"> +55 73 3668-1095</span>
               </div>
             </div>
           </div>
