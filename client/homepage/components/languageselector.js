@@ -13,7 +13,7 @@ const LanguageSelector = ({ active, lang, marginsClass, onClick }) => {
         e.preventDefault();
         onClick();
       }}
-      >{ lang }</a></span>
+      ><img height="15px" src={`/static/img/if_${lang.toLowerCase()}.png`} /></a></span>
   )
 }
 
