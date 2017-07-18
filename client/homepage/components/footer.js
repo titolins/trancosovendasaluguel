@@ -9,8 +9,8 @@ class Footer extends React.Component {
     let { ownContent } = this.props
 
     return (
-      <footer id="footer" className="navbar navbar-toggleable">
-        <div id="navbarCollapse" className="collapse navbar-collapse flex-column">
+      <footer id="footer" className="navbar">
+        <div className="flex-column">
           <div className="row pt-5 mb-5">
             <div className="col-xs-12 col-lg-6 py-3 footer-border-right text-center my-auto">
               <div className="logoText mb-1">
