@@ -47,7 +47,7 @@ class Houses extends React.Component {
       </div>)
       cs.push(<div key={i} className="collapse" id={`editHouse${i}`}>
           <div className="card card-block">
-            <h3 className="card-title">Editar casa</h3>
+            <h3 className="card-title">Editar imóvel</h3>
             <HouseForm triggerClass={i} folders={this.props.folders} house={h} handleSubmit={this.props.handleEdit} postState={this.props.postState} update={this.props.update} />
           </div>
         </div>)
@@ -58,7 +58,7 @@ class Houses extends React.Component {
         { cs }
         <div className="collapse" id="addHouse">
           <div className="card card-block">
-            <h3 className="card-title">Adicionar casa</h3>
+            <h3 className="card-title">Adicionar imóvel</h3>
             <HouseForm triggerClass="Add" folders={this.props.folders} handleSubmit={this.props.handleCreate} postState={this.props.postState} update={this.props.update} />
           </div>
         </div>
@@ -66,12 +66,12 @@ class Houses extends React.Component {
           <div className="card-header">
             <ul className="nav nav-pills card-header-pills">
               <li className="nav-item">
-                <button type="button" onClick={this.openMenu} className="triggerCollapse btn btn-primary" data-trigger="#addHouse">Adicionar casa</button>
+                <button type="button" onClick={this.openMenu} className="triggerCollapse btn btn-primary" data-trigger="#addHouse">Adicionar imóvel</button>
               </li>
             </ul>
           </div>
           <div className="card-block">
-            <h3 className="card-title">Casas</h3>
+            <h3 className="card-title">Imóveis</h3>
             <div className="row">
               { ps }
             </div>
