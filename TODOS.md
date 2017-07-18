@@ -5,5 +5,4 @@
 
 * admin - link para o site
 * capacidade (máxima tem que ser preenchida primeiro?)
-* consertar altura cards pictures panel
 
