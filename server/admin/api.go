@@ -375,7 +375,10 @@ func (api *API) selectCover(c echo.Context) (err error) {
         log.Printf("error setting picturefolder cover")
         return
     }
-
+    if err = updateHouseFolder(db, p.Folder.ID); err != nil {
+        log.Printf("error updating house folder")
+        return
+    }
     return c.JSON(200, map[string]bool{ "error": false })
 
 }
