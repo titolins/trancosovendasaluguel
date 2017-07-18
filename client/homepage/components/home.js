@@ -18,16 +18,13 @@ class Home extends React.Component {
               <div id="carousel" className="carousel slide mainCarousel" data-wrap="true" data-ride="carousel">
                 <div className="carousel-inner" role="listbox">
                   <div className="carousel-item active">
-                    <img className="mainPicture" src="/static/img/main4.jpeg"></img>
+                    <img className="mainPicture" src="/static/img/sobre.jpg"></img>
                   </div>
                   <div className="carousel-item">
                     <img className="mainPicture" src="/static/img/main5.jpg"></img>
                   </div>
                   <div className="carousel-item">
                     <img className="mainPicture" src="/static/img/main6.jpg"></img>
-                  </div>
-                  <div className="carousel-item">
-                    <img className="mainPicture" src="/static/img/main3.jpg"></img>
                   </div>
                 </div>
               </div>
