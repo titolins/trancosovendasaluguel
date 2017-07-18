@@ -106,7 +106,9 @@ a {
 }
 
 .footer-border-right {
-    border-right: 1px solid @green;
+    @media screen and (min-width: 992px) {
+        border-right: 1px solid @green;
+    }
 }
 
 .footer-border-bottom {
