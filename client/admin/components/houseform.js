@@ -15,7 +15,6 @@ export default class HouseForm extends React.Component {
     this.getData = this.getData.bind(this)
     this.showTranslatableContent = this.showTranslatableContent.bind(this)
     if (this.props.house) {
-      window[this.props.house.name] = this
       let h = JSON.parse(JSON.stringify(this.props.house))
       h.content['pt_br'].features = this.props.house.content['pt_br'].features.join(';')
       h.content['en_us'].features = this.props.house.content['en_us'].features.join(';')
@@ -37,10 +36,15 @@ export default class HouseForm extends React.Component {
           'pt_br': {
             description: "",
             features: "",
+            salesFeatures: "".
+            rentFeatures: "",
           },
           'en_us': {
             description: "",
-            features: "", } } }
+            features: "",
+            salesFeatures: "".
+            rentFeatures: "",
+            } } }
     }
     this.initialState = JSON.parse(JSON.stringify(this.state))
     this.categories = {
@@ -61,17 +65,27 @@ export default class HouseForm extends React.Component {
         state.featured.rent = e.target.checked
         break
       case 'minCapacity':
-        if (e.target.value > state.capacity.max) return
-        state.capacity.min = e.target.value
+        if (e.target.value < state.capacity.max) state.capacity.min = e.target.value
         break
       case 'maxCapacity':
-        if (e.target.value < state.capacity.min) return
-        state.capacity.max = e.target.value
+        if (e.target.value > state.capacity.min) state.capacity.max = e.target.value
         break
       case 'features_pt':
         state.content['pt_br'].features = e.target.value
         break
       case 'features_en':
+        state.content['en_us'].features = e.target.value
+        break
+      case 'salesFeatures_pt':
+        state.content['pt_br'].features = e.target.value
+        break
+      case 'salesFeatures_en':
+        state.content['en_us'].features = e.target.value
+        break
+      case 'rentFeatures_pt':
+        state.content['pt_br'].features = e.target.value
+        break
+      case 'rentFeatures_en':
         state.content['en_us'].features = e.target.value
         break
       case 'description_pt':
@@ -135,6 +149,10 @@ export default class HouseForm extends React.Component {
     let data = this.state !== null ? JSON.parse(JSON.stringify(this.state)) : JSON.parse(JSON.stringify(this.initialState))
     data.content['pt_br'].features = this.state.content['pt_br'].features.split(';')
     data.content['en_us'].features = this.state.content['en_us'].features.split(';')
+    data.content['pt_br'].salesFeatures = this.state.content['pt_br'].salesFeatures.split(';')
+    data.content['en_us'].salesFeatures = this.state.content['en_us'].salesFeatures.split(';')
+    data.content['pt_br'].rentFeatures = this.state.content['pt_br'].rentFeatures.split(';')
+    data.content['en_us'].rentFeatures = this.state.content['en_us'].rentFeatures.split(';')
     return data
   }
 

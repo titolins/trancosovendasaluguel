@@ -484,9 +484,28 @@ func validateHouse(h models.House) map[string]interface{}{
         hErrors["description"] = "Campo 'descrição' deve ter ao menos 10 caractéres"
     }
 
-    for i, f := range enContent["features"].([]interface{}) {
+    for i, f := range ptContent["features"].([]interface{}) {
         ptContent["features"].([]interface{})[i] = strings.Trim(f.(string), " ")
+    }
+
+    for i, f := range ptContent["salesFeatures"].([]interface{}) {
+        ptContent["salesFeatures"].([]interface{})[i] = strings.Trim(f.(string), " ")
+    }
+
+    for i, f := range ptContent["rentFeatures"].([]interface{}) {
+        ptContent["rentFeatures"].([]interface{})[i] = strings.Trim(f.(string), " ")
+    }
+
+    for i, f := range enContent["features"].([]interface{}) {
         enContent["features"].([]interface{})[i] = strings.Trim(f.(string), " ")
+    }
+
+    for i, f := range enContent["salesFeatures"].([]interface{}) {
+        enContent["salesFeatures"].([]interface{})[i] = strings.Trim(f.(string), " ")
+    }
+
+    for i, f := range enContent["rentFeatures"].([]interface{}) {
+        enContent["rentFeatures"].([]interface{})[i] = strings.Trim(f.(string), " ")
     }
 
     if hErrors["name"] != nil ||
