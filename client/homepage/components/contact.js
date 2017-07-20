@@ -38,7 +38,7 @@ class Contact extends React.Component {
           </ul>
         </div>
         <div className="col-xs-12 col-md-8">
-          <img className="contactImg img-fluid" src="/static/img/contato.jpg"></img>
+          <img className="contactImg img-fluid" src="/static/img/igreja.jpg"></img>
         </div>
       </div>
     )
