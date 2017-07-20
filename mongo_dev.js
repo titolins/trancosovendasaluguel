@@ -18,34 +18,31 @@ function buildSalesHouse() {
   return buildHouse(c)
 }
 
-function buildHouse(c) {
-    h = house;
-    h.category = c;
-    return h;
+function buildHouse(name, featured) {
+  h = house;
+  h.name = name;
+  h.featured = featured;
+  return h;
 }
 
 var house = {
-  category: {
-    id: 1
-  },
+  categories: [
+    "rent"
+  ],
   type: TYPES.HOUSE, // only available on houses for sale
                      // can be: house, lot, farm, store, inn
-  featured: true,
-  capacity: 4,
-  cover: { url: "https://placehold.it/550x338" },
-  pictures: [
-    { url: "https://placehold.it/550x338" },
-    { url: "https://placehold.it/550x338" }
-  ],
+  capacity: {min:1,max:2},
+  pictureFolder: {
+    cover: {},
+    pictures: [],
+  },
   content: {
     'pt_br': {
-        name: "casa 1",
         description: "descricao da casa",
         features: [
             "wifi",
             "ar condicionado" ]},
       'en_us': {
-          name: "house 1",
           description: "house description",
           features: [
             "wifi",

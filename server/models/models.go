@@ -64,6 +64,11 @@ type (
         Max int `json:"max,string" bson:"max"`
     }
 
+    FeaturedCategories struct {
+        Sales bool `json:"sales" bson:"sales"`
+        Rent bool `json:"rent" bson:"rent"`
+    }
+
     House struct {
         ID  bson.ObjectId `json:"id" bson:"_id,omitempty"`
         Name string `json:"name" bson:"name"`
@@ -71,7 +76,7 @@ type (
         // category struct (only id will matter to us here)
         Categories []string `json:"categories" bson:"categories"`
         Type Type `json:"type,string" bson:"type"`
-        Featured bool `json:"featured" bson:"featured"`
+        Featured FeaturedCategories `json:"featured" bson:"featured"`
         Capacity Capacity `json:"capacity" bson:"capacity"`
         PictureFolder PictureFolder `json:"pictureFolder,omitempty" bson:"pictureFolder,omitempty"`
         Content TranslatableContent `json:"content" bson:"content"`

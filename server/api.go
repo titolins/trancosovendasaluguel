@@ -63,20 +63,32 @@ func (api *API) getAllCategoriesHandler(c echo.Context) (err error) {
         {"$sort": &bson.M{"houses.capacity.Max": 1}},
         {"$group": &bson.M{
             "_id": &bson.M{"_id": "$_id", "name": "$name", "content": "$content"},
-            "houses": &bson.M{ "$push": "$houses" }}},
+            "featured": &bson.M{ "$push": &bson.M{
+                "$cond":&bson.M{
+                    "if":&bson.M{"$or": []interface{}{
+                        &bson.M{"$and":[]interface{}{
+                            &bson.M{"$eq":[]interface{}{"$name","rent"}},
+                            &bson.M{"$eq":[]interface{}{"$houses.featured.rent", true}}}},
+                        &bson.M{"$and":[]interface{}{
+                            &bson.M{"$eq":[]interface{}{"$name","sales"}},
+                            &bson.M{"$eq":[]interface{}{"$houses.featured.sales", true}}}}}},
+                    "then":"$houses",
+                    "else":""}}},
+            "houses": &bson.M{"$push":"$houses"}}},
         {"$project": &bson.M{
             "_id": "$_id._id",
             "name": "$_id.name",
             "content": "$_id.content",
             "items": "$houses",
             "featured": &bson.M{"$filter": &bson.M{
-                "input": "$houses",
+                "input": "$featured",
                 "as": "f",
-                "cond": &bson.M{"$eq": []interface{}{"$$f.featured", true}}}}}},
+                "cond": &bson.M{"$ne": []interface{}{"$$f", ""}}}}}},
     }).All(&cs); err != nil {
         log.Printf("error getting all categories:\n%s", err)
         return
     }
+    log.Printf("%s",cs)
 
     // only step that remained manual
     for _, c := range cs {

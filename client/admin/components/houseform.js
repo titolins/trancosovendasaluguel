@@ -15,6 +15,7 @@ export default class HouseForm extends React.Component {
     this.getData = this.getData.bind(this)
     this.showTranslatableContent = this.showTranslatableContent.bind(this)
     if (this.props.house) {
+      window[this.props.house.name] = this
       let h = JSON.parse(JSON.stringify(this.props.house))
       h.content['pt_br'].features = this.props.house.content['pt_br'].features.join(';')
       h.content['en_us'].features = this.props.house.content['en_us'].features.join(';')
@@ -24,7 +25,9 @@ export default class HouseForm extends React.Component {
         name: "",
         categories: [],
         type: "0",
-        featured: false,
+        featured: {
+          sales: false,
+          rent: false },
         capacity: {
           min: "1",
           max: "2",
@@ -51,8 +54,11 @@ export default class HouseForm extends React.Component {
     let field = e.target.name,
         state = this.state
     switch(field) {
-      case 'featured':
-        state[field] = e.target.checked
+      case 'featured_sales':
+        state.featured.sales = e.target.checked
+        break
+      case 'featured_rent':
+        state.featured.rent = e.target.checked
         break
       case 'minCapacity':
         if (e.target.value > state.capacity.max) return
@@ -203,6 +209,11 @@ export default class HouseForm extends React.Component {
                               <span aria-hidden="true">&times;</span>
                             </a>
                           </div>
+                          <div className="col-12">
+                            <label className="form-check-label">
+                              <input value={this.state.featured[c]} checked={this.state.featured[c]} onChange={this.handleChange} type="checkbox" className="form-check-input" name={`featured_${c}`}></input> Destaque
+                            </label>
+                          </div>
                         </div>
                       )
                     }) :
@@ -229,14 +240,6 @@ export default class HouseForm extends React.Component {
             </div>
           </div>
           { capacity }
-          <div className="form-group">
-            <label className="form-check-label">
-              <input value={this.state.featured} onChange={this.handleChange} type="checkbox" className="form-check-input" name="featured"></input> Destaque
-            </label>
-            <p className="form-text text-muted">
-              Se marcada essa opção, essa casa irá aparecer na página principal, na área de destaque da sua respectiva categoria. Caso contrário, para o usuário visualizá-la ele precisará entrar na página da categoria, através do link na barra de navegação.
-            </p>
-          </div>
           <div className="form-group row">
             <div className="col-sm-4">
               <label className="col-form-label">Pasta de imagens</label>
