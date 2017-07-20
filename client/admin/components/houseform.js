@@ -36,13 +36,13 @@ export default class HouseForm extends React.Component {
           'pt_br': {
             description: "",
             features: "",
-            salesFeatures: "".
+            salesFeatures: "",
             rentFeatures: "",
           },
           'en_us': {
             description: "",
             features: "",
-            salesFeatures: "".
+            salesFeatures: "",
             rentFeatures: "",
             } } }
     }
