@@ -1,5 +1,4 @@
 * script create house
-* detaques separados (vendas e aluguel)
 * subir imagens
     * *script*
 
