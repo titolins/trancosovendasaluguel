@@ -15,7 +15,7 @@ class Footer extends React.Component {
             <div className="col-xs-12 col-lg-6 py-3 footer-border-right text-center my-auto">
               <div className="logoText mb-1">
                 <p>Trancoso</p>
-                <p>vendas e aluguel</p>
+                <p>vendas aluguel</p>
               </div>
               <div>
                 <Link to="#"><span className="fa fa-facebook-square fa-lg footerLink mr-1"></span></Link>

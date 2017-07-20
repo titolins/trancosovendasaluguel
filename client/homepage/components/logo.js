@@ -12,7 +12,7 @@ export default class Logo extends React.Component {
           </div>
           <div className="col-9 logoText">
             <p>Trancoso</p>
-            <p>vendas e aluguel</p>
+            <p>vendas aluguel</p>
           </div>
         </div>
       </Link>
