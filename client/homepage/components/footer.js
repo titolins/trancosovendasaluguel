@@ -28,6 +28,10 @@ class Footer extends React.Component {
                 <span className="footerText"> contato@trancosovendasaluguel.com</span>
               </div>
               <div>
+                <span className="fa fa-envelope-o fa-lg footerLink"></span>
+                <span className="footerText"> tamitrancoso@hotmail.com</span>
+              </div>
+              <div>
                 <span className="fa fa-whatsapp fa-lg footerLink"></span>
                 <span className="footerText"> +55 73 98129-0825</span>
               </div>

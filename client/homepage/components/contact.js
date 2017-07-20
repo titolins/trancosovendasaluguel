@@ -32,7 +32,7 @@ class Contact extends React.Component {
             <h3 className="contactTitle">{ ownContent.address }</h3>
             <p className="ml-4 contactText">
               Rua do Porto, n<sup>o</sup> 229, bairro João Vieira<br/>
-              Trancoso/Bahia - CEP 22418-000<br/>
+              Trancoso/Bahia - CEP 45818-000<br/>
               Brasil
             </p>
           </ul>
