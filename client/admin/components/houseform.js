@@ -149,10 +149,10 @@ export default class HouseForm extends React.Component {
     let data = this.state !== null ? JSON.parse(JSON.stringify(this.state)) : JSON.parse(JSON.stringify(this.initialState))
     data.content['pt_br'].features = this.state.content['pt_br'].features.split(';')
     data.content['en_us'].features = this.state.content['en_us'].features.split(';')
-    data.content['pt_br'].salesFeatures = this.state.content['pt_br'].salesFeatures.split(';')
-    data.content['en_us'].salesFeatures = this.state.content['en_us'].salesFeatures.split(';')
-    data.content['pt_br'].rentFeatures = this.state.content['pt_br'].rentFeatures.split(';')
-    data.content['en_us'].rentFeatures = this.state.content['en_us'].rentFeatures.split(';')
+    if(data.content['pt_br'].salesFeatures) data.content['pt_br'].salesFeatures = this.state.content['pt_br'].salesFeatures.split(';')
+    if(data.content['en_us'].salesFeatures) data.content['en_us'].salesFeatures = this.state.content['en_us'].salesFeatures.split(';')
+    if(data.content['pt_br'].rentFeatures) data.content['pt_br'].rentFeatures = this.state.content['pt_br'].rentFeatures.split(';')
+    if(data.content['en_us'].rentFeatures) data.content['en_us'].rentFeatures = this.state.content['en_us'].rentFeatures.split(';')
     return data
   }
 
