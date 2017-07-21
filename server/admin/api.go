@@ -181,6 +181,7 @@ func (api *API) editHouse(c echo.Context) (err error) {
         log.Printf("error binding house model:\n%s", err)
         return
     }
+    log.Printf("house = %s", h)
 
     if hErrors := validateHouse(h); hErrors != nil {
         return c.JSON(500, map[string]interface{}{
@@ -188,6 +189,7 @@ func (api *API) editHouse(c echo.Context) (err error) {
             "errors": hErrors,
         })
     }
+    log.Printf("validated")
 
     db := api.DB.Clone()
     defer db.Close()
@@ -197,7 +199,6 @@ func (api *API) editHouse(c echo.Context) (err error) {
         return
     }
 
-    log.Printf("finding categories which have")
     iter := db.DB("tva").C("categories").Find(&bson.M{"items":h.ID}).Iter()
     // iter.Next returns a boolean
     for iter.Next(&category) {
@@ -488,6 +489,7 @@ func validateHouse(h models.House) map[string]interface{}{
         ptContent["features"].([]interface{})[i] = strings.Trim(f.(string), " ")
     }
 
+    /*
     for i, f := range ptContent["salesFeatures"].([]interface{}) {
         ptContent["salesFeatures"].([]interface{})[i] = strings.Trim(f.(string), " ")
     }
@@ -495,11 +497,13 @@ func validateHouse(h models.House) map[string]interface{}{
     for i, f := range ptContent["rentFeatures"].([]interface{}) {
         ptContent["rentFeatures"].([]interface{})[i] = strings.Trim(f.(string), " ")
     }
+    */
 
     for i, f := range enContent["features"].([]interface{}) {
         enContent["features"].([]interface{})[i] = strings.Trim(f.(string), " ")
     }
 
+    /*
     for i, f := range enContent["salesFeatures"].([]interface{}) {
         enContent["salesFeatures"].([]interface{})[i] = strings.Trim(f.(string), " ")
     }
@@ -507,6 +511,7 @@ func validateHouse(h models.House) map[string]interface{}{
     for i, f := range enContent["rentFeatures"].([]interface{}) {
         enContent["rentFeatures"].([]interface{})[i] = strings.Trim(f.(string), " ")
     }
+    */
 
     if hErrors["name"] != nil ||
        hErrors["description"] != nil ||
