@@ -15,9 +15,15 @@ export default class HouseForm extends React.Component {
     this.getData = this.getData.bind(this)
     this.showTranslatableContent = this.showTranslatableContent.bind(this)
     if (this.props.house) {
-      let h = JSON.parse(JSON.stringify(this.props.house))
-      h.content['pt_br'].features = this.props.house.content['pt_br'].features.join(';')
-      h.content['en_us'].features = this.props.house.content['en_us'].features.join(';')
+      let h  = JSON.parse(JSON.stringify(this.props.house)),
+          fs = ["features", "salesFeatures", "rentFeatures"],
+          ls = ["en_us", "pt_br"]
+      fs.map((feature) => {
+        ls.map((lang) => {
+          h.content[lang][feature] = h.content[lang][feature] || []
+          h.content[lang][feature] = h.content[lang][feature].join(';')
+        })
+      })
       this.state = Object.assign({}, h)
     } else {
       this.state = {
@@ -77,16 +83,16 @@ export default class HouseForm extends React.Component {
         state.content['en_us'].features = e.target.value
         break
       case 'salesFeatures_pt':
-        state.content['pt_br'].features = e.target.value
+        state.content['pt_br'].salesFeatures = e.target.value
         break
       case 'salesFeatures_en':
-        state.content['en_us'].features = e.target.value
+        state.content['en_us'].salesFeatures = e.target.value
         break
       case 'rentFeatures_pt':
-        state.content['pt_br'].features = e.target.value
+        state.content['pt_br'].rentFeatures = e.target.value
         break
       case 'rentFeatures_en':
-        state.content['en_us'].features = e.target.value
+        state.content['en_us'].rentFeatures = e.target.value
         break
       case 'description_pt':
         state.content['pt_br'].description = e.target.value
@@ -147,8 +153,8 @@ export default class HouseForm extends React.Component {
 
   getData() {
     let data = this.state !== null ? JSON.parse(JSON.stringify(this.state)) : JSON.parse(JSON.stringify(this.initialState))
-    data.content['pt_br'].features = this.state.content['pt_br'].features.split(';')
-    data.content['en_us'].features = this.state.content['en_us'].features.split(';')
+    if(data.content['pt_br'].features) data.content['pt_br'].features = this.state.content['pt_br'].features.split(';')
+    if(data.content['en_us'].features) data.content['en_us'].features = this.state.content['en_us'].features.split(';')
     if(data.content['pt_br'].salesFeatures) data.content['pt_br'].salesFeatures = this.state.content['pt_br'].salesFeatures.split(';')
     if(data.content['en_us'].salesFeatures) data.content['en_us'].salesFeatures = this.state.content['en_us'].salesFeatures.split(';')
     if(data.content['pt_br'].rentFeatures) data.content['pt_br'].rentFeatures = this.state.content['pt_br'].rentFeatures.split(';')
@@ -291,12 +297,28 @@ export default class HouseForm extends React.Component {
             </div>
             <div className="form-group row">
               <div className="col-sm-2">
-                <label className="col-form-label">Mais informações</label>
+                <label className="col-form-label">Informações genéricas</label>
               </div>
               <div className="col-sm-10">
                 <input className="form-control" type="text" name="features_pt" value={this.state.content['pt_br'].features} onChange={this.handleChange}></input>
               </div>
             </div>
+            { (this.state.categories.indexOf("sales") !== -1) ? (<div className="form-group row">
+              <div className="col-sm-2">
+                <label className="col-form-label">Informações de venda</label>
+              </div>
+              <div className="col-sm-10">
+                <input className="form-control" type="text" name="salesFeatures_pt" value={this.state.content['pt_br'].salesFeatures} onChange={this.handleChange}></input>
+              </div>
+            </div>) : '' }
+            { (this.state.categories.indexOf("rent") !== -1) ? (<div className="form-group row">
+              <div className="col-sm-2">
+                <label className="col-form-label">Informações de aluguel</label>
+              </div>
+              <div className="col-sm-10">
+                <input className="form-control" type="text" name="rentFeatures_pt" value={this.state.content['pt_br'].rentFeatures} onChange={this.handleChange}></input>
+              </div>
+            </div>) : '' }
           </div>
           <div id={`enContent${this.props.triggerClass}`} className="collapse">
             <div className={`form-group row${this.props.postState.errors.description? " has-danger" : "" }`}>
@@ -310,12 +332,28 @@ export default class HouseForm extends React.Component {
             </div>
             <div className="form-group row">
               <div className="col-sm-2">
-                <label className="col-form-label">Mais informações</label>
+                <label className="col-form-label">Informações genéricas</label>
               </div>
               <div className="col-sm-10">
                 <input className="form-control" type="text" name="features_en" value={this.state.content['en_us'].features} onChange={this.handleChange}></input>
               </div>
             </div>
+            { (this.state.categories.indexOf("sales") !== -1) ? (<div className="form-group row">
+              <div className="col-sm-2">
+                <label className="col-form-label">Informações de venda</label>
+              </div>
+              <div className="col-sm-10">
+                <input className="form-control" type="text" name="salesFeatures_en" value={this.state.content['en_us'].salesFeatures} onChange={this.handleChange}></input>
+              </div>
+            </div>) : '' }
+            { (this.state.categories.indexOf("rent") !== -1) ? (<div className="form-group row">
+              <div className="col-sm-2">
+                <label className="col-form-label">Informações de aluguel</label>
+              </div>
+              <div className="col-sm-10">
+                <input className="form-control" type="text" name="rentFeatures_en" value={this.state.content['en_us'].rentFeatures} onChange={this.handleChange}></input>
+              </div>
+            </div>) : '' }
           </div>
           <div>
             <input type="submit" className="btn btn-success" value="Enviar"></input>
