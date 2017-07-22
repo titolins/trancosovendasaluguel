@@ -51,8 +51,7 @@ func (api *API) getAllCategoriesHandler(c echo.Context) (err error) {
 
     db := api.DB.Clone()
     defer db.Close()
-    // fucking awesome query \o/
-    // sorting houses by max capacity and filtering featured houses
+
     if err = db.DB("tva").C("categories").Pipe([]bson.M{
         {"$lookup": &bson.M{
             "from": "houses",
@@ -88,7 +87,6 @@ func (api *API) getAllCategoriesHandler(c echo.Context) (err error) {
         log.Printf("error getting all categories:\n%s", err)
         return
     }
-    log.Printf("%s",cs)
 
     // only step that remained manual
     for _, c := range cs {
