@@ -15,7 +15,6 @@ class Houses extends React.Component {
   }
 
   openMenu(e) {
-    e.preventDefault()
     let openMenu = document.getElementsByClassName('triggerCollapse active')[0],
         target = e.target
 
@@ -41,7 +40,7 @@ class Houses extends React.Component {
           <div className="card-block">
             <h5 className="card-title">{h.name}</h5>
             <button type="button" onClick={this.props.handleDelete(h,this.props.update)} className="btn btn-danger">Deletar</button>
-            <a href="#" onClick={this.openMenu} data-trigger={`#editHouse${i}`} className="btn btn-warning triggerCollapse">Editar</a>
+            <a href="#editMenu" onClick={this.openMenu} data-trigger={`#editHouse${i}`} className="btn btn-warning triggerCollapse">Editar</a>
           </div>
         </div>
       </div>)
@@ -55,6 +54,7 @@ class Houses extends React.Component {
 
     return (
       <div>
+        <a name="editMenu" />
         { cs }
         <div className="collapse" id="addHouse">
           <div className="card card-block">
@@ -66,7 +66,7 @@ class Houses extends React.Component {
           <div className="card-header">
             <ul className="nav nav-pills card-header-pills">
               <li className="nav-item">
-                <button type="button" onClick={this.openMenu} className="triggerCollapse btn btn-primary" data-trigger="#addHouse">Adicionar imóvel</button>
+                <a href="#editMenu" onClick={this.openMenu} className="triggerCollapse btn btn-primary" data-trigger="#addHouse">Adicionar imóvel</a>
               </li>
             </ul>
           </div>
