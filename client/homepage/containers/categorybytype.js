@@ -10,7 +10,7 @@ export const mapStateToProps = (state, ownProps) => {
         lang = state.lang.selected
     return {
       title: state.content.static.categoryTypes[lang][typeId],
-      items: filterItems(items, lang),
+      items: filterItems(items, ownProps.match.params.categoryId, lang),
       ownContent: ownProps.contentId ? staticPropsMap(state, ownProps).ownContent : undefined,
     }
   } catch (e) {
