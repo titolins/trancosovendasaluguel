@@ -54,8 +54,6 @@ class Pictures extends React.Component {
 
   openFolder(f) {
     return (e) => {
-      e.preventDefault()
-
       let openFolder = document.getElementsByClassName('triggerCollapse active')[0],
           target = e.target,
           state = this.state
@@ -202,6 +200,7 @@ class Pictures extends React.Component {
 
     return (
       <div>
+        <a name="folderMenu" />
         { ps }
         <div className="card">
           <div className="card-header">
