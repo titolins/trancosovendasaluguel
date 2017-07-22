@@ -486,8 +486,10 @@ func validateHouse(h models.House) map[string]interface{}{
     for _, feature := range []string{"features", "salesFeatures", "rentFeatures"} {
         for _, content := range []map[string]interface{}{ptContent, enContent} {
             if content[feature] != nil {
-                for i, f := range content[feature].([]interface{}) {
-                    content[feature].([]interface{})[i] = strings.Trim(f.(string), " ")
+                if _, ok := content[feature].([]interface{}); ok {
+                    for i, f := range content[feature].([]interface{}) {
+                        content[feature].([]interface{})[i] = strings.Trim(f.(string), " ")
+                    }
                 }
             }
         }
