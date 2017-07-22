@@ -19,9 +19,22 @@ class House extends React.Component {
   }
 
   render() {
-    let { ownContent, staticContent } = this.props
-    let features = ownContent.features ? buildFeatures(ownContent.features) : null
-    let carousel = ownContent.pictures ? (<Carousel pictures={ownContent.pictures} controls={staticContent.controls} />) : null
+    let { ownContent, staticContent } = this.props,
+        carousel = ownContent.pictures ? (<Carousel pictures={ownContent.pictures} controls={staticContent.controls} />) : null,
+        features = JSON.parse(JSON.stringify(ownContent.features)) || []
+
+    switch(this.props.match.params.categoryId) {
+      case 'vendas':
+      case 'sales':
+        if (ownContent.salesFeatures) features.push(ownContent.salesFeatures)
+        break;
+      case 'aluguel':
+      case 'rent':
+        if (ownContent.rentFeatures) features.push(ownContent.rentFeatures)
+        break;
+    }
+    let featuresList = buildFeatures(features)
+
     return (
       <div className="container mainContent">
         <div className="row py-5">
@@ -35,7 +48,7 @@ class House extends React.Component {
               <h1 className="sectionTitle fullWidth pb-2">{ staticContent.capacity }</h1>
               <p>{ ownContent.capacity }</p></div>) : '' }
             <h1 className="sectionTitle fullWidth pb-2">{ staticContent.features }</h1>
-            { features }
+            { featuresList }
           </div>
         </div>
       </div>
