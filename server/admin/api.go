@@ -181,7 +181,6 @@ func (api *API) editHouse(c echo.Context) (err error) {
         log.Printf("error binding house model:\n%s", err)
         return
     }
-    log.Printf("house = %s", h)
 
     if hErrors := validateHouse(h); hErrors != nil {
         return c.JSON(500, map[string]interface{}{
@@ -189,7 +188,6 @@ func (api *API) editHouse(c echo.Context) (err error) {
             "errors": hErrors,
         })
     }
-    log.Printf("validated")
 
     db := api.DB.Clone()
     defer db.Close()
@@ -220,7 +218,6 @@ func (api *API) editHouse(c echo.Context) (err error) {
         }
     }
 
-    log.Printf("iterating house categories")
     for _, houseC := range h.Categories {
         log.Printf("categoryName = %s", houseC)
         if err = db.DB("tva").C("categories").Update(&bson.M{
