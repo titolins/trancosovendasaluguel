@@ -19,18 +19,15 @@ class CategoryByType extends React.Component {
   }
 
   render() {
-    let items = this.props.items ? buildItemsPanels(this.props.items, this.props.ownContent.detailsBtn) : null
+    let items = this.props.items ?
+      buildItemsPanels(this.props.items, this.props.ownContent.detailsBtn) :
+      (<div className="container">
+        <p className="houseDescription">Não há nenhum imóvel cadastrado para essa categoria ainda.</p>
+      </div>)
     return (
       <div className="mainContent">
         <h1 className="sectionTitle halfWidth pb-2">{ this.props.title }</h1>
-        <div className="row">
-          { items ?
-              items :
-              (<div className="container">
-                <p className="houseDescription">Não há nenhum imóvel cadastrado para essa categoria ainda.</p>
-              </div>)
-          }
-        </div>
+        <div className="row">{items}</div>
       </div>
     )
   }
