@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-    env := os.Getenv("ENV")
+    //env := os.Getenv("ENV")
 
     e := server.BuildEngine()
     /*
