@@ -70,6 +70,7 @@ func BuildEngine() (e *echo.Echo) {
 }
 
 func homeHandler(c echo.Context) (err error) {
+    /*
     pusher, ok := c.Response().Writer.(http.Pusher)
     if ok {
         if err = pusher.Push("/static/js/jspm_packages/npm/jquery@2.2.4/dist/jquery.js", nil); err != nil {
@@ -103,6 +104,7 @@ func homeHandler(c echo.Context) (err error) {
             return
         }
     }
+    */
     return c.File("/srv/http/server/static/templates/index.html")
 }
 
