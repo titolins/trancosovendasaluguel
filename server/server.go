@@ -1,7 +1,7 @@
 package server
 
 import (
-    "net/http"
+    //"net/http"
     "log"
 
     "gopkg.in/mgo.v2"
@@ -51,9 +51,11 @@ func BuildEngine() (e *echo.Echo) {
     //e.Use(middleware.HTTPSRedirect())
 
     // static files
+    /*
     e.Static("/static/img", "/srv/http/server/static/img")
     e.Static("/static/js", "/srv/http/client/")
     e.Static("/static/uploads", "/srv/http/server/static/uploads")
+    */
 
     // api routes
     api := &API{ DB: db }
