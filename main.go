@@ -2,8 +2,7 @@ package main
 
 import (
     "os"
-    "net/http"
-    "golang.org/x/crypto/acme/autocert"
+    //"golang.org/x/crypto/acme/autocert"
     //"github.com/labstack/echo/middleware"
     "github.com/titolins/trancosovendasaluguel/server"
 )
