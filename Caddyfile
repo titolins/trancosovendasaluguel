@@ -2,5 +2,16 @@ www.trancosovendasaluguel.com, trancosovendasaluguel.com {
     root /srv/http
     gzip
     log /var/log/caddy/caddy.log
-    proxy / localhost:8000
+    rewrite {
+        if {dir} is /static/js/
+        to /client/{path} {uri}
+    }
+    rewrite {
+        if {dir} starts_with /static
+        to /server/static/{path} {uri}
+    }
+    proxy / localhost:8000 {
+        except /client
+        except /server/static
+    }
 }
