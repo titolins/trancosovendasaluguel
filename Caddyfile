@@ -1,0 +1,6 @@
+www.trancosovendasaluguel.com
+
+root /srv/http
+gzip
+log /var/log/caddy/caddy.log
+proxy / localhost:8000

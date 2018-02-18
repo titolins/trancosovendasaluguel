@@ -6,6 +6,7 @@ import { mapDispatchToProps } from 'homepage/containers/fetchcontent'
 import { mapStateToProps } from 'homepage/containers/house'
 
 import Carousel from 'homepage/components/carousel'
+import Message from 'homepage/components/message'
 
 const buildFeatures = (features) => {
   return (<ul>{features.map((f,i) => {return (<li key={i}>{f}</li>)})}</ul>)
@@ -37,6 +38,21 @@ class House extends React.Component {
 
     return (
       <div className="container mainContent">
+        <div id="messageModal" className="modal modal-fade" tabIndex="-1" aria-hidden="true" role="dialog" aria-labelledby="messageModalTitle">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="messageModalTitle">Enviar mensagem</h5>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Fechar">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <Message houseName={ownContent ? ownContent.name : ''} />
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="row py-5">
           <div className="col-xs-12 col-md-6 houseCarousel">
             { carousel }
@@ -49,6 +65,9 @@ class House extends React.Component {
               <p>{ ownContent.capacity }</p></div>) : '' }
             <h1 className="sectionTitle fullWidth pb-2">{ staticContent.features }</h1>
             { featuresList }
+            <a href="#" className="btn moreBtn" data-target="#messageModal" data-toggle="modal">
+              <span className="fa fa-envelope-open-o"></span> Enviar mensagem
+            </a>
           </div>
         </div>
       </div>

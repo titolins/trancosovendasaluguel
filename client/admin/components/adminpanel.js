@@ -10,6 +10,7 @@ import Intro from 'admin/components/intro'
 import Header from 'admin/components/header'
 import Pictures from 'admin/components/pictures'
 import Houses from 'admin/components/houses'
+import Contact from 'admin/components/contact'
 
 import { getContentReq, postFilesReq, deleteContentReq, putContentReq, patchContentReq } from 'admin/requests'
 
@@ -165,6 +166,9 @@ const buildRoutes = (store, token) => {
         housesHandler.get()
         foldersHandler.get()
         return (<Houses handleEdit={housesHandler.edit} update={housesHandler.get} handleDelete={housesHandler.del} handleCreate={housesHandler.create}/>)
+      } } />
+      <Route path="/admin/contato" render={ () => {
+        return (<Contact />)
       } } />
       <Redirect to="/admin/" />
     </Switch>

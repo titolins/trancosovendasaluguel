@@ -9,16 +9,11 @@ export const CHOOSE_LANGUAGE = 'CHOOSE_LANG'
 
 export const ADD_CONTENT = 'ADD_CONTENT'
 
+export const SET_MESSAGE_RESPONSE = 'SET_MESSAGE_RESPONSE'
 
 /**
  * action creators
  */
-
-/*
-export function setConfig(config) {
-  return { type: SET_CONFIG, config };
-}
-*/
 
 // translation
 export function selectLanguage(lang) {
@@ -33,6 +28,13 @@ export function addContent(content, contentId) {
     type: ADD_CONTENT,
     contentId,
     content
+  }
+}
+
+export function setMessageResponse(response) {
+  return {
+    type: SET_MESSAGE_RESPONSE,
+    response
   }
 }
 

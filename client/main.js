@@ -18,7 +18,7 @@ import { persistStore, autoRehydrate } from 'redux-persist'
 
 import { module } from '@hot'
 
-import { lang, content } from 'homepage/reducers'
+import { lang, content, message } from 'homepage/reducers'
 import { auth, upload, post, data } from 'admin/reducers'
 
 import App from 'homepage/components/app'
@@ -32,11 +32,11 @@ import {
 import { PropsRoute } from 'homepage/propsroute'
 
 let store = createStore(
-  combineReducers({lang,content,auth,upload,post,data}),
+  combineReducers({lang,content,auth,upload,post,data,message}),
   undefined,
   compose(applyMiddleware(thunk),autoRehydrate()))
 
-persistStore(store, {blacklist: ['lang', 'content', 'upload', 'post', 'data']})
+persistStore(store, {blacklist: ['lang', 'content', 'upload', 'post', 'data', 'message']})
 
 export let component =  ReactDOM.render(
   <Provider store={store}>

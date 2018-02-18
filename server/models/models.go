@@ -1,6 +1,10 @@
 package models
 
 import (
+    "bytes"
+    "log"
+    "text/template"
+
     "gopkg.in/mgo.v2/bson"
 )
 
@@ -11,6 +15,12 @@ const (
     STORE_TYPE
     INN_TYPE
 )
+
+const emailTemplateText = `Ref. {{.HouseName}}
+
+{{.Message}}`
+
+var emailTemplate *template.Template
 
 type (
     Content interface{}
@@ -86,5 +96,29 @@ type (
         Folder PictureFolder `json:"folder"`
         Picture Picture `json:"picture"`
     }
+
+    Message struct {
+        HouseName string `json:"houseName"`
+        Email string `json:"email"`
+        Message string `json:"message"`
+    }
 )
+
+func (m *Message) Text() string {
+    var buffer bytes.Buffer
+    var err error
+
+    if emailTemplate == nil {
+        if emailTemplate, err = template.New("email").Parse(emailTemplateText); err != nil {
+            log.Printf("error parsing template:\n%s", err)
+            return ""
+        }
+    }
+    if err = emailTemplate.Execute(&buffer, m); err != nil {
+        log.Printf("error executing template:\n%s", err)
+        return ""
+    }
+
+    return buffer.String()
+}
 

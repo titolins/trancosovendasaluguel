@@ -1,10 +1,15 @@
 package server
 
 import (
+    "os"
+    "os/exec"
     "log"
+    "fmt"
 
     "gopkg.in/mgo.v2"
     "gopkg.in/mgo.v2/bson"
+
+    "github.com/go-gomail/gomail"
 
     "github.com/labstack/echo"
     //"github.com/titolins/trancosovendasaluguel/server/controllers"
@@ -39,6 +44,8 @@ func (api *API) Bind(group *echo.Group) {
     group.GET("/categorias/:categoryId", api.getCategoryHouses)
     group.GET("/categorias/:categoryId/casas/:houseId", api.getHouseHandler)
     group.GET("/categorias/:categoryId/portipo/:typeId", api.getHousesByTypeHandler)
+
+    group.POST("/sendmessage", api.sendMessageHandler)
 }
 
 /*
@@ -150,3 +157,68 @@ func (api *API) getHouseHandler(c echo.Context) (err error) {
 /*
  * end houses
  */
+
+func (api *API) sendMessageHandler(c echo.Context) (err error) {
+    res := map[string]interface{}{
+        "error": false,
+        "errors": nil,
+    }
+    errors := make([]string, 0)
+    statusCode := 200
+    var msg models.Message
+    if err = c.Bind(&msg); err != nil {
+        log.Printf("error binding message:\n%s", err)
+        return
+    }
+    cmd := exec.Command("/usr/sbin/sendmail", "-t")
+    cmd.Stdout = os.Stdout
+    cmd.Stderr = os.Stderr
+    pw, err := cmd.StdinPipe()
+    if err != nil {
+        log.Printf("error getting pipe:\n%s", err)
+        res["error"] = true
+        errors = append(errors, err.Error())
+        statusCode = 500
+    }
+    if err = cmd.Start(); err != nil {
+        log.Printf("error starting sendMail:\n%s", err)
+        res["error"] = true
+        errors = append(errors, err.Error())
+        statusCode = 500
+    }
+
+    m := buildMail(msg)
+
+    if _, err = m.WriteTo(pw); err != nil {
+        log.Printf("error writing message:\n%s", err)
+        res["error"] = true
+        errors = append(errors, err.Error())
+        statusCode = 500
+    }
+
+    if err = pw.Close(); err != nil {
+        log.Printf("error closing writer:\n%s", err)
+        res["error"] = true
+        errors = append(errors, err.Error())
+        statusCode = 500
+    }
+
+    if err = cmd.Wait(); err != nil {
+        log.Printf("error closing writer:\n%s", err)
+        res["error"] = true
+        errors = append(errors, err.Error())
+        statusCode = 500
+    }
+
+    return c.JSON(statusCode, res)
+}
+
+func buildMail(msg models.Message) *gomail.Message {
+    m := gomail.NewMessage()
+    m.SetHeader("From", msg.Email)
+    m.SetHeader("To", "titolins@outlook.com")
+    m.SetHeader("Subject", fmt.Sprintf("Trancoso Vendas Aluguel | Contato %s", msg.HouseName))
+    m.SetBody("text/plain", msg.Text())
+
+    return m
+}
